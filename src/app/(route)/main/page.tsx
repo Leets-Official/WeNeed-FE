@@ -1,7 +1,3 @@
 export default function MainPage() {
-  return (
-    <section>
-        mainPage
-    </section>
-  );
+  return <section>mainPage</section>;
 }

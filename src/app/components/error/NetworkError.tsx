@@ -1,7 +1,5 @@
 const NetworkError = () => {
-  return (
-    <div>Error</div>
-  )
-}
+  return <div>Error</div>;
+};
 
-export default NetworkError
+export default NetworkError;
