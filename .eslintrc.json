@@ -1,10 +1,19 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "prettier",
+    "import"
+  ],
   "parserOptions": {
     "project": "./tsconfig.json",
-    "createDefaultProgram": true
+    "createDefaultProgram": true,
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
   "env": {
     "browser": true,
@@ -13,19 +22,24 @@
   },
   "ignorePatterns": ["node_modules/"],
   "extends": [
-    "eslint:recommended",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "prettier",
     "plugin:react/recommended",
-    "prettier"
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": 0,
-    "@typescript-eslint/semi": "off",
-    "react/jsx-curly-brace-presence": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
-    "no-useless-catch": "off"
+    "no-useless-catch": "off",
+    "import/prefer-default-export": "off",
+    "react/require-default-props": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": ["arrow-function", "function-declaration"] }
+    ]
   }
 }
