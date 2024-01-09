@@ -1,47 +1,27 @@
 'use client';
 
+import { BUTTON_STYLE } from 'constants/styles';
+
 interface ButtonProps {
   buttonText: string;
-  buttonType: 'small' | 'medium' | 'large';
-  className: string;
+  type: 'small' | 'medium' | 'large' | 'default';
+  className?: string;
   isDisabled: boolean;
   onClickHandler: () => void;
 }
 
-const getButtonStyles = (buttonType: 'small' | 'medium' | 'large') => {
-  switch (buttonType) {
-    case 'small':
-      return {
-        button: `px-2 py-2`,
-      };
-    case 'medium':
-      return {
-        button: `px-10 py-10`,
-      };
-    case 'large':
-      return {
-        button: `px-20 py-20`,
-      };
-    default:
-      return {
-        button: 'w-full h-full',
-      };
-  }
-};
-
 const Button = ({
-  onClickHandler,
+  type,
   buttonText,
-  buttonType,
   className,
   isDisabled,
+  onClickHandler,
 }: ButtonProps) => {
-  const buttonStyles = getButtonStyles(buttonType);
+  const buttonStyles = BUTTON_STYLE[type](className || '');
 
   return (
     <button
-      type="button"
-      className={`${buttonStyles.button} ${className}`}
+      className={`${buttonStyles}`}
       onClick={onClickHandler}
       disabled={isDisabled}
     >

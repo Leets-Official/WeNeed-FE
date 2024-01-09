@@ -1,37 +1,28 @@
 'use client';
 
+import { INPUT_STYLE } from 'constants/styles';
+
 interface InputProps {
-  type: string;
+  type: 'search' | 'default';
   textValue: string;
-  placeholder: string;
+  placeholder?: string;
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   onEnterPress?: () => void;
 }
 
-const getInputType = (type: string) => {
-  switch (type) {
-    case 'info':
-      return {
-        input: 'px-5 py-2',
-      };
-    default:
-      return {
-        input: 'w-full h-full',
-      };
-  }
-};
-
 const Input = ({
   type,
   textValue,
   placeholder,
+  className,
   onFocus,
   onEnterPress,
   onChange,
-  className,
 }: InputProps) => {
+  const buttonStyles = INPUT_STYLE[type](className || '');
+
   return (
     <input
       value={textValue}
@@ -39,7 +30,7 @@ const Input = ({
       onFocus={onFocus}
       onKeyPress={(e) => e.key === 'Enter' && onEnterPress}
       onChange={onChange}
-      className={`${className} ${getInputType(type).input}`}
+      className={buttonStyles}
     />
   );
 };
