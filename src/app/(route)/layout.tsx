@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import '../ui/globals.css';
 
 export const metadata: Metadata = {
   title: '위닛',
@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="h-screen min-w-[850px] mx-auto">{children}</body>
     </html>
   );
 }
