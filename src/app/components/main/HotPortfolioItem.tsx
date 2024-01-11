@@ -1,4 +1,4 @@
-const HotPostItem = () => {
+const HotPortfolioItem = () => {
   return (
     <div className="relative cursor-pointer">
       <div className="w-[683px] h-[300px] bg-zinc-300 rounded-lg text-black "></div>
@@ -13,4 +13,4 @@ const HotPostItem = () => {
   );
 };
 
-export default HotPostItem;
+export default HotPortfolioItem;
