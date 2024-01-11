@@ -1,4 +1,4 @@
-const PostItem = () => {
+const PortfolioItem = () => {
   return (
     <div className="relative cursor-pointer">
       <div className="absolute top-3 right-3 w-8 h-8 bg-zinc-500 rounded-full"></div>
@@ -19,4 +19,4 @@ const PostItem = () => {
   );
 };
 
-export default PostItem;
+export default PortfolioItem;
