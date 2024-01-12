@@ -7,7 +7,7 @@ interface IconPathTypes {
 }
 interface IconOptions {
   stroke: string;
-  strokeWidth: number;
+  strokeWidth?: number;
   strokeLinecap?: 'round' | 'butt' | 'square' | 'inherit' | undefined;
   strokeLinejoin?: 'round' | 'bevel' | 'miter' | 'inherit' | undefined;
 }
