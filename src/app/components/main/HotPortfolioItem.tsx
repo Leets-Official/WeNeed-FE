@@ -1,13 +1,11 @@
 const HotPortfolioItem = () => {
   return (
-    <div className="relative cursor-pointer">
-      <div className="w-[683px] h-[300px] bg-zinc-300 rounded-lg text-black "></div>
-      <div className="absolute bottom-[16px] left-[20px]">
-        <p className="text-xl font-semibold ">제목</p>
-        <p className="text-lg font-medium ">소제목</p>
+    <div className="relative w-[1205px] h-[525px] bg-gray-300 rounded-lg">
+      <div className="w-11 h-16 left-[642.33px] top-[200.61px] absolute">
+        <span className="text-xl font-semibold ">제목</span>
       </div>
-      <div className="absolute bottom-[22px] right-[30px] flex justify-center items-center w-20 h-8 text-xl font-semibold bg-neutral-400 rounded-2xl">
-        <p>1위</p>
+      <div className="absolute top-[15px] left-[15px] w-32 h-7 flex bg-black rounded-2xl text-center">
+        <div className="w-full h-full font-semibold">이번 달 HOT</div>
       </div>
     </div>
   );

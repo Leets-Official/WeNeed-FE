@@ -4,7 +4,7 @@ import { weneed } from 'ui/IconsPath';
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col justify-between h-[666px] bg-black text-white pt-[70px] pb-[130px] px-[10%]">
+    <footer className="flex flex-col justify-between h-[666px] text-white pt-[70px] pb-[130px] px-[10%]">
       <Icons name={weneed} />
       <div className="mt-[80px]">
         <div className="flex items-center gap-3 mb-3">
