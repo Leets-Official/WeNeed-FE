@@ -1,6 +1,6 @@
 'use client';
 
-import { IconPathTypes } from 'types/icon';
+import { IconPathTypes } from '_types/icon';
 
 interface IconsProps {
   name: IconPathTypes;
