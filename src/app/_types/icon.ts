@@ -1,4 +1,4 @@
-export interface IconPathTypes {
+interface IconPathTypes {
   path: string;
   width: number;
   height: number;
