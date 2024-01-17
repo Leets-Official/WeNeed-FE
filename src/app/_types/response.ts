@@ -25,7 +25,7 @@ interface ResponseRecruitingDetail {
   comments: CommentList[];
 }
 
-interface ResponseGoogleLogin {
+interface GoogleLoginResponse {
   accessToken: string;
   refreshToken: string;
 }
