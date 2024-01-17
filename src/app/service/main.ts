@@ -9,7 +9,7 @@ export const getPortfolioMain = async (
   const token = cookies().get('accessToken');
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_MOCK_SERVER}/portfolio`, // backend endpoint
+      `${process.env.NEXT_PUBLIC_SERVER}/portfolio`, // backend endpoint
       {
         headers: {
           'Content-Type': 'application/json',
