@@ -18,8 +18,3 @@ interface IconsSVGTypes {
   path: string;
   fill: string;
 }
-interface IconsSVGTypes {
-  size: number;
-  path: string;
-  fill: string;
-}
