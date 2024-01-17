@@ -1,10 +1,52 @@
+'use client';
+
 import HotPortfolioItem from '../HotPortfolioItem';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/scrollbar';
+import Icons from 'components/common/Icons';
+import { bigLeftAngle, bigRightAngle } from 'ui/IconsPath';
 
 const HotPortfolioContainer = () => {
   return (
-    <div className="mt-[60px] w-full flex flex-col justify-center items-center overflow-hidden">
-      <div className="flex gap-[37px]">
-        <HotPortfolioItem />
+    <div className="relative mt-[60px] w-[97vw] flex flex-col justify-center items-center">
+      <div className="w-full">
+        <Swiper
+          modules={[Navigation]}
+          slidesPerView={1.5}
+          spaceBetween={30}
+          grabCursor={true}
+          loop={true}
+          centeredSlides={true}
+          navigation={{
+            prevEl: '.swiper-button-prev-hot',
+            nextEl: '.swiper-button-next-hot',
+          }}
+        >
+          <SwiperSlide>
+            <HotPortfolioItem />
+          </SwiperSlide>
+          <SwiperSlide>
+            <HotPortfolioItem />
+          </SwiperSlide>
+          <SwiperSlide>
+            <HotPortfolioItem />
+          </SwiperSlide>
+          <SwiperSlide>
+            <HotPortfolioItem />
+          </SwiperSlide>
+          <SwiperSlide>
+            <HotPortfolioItem />
+          </SwiperSlide>
+        </Swiper>
+        <div className="swiper-button-prev-hot absolute left-[18%] z-20 top-1/2 transform -translate-y-1/2 bg-black rounded-full">
+          <Icons name={bigLeftAngle} />
+        </div>
+        <div className="swiper-button-next-hot absolute right-[18%] x-20 top-1/2 transform -translate-y-1/2">
+          <Icons name={bigRightAngle} />
+        </div>
       </div>
     </div>
   );
