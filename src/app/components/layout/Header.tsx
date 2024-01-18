@@ -24,7 +24,7 @@ const Header = ({ type, isLoggedIn = false }: HeaderProps) => {
           />
         </div>
       </div>
-      <div className="flex gap-[40px]">
+      <div className="flex gap-[40px] cursor-pointer">
         <p>마이페이지</p>
         <p>로그인</p>
       </div>
