@@ -15,7 +15,11 @@ const HotPortfolioContainer = () => {
       <div className="w-full">
         <Swiper
           modules={[Navigation]}
-          slidesPerView={1.5}
+          slidesPerView="auto"
+          breakpoints={{
+            1024: { slidesPerView: 1.125 },
+            1280: { slidesPerView: 1.5 },
+          }}
           spaceBetween={30}
           grabCursor={true}
           loop={true}
