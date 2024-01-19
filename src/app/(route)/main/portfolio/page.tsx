@@ -13,7 +13,7 @@ export default async function MainPortfolioPage() {
   )
     .then((res) => res.json())
     .then((res) => {
-      return res.data;
+      return res;
     });
 
   return (
