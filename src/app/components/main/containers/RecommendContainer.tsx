@@ -24,6 +24,7 @@ const RecommendContainer = () => {
           breakpoints={{
             1280: { slidesPerView: 5.5 },
             1024: { slidesPerView: 4 },
+            1920: { slidesPerView: 7 },
           }}
           slidesPerView="auto"
           grabCursor={true}
