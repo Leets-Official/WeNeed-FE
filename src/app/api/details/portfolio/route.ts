@@ -17,7 +17,7 @@ const mockPortfolioDetails = {
   },
   portfolio: {
     thumbnail:
-      'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+      'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
     title: '위니드포폴',
     createdAt: '2023-01-01T00:00:00Z',
@@ -33,7 +33,7 @@ const mockPortfolioDetails = {
       nickname: '위니드',
       major: '시각디자인과',
       profile:
-        'https://s3-alpha-sig.figma.com/img/605f/ffce/0207ec5b5b5ac6fb87b4910c529974e4?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NsSz25KNfa~N16Nio~d3vYvJbuMR1ZiK96iNpqDJ1J8GasL3viPTXXTVq2hkpatd7jNoJIZ2ajE6VYK7vFkD1yahxEwGuS80YUMuxJr5SKaRbx3tzDtkCFxY1-3NixI57-wKM9exeXiDWmWDhULFT8lQ3xkfDNgcJPL5gkntXyzkc41ROzh04sLg76mt5MxlLrvSUe6cfA2Cz2DTAvEPDxAmSVDEOowH-XNGA3VZ~VOHv0uDSNx4j3IH83Zu8wPCv5gPDGoV2Ky0lmP0uXxRi4cGwx-ZXXXegrx3SXqQpbNjFF7HIRYIOJh2YLZ1v36x2tK-H8BScpJ6uKYehbIrEA__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       grade: 3,
     },
     teamMembers: [
@@ -41,13 +41,13 @@ const mockPortfolioDetails = {
         userId: 1,
         nickname: 'string',
         profile:
-          'https://s3-alpha-sig.figma.com/img/3e7e/1346/9f9936fa68f41c17b224a071bea60ef2?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=doGbHOWg61z80xWOv8VlUYzlPF~0T9B~VPKx2cGr3Ol8au-Ow~Kj0LWB9dwmZ8Ff6VLW2WN70ARt1-USpx7Qh2B6RK8ZkKFfKpx4rm6fP9NPxRBiZOx7yo~9QqpFdkcvM8zQiPk05UOec~pG9KQu1I9MztgOO~fPH1U9ayDupx-Ew-A39WyeDfa2t7eXvKlYQyz9F3m2SQISZAIFclYgZO9Fzc5OneU5~~6Ouz3rhO4SRm4jSXDZ7~oHw9Mdf9h-NDmG-9T1RPn27dv4myYwaxyAzgf-m4a5F80-eCHsOeVEmQEMlXlyWr67VCDjEZLdEi7lF7SxvXX6~-Gzcz0keg__',
+          'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       },
       {
         userId: 2,
         nickname: 'string',
         profile:
-          'https://s3-alpha-sig.figma.com/img/0577/f0e9/b7fca2f32639871454da0de95f951709?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QXYUIJ78o4iC2-S7jzyWp3GoTidO8LRg5ltGOL7I9WquSORINK9uDNArHD5jUXyV9VLeYrDKSWkf3BTpWT46PoFcctnJPNkVfvU2QlKb-hjdiQ9q3WsxuFYOTTXjUdlP51l90qTbREVcbg56MCxAMIHgXNnu5GhqXnKamu94PdykTxmDfE~hYBJW5CmAygSisZ1JQNPWy-HgTP2izXOsiUg7h2mDTYrTn7IYTtU2fwbeIf5sgOqPLu7v2b5luM9dljuuubnUhYPAcFxA76PW~QOYP7njraGy2jnRqLrgtwxVUFvdRXVxqdQUB3QdbL2OCnsNVV9dQiAuXYrXDRI3vw__',
+          'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       },
     ],
     contents: [
@@ -61,13 +61,13 @@ const mockPortfolioDetails = {
         id: 2,
         type: 'image',
         imageData:
-          'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+          'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       },
       {
         id: 3,
         type: 'image',
         imageData:
-          'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+          'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       },
     ],
   },
@@ -75,7 +75,7 @@ const mockPortfolioDetails = {
     {
       articleId: 1,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴1',
       bookmarked: false,
@@ -83,7 +83,7 @@ const mockPortfolioDetails = {
     {
       articleId: 2,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -91,7 +91,7 @@ const mockPortfolioDetails = {
     {
       articleId: 3,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -99,7 +99,7 @@ const mockPortfolioDetails = {
     {
       articleId: 4,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -107,7 +107,7 @@ const mockPortfolioDetails = {
     {
       articleId: 5,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -115,7 +115,7 @@ const mockPortfolioDetails = {
     {
       articleId: 6,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -123,7 +123,7 @@ const mockPortfolioDetails = {
     {
       articleId: 7,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
 
       title: '내포폴2',
       bookmarked: true,
@@ -139,7 +139,7 @@ const mockPortfolioDetails = {
       grade: 3,
       createdAt: '2024-01-25T14:48:45.287Z',
       profile:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
     },
     {
       commentId: 1,
@@ -151,7 +151,7 @@ const mockPortfolioDetails = {
       grade: 4,
       createdAt: '2024-01-26T14:48:45.287Z',
       profile:
-        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
       children: [
         {
           commentId: 10,
@@ -163,7 +163,7 @@ const mockPortfolioDetails = {
           grade: 4,
           createdAt: '2024-01-26T14:48:45.287Z',
           profile:
-            'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+            'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
         },
         {
           commentId: 11,
@@ -175,7 +175,7 @@ const mockPortfolioDetails = {
           grade: 4,
           createdAt: '2024-01-26T14:48:45.287Z',
           profile:
-            'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+            'https://s3-alpha-sig.figma.com/img/ac88/f9f3/f8efddbddc23fa33c1407539718bc36a?Expires=1707696000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=c8kXowJWlo2tgDatFEE7gqwz~gBtcLI1UCxo91oYTkttjpUFCDPCFTzxJSthGtLFamCK14EzrJVkps685CERZdlf02L9DMwtlAHHtPjdVzbAyJ~sqdVyi7K5RPz4BMsp0fG7J4Ot-q6m025TefniwOB--0W6Zy0PPcAGuEChDwxvYd-6EjkPv~XirD2-fL32qpEn1ePPyr8llQmROGDs6tn6aRUWSbPhe1PAzXLxR27c-gsnuiyW-2yvW4R4H26d1Kqn-jSw9~4Ti2ZekNlCv-o0BJUes~CL2E5Q8WlJU3CmvrTS1oeZtOk14dB3eH47opYsFq~kmWV7cmtPjWS1Qw__',
         },
       ],
     },
