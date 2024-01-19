@@ -40,11 +40,17 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
               {(article as PortfolioArticle).writerNickname}
             </p>
           </div>
+          <div className="flex gap-[10px] justify-center items-center ">
+            <Icons name={view} />
+            <p>122</p>
+            <GradientHeart width={16} height={17} />
+            <p>12</p>
+          </div>
           {!onRecommend && (
             <div className="flex gap-[10px] justify-center items-center">
               <Icons name={view} />
               <p>{(article as PortfolioArticle).viewCount}</p>
-              <GradientHeart />
+              <GradientHeart width={16} height={17} />
               <p>{(article as PortfolioArticle).heartCount}</p>
             </div>
           )}
