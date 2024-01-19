@@ -1,7 +1,6 @@
 'use client';
 import Icons from 'components/common/Icons';
 import { useState } from 'react';
-import { UploadPropTypes } from '_types/upload';
 import { closeIcon } from 'ui/IconsPath';
 import ConfirmButton from './ConfirmButton';
 

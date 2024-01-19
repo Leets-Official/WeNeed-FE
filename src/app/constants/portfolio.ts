@@ -5,11 +5,16 @@ export const FILE_TYPE_LIST = [
   '비디오',
   '오디오',
   '링크',
-];
+] as const;
+export const SIDENAV_ITEM_NAME = ['미리보기', '업로드', '팀원 추가'] as const;
 
-export const SIDENAV_ITEM_NAME = ['미리보기', '업로드', '팀원 추가'];
-
-export const INTERESTED_FIELD_LIST = ['기획', '디자인', '미디어', '예술', 'IT'];
+export const INTERESTED_FIELD_LIST = [
+  '기획',
+  '디자인',
+  '미디어',
+  '예술',
+  'IT',
+] as const;
 
 export const INTERESTED_TAG_LIST = [
   '광고',
@@ -41,4 +46,4 @@ export const INTERESTED_TAG_LIST = [
   '웹',
   '앱',
   '보안',
-];
+] as const;

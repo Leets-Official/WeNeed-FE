@@ -3,7 +3,7 @@
 import { INPUT_STYLE } from 'constants/styles';
 
 interface InputProps {
-  type: 'search' | 'default';
+  type: 'search' | 'upload' | 'default';
   textValue: string;
   placeholder?: string;
   className?: string;

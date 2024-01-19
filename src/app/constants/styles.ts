@@ -9,4 +9,6 @@ export const INPUT_STYLE = {
   search: (className: string) =>
     `w-96 h-8 bg-neutral-800 rounded-3xl px-8 outline-none ${className}`,
   default: () => 'w-full h-full ',
+  upload: (className: string) =>
+    `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
 } as const;

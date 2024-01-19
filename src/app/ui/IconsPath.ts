@@ -70,10 +70,13 @@ export const navItemIconPath = [
 ] as const;
 
 export const fileIcon = {
-  size: 25,
-  rsize: 24,
-  rfill: 'none',
+  width: 26,
+  height: 26,
   fill: 'black',
+  options: {
+    fillRule: 'evenodd',
+    clipRule: 'evenodd',
+  },
 } as const;
 
 export const fileIconPath = [
@@ -86,10 +89,13 @@ export const fileIconPath = [
 ] as const;
 
 export const miniFileIcon = {
-  size: 25,
-  rsize: 24,
-  rfill: 'none',
+  width: 24,
+  height: 24,
   fill: 'black',
+  options: {
+    fillRule: 'evenodd',
+    clipRule: 'evenodd',
+  },
 } as const;
 
 export const miniFileIconPath = [

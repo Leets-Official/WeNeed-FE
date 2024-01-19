@@ -9,7 +9,7 @@ const FileTypeContainer = () => {
         <FileType
           key={item}
           title={item}
-          iconSvgInfo={{ ...fileIcon, path: fileIconPath[index] }}
+          iconInfo={{ ...fileIcon, path: fileIconPath[index] }}
         />
       ))}
     </div>

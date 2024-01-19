@@ -3,6 +3,7 @@ import Icons from 'components/common/Icons';
 import TeamMate from './TeamMate';
 import { searchTeamIcon } from 'ui/IconsPath';
 import Image from 'next/image';
+import Input from 'components/common/Input';
 
 const MockArr = [
   '민규우',
@@ -21,9 +22,12 @@ const SearchTeamInput = () => {
             imageURL="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
             nickName={'낭낭한민규'}
           />
-          <input
-            className="text-black w-[40%] h-[30px] text-base "
+          <Input
+            type={'upload'}
+            className=""
             placeholder="함께한 팀원의 이름을 검색해보세요."
+            textValue={''}
+            onChange={() => console.log('입력중...')}
           />
         </div>
         <Icons name={searchTeamIcon} />
