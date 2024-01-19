@@ -9,12 +9,12 @@ const MiniFileTypeContainer = () => {
       <div className="flex flex-row-reverse mt-[15px] mr-[15px]">
         <Icons name={closeIcon} />
       </div>
-      <div className="flex justify-center gap-x-[42px] mt-[25px]">
+      <div className="flex justify-center gap-x-[40px] mt-[25px]">
         {FILE_TYPE_LIST.map((item, index) => (
           <MiniFileType
             key={item}
             title={item}
-            iconSvgInfo={{ ...miniFileIcon, path: miniFileIconPath[index] }}
+            iconInfo={{ ...miniFileIcon, path: miniFileIconPath[index] }}
           />
         ))}
       </div>

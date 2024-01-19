@@ -1,5 +1,4 @@
 import Icons from 'components/common/Icons';
-import { IconPathTypes } from '_types/icon';
 
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
