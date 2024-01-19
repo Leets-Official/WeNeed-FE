@@ -21,8 +21,8 @@ export const addThumbnailIcon = {
 
 export const selectFileIcon = {
   path: 'M8.9082 0.81543H7.9082V8.31543H0.408203V9.31543H7.9082V16.8154H8.9082V9.31543H16.4082V8.31543H8.9082V0.81543Z',
-  width: 16,
-  height: 16,
+  width: 17,
+  height: 17,
   fill: '#000000 ',
 } as const;
 
