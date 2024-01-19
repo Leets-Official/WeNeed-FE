@@ -1,6 +1,6 @@
 import { closeIcon, miniFileIcon } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
-import MiniFileType from 'components/upload/both/MiniFileType';
+import MiniFileType from '../MiniFileType';
 
 interface FileTypeContainerProps {
   fileTypeList: readonly string[];

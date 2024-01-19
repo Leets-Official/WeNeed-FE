@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
@@ -13,6 +14,7 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
+    console.log(option, '이 선택되었습니다.');
     setSelectedOption(option);
     setIsOpen(false);
   };
@@ -22,10 +24,9 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
       <div
         className="flex w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 items-center place-content-between cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
-        onBlur={() => setIsOpen(false)}
         tabIndex={0}
       >
-        <div className="flex gap-x-[10px]">
+        <div className="flex gap-x-[2px]">
           <p>{title}</p>
           <p className="text-red-400">*</p>
         </div>
@@ -48,7 +49,7 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
                   index === 0 ? 'border-t-0' : ''
                 }
                 `}
-                onClick={() => handleOptionClick}
+                onClick={() => handleOptionClick(option)}
               >
                 {option}
               </div>

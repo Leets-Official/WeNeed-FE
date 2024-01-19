@@ -2,7 +2,7 @@
 import Icons from 'components/common/Icons';
 import { useState } from 'react';
 import { closeIcon } from 'ui/IconsPath';
-import ConfirmButton from './ConfirmButton';
+import ConfirmButton from 'components/upload/both/ConfirmButton';
 
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
