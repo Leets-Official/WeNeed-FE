@@ -5,6 +5,7 @@ export const BUTTON_STYLE = {
   userinfo: (className: string) => `py-[17px] ${className}`,
   upload: (className: string) =>
     `w-[843px] h-[44px] rounded-[9px] cursor-pointer ${className}`,
+  share: (className: string) => `${className}`,
   default: () => 'w-full h-full',
 } as const;
 
