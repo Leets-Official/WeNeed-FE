@@ -1,20 +1,27 @@
-import { FILE_TYPE_LIST } from 'constants/portfolio';
-import { closeIcon, miniFileIcon, miniFileIconPath } from 'ui/IconsPath';
+import { closeIcon, miniFileIcon } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
-import MiniFileType from '../modal/uploadFile/MiniFileType';
+import MiniFileType from '../MiniFileType';
 
-const MiniFileTypeContainer = () => {
+interface FileTypeContainerProps {
+  fileTypeList: readonly string[];
+  fileIconPath: readonly string[];
+}
+
+const MiniFileTypeContainer = ({
+  fileTypeList,
+  fileIconPath,
+}: FileTypeContainerProps) => {
   return (
     <div className="flex flex-col w-[922px] h-[190px] rounded-[9px] bg-white">
       <div className="flex flex-row-reverse mt-[15px] mr-[15px]">
         <Icons name={closeIcon} />
       </div>
       <div className="flex justify-center gap-x-[40px] mt-[25px]">
-        {FILE_TYPE_LIST.map((item, index) => (
+        {fileTypeList.map((item, index) => (
           <MiniFileType
             key={item}
             title={item}
-            iconInfo={{ ...miniFileIcon, path: miniFileIconPath[index] }}
+            iconInfo={{ ...miniFileIcon, path: fileIconPath[index] }}
           />
         ))}
       </div>

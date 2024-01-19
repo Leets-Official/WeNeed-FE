@@ -4,8 +4,8 @@ import { closeIcon } from 'ui/IconsPath';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import ProgressBar from './ProgressBar';
-import { imgAndVideo } from 'ui/fileType';
-import ConfirmButton from './ConfirmButton';
+import { imgAndVideo } from 'ui/upload/fileType';
+import ConfirmButton from 'components/upload/both/ConfirmButton';
 
 interface FileInfo {
   name: string | undefined;
@@ -70,7 +70,7 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
           onClick={divClick}
         >
           {fileInfo.name != undefined ? (
-            <div className="flex gap-x-[12px] mt-[30px] ml-[22px] text-black text-xs font-medium">
+            <div className="flex gap-x-3 mt-[30px] ml-[22px] text-black text-xs font-medium">
               <div>
                 {fileType === '이미지' && (
                   <Image
