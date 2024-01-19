@@ -18,10 +18,8 @@ interface IconsSVGTypes {
   path: string;
   fill: string;
 }
-export interface IconsSVGTypes {
+interface IconsSVGTypes {
   size: number;
-  rsize: number;
-  rfill: string;
   path: string;
   fill: string;
 }
