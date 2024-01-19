@@ -19,6 +19,7 @@ const HotPortfolioContainer = () => {
           breakpoints={{
             1024: { slidesPerView: 1.125 },
             1280: { slidesPerView: 1.5 },
+            1920: { slidesPerView: 2.25 },
           }}
           spaceBetween={30}
           grabCursor={true}

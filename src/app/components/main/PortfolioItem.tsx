@@ -42,7 +42,7 @@ const PortfolioItem = ({ onRecommend }: PortfolioItemsProps) => {
           <div className="flex gap-[10px] justify-center items-center ">
             <Icons name={view} />
             <p>122</p>
-            <GradientHeart />
+            <GradientHeart width={16} height={17} />
             <p>12</p>
           </div>
         </div>
