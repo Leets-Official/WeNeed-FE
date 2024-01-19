@@ -1,6 +1,5 @@
 'use client';
 import { useRef, useState } from 'react';
-import { UploadPropTypes } from '_types/upload';
 import { closeIcon } from 'ui/IconsPath';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';

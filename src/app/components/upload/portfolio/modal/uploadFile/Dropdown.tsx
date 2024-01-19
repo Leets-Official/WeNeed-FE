@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
 
 interface DropdownProps {
-  options: string[];
+  options: readonly string[];
   title: string;
   announcement: string;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
-  options,
-  title,
-  announcement,
-}: DropdownProps) => {
+const Dropdown = ({ options, title, announcement }: DropdownProps) => {
   const [selectedOption, setSelectedOption] = useState<string>('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
