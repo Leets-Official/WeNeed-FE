@@ -6,9 +6,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="bg-black">
       <Header type={'main'} isLoggedIn />
-      {children}
+      <div className="max-w-[1280px] mx-auto">{children}</div>
     </section>
   );
 }
