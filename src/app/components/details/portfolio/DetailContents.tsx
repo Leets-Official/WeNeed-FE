@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import DetailMenuBar from './DetailMenuBar';
 
 interface DetailContentsProps {
   title: string;
@@ -25,7 +24,7 @@ const DetailContents = ({
             return (
               <div
                 key={content.id}
-                className="w-[842px] h-auto"
+                className="max-w-[842px] h-auto"
                 dangerouslySetInnerHTML={{ __html: content.textData ?? '' }}
               ></div>
             );
@@ -33,7 +32,7 @@ const DetailContents = ({
             return (
               <div
                 key={content.id}
-                className="flex justify-center items-center w-[1280px] h-auto overflow-hidden"
+                className="flex justify-center items-center w-full h-auto overflow-hidden"
               >
                 <Image
                   src={content.imageData || ''}
