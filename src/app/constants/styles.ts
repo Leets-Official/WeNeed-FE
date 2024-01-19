@@ -2,6 +2,7 @@ export const BUTTON_STYLE = {
   small: (className: string) => `px-2 py-2 ${className}`,
   medium: (className: string) => `px-10 py-10 ${className}`,
   large: (className: string) => `px-20 py-20 ${className}`,
+  share: (className: string) => `${className}`,
   default: () => 'w-full h-full',
 } as const;
 
