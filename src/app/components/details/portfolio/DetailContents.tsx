@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import DetailMenuBar from './DetailMenuBar';
 
 interface DetailContentsProps {
+  title: string;
   contents: Array<Content>;
   links: string[];
   files: string[];
@@ -8,20 +10,31 @@ interface DetailContentsProps {
 }
 
 const DetailContents = ({
+  title,
   contents,
   links,
   files,
   skills,
 }: DetailContentsProps) => {
   return (
-    <div className="flex flex-col items-center bg-neutral-700 mt-[95px] min-h-[800px]">
+    <div className="flex flex-col items-center mt-[95px] min-h-[800px] gap-[40px] ">
+      <h1 className="mb-[87px] text-3xl font-bold"> {title}</h1>
       {contents.map((content) => {
         switch (content.type) {
           case 'text':
-            return <div>{content.textData}</div>;
+            return (
+              <div
+                key={content.id}
+                className="w-[842px] h-auto"
+                dangerouslySetInnerHTML={{ __html: content.textData ?? '' }}
+              ></div>
+            );
           case 'image':
             return (
-              <div className="max-w-[1280px] max-h-[749] ">
+              <div
+                key={content.id}
+                className="flex justify-center items-center w-[1280px] h-auto overflow-hidden"
+              >
                 <Image
                   src={content.imageData || ''}
                   width={1280}
@@ -29,6 +42,7 @@ const DetailContents = ({
                   alt="content"
                   style={{
                     objectFit: 'cover',
+                    objectPosition: 'center center',
                     width: '100%',
                     height: '100%',
                   }}

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const HotPortfolioItem = () => {
   return (
-    <div className="relative flex justify-center w-[1150px] h-[525px] rounded-lg bg-white overflow-hidden ">
+    <div className="relative flex justify-center items-center w-[1150px] h-[525px] rounded-lg bg-white overflow-hidden ">
       <Image
         src="https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg"
         alt="hot portfolio"
@@ -10,6 +10,7 @@ const HotPortfolioItem = () => {
         height={525}
         style={{
           objectFit: 'cover',
+          objectPosition: 'center',
           width: '100%',
           height: 'auto',
         }}

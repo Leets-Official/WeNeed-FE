@@ -13,7 +13,7 @@ const PortfolioItem = ({ onRecommend }: PortfolioItemsProps) => {
       <div className="absolute top-3 right-3">
         <Icons name={bookmark} />
       </div>
-      <div className="w-72 h-72 rounded-lg text-sm overflow-hidden ">
+      <div className="flex justify-center items-center w-72 h-72 rounded-lg text-sm overflow-hidden ">
         <Image
           src="https://s3-alpha-sig.figma.com/img/d489/d794/6732799958bc759af733d7aa6c984f5b?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LVQzXhTJIQ~TSDtQHStc7X763YOP~R6-XeEPLLS8OpWm~n4G~Qhh2nPgZxwoBBX1Md5KB7x85H0zse6Kz6~4YKxUY1tw0t1~Q6Ku3Grv6VdfSdIH-2lWSw9v9Dz26r~MTiQKxqb9E3YVLTAFMtlvnBGHzTKDftprktUOi1QBcnJsoJM2KF5CXMCm0n3pLafgM80ZF3hxik9SO4wfIuxI2GihnZuJqLt7k-f2AA2t55C0dgSO1MyqkpmuC56XlVa-biuEfb5CuUJXY~XkXXliC~Ygq7BHw1tgV6FQSDKiO2iUCtdT1yAeYSJNs6FA9-EpSL9jbHpUiHlQulzl7Qjw5A__"
           width={288}
@@ -21,6 +21,7 @@ const PortfolioItem = ({ onRecommend }: PortfolioItemsProps) => {
           alt="postImage"
           style={{
             objectFit: 'cover',
+            objectPosition: 'center',
             width: '100%',
             height: 'auto',
           }}
