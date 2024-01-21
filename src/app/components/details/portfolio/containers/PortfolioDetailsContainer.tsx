@@ -5,6 +5,8 @@ import Profile from '../Profile';
 import DetailCategories from 'components/main/DetailCategories';
 import { formatUploadTime } from 'utils/date';
 import DetailContents from '../DetailContents';
+import DetailMenuBar from '../DetailMenuBar';
+import WriterOptions from '../WriterOptions';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -23,6 +25,7 @@ const PortfolioDetailsContainer = ({
     heartCount,
     bookmarkCount,
     tags,
+    title,
     contents,
     links,
     files,
@@ -31,13 +34,14 @@ const PortfolioDetailsContainer = ({
   return (
     <div className="flex flex-col items-center bg-black text-white min-h-screen">
       {thumbnail ? (
-        <div className="relative w-screen h-[380px] overflow-hidden">
+        <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden">
           <Image
             src={thumbnail}
             layout="fill"
             alt="thumbnail"
             style={{
               objectFit: 'cover',
+              objectPosition: 'center',
               width: '100%',
               height: '100%',
             }}
@@ -50,7 +54,7 @@ const PortfolioDetailsContainer = ({
           </div>
         </div>
       )}
-      <div className="w-[1290px]">
+      <div className="w-[1290px]  mb-[143px]">
         <Profile
           writer={writer}
           date={createdAt}
@@ -65,11 +69,14 @@ const PortfolioDetailsContainer = ({
           {formatUploadTime(createdAt)}
         </p>
         <DetailContents
+          title={title}
           contents={contents}
           links={links}
           files={files}
           skills={skills}
         />
+        <DetailMenuBar userId={writer.userId} />
+        {user.sameUser && <WriterOptions />}
       </div>
     </div>
   );
