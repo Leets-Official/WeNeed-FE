@@ -25,7 +25,7 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
         onClick={() => setIsOpen(!isOpen)}
         tabIndex={0}
       >
-        <div className="flex gap-x-[10px]">
+        <div className="flex gap-x-[2px]">
           <p>{title}</p>
           <p className="text-red-400">*</p>
         </div>
