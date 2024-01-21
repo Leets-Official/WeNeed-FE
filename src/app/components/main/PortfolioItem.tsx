@@ -13,7 +13,11 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
   return (
     <div className="relative cursor-pointer w-[285px]">
       <div className="z-20 absolute top-3 right-3">
-        {article.bookmarked ? <GradientBookmark /> : <Icons name={bookmark} />}
+        {article.bookmarked ? (
+          <GradientBookmark width={16} height={17} />
+        ) : (
+          <Icons name={bookmark} />
+        )}
       </div>
       <div className="relative w-[296px] h-[296px] rounded-lg text-sm overflow-hidden">
         <Image
