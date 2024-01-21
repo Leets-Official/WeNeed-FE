@@ -1,4 +1,4 @@
-export const FILE_TYPE_LIST = [
+export const FILE_TYPE_PORTFOLIO = [
   '텍스트',
   '이미지',
   '문서',
@@ -6,7 +6,8 @@ export const FILE_TYPE_LIST = [
   '오디오',
   '링크',
 ] as const;
-export const SIDENAV_ITEM_NAME = ['미리보기', '업로드', '팀원 추가'] as const;
+
+export const SIDENAV_ITEM_NAME_P = ['미리보기', '업로드', '팀원 추가'] as const;
 
 export const INTERESTED_FIELD_LIST = [
   '기획',

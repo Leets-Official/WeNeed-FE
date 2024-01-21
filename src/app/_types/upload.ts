@@ -11,3 +11,9 @@ interface ConfirmButtonProps {
   btnClick: () => void;
   btnText: string | undefined;
 }
+
+interface ThumbnailTypes {
+  bgColor: string;
+  height: string;
+  etcStyles?: string;
+}
