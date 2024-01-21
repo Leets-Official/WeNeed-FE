@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
+}
