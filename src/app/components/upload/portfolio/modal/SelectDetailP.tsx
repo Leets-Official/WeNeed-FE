@@ -4,10 +4,10 @@ import {
   INTERESTED_FIELD_LIST,
   INTERESTED_TAG_LIST,
 } from 'constants/portfolio';
-import Dropdown from './Dropdown';
-import ConfirmButton from './ConfirmButton';
+import Dropdown from '../../both/modal/uploadFile/Dropdown';
+import ConfirmButton from 'components/upload/both/ConfirmButton';
 
-const SelectDetail = () => {
+const SelectDetailP = () => {
   return (
     <div className="flex flex-col w-[922px] h-[421px] bg-white rounded-[9px]">
       <div className="flex flex-row-reverse mt-[16px] mr-[16px]">
@@ -54,4 +54,4 @@ const SelectDetail = () => {
   );
 };
 
-export default SelectDetail;
+export default SelectDetailP;

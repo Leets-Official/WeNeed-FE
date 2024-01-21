@@ -1,7 +1,7 @@
 import Icons from 'components/common/Icons';
 import { selectFileIcon } from 'ui/IconsPath';
 
-const SelectFile = () => {
+const SelectFileP = () => {
   return (
     <div className="flex items-center justify-center w-[1200px] h-[66px] gap-x-[10px] cursor-pointer border border-dashed border-neutral-400">
       <Icons name={selectFileIcon} />
@@ -10,4 +10,4 @@ const SelectFile = () => {
   );
 };
 
-export default SelectFile;
+export default SelectFileP;

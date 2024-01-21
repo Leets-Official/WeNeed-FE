@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import ProgressBar from './ProgressBar';
 import { imgAndVideo } from 'ui/fileType';
-import ConfirmButton from './ConfirmButton';
+import ConfirmButton from 'components/upload/both/ConfirmButton';
 
 interface FileInfo {
   name: string | undefined;
