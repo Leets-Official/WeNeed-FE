@@ -48,13 +48,13 @@ const PortfolioDetailsContainer = ({
           />
         </div>
       ) : (
-        <div className="relative w-screen h-96 bg-gradient-to-r from-cyan-400 to-blue-500">
+        <div className="relative w-screen h-96  bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Icons name={bigWeneed} />
           </div>
         </div>
       )}
-      <div className="w-[1290px]  mb-[143px]">
+      <div className="w-[1290px] mb-[143px]">
         <Profile
           writer={writer}
           date={createdAt}
