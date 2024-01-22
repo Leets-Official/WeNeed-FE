@@ -28,7 +28,8 @@
     "next.config.js",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "EditorTools.js"
   ],
   "exclude": ["node_modules"]
 }
