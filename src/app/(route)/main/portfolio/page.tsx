@@ -1,5 +1,5 @@
 import Footer from 'components/layout/Footer';
-import MainNavbar from 'components/main/MainNavbar';
+import MainNavbar from 'components/main/common/MainNavbar';
 import {
   DetailCategoriesContainer,
   HotPortfolioContainer,

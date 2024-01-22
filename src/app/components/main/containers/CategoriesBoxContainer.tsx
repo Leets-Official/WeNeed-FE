@@ -1,4 +1,4 @@
-import CategoriesBox from '../CategoriesBox';
+import CategoriesBox from '../common/CategoriesBox';
 
 const CategoriesBoxContainer = () => {
   return (
