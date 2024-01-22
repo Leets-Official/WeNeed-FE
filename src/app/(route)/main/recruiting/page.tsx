@@ -1,5 +1,6 @@
-import MainNavbar from 'components/main/MainNavbar';
+import MainNavbar from 'components/main/common/MainNavbar';
 import { DetailCategoriesContainer } from 'components/main/containers';
+import RecruitingContainer from 'components/main/containers/RecruitingContainer';
 
 export default async function MainRecruitingPage() {
   const data: ResponseRecruitingMain = await fetch(
@@ -11,11 +12,10 @@ export default async function MainRecruitingPage() {
     });
 
   return (
-    <section>
-      <div className="flex flex-col items-center w-full min-h-screen text-white ">
-        <MainNavbar />
-        <DetailCategoriesContainer />
-      </div>
+    <section className="flex flex-col items-center w-full min-h-screen text-white ">
+      <MainNavbar />
+      <DetailCategoriesContainer />
+      <RecruitingContainer />
     </section>
   );
 }

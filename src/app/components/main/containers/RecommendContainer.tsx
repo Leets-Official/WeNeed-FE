@@ -1,7 +1,7 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import PortfolioItem from '../PortfolioItem';
+import PortfolioItem from '../portfolio/PortfolioItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
