@@ -230,20 +230,5 @@ const mockPortfolioDetails = {
       content: '우와 작업물 너무 좋은데요! 저장할께요.  ',
     },
   ],
-  comments: [
-    {
-      commentId: 1,
-      content: '우와! 저의 관심사와 동일하네요! 크루 제안 넣어야 겠어요!! ',
-    },
-    {
-      commentId: 2,
-      content:
-        '안녕하세요. 작업물이 굉장히 제 취향이네요. 기회가 된다면 함께 작업하고 싶어요!  ',
-    },
-    {
-      commentId: 3,
-      content: '우와 작업물 너무 좋은데요! 저장할께요.  ',
-    },
-  ],
 };
 s;
