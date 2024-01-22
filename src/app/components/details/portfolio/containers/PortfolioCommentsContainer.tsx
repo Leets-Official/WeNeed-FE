@@ -36,6 +36,7 @@ const PortfolioCommentsContainer = ({
           </div>
         </div>
       </div>
+      {/* 댓글 0개일 경우 */}
     </div>
   );
 };

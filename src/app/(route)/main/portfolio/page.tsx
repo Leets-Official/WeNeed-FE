@@ -8,14 +8,11 @@ import {
 } from 'components/main/containers';
 
 export default async function MainPortfolioPage() {
-  const data = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio`,
     { cache: 'no-store' },
-  )
-    .then((res) => res.json())
-    .then((res) => {
-      return res;
-    });
+  );
+  const data = await response.json();
 
   return (
     <section>

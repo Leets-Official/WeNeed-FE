@@ -10,7 +10,7 @@ interface PortfolioItemsProps {
 const PortfolioItem = ({ onRecommend }: PortfolioItemsProps) => {
   return (
     <div className="relative cursor-pointer w-[285px]">
-      <div className="absolute top-3 right-3">
+      <div className="absolute top-3 right-3 z-20">
         <Icons name={bookmark} />
       </div>
       <div className="flex justify-center items-center w-72 h-72 rounded-lg text-sm overflow-hidden ">
