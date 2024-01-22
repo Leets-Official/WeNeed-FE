@@ -10,6 +10,7 @@ import {
 export default async function MainPortfolioPage() {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio`,
+    { cache: 'no-store' },
   )
     .then((res) => res.json())
     .then((res) => {

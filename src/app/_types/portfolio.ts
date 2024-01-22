@@ -51,3 +51,8 @@ interface OtherWorkList {
   thumbnail: string;
   title: string;
 }
+
+interface CommentList {
+  commentId: number;
+  content: string;
+}
