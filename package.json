@@ -18,8 +18,14 @@
     ]
   },
   "dependencies": {
+    "@editorjs/attaches": "^1.3.0",
+    "@editorjs/editorjs": "^2.28.2",
+    "@editorjs/link": "^2.6.2",
+    "@editorjs/paragraph": "^2.11.3",
+    "@editorjs/simple-image": "^1.6.0",
     "@nextui-org/react": "^2.2.9",
     "@types/uuid": "^9.0.7",
+    "editorjs-html": "^3.4.3",
     "framer-motion": "^10.18.0",
     "next": "14.0.4",
     "react": "^18",
