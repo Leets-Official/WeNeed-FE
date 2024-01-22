@@ -2,7 +2,7 @@
 
 import Icons from 'components/common/Icons';
 import { hamburger, write } from 'ui/IconsPath';
-import CategoriesBoxContainer from './containers/CategoriesBoxContainer';
+import CategoriesBoxContainer from '../containers/CategoriesBoxContainer';
 import { useState } from 'react';
 
 const MainNavbar = () => {
