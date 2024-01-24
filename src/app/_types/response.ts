@@ -1,3 +1,8 @@
+interface GoogleLoginResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
 interface ResponseRecruitingMain {
   user: UserProfile;
   pageable: Pageable;
@@ -22,17 +27,5 @@ interface ResponsePortfolioDetails {
 interface ResponseRecruitingDetail {
   user: UserProfile;
   recruit: RecruitDetailItem;
-  comments: CommentList[];
-}
-
-interface GoogleLoginResponse {
-  accessToken: string;
-  refreshToken: string;
-}
-
-interface ResponsePortfolioDetails {
-  user: UserProfile;
-  portfolio: PortfolioDetails;
-  workList: OtherWorkList[];
   comments: CommentList[];
 }
