@@ -20,9 +20,10 @@ const SearchBar = () => {
         type="search"
         onChange={(e) => onChangeKeyword(e)}
         textValue={searchKeyword}
+        onBlur={() => setOpenSearchModal(false)}
       />
       {openSearchModal && (
-        <div className="absolute top-[40px] w-[808px] h-[177px] bg-black border border-white rounded-[10px]"></div>
+        <div className="absolute z-20 top-[40px] w-[808px] h-[177px] bg-black border border-white rounded-[10px]"></div>
       )}
     </div>
   );
