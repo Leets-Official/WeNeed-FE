@@ -14,7 +14,7 @@ const Header = ({ type, isLoggedIn = false, username }: HeaderProps) => {
       <div className="h-full flex items-center gap-[78px]">
         <Icons name={weneed} />
         <div className="relative">
-          <Icons name={search} className="absolute left-2 top-2" />
+          <Icons name={search} className="absolute left-2 top-2 z-20" />
           <SearchBar />
         </div>
       </div>
