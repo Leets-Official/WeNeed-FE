@@ -1,8 +1,3 @@
-interface GoogleLoginResponse {
-  accessToken: string;
-  refreshToken: string;
-}
-
 interface ResponseRecruitingMain {
   user: UserProfile;
   pageable: Pageable;
