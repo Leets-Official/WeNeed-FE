@@ -2,6 +2,8 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
+type SortTypes = 'recent' | 'view' | 'like';
+
 interface User {
   nickname: string;
 }
