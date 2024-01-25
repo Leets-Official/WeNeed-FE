@@ -1,18 +1,21 @@
+import Link from 'next/link';
 import RecruitingItem from '../recruiting/RecruitingItem';
 
 interface RecruitingContainerProps {
-  user: UserData;
   data: RecruitListItem[];
 }
 
-const RecruitingContainer = ({ user, data }: RecruitingContainerProps) => {
+const RecruitingContainer = ({ data }: RecruitingContainerProps) => {
   return (
-    <div className="mt-[75px]">
-      {data.map((item) => {
+    <div className="mt-[75px] flex flex-col gap-[50px]">
+      {data.map((article) => {
+        const { nickname, major, grade, createdAt } = article;
         return (
-          <div key={item.articleId}>
+          <div key={article.articleId}>
             {/* <Profile /> */}
-            <RecruitingItem />
+            <Link href={`/article/${article.articleId}`}>
+              <RecruitingItem article={article} />
+            </Link>
           </div>
         );
       })}
