@@ -30,7 +30,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
           <p className="absolute z-10 w-[220px] top-[20px] left-[20px] truncate font-semibold">
             {(article as RecommendArticle).title}
           </p>
-          <div className="absolute top-0 h-20 w-full bg-gradient-to-t from-transparent to-neutral-950 rounded-2xl"></div>
+          <div className="absolute top-0 h-20 w-[296px] bg-gradient-to-t from-transparent to-neutral-950 rounded-md"></div>
         </>
       ) : (
         <div className="flex justify-between w-full h-[35px] mt-[11px]">
