@@ -14,6 +14,8 @@ interface DetailMenuBarType {
 interface UserProfile {
   nickname: string;
   sameUser: boolean;
+  hearted: boolean;
+  bookmarked: boolean;
 }
 
 interface WriterProfile {
@@ -26,9 +28,15 @@ interface WriterProfile {
 
 interface Content {
   id: number;
-  type: 'text' | 'image';
+  type: 'text' | 'image' | 'links';
   textData?: string;
   imageData?: string;
+}
+
+interface TeamMember {
+  userId: number;
+  nickname: string;
+  profile: string;
 }
 
 interface PortfolioDetails {

@@ -13,6 +13,11 @@ interface RecruitListItem {
   bookmarkCount: number;
 }
 
+interface RecruitDetailItem extends PortfolioDetails {
+  commentCount: number;
+  teamMembers: TeamMember[];
+}
+
 interface Pagable {
   size: number;
   page: number;
@@ -20,6 +25,13 @@ interface Pagable {
   totalElements: number;
 }
 
-interface UserData {
+interface Comment {
+  commentId: number;
+  content: string;
+  userId: number;
   nickname: string;
+  major: string;
+  grade: number;
+  createdAt: string;
+  profile: string;
 }

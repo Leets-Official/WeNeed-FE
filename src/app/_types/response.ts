@@ -1,7 +1,11 @@
-// response types
-
 interface ResponseRecruitingMain {
-  user: UserData;
+  user: UserProfile;
   pagable: Pagable;
   recrutingList: RecruitListItem[];
+}
+
+interface ResponseRecruitingDetail {
+  user: UserProfile;
+  recruit: RecruitDetailItem;
+  comments: Comment[];
 }
