@@ -1,4 +1,4 @@
-import MainNavbar from 'components/main/common/MainNavbar';
+import MainNavbar from 'components/main/MainNavbar';
 import { DetailCategoriesContainer } from 'components/main/containers';
 import RecruitingContainer from 'components/main/containers/RecruitingContainer';
 
