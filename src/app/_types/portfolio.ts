@@ -2,15 +2,6 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
-interface DetailMenuBarType {
-  readonly 프로필: JSX.Element;
-  readonly 크루제안: JSX.Element;
-  readonly 좋아요: JSX.Element;
-  readonly 북마크: JSX.Element;
-  readonly 댓글: JSX.Element;
-  readonly 공유: JSX.Element;
-}
-
 interface UserProfile {
   nickname: string;
   sameUser: boolean;
