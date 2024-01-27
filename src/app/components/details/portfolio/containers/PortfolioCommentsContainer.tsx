@@ -3,7 +3,7 @@
 import Icons from 'components/common/Icons';
 import Input from 'components/common/Input';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { inputDrop } from 'ui/IconsPath';
 
 interface PortfolioCommentsContainerProps {
@@ -14,10 +14,14 @@ const PortfolioCommentsContainer = ({
   comments = [],
 }: PortfolioCommentsContainerProps) => {
   const [commentValue, setCommentValue] = useState<string>('');
+  const commentsContainerRef = useRef(null);
 
   const onSubmitHandler = () => {};
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-white py-[50px]">
+    <div
+      className="flex flex-col justify-center items-center w-full bg-white py-[50px]"
+      ref={commentsContainerRef}
+    >
       <div className="w-[1290px]">
         <p className="w-full text-xl font-semibold mb-[25px]">
           댓글 {comments.length}개
@@ -35,6 +39,9 @@ const PortfolioCommentsContainer = ({
             <Icons name={inputDrop} />
           </div>
         </div>
+        {comments.map((comment) => {
+          return <p key={comment.commentId}>{comment.content}</p>;
+        })}
       </div>
     </div>
   );
