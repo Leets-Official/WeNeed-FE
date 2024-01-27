@@ -1,7 +1,6 @@
 import Icons from 'components/common/Icons';
 import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
-import Dropdown from '../../both/modal/uploadFile/Dropdown';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 
