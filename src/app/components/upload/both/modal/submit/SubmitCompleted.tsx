@@ -1,9 +1,6 @@
 import Button from 'components/common/Button';
-import Icons from 'components/common/Icons';
 import { useState } from 'react';
-import { completedCircle } from 'ui/IconsPath';
 import GradientCompleted from 'ui/gradient/GradientCompleted';
-import LoadingCircle from 'ui/gradient/GradientLoading';
 
 const SubmitCompleted = () => {
   const [isHovered, setIsHovered] = useState(false);
