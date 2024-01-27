@@ -4,7 +4,6 @@ interface UploadPropTypes {
   announcement: string;
   rule?: string;
   accept?: string;
-  onSubmit: () => void;
 }
 
 interface ConfirmButtonProps {
