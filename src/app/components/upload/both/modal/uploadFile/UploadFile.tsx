@@ -4,11 +4,15 @@ import { closeIcon } from 'ui/IconsPath';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import ProgressBar from './ProgressBar';
-import { imgAndVideo } from 'ui/fileType';
+import { imgAndVideo } from 'ui/upload/fileType';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadState } from 'recoil/upload';
+import { filestate } from 'recoil/dndFiles';
+import { useRecoilState } from 'recoil';
 
 interface FileInfo {
-  name: string | undefined;
+  name: string;
   size: number;
   url: string;
 }
@@ -18,13 +22,15 @@ interface UploadFileProps {
 }
 
 const UploadFile = ({ uploadInfo }: UploadFileProps) => {
-  const { fileType, sizeLimit, announcement, rule, onSubmit, accept } =
-    uploadInfo;
+  const { fileType, sizeLimit, announcement, rule, accept } = uploadInfo;
   const [fileInfo, setFileInfo] = useState<FileInfo>({
-    name: undefined,
+    name: '',
     size: 0,
     url: '',
   });
+  const [items, setItems] = useRecoilState<DndTextTypes[]>(uploadState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const divClick = () => inputRef.current?.click();
@@ -43,6 +49,42 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
     }
   };
 
+  const addImage = () => {
+    setItems((prevData) => [
+      ...prevData,
+      {
+        id: uuidv4(),
+        type: 'image',
+        content: fileInfo.name,
+        url: fileInfo.url,
+      },
+    ]);
+  };
+
+  const addVideo = () => {
+    setFiles((prevData) => [
+      ...prevData,
+      {
+        id: uuidv4(),
+        type: 'video',
+        content: fileInfo.name,
+        url: fileInfo.url,
+      },
+    ]);
+  };
+
+  const addDocs = () => {
+    setFiles((prevData) => [
+      ...prevData,
+      {
+        id: uuidv4(),
+        type: 'docs',
+        content: fileInfo.name,
+        url: fileInfo.url,
+      },
+    ]);
+  };
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const selectedFile = e.dataTransfer.files?.[0];
@@ -51,6 +93,18 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
       size: selectedFile.size,
       url: URL.createObjectURL(selectedFile),
     });
+  };
+
+  const handleConfirm = () => {
+    if (fileType === '영상') {
+      addVideo();
+    } else if (fileType === '문서') {
+      addDocs();
+    } else if (fileType === '이미지') {
+      addImage();
+    } else {
+      return 0;
+    }
   };
 
   return (
@@ -69,7 +123,7 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
           onDrop={handleDrop}
           onClick={divClick}
         >
-          {fileInfo.name != undefined ? (
+          {fileInfo.name != '' ? (
             <div className="flex gap-x-[12px] mt-[30px] ml-[22px] text-black text-xs font-medium">
               <div>
                 {fileType === '이미지' && (
@@ -100,9 +154,11 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center gap-y-[6px] mt-[68px] text-[#D9D9D9] font-semibold">
+            <div className="flex flex-col items-center justify-center gap-y-[12.5px] mt-[60px] text-[#D9D9D9] font-semibold">
               <span className="text-base">{announcement}</span>
-              <span className="text-xs">{rule}</span>
+              <span className="text-center text-xs whitespace-pre-wrap">
+                {rule}
+              </span>
             </div>
           )}
           <input
@@ -115,7 +171,7 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
           />
         </div>
         <div className="flex flex-row-reverse mt-[14px]">
-          <ConfirmButton btnClick={onSubmit} btnText={fileInfo.name} />
+          <ConfirmButton btnClick={handleConfirm} btnText={fileInfo.name} />
         </div>
       </div>
     </div>
