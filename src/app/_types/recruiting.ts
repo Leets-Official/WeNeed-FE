@@ -18,14 +18,7 @@ interface RecruitDetailItem extends PortfolioDetails {
   teamMembers: TeamMember[];
 }
 
-interface Pagable {
-  size: number;
-  page: number;
-  totalPages: number;
-  totalElements: number;
-}
-
-interface Comment {
+interface CommentItem {
   commentId: number;
   content: string;
   userId: number;
