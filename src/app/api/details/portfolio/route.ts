@@ -11,13 +11,14 @@ export async function GET(request: Request): Promise<NextResponse> {
 const mockPortfolioDetails = {
   user: {
     nickname: '위니드',
-    sameUser: true, //글쓴 사람 != 현재 보고있는 나
-    isHearted: true, //'나'가 해당 게시물 좋아요 눌렀는지 여부
-    isBookmarked: true, //'나'가 해당 게시물 북마크 눌렀는지 여부
+    sameUser: true,
+    hearted: true,
+    bookmarked: true,
   },
   portfolio: {
     thumbnail:
-      'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+      'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
     title: '위니드포폴',
     createdAt: '2023-01-01T00:00:00Z',
     heartCount: 23,
@@ -60,66 +61,81 @@ const mockPortfolioDetails = {
     {
       articleId: 1,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴1',
-      isBookmarked: false,
+      bookmarked: false,
     },
     {
       articleId: 2,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
     {
       articleId: 3,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
     {
       articleId: 4,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
     {
       articleId: 5,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
     {
       articleId: 6,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
     {
       articleId: 7,
       thumnail:
-        'https://s3-alpha-sig.figma.com/img/5202/49f7/988d39bc8cb67ef13e68fa679dd37972?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eoTpAMHJtPKnmykBP8YyUg1fbFkWOEzkRH2AtjuuzUvfeYmly-GarRF5x-zk81Diyf7HCObBc65Xpi1hcrMghwwSJg2rQ6y141HyXDNnhCWEUjhfdI-LeW9GeWPA4nOg9OiTpQqxealELTECvZrwFuNMI-2FYQrhzSQE9yWvPx6eTIyOvydPN~aBYGWgscrOLfDqokCs8ZXlg6BSrKnO2p2KHTQjCt3M3VBCs0wc2cEjnST0cg9-x8-0an4JxRkQnRiBBLUag0~JduS~qYkRIMgCXoca2Kg9rUZb2P7Sbt2VJq88W3jZ9ERoA~Kl1qzDvoBlqKrNnGb5Uo~dR4UFtA__',
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+
       title: '내포폴2',
-      isBookmarked: true,
+      bookmarked: true,
     },
   ],
   comments: [
     {
-      commentId: 1,
-      content: '우와! 저의 관심사와 동일하네요! 크루 제안 넣어야 겠어요!! ',
+      commentId: 0,
+      content: '우와! 저의 관심사와 동일하네요! 크루 제안 넣어야 겠어요!!',
+      userId: 0,
+      nickname: '위니드니드',
+      major: '경영학전공',
+      grade: 3,
+      createdAt: '2024-01-27T14:48:45.287Z',
+      profile: 'string',
     },
     {
-      commentId: 2,
+      commentId: 1,
       content:
         '안녕하세요. 작업물이 굉장히 제 취향이네요. 기회가 된다면 함께 작업하고 싶어요!  ',
-    },
-    {
-      commentId: 3,
-      content: '우와 작업물 너무 좋은데요! 저장할께요.  ',
+      userId: 1,
+      nickname: '가천대생',
+      major: '경영학전공',
+      grade: 4,
+      createdAt: '2024-01-27T14:48:45.287Z',
+      profile: 'string',
     },
   ],
 };

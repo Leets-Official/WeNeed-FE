@@ -2,11 +2,11 @@ import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../Profile';
-import DetailCategories from 'components/main/DetailCategories';
 import { formatUploadTime } from 'utils/date';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
+import DetailCategories from 'components/main/common/DetailCategories';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -37,13 +37,10 @@ const PortfolioDetailsContainer = ({
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden">
           <Image
             src={thumbnail}
-            layout="fill"
+            fill={true}
             alt="thumbnail"
             style={{
               objectFit: 'cover',
-              objectPosition: 'center',
-              width: '100%',
-              height: '100%',
             }}
           />
         </div>
@@ -75,7 +72,7 @@ const PortfolioDetailsContainer = ({
           files={files}
           skills={skills}
         />
-        <DetailMenuBar userId={writer.userId} />
+        <DetailMenuBar userId={writer.userId} user={user} />
         {user.sameUser && <WriterOptions />}
       </div>
     </div>

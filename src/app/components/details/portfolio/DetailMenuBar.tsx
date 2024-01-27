@@ -2,13 +2,23 @@
 
 import Icons from 'components/common/Icons';
 import { useRouter } from 'next/navigation';
-import { profile } from 'ui/IconsPath';
+import {
+  comment,
+  crewPlus,
+  noneFilledBookmark,
+  noneFilledHeart,
+  profile,
+  share,
+  whiteFilledBookmark,
+  whiteFilledHeart,
+} from 'ui/IconsPath';
 
 interface DetailMenuBarProps {
   userId: number;
+  user: UserProfile;
 }
 
-const DetailMenuBar = ({ userId }: DetailMenuBarProps) => {
+const DetailMenuBar = ({ userId, user }: DetailMenuBarProps) => {
   const router = useRouter();
   const DETAIL_MENU_HANDLERS: Record<string, () => void> = {
     프로필: () => router.push(`/profile/${userId}`),
@@ -18,14 +28,6 @@ const DetailMenuBar = ({ userId }: DetailMenuBarProps) => {
     댓글: () => {},
     공유: () => {},
   };
-  const DETAIL_MENU_RENDER: Record<string, React.ReactNode> = {
-    프로필: <Icons name={profile} />,
-    크루제안: <Icons name={profile} />,
-    좋아요: <Icons name={profile} />,
-    북마크: <Icons name={profile} />,
-    댓글: <Icons name={profile} />,
-    공유: <Icons name={profile} />,
-  } as const;
 
   return (
     <div className="flex w-full justify-center items-center mt-[200px] gap-[40px] mb-[80px]">
@@ -39,7 +41,7 @@ const DetailMenuBar = ({ userId }: DetailMenuBarProps) => {
               className="flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer"
               onClick={DETAIL_MENU_HANDLERS[menu]}
             >
-              {icon}
+              {icon(user.hearted, user.bookmarked)}
             </div>
             <div>{menu}</div>
           </div>
@@ -50,3 +52,19 @@ const DetailMenuBar = ({ userId }: DetailMenuBarProps) => {
 };
 
 export default DetailMenuBar;
+
+const DETAIL_MENU_RENDER: Record<
+  string,
+  (filledheart: boolean, filledBookmark: boolean) => React.ReactNode
+> = {
+  프로필: () => <Icons name={profile} />,
+  크루제안: () => <Icons name={crewPlus} />,
+  좋아요: (filledheart) => (
+    <Icons name={filledheart ? whiteFilledHeart : noneFilledHeart} />
+  ),
+  북마크: (filledBookmark) => (
+    <Icons name={filledBookmark ? whiteFilledBookmark : noneFilledBookmark} />
+  ),
+  댓글: () => <Icons name={comment} />,
+  공유: () => <Icons name={share} />,
+} as const;
