@@ -82,9 +82,11 @@ interface OtherWorkList {
   articleId: number;
   thumbnail: string;
   title: string;
+  bookmarked: boolean;
 }
 
-interface CommentList {
+interface CommentList extends WriterProfile {
   commentId: number;
   content: string;
+  createdAt: string;
 }

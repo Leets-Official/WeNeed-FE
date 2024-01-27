@@ -1,7 +1,5 @@
 import Icons from 'components/common/Icons';
 import Input from 'components/common/Input';
-import Link from 'next/link';
-import { useState } from 'react';
 import SearchBar from 'components/common/SearchBar';
 import Link from 'next/link';
 import { search, weneed } from 'ui/IconsPath';

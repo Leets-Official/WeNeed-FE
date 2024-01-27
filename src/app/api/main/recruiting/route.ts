@@ -5,10 +5,10 @@ export async function GET(request: Request): Promise<NextResponse> {
   // const data = await getRecruitingMain(size, page, sort).then((data) => data);
 
   /* development env */
-  return NextResponse.json(mockPortfolioMain);
+  return NextResponse.json(mockRecruitingMain);
 }
 
-const mockPortfolioMain = {
+const mockRecruitingMain = {
   user: {
     nickname: '위니드', //비로그인 : "guest"
   },
