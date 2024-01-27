@@ -1,4 +1,4 @@
-import LoadingCircle from 'ui/gradient/LoadingCircle';
+import LoadingCircle from 'ui/gradient/GradientLoading';
 
 const SubmitLoading = () => {
   return (

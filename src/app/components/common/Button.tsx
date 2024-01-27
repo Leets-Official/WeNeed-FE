@@ -4,11 +4,12 @@ import { BUTTON_STYLE } from 'constants/styles';
 
 interface ButtonProps {
   buttonText: string;
-  type: keyof typeof BUTTON_STYLE;
+  type: 'small' | 'medium' | 'large' | 'upload' | 'default';
   className?: string;
   isDisabled: boolean;
   onClickHandler: () => void;
-  children?: React.ReactNode;
+  mouseEnterHandler?: () => void;
+  mouseLeaveHandler?: () => void;
 }
 
 const Button = ({
@@ -17,7 +18,8 @@ const Button = ({
   className,
   isDisabled,
   onClickHandler,
-  children,
+  mouseEnterHandler,
+  mouseLeaveHandler,
 }: ButtonProps) => {
   const buttonStyles = BUTTON_STYLE[type](className || '');
 
@@ -26,8 +28,9 @@ const Button = ({
       className={`${buttonStyles}`}
       onClick={onClickHandler}
       disabled={isDisabled}
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
     >
-      {children}
       {buttonText}
     </button>
   );
