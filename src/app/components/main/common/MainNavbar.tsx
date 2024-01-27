@@ -2,8 +2,9 @@
 
 import Icons from 'components/common/Icons';
 import { hamburger, write } from 'ui/IconsPath';
-import CategoriesBoxContainer from './containers/CategoriesBoxContainer';
+import CategoriesBoxContainer from '../containers/CategoriesBoxContainer';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const MainNavbar = () => {
   const [openCategoriesBox, setOpenCategoriesBox] = useState<boolean>(false);
@@ -21,8 +22,12 @@ const MainNavbar = () => {
             </p>
             카테고리
           </li>
-          <li className="cursor-pointer">게시물</li>
-          <li className="cursor-pointer">크루찾기</li>
+          <Link href={'/main/portfolio'}>
+            <li className="cursor-pointer">게시물</li>
+          </Link>
+          <Link href={'/main/recruiting'}>
+            <li className="cursor-pointer">크루찾기</li>
+          </Link>
         </ul>
         <div className="flex gap-[7px] justify-center items-center cursor-pointer">
           <p>

@@ -11,7 +11,7 @@ export const NOT_LOGGEDIN_SECTION_HEADING = {
 } as const;
 
 export const SORT_TYPES = {
-  default: '정렬방식',
+  recent: '최신순',
   view: '조회수 높은순',
   like: '좋아요 높은순',
 } as const;
