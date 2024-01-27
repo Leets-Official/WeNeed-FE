@@ -1,6 +1,6 @@
 'use client';
 
-import HotPortfolioItem from '../HotPortfolioItem';
+import HotPortfolioItem from '../portfolio/HotPortfolioItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
