@@ -12,16 +12,22 @@ export default async function MainPortfolioPage() {
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio`,
     { cache: 'no-store' },
   );
-  const data = await response.json();
+  const {
+    hotArticleList,
+    articleList,
+    recommendArticleList,
+    pageable,
+    user,
+  }: Response = await response.json();
 
   return (
     <section>
       <div className="flex flex-col items-center w-full min-h-screen text-white ">
         <MainNavbar />
         <DetailCategoriesContainer />
-        <HotPortfolioContainer />
-        <PortfolioContainer />
-        <RecommendContainer />
+        <HotPortfolioContainer data={hotArticleList} />
+        <PortfolioContainer data={articleList} />
+        <RecommendContainer data={recommendArticleList} />
       </div>
       <Footer />
     </section>

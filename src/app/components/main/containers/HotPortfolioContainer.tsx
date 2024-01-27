@@ -5,11 +5,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
 import Icons from 'components/common/Icons';
 import { bigLeftAngle, bigRightAngle } from 'ui/IconsPath';
 
-const HotPortfolioContainer = () => {
+interface HotPortfolioContainerProps {
+  data: HotArticle[];
+}
+
+const HotPortfolioContainer = ({ data }: HotPortfolioContainerProps) => {
   return (
     <div className="relative mt-[60px] w-[97vw] flex flex-col justify-center items-center">
       <div className="w-full">
@@ -30,21 +33,13 @@ const HotPortfolioContainer = () => {
             nextEl: '.swiper-button-next-hot',
           }}
         >
-          <SwiperSlide>
-            <HotPortfolioItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <HotPortfolioItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <HotPortfolioItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <HotPortfolioItem />
-          </SwiperSlide>
-          <SwiperSlide>
-            <HotPortfolioItem />
-          </SwiperSlide>
+          {data.map((article) => {
+            return (
+              <SwiperSlide key={article.articleId}>
+                <HotPortfolioItem article={article} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
         <div className="swiper-button-prev-hot absolute left-[18%] z-20 top-1/2 transform -translate-y-1/2 bg-black rounded-full">
           <Icons name={bigLeftAngle} />
