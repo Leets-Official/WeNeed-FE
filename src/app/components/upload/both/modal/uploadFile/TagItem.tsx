@@ -1,3 +1,4 @@
+'use client';
 import Icons from 'components/common/Icons';
 import { tagCancle } from 'ui/IconsPath';
 
