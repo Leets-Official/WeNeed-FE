@@ -1,7 +1,6 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import DetailCategories from '../common/DetailCategories';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -13,6 +12,7 @@ import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import { selectedCategories } from 'recoil/main';
 import { useRecoilState } from 'recoil';
 import { useEffect, useState } from 'react';
+import DetailCategories from '../common/DetailCategories';
 
 const DetailCategoriesContainer = () => {
   const [selectedCategoriesValue, setSelectedCategories] =

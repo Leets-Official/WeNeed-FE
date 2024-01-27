@@ -13,7 +13,7 @@ const RecruitingContainer = ({ data }: RecruitingContainerProps) => {
         return (
           <div key={article.articleId}>
             {/* <Profile /> */}
-            <Link href={`/article/${article.articleId}`}>
+            <Link href={`/recruiting/${article.articleId}`}>
               <RecruitingItem article={article} />
             </Link>
           </div>
