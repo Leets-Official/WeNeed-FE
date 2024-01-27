@@ -12,7 +12,6 @@ export default async function MainRecruitingPage() {
     <section className="flex flex-col items-center w-full min-h-screen text-white ">
       <MainNavbar />
       <DetailCategoriesContainer />
-
       <RecruitingContainer data={recrutingList} user={user} />
     </section>
   );
