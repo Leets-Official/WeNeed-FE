@@ -1,4 +1,4 @@
-const LoadingCircle = () => {
+const GradientLoading = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,4 +29,4 @@ const LoadingCircle = () => {
   );
 };
 
-export default LoadingCircle;
+export default GradientLoading;
