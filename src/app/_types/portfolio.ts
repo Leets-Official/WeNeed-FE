@@ -2,13 +2,37 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
-interface DetailMenuBarType {
-  readonly 프로필: JSX.Element;
-  readonly 크루제안: JSX.Element;
-  readonly 좋아요: JSX.Element;
-  readonly 북마크: JSX.Element;
-  readonly 댓글: JSX.Element;
-  readonly 공유: JSX.Element;
+type SortTypes = 'recent' | 'view' | 'like';
+
+interface Pageable {
+  size: number;
+  page: number;
+  totalPages: number;
+  totalElements: number;
+}
+
+interface CommonArticle {
+  articleId: number;
+  thumbnail: string;
+  bookmarked: boolean;
+  createdAt: string;
+}
+
+interface HotArticle {
+  title: string;
+  articleId: number;
+  thumbnail: string;
+}
+
+interface PortfolioArticle extends CommonArticle {
+  writerNickname: string;
+  viewCount: number;
+  heartCount: number;
+}
+
+interface RecommendArticle extends CommonArticle {
+  title: string;
+  subTitle: string;
 }
 
 interface UserProfile {

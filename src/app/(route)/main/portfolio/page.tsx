@@ -8,22 +8,26 @@ import {
 } from 'components/main/containers';
 
 export default async function MainPortfolioPage() {
-  const data = await fetch(
+  const response = await fetch(
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio`,
-  )
-    .then((res) => res.json())
-    .then((res) => {
-      return res.data;
-    });
+    { cache: 'no-store' },
+  );
+  const {
+    hotArticleList,
+    articleList,
+    recommendArticleList,
+    pageable,
+    user,
+  }: ResponseMainPortfolio = await response.json();
 
   return (
     <section>
       <div className="flex flex-col items-center w-full min-h-screen text-white ">
         <MainNavbar />
         <DetailCategoriesContainer />
-        <HotPortfolioContainer />
-        <PortfolioContainer />
-        <RecommendContainer />
+        <HotPortfolioContainer data={hotArticleList} />
+        <PortfolioContainer data={articleList} />
+        <RecommendContainer data={recommendArticleList} />
       </div>
       <Footer />
     </section>
