@@ -8,7 +8,6 @@ interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
-  onSelect: (selectedTags: string[]) => void;
 }
 
 const DropdownTag = ({
