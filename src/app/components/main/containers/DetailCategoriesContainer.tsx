@@ -1,7 +1,7 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import DetailCategories from '../DetailCategories';
+import DetailCategories from '../common/DetailCategories';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';

@@ -1,7 +1,11 @@
-interface ResponseMainPortfolio {
-  user: User;
-  pageable: Pageable;
-  hotArticleList: HotArticle[];
-  articleList: PortfolioArticle[];
-  recommendArticleList: RecommendArticle[];
+interface ResponseRecruitingMain {
+  user: UserProfile;
+  pagable: Pagable;
+  recrutingList: RecruitListItem[];
+}
+
+interface ResponseRecruitingDetail {
+  user: UserProfile;
+  recruit: RecruitDetailItem;
+  comments: Comment[];
 }

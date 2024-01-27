@@ -1,8 +1,8 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import PortfolioItem from '../PortfolioItem';
-import PortfolioItemNav from '../PortfolioItemNav';
+import PortfolioItem from '../portfolio/PortfolioItem';
+import PortfolioItemNav from '../portfolio/PortfolioItemNav';
 import Pages from 'components/common/Pages';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
