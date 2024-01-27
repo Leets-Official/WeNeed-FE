@@ -1,10 +1,10 @@
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import PortfolioItem from '../portfolio/PortfolioItem';
-import PortfolioItemNav from '../portfolio/PortfolioItemNav';
 import Pages from 'components/common/Pages';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedSortType } from 'recoil/main';
+import PortfolioItemNav from '../PortfolioItemNav';
+import PortfolioItem from '../PortfolioItem';
 
 interface PortfolioContainerProps {
   data: PortfolioArticle[];

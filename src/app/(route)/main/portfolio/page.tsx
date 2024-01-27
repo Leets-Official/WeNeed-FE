@@ -18,7 +18,7 @@ export default async function MainPortfolioPage() {
     recommendArticleList,
     pageable,
     user,
-  }: Response = await response.json();
+  }: ResponsePortfolioMain = await response.json();
 
   return (
     <section>
