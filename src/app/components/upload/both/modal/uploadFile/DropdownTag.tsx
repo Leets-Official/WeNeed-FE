@@ -20,7 +20,6 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
       setSelectedOption([...selectedOption, option]);
     }
   };
-  console.log(selectedOption);
 
   const handleRemoveOption = (option: string) => {
     setSelectedOption(selectedOption.filter((item) => item !== option));
