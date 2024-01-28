@@ -89,4 +89,5 @@ interface CommentList extends WriterProfile {
   commentId: number;
   content: string;
   createdAt: string;
+  children?: CommentList[];
 }

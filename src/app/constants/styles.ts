@@ -15,3 +15,9 @@ export const INPUT_STYLE = {
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
 } as const;
+
+export const PROFILE_STYLE = {
+  large: () => 'w-[80px]  h-[80px]',
+  medium: () => 'w-[56px] h-[56px]',
+  small: () => 'w-[24px] h-[24px]',
+} as const;

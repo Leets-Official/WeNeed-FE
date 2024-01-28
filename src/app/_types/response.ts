@@ -19,14 +19,8 @@ interface ResponsePortfolioMain {
   recommendArticleList: RecommendArticle[];
 }
 
-interface ResponsePortfolioMainDetail {
-  user: UserProfile;
-  recruit: RecruitDetailItem;
-  comments: CommentItem[];
-}
-
 interface ResponseRecruitingDetail {
   user: UserProfile;
   recruit: RecruitDetailItem;
-  comments: CommentItem[];
+  comments: CommentList[];
 }

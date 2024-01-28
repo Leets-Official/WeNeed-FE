@@ -123,8 +123,9 @@ const mockPortfolioDetails = {
       nickname: '위니드니드',
       major: '경영학전공',
       grade: 3,
-      createdAt: '2024-01-27T14:48:45.287Z',
-      profile: 'string',
+      createdAt: '2024-01-25T14:48:45.287Z',
+      profile:
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
     },
     {
       commentId: 1,
@@ -134,8 +135,35 @@ const mockPortfolioDetails = {
       nickname: '가천대생',
       major: '경영학전공',
       grade: 4,
-      createdAt: '2024-01-27T14:48:45.287Z',
-      profile: 'string',
+      createdAt: '2024-01-26T14:48:45.287Z',
+      profile:
+        'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+      children: [
+        {
+          commentId: 10,
+          content:
+            '대댓 안녕하세요. 작업물이 굉장히 제 취향이네요. 기회가 된다면 함께 작업하고 싶어요!  ',
+          userId: 1,
+          nickname: '가천대생',
+          major: '경영학전공',
+          grade: 4,
+          createdAt: '2024-01-26T14:48:45.287Z',
+          profile:
+            'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        },
+        {
+          commentId: 11,
+          content:
+            '대댓임 안녕하세요. 작업물이 굉장히 제 취향이네요. 기회가 된다면 함께 작업하고 싶어요!  ',
+          userId: 1,
+          nickname: '가천대생',
+          major: '경영학전공',
+          grade: 4,
+          createdAt: '2024-01-26T14:48:45.287Z',
+          profile:
+            'https://s3-alpha-sig.figma.com/img/e6fc/d678/fff9528f05811626e304e6e1d349975d?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=purZNtvb2jSiJT8MyKNpJi9v1D7Q4IV7MZY4AfutZwQ4P016o427UNmBVRknYoqc~m-Qg0bqY9-C0uv92UAjKQc6PFtmpL-liBccYmypWboOMAZaJ-l6TpfTONlnDKdMYXmaT6Tv7qhfFwB5jTEoTvMZkxkBfkLktRw~4wUWQL0HALklyHinxVqWjlofOg8yGA5600bLff-dDL6Ja24J2sqrwgqnKM~Z6pljJLtNhEQjoH~Cr9iO1lsvrIsnZ9~J~EMkXij6vJeRf3VKcvDRU9jf6hccDtNJekFeNCAvS~XkMn5cga~MVxDWdtJTS-dvYatMvQ~73bxunNsWpsZR6Q__',
+        },
+      ],
     },
   ],
 };
