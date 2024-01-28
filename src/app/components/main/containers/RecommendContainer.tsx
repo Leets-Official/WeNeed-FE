@@ -1,12 +1,16 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import PortfolioItem from '../PortfolioItem';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import PortfolioItem from '../PortfolioItem';
 
-const RecommendContainer = () => {
+interface RecommendContainerProps {
+  data: RecommendArticle[];
+}
+
+const RecommendContainer = ({ data }: RecommendContainerProps) => {
   return (
     <div className="relative flex flex-col items-center w-[98vw] h-[525px] scrollbar-hide  mt-[65px] bg-neutral-700 pt-[50px] pb-[60px]">
       <div className="flex flex-col gap-[20px] w-[1280px]">
@@ -31,27 +35,11 @@ const RecommendContainer = () => {
             delay: 1500,
           }}
         >
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
-          <SwiperSlide>
-            <PortfolioItem onRecommend />
-          </SwiperSlide>
+          {data.map((article) => (
+            <SwiperSlide key={article.articleId}>
+              <PortfolioItem article={article} onRecommend />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
