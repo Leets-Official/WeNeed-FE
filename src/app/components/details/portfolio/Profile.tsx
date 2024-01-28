@@ -1,7 +1,7 @@
 import Icons from 'components/common/Icons';
 import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
-import { bookmark, heart, view } from 'ui/IconsPath';
+import { bookmark, heart } from 'ui/IconsPath';
 import GradientBookmark from 'ui/gradient/GradientBookmark';
 import GradientHeart from 'ui/gradient/GradientHeart';
 import GradientView from 'ui/gradient/GradientView';
@@ -30,9 +30,9 @@ const Profile = ({
   const { nickname, major, profile, grade } = writer;
   const profileStyles = PROFILE_STYLE[size || '']();
   return (
-    <div className="w-full  mt-[48px]  flex justify-between items-center">
+    <div className="w-full mt-[48px]  flex justify-between items-center">
       <div className="w-[80%] flex items-center gap-[20px] ">
-        <div className={`rounded-full overflow-hidden ${profileStyles} `}>
+        <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
           <Image
             width={onComment ? 56 : 80}
             height={onComment ? 56 : 80}
