@@ -7,6 +7,7 @@ interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
+  onSelect: (tags: string[]) => void;
 }
 const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
