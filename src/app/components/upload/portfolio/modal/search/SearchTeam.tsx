@@ -14,7 +14,7 @@ const SearchTeam = () => {
         <p>팀원 추가하기</p>
         <SearchTeamInput />
       </div>
-      <div className="flex flex-row-reverse mt-[25px] mr-[40px]">
+      <div className="flex flex-row-reverse mt-[25px] mr-10">
         <Button
           buttonText={'확인'}
           type={'small'}

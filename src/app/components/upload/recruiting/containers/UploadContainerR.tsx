@@ -1,4 +1,4 @@
-import { recruitThumbnail } from 'ui/bothUI';
+import { recruitThumbnail } from 'ui/upload/bothUI';
 import AddThumbnail from '../../both/AddThumbnail';
 import SelectFileR from '../SelectFileR';
 import BigSentence from '../BigSentence';

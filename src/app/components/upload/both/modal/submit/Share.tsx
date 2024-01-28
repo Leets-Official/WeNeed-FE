@@ -1,18 +1,9 @@
+'use client';
 import Button from 'components/common/Button';
 import Icons from 'components/common/Icons';
-import { useState } from 'react';
 import { closeIcon } from 'ui/IconsPath';
 
 const Share = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
   return (
     <div className=" relative w-[922px] h-[211px] bg-white rounded-[9px]">
       <Icons
@@ -34,13 +25,7 @@ const Share = () => {
         type={'upload'}
         isDisabled={false}
         onClickHandler={() => console.log('링크가 복사되었습니다.')}
-        className={`absolute left-[40px] bottom-[20px] text-sm text-white ${
-          isHovered
-            ? 'bg-gradient-to-r from-cyan-400 to-blue-500'
-            : 'bg-[#000] opacity-[0.5]'
-        }`}
-        mouseEnterHandler={handleMouseEnter}
-        mouseLeaveHandler={handleMouseLeave}
+        className="absolute left-[40px] bottom-[20px] text-sm text-white bg-[#000] opacity-[0.5] hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100"
       />
     </div>
   );
