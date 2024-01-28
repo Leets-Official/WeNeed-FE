@@ -7,6 +7,7 @@ import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
 import DetailCategories from 'components/main/common/DetailCategories';
+import Link from 'next/link';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -27,6 +28,7 @@ const PortfolioDetailsContainer = ({
     tags,
     title,
     contents,
+    teamMembers,
     links,
     files,
     skills,
@@ -53,7 +55,30 @@ const PortfolioDetailsContainer = ({
         </div>
       )}
       <div className="w-[1290px] mb-[143px]">
-        <div className="mb-[60px]">
+        <div className="relative mb-[60px]">
+          <div className="absolute top-0 left-[-96px] flex ">
+            {teamMembers &&
+              teamMembers.map((mem, i) => (
+                <Link href={`/mypage/${mem.userId}`} key={mem.userId}>
+                  <div
+                    className="rounded-full overflow-hidden w-[80px] h-[80px]"
+                    style={{
+                      marginLeft: `-${i * 30}px`, // 여기서 숫자를 조절하여 간격을 조정할 수 있습니다.
+                    }}
+                  >
+                    <Image
+                      width={80}
+                      height={80}
+                      alt="writer"
+                      src={mem.profile}
+                      style={{
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                </Link>
+              ))}
+          </div>
           <Profile
             writer={writer}
             date={createdAt}
