@@ -31,6 +31,7 @@ const PortfolioDetailsContainer = ({
     files,
     skills,
   } = portfolio;
+  const { bookmarked, hearted } = user;
   return (
     <div className="flex flex-col items-center bg-black text-white min-h-screen">
       {thumbnail ? (
@@ -52,11 +53,15 @@ const PortfolioDetailsContainer = ({
         </div>
       )}
       <div className="w-[1290px] mb-[143px]">
-        <Profile
-          writer={writer}
-          date={createdAt}
-          count={[viewCount, heartCount, bookmarkCount]}
-        />
+        <div className="mb-[60px]">
+          <Profile
+            writer={writer}
+            date={createdAt}
+            count={[viewCount, heartCount, bookmarkCount]}
+            user={{ bookmarked, hearted }}
+            size="large"
+          />
+        </div>
         <div className="w-full flex justify-center mb-[32px]">
           {tags.map((tag) => (
             <DetailCategories key={tag} category={tag} />
