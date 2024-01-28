@@ -36,6 +36,20 @@ const mockPortfolioDetails = {
         'https://s3-alpha-sig.figma.com/img/605f/ffce/0207ec5b5b5ac6fb87b4910c529974e4?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=NsSz25KNfa~N16Nio~d3vYvJbuMR1ZiK96iNpqDJ1J8GasL3viPTXXTVq2hkpatd7jNoJIZ2ajE6VYK7vFkD1yahxEwGuS80YUMuxJr5SKaRbx3tzDtkCFxY1-3NixI57-wKM9exeXiDWmWDhULFT8lQ3xkfDNgcJPL5gkntXyzkc41ROzh04sLg76mt5MxlLrvSUe6cfA2Cz2DTAvEPDxAmSVDEOowH-XNGA3VZ~VOHv0uDSNx4j3IH83Zu8wPCv5gPDGoV2Ky0lmP0uXxRi4cGwx-ZXXXegrx3SXqQpbNjFF7HIRYIOJh2YLZ1v36x2tK-H8BScpJ6uKYehbIrEA__',
       grade: 3,
     },
+    teamMembers: [
+      {
+        userId: 1,
+        nickname: 'string',
+        profile:
+          'https://s3-alpha-sig.figma.com/img/3e7e/1346/9f9936fa68f41c17b224a071bea60ef2?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=doGbHOWg61z80xWOv8VlUYzlPF~0T9B~VPKx2cGr3Ol8au-Ow~Kj0LWB9dwmZ8Ff6VLW2WN70ARt1-USpx7Qh2B6RK8ZkKFfKpx4rm6fP9NPxRBiZOx7yo~9QqpFdkcvM8zQiPk05UOec~pG9KQu1I9MztgOO~fPH1U9ayDupx-Ew-A39WyeDfa2t7eXvKlYQyz9F3m2SQISZAIFclYgZO9Fzc5OneU5~~6Ouz3rhO4SRm4jSXDZ7~oHw9Mdf9h-NDmG-9T1RPn27dv4myYwaxyAzgf-m4a5F80-eCHsOeVEmQEMlXlyWr67VCDjEZLdEi7lF7SxvXX6~-Gzcz0keg__',
+      },
+      {
+        userId: 2,
+        nickname: 'string',
+        profile:
+          'https://s3-alpha-sig.figma.com/img/0577/f0e9/b7fca2f32639871454da0de95f951709?Expires=1707091200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QXYUIJ78o4iC2-S7jzyWp3GoTidO8LRg5ltGOL7I9WquSORINK9uDNArHD5jUXyV9VLeYrDKSWkf3BTpWT46PoFcctnJPNkVfvU2QlKb-hjdiQ9q3WsxuFYOTTXjUdlP51l90qTbREVcbg56MCxAMIHgXNnu5GhqXnKamu94PdykTxmDfE~hYBJW5CmAygSisZ1JQNPWy-HgTP2izXOsiUg7h2mDTYrTn7IYTtU2fwbeIf5sgOqPLu7v2b5luM9dljuuubnUhYPAcFxA76PW~QOYP7njraGy2jnRqLrgtwxVUFvdRXVxqdQUB3QdbL2OCnsNVV9dQiAuXYrXDRI3vw__',
+      },
+    ],
     contents: [
       {
         id: 1,

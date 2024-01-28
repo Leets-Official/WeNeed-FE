@@ -1,10 +1,3 @@
-interface ResponsePortfolioDetails {
-  user: UserProfile;
-  portfolio: PortfolioDetails;
-  workList: OtherWorkList[];
-  comments: CommentList[];
-}
-
 interface ResponseRecruitingMain {
   user: UserProfile;
   pageable: Pageable;
@@ -17,6 +10,13 @@ interface ResponsePortfolioMain {
   hotArticleList: HotArticle[];
   articleList: PortfolioArticle[];
   recommendArticleList: RecommendArticle[];
+}
+
+interface ResponsePortfolioDetails {
+  user: UserProfile;
+  portfolio: PortfolioDetails;
+  workList: OtherWorkList[];
+  comments: CommentList[];
 }
 
 interface ResponseRecruitingDetail {
