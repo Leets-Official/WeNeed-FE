@@ -1,17 +1,8 @@
+'use client';
 import Button from 'components/common/Button';
-import { useState } from 'react';
 import GradientCompleted from 'ui/gradient/GradientCompleted';
 
 const SubmitCompleted = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
   return (
     <div className="relative w-[922px] h-[340px] items-center bg-white rounded-[9px]">
       <div className="absolute top-[57.5px] left-[409px]">
@@ -27,13 +18,7 @@ const SubmitCompleted = () => {
         onClickHandler={function (): void {
           console.log('다음 모달로 이동');
         }}
-        className={`absolute bottom-[22.5px] left-[44.3px] ${
-          isHovered
-            ? 'bg-gradient-to-r from-cyan-400 to-blue-500'
-            : 'bg-[#D9D9D9]'
-        }`}
-        mouseEnterHandler={handleMouseEnter}
-        mouseLeaveHandler={handleMouseLeave}
+        className="absolute bottom-[22.5px] left-[40.3px] bg-[#D9D9D9] hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:text-white"
       />
     </div>
   );
