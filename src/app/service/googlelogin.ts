@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { setTokens } from 'utils/cookieUtils';
 
 /* BE real api func */
 // export const googleLogin = async (
@@ -34,17 +33,22 @@ import { setTokens } from 'utils/cookieUtils';
 //   }
 // };
 
-export async function googleLoginMock(
-  code: string,
-): Promise<NextResponse<GoogleLoginResponse>> {
+export async function googleLoginMock(code: string): Promise<NextResponse> {
   try {
     const responseData = {
       accessToken: 'mockAccessToken123',
       refreshToken: 'mockRefreshToken123',
     };
-    return NextResponse.json(responseData);
-  } catch (error) {
+
+    const jsonResponse = NextResponse.json(responseData);
+    jsonResponse.headers.set('Content-Type', 'application/json');
+
+    return jsonResponse;
+  } catch (error: unknown) {
     console.log('google login error', error);
-    throw error;
+    return NextResponse.json(
+      { error: (error as Error).message },
+      { status: 500 },
+    );
   }
 }

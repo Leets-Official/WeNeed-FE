@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { setTokens } from 'utils/cookieUtils';
+import { useEffect } from 'react';
 
 const fetchData = async () => {
   try {
@@ -23,32 +22,36 @@ const fetchData = async () => {
     });
 
     if (!res.ok) {
-      throw new Error('Network response was not ok');
+      console.error('HTTP error : ', res.status);
+      throw new Error(`HTTP error : ${res.status}}`);
     }
 
     const data = await res.json();
     console.log('success', data);
     return data;
   } catch (error) {
-    console.error('Error during fetch:', error);
+    console.error('Error during fetch in fetch function:', error);
     throw error;
   }
 };
 
 const OauthPage = () => {
-  const [responseData, setResponseData] = useState(null);
-
   useEffect(() => {
-    const fetchDataAndSetState = async () => {
+    const fetchDataAndRedirect = async () => {
       try {
         const data = await fetchData();
-        setResponseData(data);
+
+        if (data && data.destination) {
+          window.location.href = data.destination;
+        } else {
+          console.error('No data or redirectUrl found');
+        }
       } catch (error) {
-        console.error('Error during fetch:', error);
+        console.error('Error during fetch in useEffect:', error);
       }
     };
 
-    fetchDataAndSetState();
+    fetchDataAndRedirect();
   }, []);
   return (
     <div>
