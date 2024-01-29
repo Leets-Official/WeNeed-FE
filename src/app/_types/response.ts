@@ -23,3 +23,9 @@ interface ResponseRecruitingDetail {
   recruit: RecruitDetailItem;
   comments: CommentItem[];
 }
+
+interface ResponseUploadSearch {
+  userId: number;
+  nickname: string;
+  profile: string;
+}
