@@ -35,3 +35,9 @@ interface ResponseSearch {
   pageable: Pageable;
   articleList: SearchArticle[];
 }
+
+interface ResponseUploadSearch {
+  userId: number;
+  nickname: string;
+  profile: string;
+}
