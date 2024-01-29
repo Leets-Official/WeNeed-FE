@@ -9,8 +9,16 @@ export const BUTTON_STYLE = {
 
 export const INPUT_STYLE = {
   search: (className: string) =>
-    `w-96 h-8 bg-neutral-800 rounded-3xl px-8 outline-none focus:border focus:border-white ${className}`,
+    `w-96 h-8 bg-neutral-800 rounded-3xl px-8 outline-none ${className}`,
+  comment: (className: string) =>
+    `relative w-[1210px] h-[50px] px-[21px] bg-zinc-300 rounded-lg placeholder-white ${className}`,
   default: () => 'w-full h-full ',
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
+} as const;
+
+export const PROFILE_STYLE = {
+  large: () => 'w-[80px]  h-[80px]',
+  medium: () => 'w-[56px] h-[56px]',
+  small: () => 'w-[24px] h-[24px]',
 } as const;

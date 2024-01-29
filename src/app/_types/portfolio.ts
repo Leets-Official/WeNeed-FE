@@ -76,10 +76,29 @@ interface PortfolioDetails {
   skills: string[];
   writer: WriterProfile;
   contents: Array<Content>;
+  teamMembers: teamMember[];
+}
+
+interface teamMember {
+  userId: number;
+  nickname: string;
+  profile: string;
 }
 
 interface OtherWorkList {
   articleId: number;
   thumbnail: string;
   title: string;
+  bookmarked: boolean;
+}
+
+interface CommentList extends WriterProfile {
+  commentId: number;
+  content: string;
+  createdAt: string;
+  children?: CommentList[];
+}
+
+interface RecommentList extends CommentList {
+  parentId: number;
 }

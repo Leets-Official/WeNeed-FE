@@ -17,14 +17,3 @@ interface RecruitDetailItem extends PortfolioDetails {
   commentCount: number;
   teamMembers: TeamMember[];
 }
-
-interface CommentItem {
-  commentId: number;
-  content: string;
-  userId: number;
-  nickname: string;
-  major: string;
-  grade: number;
-  createdAt: string;
-  profile: string;
-}

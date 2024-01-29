@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
 import TagItem from './TagItem';
@@ -8,9 +8,15 @@ interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
+  onSelect: (selectedTags: string[]) => void;
 }
 
-const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
+const DropdownTag = ({
+  options,
+  title,
+  announcement,
+  onSelect,
+}: DropdownTagProps) => {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -25,6 +31,10 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
   const handleRemoveOption = (option: string) => {
     setSelectedOption(selectedOption.filter((item) => item !== option));
   };
+
+  useEffect(() => {
+    onSelect(selectedOption);
+  }, [selectedOption, onSelect]);
 
   return (
     <div className="flex flex-col">
