@@ -4,7 +4,7 @@ import { BUTTON_STYLE } from 'constants/styles';
 
 interface ButtonProps {
   buttonText: string;
-  type: 'small' | 'medium' | 'large' | 'share' | 'default';
+  type: keyof typeof BUTTON_STYLE;
   className?: string;
   isDisabled: boolean;
   onClickHandler: () => void;
