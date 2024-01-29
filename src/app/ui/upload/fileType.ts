@@ -17,7 +17,7 @@ export const docs = {
   fileType: '문서',
   sizeLimit: 100000,
   announcement: '문서 불러오기',
-  rule: 'PDF 파일만 가능합니다.',
+  rule: 'PDF 파일만 가능합니다.\n게시물 하단에 첨부되며 위치 변경이 불가능합니다!',
   accept: '.pdf',
   onSubmit: () => console.log('안녕'),
 };
@@ -26,7 +26,7 @@ export const video = {
   fileType: '영상',
   sizeLimit: 100000,
   announcement: '영상 파일을 업로드해주세요!',
-  rule: 'MP4 형식으로만 첨부 가능합니다!',
+  rule: 'MP4 형식으로만 첨부 가능합니다!\n게시물 하단에 첨부되며 위치 변경이 불가능합니다!',
   accept: 'video/mp4',
   onSubmit: () => console.log('안녕'),
 };

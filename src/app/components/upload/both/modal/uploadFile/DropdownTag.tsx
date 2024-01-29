@@ -1,23 +1,40 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
+import TagItem from './TagItem';
 
-interface DropdownProps {
+interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
+  onSelect: (selectedTags: string[]) => void;
 }
 
-const Dropdown = ({ options, title, announcement }: DropdownProps) => {
-  const [selectedOption, setSelectedOption] = useState<string>('');
+const DropdownTag = ({
+  options,
+  title,
+  announcement,
+  onSelect,
+}: DropdownTagProps) => {
+  const [selectedOption, setSelectedOption] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
-    console.log(option, '이 선택되었습니다.');
-    setSelectedOption(option);
-    setIsOpen(false);
+    if (selectedOption.includes(option)) {
+      setSelectedOption(selectedOption.filter((item) => item !== option));
+    } else {
+      setSelectedOption([...selectedOption, option]);
+    }
   };
+
+  const handleRemoveOption = (option: string) => {
+    setSelectedOption(selectedOption.filter((item) => item !== option));
+  };
+
+  useEffect(() => {
+    onSelect(selectedOption);
+  }, [selectedOption, onSelect]);
 
   return (
     <div className="flex flex-col">
@@ -32,7 +49,16 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
         </div>
         <div className="flex items-center">
           {selectedOption ? (
-            <div className="text-black mr-[21px]">{selectedOption}</div>
+            <div className="flex gap-x-[10px] text-black mr-[21px]">
+              {selectedOption.map((option) => (
+                <div key={option} className="flex items-center h-[36px]">
+                  <TagItem
+                    tagName={option}
+                    tagClick={() => handleRemoveOption(option)}
+                  />
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="text-zinc-300 mr-[21px] ">{announcement}</div>
           )}
@@ -51,7 +77,7 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
                 `}
                 onClick={() => handleOptionClick(option)}
               >
-                {option}
+                <span>{option}</span>
               </div>
             ))}
           </div>
@@ -61,4 +87,4 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
   );
 };
 
-export default Dropdown;
+export default DropdownTag;
