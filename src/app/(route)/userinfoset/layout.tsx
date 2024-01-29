@@ -3,5 +3,11 @@ export default function UserinfoSetLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main>{children}</main>;
+  return (
+    <main>
+      <div className="bg-login w-screen h-screen bg-cover bg-no-repeat bg-fixed overflow-hidden">
+        {children}
+      </div>
+    </main>
+  );
 }
