@@ -1,6 +1,6 @@
 import { googleLoginMock } from 'service/googlelogin';
 import { NextResponse } from 'next/server';
-import { setFirstCookies, getCookie, setTokens } from 'utils/cookieUtils';
+import { getCookie, setTokens } from 'utils/cookieUtils';
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);

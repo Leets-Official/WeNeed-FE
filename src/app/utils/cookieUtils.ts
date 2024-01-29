@@ -1,4 +1,4 @@
-import { serialize, parse, CookieSerializeOptions } from 'cookie';
+import { serialize, parse } from 'cookie';
 import { NextResponse } from 'next/server';
 
 interface FirsetCookieProps {
@@ -7,7 +7,7 @@ interface FirsetCookieProps {
   value: string;
 }
 
-const generateCookie = ({ accessToken, refreshToken }: GoogleLoginResponse) => {
+const generateCookie = ({ accessToken, refreshToken }: ResponseGoogleLogin) => {
   const accessTokenMaxAge = 1 * 24 * 60 * 60; // 1 day
   const refreshTokenMaxAge = 14 * 24 * 60 * 60; // 2 weeks
 
