@@ -102,3 +102,8 @@ interface CommentList extends WriterProfile {
 interface RecommentList extends CommentList {
   parentId: number;
 }
+
+interface CommentList {
+  commentId: number;
+  content: string;
+}
