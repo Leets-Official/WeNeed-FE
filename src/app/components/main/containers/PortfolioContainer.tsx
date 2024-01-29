@@ -5,8 +5,9 @@ import Pages from 'components/common/Pages';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedSortType } from 'recoil/main';
-import PortfolioItemNav from '../PortfolioItemNav';
-import PortfolioItem from '../PortfolioItem';
+import PortfolioItemNav from '../portfolio/PortfolioItemNav';
+import PortfolioItem from '../portfolio/PortfolioItem';
+import Link from 'next/link';
 
 interface PortfolioContainerProps {
   data: PortfolioArticle[];
@@ -35,7 +36,12 @@ const PortfolioContainer = ({ data }: PortfolioContainerProps) => {
       />
       <div className="flex gap-[32px] flex-wrap">
         {data?.map((article, i) => (
-          <PortfolioItem article={article} key={article.articleId} />
+          <Link
+            href={`/portfolio/${article.articleId}`}
+            key={article.articleId}
+          >
+            <PortfolioItem article={article} />
+          </Link>
         ))}
       </div>
       <div className="w-full flex justify-center mt-[80px]">

@@ -1,5 +1,7 @@
 import Icons from 'components/common/Icons';
+import Input from 'components/common/Input';
 import SearchBar from 'components/common/SearchBar';
+import Link from 'next/link';
 import { search, weneed } from 'ui/IconsPath';
 
 interface HeaderProps {
@@ -12,7 +14,9 @@ const Header = ({ type, isLoggedIn = false, username }: HeaderProps) => {
   return (
     <header className="w-full h-[60px] bg-black text-white flex justify-between items-center px-[10%]">
       <div className="h-full flex items-center gap-[78px]">
-        <Icons name={weneed} />
+        <Link href={'/main/portfolio'}>
+          <Icons name={weneed} />
+        </Link>
         <div className="relative">
           <Icons name={search} className="absolute left-2 top-2 z-20" />
           <SearchBar />

@@ -5,7 +5,7 @@ import GradientHeart from 'ui/gradient/GradientHeart';
 import GradientBookmark from 'ui/gradient/GradientBookmark';
 
 interface PortfolioItemsProps {
-  article: PortfolioArticle | RecommendArticle;
+  article: PortfolioArticle | RecommendArticle | OtherWorkList;
   onRecommend?: boolean;
 }
 
@@ -13,7 +13,11 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
   return (
     <div className="relative cursor-pointer w-[285px]">
       <div className="z-20 absolute top-3 right-3">
-        {article.bookmarked ? <GradientBookmark /> : <Icons name={bookmark} />}
+        {article.bookmarked ? (
+          <GradientBookmark width={18} height={25} />
+        ) : (
+          <Icons name={bookmark} />
+        )}
       </div>
       <div className="relative w-[296px] h-[296px] rounded-lg text-sm overflow-hidden">
         <Image
@@ -44,7 +48,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
             <div className="flex gap-[10px] justify-center items-center">
               <Icons name={view} />
               <p>{(article as PortfolioArticle).viewCount}</p>
-              <GradientHeart />
+              <GradientHeart width={18} height={25} />
               <p>{(article as PortfolioArticle).heartCount}</p>
             </div>
           )}

@@ -3,6 +3,7 @@ import RecruitingItem from '../recruiting/RecruitingItem';
 
 interface RecruitingContainerProps {
   data: RecruitListItem[];
+  user: UserProfile;
 }
 
 const RecruitingContainer = ({ data }: RecruitingContainerProps) => {
