@@ -65,7 +65,7 @@ const mockPortfolioMain = {
       createdAt: '2023-01-01T00:00:00Z',
       viewCount: 122,
       heartCount: 12,
-      bookmarked: true,
+      bookmarked: false,
     },
     {
       articleId: 11,
