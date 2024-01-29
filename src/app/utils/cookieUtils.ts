@@ -1,5 +1,11 @@
-import { serialize } from 'cookie';
+import { serialize, parse, CookieSerializeOptions } from 'cookie';
 import { NextResponse } from 'next/server';
+
+interface FirsetCookieProps {
+  res: NextResponse<unknown>;
+  name: string;
+  value: string;
+}
 
 const generateCookie = ({ accessToken, refreshToken }: GoogleLoginResponse) => {
   const accessTokenMaxAge = 1 * 24 * 60 * 60; // 1 day
@@ -27,18 +33,11 @@ const generateCookie = ({ accessToken, refreshToken }: GoogleLoginResponse) => {
 };
 
 export const setTokens = (
-  response: NextResponse,
+  response: NextResponse<unknown>,
   accessToken: string,
   refreshToken: string,
-): NextResponse => {
+): NextResponse<unknown> => {
   try {
-    console.log(' This is Tokens in server : ', accessToken, refreshToken);
-
-    console.log(
-      'This is Response on server response before set cookie: ',
-      response,
-    );
-
     const { accessTokenCookie, refreshTokenCookie } = generateCookie({
       accessToken,
       refreshToken,
@@ -51,6 +50,44 @@ export const setTokens = (
     return response;
   } catch (error) {
     console.error('Error during setting cookies:', error);
+    throw error;
+  }
+};
+
+export const setFirstCookies = ({
+  res,
+  name,
+  value,
+}: FirsetCookieProps): NextResponse<unknown> => {
+  try {
+    const firstLoginMaxAge = 365 * 24 * 60 * 60; // 1 year
+
+    const firstLoginCookies = serialize(name, value, {
+      expires: new Date(Date.now() + firstLoginMaxAge * 1000),
+      httpOnly: true,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    });
+
+    res.cookies.set(name, firstLoginCookies);
+    console.log('setCookies res.cookies : ', res.cookies);
+    return res;
+  } catch (error) {
+    console.error('Error during setting cookies:', error);
+    throw error;
+  }
+};
+
+export const getCookie = (req: Request, name: string) => {
+  try {
+    const cookieHeader = req.headers.get('cookie');
+    const cookies = parse(cookieHeader || '');
+    console.log('getCookies cookies : ', cookies);
+    console.log('getCookies cookies[name] : ', cookies[name]);
+    return cookies[name];
+  } catch (error) {
+    console.error('Error during getting cookies:', error);
     throw error;
   }
 };
