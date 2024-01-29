@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   isDisabled: boolean;
   onClickHandler: () => void;
+  children?: React.ReactNode;
 }
 
 const Button = ({
@@ -16,6 +17,7 @@ const Button = ({
   className,
   isDisabled,
   onClickHandler,
+  children,
 }: ButtonProps) => {
   const buttonStyles = BUTTON_STYLE[type](className || '');
 
@@ -25,6 +27,7 @@ const Button = ({
       onClick={onClickHandler}
       disabled={isDisabled}
     >
+      {children}
       {buttonText}
     </button>
   );
