@@ -39,3 +39,9 @@ interface ResponseSearch {
 interface ResponseUploadSearch {
   users: UserInfo[];
 }
+
+interface ResponseUploadSearch {
+  userId: number;
+  nickname: string;
+  profile: string;
+}
