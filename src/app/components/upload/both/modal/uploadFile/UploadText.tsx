@@ -1,69 +1,16 @@
 'use client';
 import Icons from 'components/common/Icons';
-import { useState } from 'react';
 import { closeIcon } from 'ui/IconsPath';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
-import { v4 as uuidv4 } from 'uuid';
-import { uploadState } from 'recoil/upload';
-import { useRecoilState } from 'recoil';
+import useAddText from 'hooks/upload/useAddText';
+
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
 }
 
 const UploadText = ({ uploadInfo }: UploadTextProps) => {
   const { fileType, announcement, rule } = uploadInfo;
-  const [text, setText] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-  const [items, setItems] = useRecoilState(uploadState);
-
-  const startEdit = () => {
-    setIsEditing(true);
-  };
-
-  const addText = () => {
-    setItems((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'text',
-        content: text,
-      },
-    ]);
-  };
-
-  const addLink = () => {
-    setItems((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'link',
-        content: text,
-      },
-    ]);
-  };
-
-  const addSound = () => {
-    setItems((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'sound',
-        content: text,
-      },
-    ]);
-  };
-
-  const handleConfirm = () => {
-    if (fileType === '링크') {
-      addLink();
-    } else if (fileType === '텍스트') {
-      addText();
-    } else if (fileType === '음성') {
-      addSound();
-    } else {
-      console.log('기타 파일을 처리합니다.');
-    }
-  };
+  const { text, setText, handleConfirm, isEditing, startEdit } = useAddText();
 
   return (
     <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
@@ -95,7 +42,10 @@ const UploadText = ({ uploadInfo }: UploadTextProps) => {
           )}
         </div>
         <div className="flex flex-row-reverse mt-[24px]">
-          <ConfirmButton btnClick={handleConfirm} btnText={text} />
+          <ConfirmButton
+            btnClick={() => handleConfirm(fileType)}
+            btnText={text}
+          />
         </div>
       </div>
     </div>

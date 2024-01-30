@@ -4,7 +4,8 @@ import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import PortfolioItem from '../PortfolioItem';
+import Link from 'next/link';
+import PortfolioItem from '../portfolio/PortfolioItem';
 
 interface RecommendContainerProps {
   data: RecommendArticle[];
@@ -28,6 +29,7 @@ const RecommendContainer = ({ data }: RecommendContainerProps) => {
           breakpoints={{
             1280: { slidesPerView: 5.5 },
             1024: { slidesPerView: 4 },
+            1920: { slidesPerView: 7 },
           }}
           slidesPerView="auto"
           grabCursor={true}
@@ -37,7 +39,9 @@ const RecommendContainer = ({ data }: RecommendContainerProps) => {
         >
           {data.map((article) => (
             <SwiperSlide key={article.articleId}>
-              <PortfolioItem article={article} onRecommend />
+              <Link href={`/portfolio/${article.articleId}`}>
+                <PortfolioItem article={article} onRecommend />
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

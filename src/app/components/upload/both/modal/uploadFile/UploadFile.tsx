@@ -1,111 +1,25 @@
 'use client';
-import { useRef, useState } from 'react';
-import { closeIcon } from 'ui/IconsPath';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import ProgressBar from './ProgressBar';
-import { imgAndVideo } from 'ui/upload/fileType';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
-import { v4 as uuidv4 } from 'uuid';
-import { uploadState } from 'recoil/upload';
-import { filestate } from 'recoil/dndFiles';
-import { useRecoilState } from 'recoil';
-
-interface FileInfo {
-  name: string;
-  size: number;
-  url: string;
-}
-
+import { closeIcon } from 'ui/IconsPath';
+import { imgAndVideo } from 'ui/upload/fileType';
+import useAddFile from 'hooks/upload/useAddFile';
 interface UploadFileProps {
   uploadInfo: UploadPropTypes;
 }
 
 const UploadFile = ({ uploadInfo }: UploadFileProps) => {
   const { fileType, sizeLimit, announcement, rule, accept } = uploadInfo;
-  const [fileInfo, setFileInfo] = useState<FileInfo>({
-    name: '',
-    size: 0,
-    url: '',
-  });
-  const [items, setItems] = useRecoilState<DndTextTypes[]>(uploadState);
-  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
-
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const divClick = () => inputRef.current?.click();
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-
-    if (selectedFile) {
-      setFileInfo({
-        name: selectedFile.name,
-        size: selectedFile.size,
-        url: URL.createObjectURL(selectedFile),
-      });
-    } else {
-      alert('올바른 파일이 선택되지 않았습니다!');
-    }
-  };
-
-  const addImage = () => {
-    setItems((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'image',
-        content: fileInfo.name,
-        url: fileInfo.url,
-      },
-    ]);
-  };
-
-  const addVideo = () => {
-    setFiles((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'video',
-        content: fileInfo.name,
-        url: fileInfo.url,
-      },
-    ]);
-  };
-
-  const addDocs = () => {
-    setFiles((prevData) => [
-      ...prevData,
-      {
-        id: uuidv4(),
-        type: 'docs',
-        content: fileInfo.name,
-        url: fileInfo.url,
-      },
-    ]);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const selectedFile = e.dataTransfer.files?.[0];
-    setFileInfo({
-      name: selectedFile?.name,
-      size: selectedFile.size,
-      url: URL.createObjectURL(selectedFile),
-    });
-  };
-
-  const handleConfirm = () => {
-    if (fileType === '영상') {
-      addVideo();
-    } else if (fileType === '문서') {
-      addDocs();
-    } else if (fileType === '이미지') {
-      addImage();
-    } else {
-      return 0;
-    }
-  };
+  const {
+    fileInfo,
+    handleConfirm,
+    inputRef,
+    divClick,
+    handleFileChange,
+    handleDrop,
+  } = useAddFile();
 
   return (
     <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
@@ -120,7 +34,7 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
         <div
           className="w-[843px] h-[184px] rounded-[9px] border-2 border-dashed border-neutral-700 mt-[11px] cursor-pointer"
           onDragOver={(e) => e.preventDefault()}
-          onDrop={handleDrop}
+          onDrop={(e) => handleDrop(e)}
           onClick={divClick}
         >
           {fileInfo.name != '' ? (
@@ -165,13 +79,16 @@ const UploadFile = ({ uploadInfo }: UploadFileProps) => {
             type="file"
             multiple
             ref={inputRef}
-            onChange={handleFileChange}
+            onChange={(e) => handleFileChange(e)}
             className="w-auto h-auto hidden"
             accept={accept}
           />
         </div>
         <div className="flex flex-row-reverse mt-[14px]">
-          <ConfirmButton btnClick={handleConfirm} btnText={fileInfo.name} />
+          <ConfirmButton
+            btnClick={() => handleConfirm(fileType)}
+            btnText={fileInfo.name}
+          />
         </div>
       </div>
     </div>

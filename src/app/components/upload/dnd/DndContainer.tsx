@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import {
   DragDropContext,
@@ -5,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { uploadState } from 'recoil/upload';
+import { textState } from 'recoil/dndFiles';
 import { useRecoilState } from 'recoil';
 import DndText from 'components/upload/dnd/DndText';
 import DndLink from './DndLink';
@@ -13,7 +14,7 @@ import DndSound from './DndSound';
 import DndImage from './DndImage';
 
 const DndContainer = () => {
-  const [items, setItems] = useRecoilState(uploadState);
+  const [items, setItems] = useRecoilState(textState);
 
   // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -23,7 +24,7 @@ const DndContainer = () => {
     _items.splice(destination.index, 0, targetItem);
     const updatedItems = _items.map((item, index) => ({
       ...item,
-      order: index,
+      id: String(index),
     }));
 
     setItems(updatedItems);
@@ -48,6 +49,7 @@ const DndContainer = () => {
   };
 
   useEffect(() => {
+    console.log('items현황: ', items);
     const animation = requestAnimationFrame(() => setEnabled(true));
     return () => {
       cancelAnimationFrame(animation);

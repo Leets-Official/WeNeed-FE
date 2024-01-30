@@ -2,9 +2,6 @@ import { portThumbnail } from 'ui/upload/bothUI';
 import AddThumbnail from '../../both/AddThumbnail';
 import SelectFile from '../SelectFileP';
 import DndContainer from 'components/upload/dnd/DndContainer';
-import Header from 'components/layout/Header';
-import { docs, link, sound, text } from 'ui/upload/fileType';
-import UploadFile from 'components/upload/both/modal/uploadFile/UploadFile';
 import Attatched from 'components/upload/dnd/Attatched';
 
 const UploadContainerP = () => {

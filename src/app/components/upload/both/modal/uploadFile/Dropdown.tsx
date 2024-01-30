@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';

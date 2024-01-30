@@ -12,16 +12,17 @@ interface ResponsePortfolioMain {
   recommendArticleList: RecommendArticle[];
 }
 
-interface ResponsePortfolioMainDetail {
+interface ResponsePortfolioDetails {
   user: UserProfile;
-  recruit: RecruitDetailItem;
-  comments: CommentItem[];
+  portfolio: PortfolioDetails;
+  workList: OtherWorkList[];
+  comments: CommentList[];
 }
 
 interface ResponseRecruitingDetail {
   user: UserProfile;
   recruit: RecruitDetailItem;
-  comments: CommentItem[];
+  comments: CommentList[];
 }
 
 interface ResponseUploadSearch {
