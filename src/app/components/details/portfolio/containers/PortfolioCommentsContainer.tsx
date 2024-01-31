@@ -35,7 +35,7 @@ const PortfolioCommentsContainer = ({
           <Icons name={inputDrop} />
         </div>
       </div>
-      <div className="w-[1290px] flex flex-col items-start">
+      <div className="w-[1290px] mt-[30px] flex flex-col items-start">
         {comments.length ? (
           comments.map((comment) => {
             const { children, commentId } = comment;
@@ -45,7 +45,7 @@ const PortfolioCommentsContainer = ({
                 {comment.children && (
                   <div
                     className="w-[98px] h-[20px] rounded-[10px] bg-gradient-to-r from-[#00E0EE] to-[#517EF3]
-                      text-[12px] text-center font-normal flex justify-center items-center ml-[75px] mt-[13px] gap-1 
+                      text-[12px] text-center font-normal flex justify-center items-center ml-[86px] mt-[13px] gap-1 
                       cursor-pointer hover:from-[#fff] hover:to-[#fff]"
                     onClick={() => setOpenChildren(!openChildren)}
                   >
@@ -58,7 +58,7 @@ const PortfolioCommentsContainer = ({
                         <Icons name={commentOpen} />
                       </p>
                     )}
-                    <p>답글 {children?.length}개 보기</p>
+                    <p className="pt-0.5">답글 {children?.length}개 보기</p>
                   </div>
                 )}
                 <div className="flex flex-col items-start">
