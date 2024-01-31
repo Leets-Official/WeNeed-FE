@@ -6,7 +6,7 @@ interface AddThumbnailProps {
 const AddThumbnail = ({ thumbnailInfo }: AddThumbnailProps) => {
   const { height, bgColor, etcStyles } = thumbnailInfo;
   return (
-    <div className="mb-2.5 mt-[22px] w-full cursor-pointer">
+    <div className="w-full cursor-pointer">
       <div
         className={`flex items-center justify-center ${height} gap-x-[9px] ${bgColor} text-white font-bold ${etcStyles}`}
       >
