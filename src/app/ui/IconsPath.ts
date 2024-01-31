@@ -17,7 +17,7 @@ export const weneedLarge = {
   width: 245,
   height: 42,
   fill: 'black',
-};
+} as const;
 
 export const hamburger = {
   path: 'M0 0H16V2.09437H0V0ZM0 5.23592H16V7.33029H0V5.23592ZM0 10.4718H16V12.5662H0V10.4718Z',

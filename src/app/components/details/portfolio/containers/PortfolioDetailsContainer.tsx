@@ -1,13 +1,14 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import { bigWeneed } from 'ui/IconsPath';
-import Profile from '../Profile';
+import Profile from '../../common/Profile';
 import { formatUploadTime } from 'utils/date';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
 import DetailCategories from 'components/main/common/DetailCategories';
 import Link from 'next/link';
+import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -55,7 +56,7 @@ const PortfolioDetailsContainer = ({
         </div>
       )}
       <div className="w-[1290px] mb-[143px]">
-        <div className="relative mb-[60px]">
+        <div className="relative mb-[60px] mt-[48px]">
           <div className="absolute top-0 left-[-96px] flex ">
             {teamMembers &&
               teamMembers.map((mem, i) => (
@@ -63,7 +64,7 @@ const PortfolioDetailsContainer = ({
                   <div
                     className="rounded-full overflow-hidden w-[80px] h-[80px]"
                     style={{
-                      marginLeft: `-${i * 30}px`, // 여기서 숫자를 조절하여 간격을 조정할 수 있습니다.
+                      marginLeft: `-${i * 30}px`,
                     }}
                   >
                     <Image
@@ -87,14 +88,7 @@ const PortfolioDetailsContainer = ({
             size="large"
           />
         </div>
-        <div className="w-full flex justify-center mb-[32px]">
-          {tags.map((tag) => (
-            <DetailCategories key={tag} category={tag} />
-          ))}
-        </div>
-        <p className="w-full text-center font-semibold tracking-[1.25px] ">
-          {formatUploadTime(createdAt)}
-        </p>
+        <DetailContentsInfo tags={tags} createdAt={createdAt} />
         <DetailContents
           title={title}
           contents={contents}
