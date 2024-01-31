@@ -9,7 +9,7 @@ interface TeamMateProps {
 
 const TeamMate = ({ imageURL, nickName }: TeamMateProps) => {
   return (
-    <div className="flex w-[auto] h-[37px] gap-x-[12px] items-center text-[16px] pl-[8px] pr-[12px] rounded-[9px] border border-cyan-400">
+    <div className="flex w-[auto] h-[37px] gap-x-3 items-center text-[16px] pl-2 pr-3 rounded-[9px] border border-[#00E0EE]">
       <Image
         src={imageURL}
         alt="프로필"

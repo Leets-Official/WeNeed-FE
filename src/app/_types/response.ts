@@ -26,7 +26,5 @@ interface ResponseRecruitingDetail {
 }
 
 interface ResponseUploadSearch {
-  userId: number;
-  nickname: string;
-  profile: string;
+  users: userInfo[];
 }

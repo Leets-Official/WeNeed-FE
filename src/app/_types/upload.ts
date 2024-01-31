@@ -30,3 +30,9 @@ interface DNDFileTypes {
   content: string;
   url: string;
 }
+
+interface userInfo {
+  userId: number;
+  nickName: string;
+  profile: string;
+}
