@@ -33,6 +33,6 @@ interface DNDFileTypes {
 
 interface userInfo {
   userId: number;
-  nickName: string;
+  nickname: string;
   profile: string;
 }
