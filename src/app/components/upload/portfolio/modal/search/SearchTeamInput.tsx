@@ -26,9 +26,9 @@ const SearchTeamInput = () => {
     MainRecruitingPage();
   };
 
-  const handleSelect = (nickName: string) => {
-    console.log(`${nickName} 멤버 추가 기능 실행`);
-    setSelectedNickName((prevNames) => [...prevNames, nickName]);
+  const handleSelect = (nickname: string) => {
+    console.log(`${nickname} 멤버 추가 기능 실행`);
+    setSelectedNickName((prevNames) => [...prevNames, nickname]);
   };
 
   return (
@@ -53,7 +53,7 @@ const SearchTeamInput = () => {
               <div
                 key={user.userId}
                 className="flex items-center w-[797px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
-                onClick={() => handleSelect(user.nickName)}
+                onClick={() => handleSelect(user.nickname)}
               >
                 {/* <Image
                   src={user.profile}
@@ -62,7 +62,7 @@ const SearchTeamInput = () => {
                   height="24"
                   className="rounded-full"
                 /> */}
-                <div className="text-base font-semibold">{user.nickName}</div>
+                <div className="text-base font-semibold">{user.nickname}</div>
               </div>
             ))}
           </div>
