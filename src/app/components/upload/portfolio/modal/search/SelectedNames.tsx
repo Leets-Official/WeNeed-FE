@@ -2,7 +2,7 @@ import TeamMate from './TeamMate';
 
 const SelectedNames = ({ selectedNames }: { selectedNames: string[] }) => {
   return (
-    <div>
+    <div className="flex items-center gap-x-[15px] flex-wrap">
       {selectedNames.map((name, index) => (
         <TeamMate
           key={index}
