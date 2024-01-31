@@ -30,7 +30,7 @@ const Profile = ({
   const { nickname, major, profile, grade } = writer;
   const profileStyles = PROFILE_STYLE[size || '']();
   return (
-    <div className="w-full mt-[48px]  flex justify-between items-center">
+    <div className="w-full flex justify-between items-center">
       <div className="w-[80%] flex items-center gap-[20px] ">
         <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
           <Image
@@ -47,7 +47,7 @@ const Profile = ({
           className={`flex ${onComment ? 'items-center' : 'flex-col'} gap-3`}
         >
           <p className="text-lg">{nickname}</p>
-          <div className="flex gap-1.5 text-sm">
+          <div className="font-normal flex gap-1.5 text-sm">
             <p>{major} |</p>
             <p>{grade}학년 |</p>
             <p>{formatUploadTime(date)}</p>
@@ -55,7 +55,7 @@ const Profile = ({
         </div>
       </div>
       {count && (
-        <div className="flex gap-[32px] w-[20%]">
+        <div className="flex gap-[32px] h-[75px] items-end justify-end w-[20%]">
           <p className="flex  gap-[10px] cursor-pointer">
             <GradientView width={24} height={18} /> {count[0]}
           </p>
