@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request): Promise<NextResponse> {
   /* production env */
-  // const data = await getPortfolioDetails(size, page, sort).then((data) => data);
+  // const data = await (userId, nickName, profile).then((data) => data);
 
   /* development env */
   return NextResponse.json(mockTeamNames);
