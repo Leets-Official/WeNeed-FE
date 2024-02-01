@@ -73,7 +73,7 @@ const useAddFile = () => {
   };
 
   const handleConfirm = (fileType: string) => {
-    if (fileType === '사진') {
+    if (fileType === '이미지') {
       addFile('image');
     } else if (fileType === '문서') {
       addFile('docs');

@@ -1,7 +1,7 @@
 'use client';
 import Icons from 'components/common/Icons';
 import ModalSelector from './modal/ModalSelector';
-import { useState } from 'react';
+import { useModal } from 'hooks/upload/useModal';
 
 interface FileTypeProps {
   iconInfo: IconPathTypes;
@@ -9,20 +9,7 @@ interface FileTypeProps {
 }
 
 const FileType = ({ iconInfo, title }: FileTypeProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const closeModal = () => {
-    setIsOpen(false);
-  };
-
-  const handleModalClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    event.stopPropagation();
-  };
+  const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
 
   return (
     <div
