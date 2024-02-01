@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import {
   DragDropContext,
@@ -5,18 +6,24 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { uploadState } from 'recoil/upload';
+import { textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
-import DndText from 'components/upload/dnd/DndText';
+import DndText from './DndText';
 import DndLink from './DndLink';
 import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
 
-const DndContainer = () => {
-  const [items, setItems] = useRecoilState(uploadState);
+interface DndContainerProps {
+  articleType: string;
+}
 
-  // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
+const DndContainer = ({ articleType }: DndContainerProps) => {
+  const [items, setItems] = useRecoilState(textState);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [enabled, setEnabled] = useState(false);
+  const height = articleType === 'portfolio' ? 680 : 645;
+
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     const _items = [...items];
@@ -24,44 +31,46 @@ const DndContainer = () => {
     _items.splice(destination.index, 0, targetItem);
     const updatedItems = _items.map((item, index) => ({
       ...item,
-      order: index,
+      id: String(index),
     }));
 
     setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
   };
-
-  // --- requestAnimationFrame 초기화
-  const [enabled, setEnabled] = useState(false);
 
   const componenetByType = (item: DndTextTypes) => {
     switch (item.type) {
       case 'text':
-        return <DndText text={item.content} />;
+        return <DndText text={item.data} />;
       case 'link':
-        return <DndLink link={item.content} />;
+        return <DndLink link={item.data} />;
       case 'sound':
-        return <DndSound link={item.content} />;
+        return <DndSound link={item.data} />;
       case 'image':
-        return <DndImage fileName={item.content} url={item.url} />;
+        return <DndImage fileName={item.data} url={item.data} />;
       default:
         return null;
     }
   };
 
   useEffect(() => {
+    console.log('items현황: ', items);
+    console.log('uploadData현황: ', uploadData);
     const animation = requestAnimationFrame(() => setEnabled(true));
     return () => {
       cancelAnimationFrame(animation);
       setEnabled(false);
     };
-  }, [items]);
+  }, [items, uploadData]);
 
   if (!enabled) {
     return null;
   }
 
   return (
-    <div className="flex flex-col items-center w-full h-[740px] overflow-y-auto gap-y-[16px]">
+    <div
+      className={`flex flex-col items-center w-full h-[${height}px] overflow-y-auto gap-y-[16px]`}
+    >
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
@@ -88,7 +97,7 @@ const DndContainer = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <Attatched />
+      {articleType === 'portfolio' && <Attatched />}
     </div>
   );
 };

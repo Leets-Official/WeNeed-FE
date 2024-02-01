@@ -1,6 +1,6 @@
 import DndVideo from './DndVideo';
 import DndDocs from './DndDocs';
-import { filestate } from 'recoil/dndFiles';
+import { filestate } from 'recoil/upload';
 import { useRecoilValue } from 'recoil';
 
 const Attatched = () => {
