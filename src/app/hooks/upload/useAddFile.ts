@@ -1,4 +1,3 @@
-'use client';
 import { useRecoilState } from 'recoil';
 import { filestate, orderState } from 'recoil/upload';
 import { textState } from 'recoil/upload';
