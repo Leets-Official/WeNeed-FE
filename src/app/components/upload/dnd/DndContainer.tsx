@@ -6,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { textState } from 'recoil/dndFiles';
+import { textState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from 'components/upload/dnd/DndText';
 import DndLink from './DndLink';

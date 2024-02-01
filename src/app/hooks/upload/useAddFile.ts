@@ -1,7 +1,7 @@
 'use client';
 import { useRecoilState } from 'recoil';
-import { filestate, orderState } from 'recoil/dndFiles';
-import { textState } from 'recoil/dndFiles';
+import { filestate, orderState } from 'recoil/upload';
+import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
 interface FileInfo {

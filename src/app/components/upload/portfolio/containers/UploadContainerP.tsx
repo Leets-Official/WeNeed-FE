@@ -7,7 +7,7 @@ import SideNav from 'components/upload/both/SideNav';
 import { navItemIconPath_P } from 'ui/IconsPath';
 import { SIDENAV_ITEM_NAME } from 'constants/portfolio';
 import FirstSelectP from '../FirstSelectP';
-import { filestate, textState } from 'recoil/dndFiles';
+import { filestate, textState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 
 const UploadContainerP = () => {

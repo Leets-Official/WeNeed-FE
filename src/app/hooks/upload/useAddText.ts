@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { textState } from 'recoil/dndFiles';
-import { orderState } from 'recoil/dndFiles';
+import { textState } from 'recoil/upload';
+import { orderState } from 'recoil/upload';
 
 const useAddText = () => {
   const [text, setText] = useState('');
