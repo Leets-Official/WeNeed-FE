@@ -1,4 +1,3 @@
-'use client';
 import { useState } from 'react';
 
 export const useModal = (initialState = false) => {
