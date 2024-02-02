@@ -7,10 +7,12 @@ import { useState } from 'react';
 import { commentClose, commentOpen, inputDrop } from 'ui/IconsPath';
 
 interface PortfolioCommentsContainerProps {
+  onRecruit?: boolean;
   comments: CommentList[];
 }
 
 const PortfolioCommentsContainer = ({
+  onRecruit = false,
   comments = [],
 }: PortfolioCommentsContainerProps) => {
   const [commentValue, setCommentValue] = useState<string>('');
@@ -18,24 +20,37 @@ const PortfolioCommentsContainer = ({
 
   const onSubmitHandler = () => {};
   return (
-    <div className="flex flex-col justify-center items-center w-full bg-white pt-[50px] pb-[100px] ">
-      <p className="text-xl font-semibold mb-[25px] w-[1290px]">
+    <div className="flex flex-col justify-center items-center w-full bg-white pt-[50px] pb-[100px]  ">
+      <p
+        className={`text-xl font-semibold mb-[25px] max-w-[1290px]  ${
+          onRecruit ? 'text-black w-full' : ' w-[79%] '
+        }`}
+      >
         댓글 {comments.length}개
       </p>
-      <div className="w-[1290px] flex items-center relative">
-        <div className="w-[56px] h-[56px] bg-neutral-300 rounded-full mr-[23px]"></div>
+      <div
+        className={`flex items-center relative max-w-[1290px] ${
+          onRecruit ? ' w-full' : ' w-[79%]'
+        }`}
+      >
+        <div className="w-[56px] h-[56px] bg-neutral-300 rounded-full mr-[23px] "></div>
         <Input
           type="comment"
           textValue={commentValue}
           onChange={(e) => setCommentValue(e.target.value)}
           onEnterPress={onSubmitHandler}
           placeholder="댓글을 입력해주세요."
+          className="w-[90%]"
         />
-        <div className="absolute top-[15px] right-[19px] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
+        <div className="absolute top-[30%] right-[5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
           <Icons name={inputDrop} />
         </div>
       </div>
-      <div className="w-[1290px] mt-[30px] flex flex-col items-start">
+      <div
+        className={` mt-[30px] flex flex-col items-start text-black max-w-[1290px] ${
+          onRecruit ? ' w-full bg-black' : ' w-[79%]'
+        }`}
+      >
         {comments.length ? (
           comments.map((comment) => {
             const { children, commentId } = comment;
