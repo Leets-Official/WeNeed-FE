@@ -4,9 +4,9 @@ import ModalOutside from 'components/common/modal/ModalOutside';
 import ModalPortal from 'components/common/modal/ModalPortal';
 import NeedLoginModal from 'components/common/modal/NeedLoginModal';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
-import Profile from 'components/details/common/Profile';
 import { useEffect, useState } from 'react';
 import RecruitingDetailContents from '../RecruitingDetailContents';
+import WriterOptions from 'components/details/portfolio/WriterOptions';
 
 interface RecruitingDetailContainersProps {
   recruit: RecruitDetailItem;
@@ -17,20 +17,7 @@ const RecruitingDetailContainers = ({
   recruit,
   user,
 }: RecruitingDetailContainersProps) => {
-  const {
-    writer,
-    createdAt,
-    viewCount,
-    heartCount,
-    bookmarkCount,
-    tags,
-    title,
-    contents,
-    links,
-    files,
-    skills,
-  } = recruit;
-  const { bookmarked, hearted } = user;
+  const { createdAt, tags, title, contents } = recruit;
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   useEffect(() => {
@@ -47,20 +34,14 @@ const RecruitingDetailContainers = ({
 
   return (
     <>
-      <div className="w-[1280px] min-h-screen  pb-[54px] text-white ">
-        <Profile
-          writer={writer}
-          date={createdAt}
-          count={[viewCount, heartCount, bookmarkCount]}
-          user={{ bookmarked, hearted }}
-          size="large"
-        />
-        <div className="flex flex-col items-center w-full mt-[40px] min-h-screen bg-white rounded-[10px] py-[54px] px-[47px] ">
-          <DetailContentsInfo tags={tags} createdAt={createdAt} recruit />
-          <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
-            {title}
-          </h3>
-          <RecruitingDetailContents contents={contents} />
+      <div className="flex flex-col items-center w-full mt-[40px] min-h-screen ">
+        <DetailContentsInfo tags={tags} createdAt={createdAt} recruit />
+        <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
+          {title}
+        </h3>
+        <RecruitingDetailContents contents={contents} />
+        <div className="text-black  mt-[100px]">
+          {user.sameUser && <WriterOptions onRecruit />}
         </div>
       </div>
       {!isLoggedIn && (

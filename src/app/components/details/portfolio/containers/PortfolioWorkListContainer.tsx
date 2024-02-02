@@ -18,7 +18,7 @@ const PortfolioWorkListContainer = ({
 }: PortfolioWorkListContainerProps) => {
   return (
     <div className="flex justify-center items-center w-full bg-black text-white">
-      <div className="w-[1290px] mt-[60px] mb-[60px]">
+      <div className="max-w-[1290px] w-full mt-[60px] mb-[60px]">
         <ProfileCol user={writer} />
         <div className="flex justify-between w-full ">
           <h3 className="w-[80%] text-3xl font-semibold mb-[43px] ">
