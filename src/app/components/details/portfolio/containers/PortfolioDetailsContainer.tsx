@@ -2,11 +2,9 @@ import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../../common/Profile';
-import { formatUploadTime } from 'utils/date';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
-import DetailCategories from 'components/main/common/DetailCategories';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 
@@ -36,9 +34,9 @@ const PortfolioDetailsContainer = ({
   } = portfolio;
   const { bookmarked, hearted } = user;
   return (
-    <div className="flex flex-col items-center bg-black text-white min-h-screen">
+    <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
       {thumbnail ? (
-        <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden">
+        <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
             src={thumbnail}
             fill={true}
@@ -49,13 +47,13 @@ const PortfolioDetailsContainer = ({
           />
         </div>
       ) : (
-        <div className="relative w-screen h-96  bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
+        <div className="relative w-full h-96 bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Icons name={bigWeneed} />
           </div>
         </div>
       )}
-      <div className="w-[1290px] mb-[143px]">
+      <div className="w-full mb-[143px]">
         <div className="relative mb-[60px] mt-[48px]">
           <div className="absolute top-0 left-[-96px] flex ">
             {teamMembers &&

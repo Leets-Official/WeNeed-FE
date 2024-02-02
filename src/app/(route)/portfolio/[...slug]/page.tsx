@@ -12,9 +12,11 @@ export default async function PortfolioPage() {
     await response.json();
 
   return (
-    <section className="h-screen">
+    <section className="min-h-screen flex flex-col items-center bg-black text-white ">
       <Header isLoggedIn type="main" />
-      <PortfolioDetailsContainer user={user} portfolio={portfolio} />
+      <div className="w-[80%] max-w-[1290px] ">
+        <PortfolioDetailsContainer user={user} portfolio={portfolio} />
+      </div>
       <PortfolioCommentsContainer comments={comments} />
       <PortfolioWorkListContainer
         workList={workList}
