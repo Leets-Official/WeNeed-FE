@@ -1,4 +1,4 @@
-import PortfolioCommentsContainer from 'components/details/portfolio/containers/PortfolioCommentsContainer';
+import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import PortfolioDetailsContainer from 'components/details/portfolio/containers/PortfolioDetailsContainer';
 import PortfolioWorkListContainer from 'components/details/portfolio/containers/PortfolioWorkListContainer';
 import Header from 'components/layout/Header';
@@ -17,7 +17,7 @@ export default async function PortfolioPage() {
       <div className="w-[80%] max-w-[1290px] ">
         <PortfolioDetailsContainer user={user} portfolio={portfolio} />
       </div>
-      <PortfolioCommentsContainer comments={comments} />
+      <CommentsContainer comments={comments} />
       <PortfolioWorkListContainer
         workList={workList}
         writer={portfolio.writer}

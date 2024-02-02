@@ -1,5 +1,5 @@
 import Profile from 'components/details/common/Profile';
-import PortfolioCommentsContainer from 'components/details/portfolio/containers/PortfolioCommentsContainer';
+import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
 
@@ -13,7 +13,7 @@ export default async function PortfolioPage() {
   const { bookmarked, hearted } = user;
 
   return (
-    <section className="min-h-screen flex flex-col items-center bg-black w-screen text-white ">
+    <section className="min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
       <Header isLoggedIn type="main" />
       <div className=" w-[80%] max-w-[1290px]">
         <div className="my-[40px]">
@@ -25,9 +25,9 @@ export default async function PortfolioPage() {
             size="large"
           />
         </div>
-        <div className="bg-white rounded-t-[10px] py-[54px] px-[47px]">
+        <div className="bg-white rounded-[10px] py-[54px] px-[47px] mb-[100px]">
           <RecruitingDetailContainers recruit={recruit} user={user} />
-          <PortfolioCommentsContainer comments={comments} onRecruit />
+          <CommentsContainer comments={comments} onRecruit />
         </div>
       </div>
     </section>
