@@ -9,7 +9,7 @@ const RecruitingDetailContents = ({
   contents,
 }: RecruitingDetailContentsProps) => {
   return (
-    <div className="flex flex-col items-center gap-[50px] mt-[20px]">
+    <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden">
       {contents.map((content) => {
         switch (content.type) {
           case 'text':
