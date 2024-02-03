@@ -8,8 +8,7 @@ interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
-  onSelect: (selectedTags: string[]) => void;
-}
+
 
 const DropdownTag = ({
   options,
@@ -31,6 +30,7 @@ const DropdownTag = ({
   const handleRemoveOption = (option: string) => {
     setSelectedOption(selectedOption.filter((item) => item !== option));
   };
+
 
   useEffect(() => {
     onSelect(selectedOption);

@@ -52,7 +52,7 @@ interface WriterProfile {
 
 interface Content {
   id: number;
-  type: 'text' | 'image' | 'links';
+  type: 'text' | 'image' | 'links' | 'audio';
   textData?: string;
   imageData?: string;
 }
