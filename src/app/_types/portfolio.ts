@@ -1,109 +1,81 @@
-interface InterestedFieldWithTags {
-  [key: string]: string[];
-}
+import { ReactNode } from 'react';
+import Icons from '../components/common/Icons';
 
-type SortTypes = 'recent' | 'view' | 'like';
+export const FILE_TYPE_LIST = [
+  '텍스트',
+  '이미지',
+  '문서',
+  '비디오',
+  '오디오',
+  '링크',
+] as const;
 
-interface Pageable {
-  size: number;
-  page: number;
-  totalPages: number;
-  totalElements: number;
-}
+export const SIDENAV_ITEM_NAME = ['미리보기', '업로드', '팀원 추가'] as const;
 
-interface CommonArticle {
-  articleId: number;
-  thumbnail: string;
-  bookmarked: boolean;
-  createdAt: string;
-}
+export const INTERESTED_FIELD_LIST = [
+  '기획',
+  '디자인',
+  '미디어',
+  '예술',
+  'IT',
+] as const;
 
-interface HotArticle {
-  title: string;
-  articleId: number;
-  thumbnail: string;
-}
+export const INTERESTED_FIELD_WITH_TAGS: InterestedFieldWithTags = {
+  미디어: ['광고', '마케팅', '방송', '사진/영상'],
+  디자인: [
+    '그래픽',
+    'BXBI',
+    'UXUI',
+    '영상',
+    '3D',
+    '모션',
+    '애니메이션',
+    '제품',
+    '인테리어',
+    '패션',
+  ],
+  예술: ['문화', '연기', '음악', '무용', '조소', '회화'],
+  IT: ['AI', '데이터', '게임', '웹', '앱', '보안'],
+  기획: ['아이디어', '브랜딩', '창업'],
+} as const;
 
-interface PortfolioArticle extends CommonArticle {
-  writerNickname: string;
-  viewCount: number;
-  heartCount: number;
-}
+export const INTERESTED_TAG_LIST = [
+  '광고',
+  '마케팅',
+  '방송',
+  '사진/영상',
+  '아이디어',
+  '브랜딩',
+  '창업',
+  '그래픽',
+  'BXBI',
+  'UXUI',
+  '영상',
+  '3D',
+  '모션',
+  '애니메이션',
+  '제품',
+  '인테리어',
+  '패션',
+  '문화',
+  '연기',
+  '음악',
+  '무용',
+  '조소',
+  '회화',
+  'AI',
+  '데이터',
+  '게임',
+  '웹',
+  '앱',
+  '보안',
+] as const;
 
-interface RecommendArticle extends CommonArticle {
-  title: string;
-  subTitle: string;
-}
-
-interface UserProfile {
-  nickname: string;
-  sameUser: boolean;
-  hearted: boolean;
-  bookmarked: boolean;
-}
-
-interface WriterProfile {
-  userId: number;
-  nickname: string;
-  major: string;
-  profile: string;
-  grade: number;
-}
-
-interface Content {
-  id: number;
-  type: 'text' | 'image' | 'links' | 'audio';
-  textData?: string;
-  imageData?: string;
-}
-
-interface TeamMember {
-  userId: number;
-  nickname: string;
-  profile: string;
-}
-
-interface PortfolioDetails {
-  thumbnail: string;
-  title: string;
-  createdAt: string;
-  heartCount: number;
-  viewCount: number;
-  bookmarkCount: number;
-  tags: string[];
-  links: string[];
-  files: string[];
-  skills: string[];
-  writer: WriterProfile;
-  contents: Array<Content>;
-  teamMembers: teamMember[];
-}
-
-interface teamMember {
-  userId: number;
-  nickname: string;
-  profile: string;
-}
-
-interface OtherWorkList {
-  articleId: number;
-  thumbnail: string;
-  title: string;
-  bookmarked: boolean;
-}
-
-interface CommentList extends WriterProfile {
-  commentId: number;
-  content: string;
-  createdAt: string;
-  children?: CommentList[];
-}
-
-interface RecommentList extends CommentList {
-  parentId: number;
-}
-
-interface CommentList {
-  commentId: number;
-  content: string;
-}
+export const DETAIL_MENU_BAR = {
+  프로필: 'profile',
+  크루제안: 'crew_plus',
+  좋아요: 'likeInDetail',
+  북마크: 'bookmarkInDetail',
+  댓글: 'comments',
+  공유: 'share',
+} as const;
