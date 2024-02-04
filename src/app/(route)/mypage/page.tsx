@@ -13,27 +13,30 @@ export default function MyPage() {
 
   const ItemList = [...MY_PAGE.DEPARTMENT_LIST].sort();
 
-  const handleItemSelect = (item: string) => {
+  const handleItemSelect = (major: string) => {
     setIsOpen(false);
-    setDropdownItem((prev) => ({ ...prev, item }));
+    setDropdownItem((prev) => ({ ...prev, major }));
+    console.log('selectedItem', major);
+    console.log(dropdownItem);
   };
 
   const handleIsOpen = () => {
     setIsOpen((prev) => !prev);
+    console.log('isOpen', isOpen);
   };
 
   return (
     <section>
       <div className="w-[705px] h-[1241px] bg-neutral-900">
         <InfoBox title={'이름'} content={'김민수'} />
+        <DropDown
+          sortedItemList={ItemList}
+          selectedItem={dropdownItem.major}
+          onItemSelect={handleItemSelect}
+          onOpen={handleIsOpen}
+          isOpen={isOpen}
+        />
       </div>
-      <DropDown
-        sortedItemList={ItemList}
-        selectedItem={dropdownItem.major}
-        onItemSelect={handleItemSelect}
-        onOpen={handleIsOpen}
-        isOpen={false}
-      />
       MyPage
     </section>
   );
