@@ -12,17 +12,16 @@ interface ResponsePortfolioMain {
   recommendArticleList: RecommendArticle[];
 }
 
-interface ResponsePortfolioDetails {
+interface ResponsePortfolioMainDetail {
   user: UserProfile;
-  portfolio: PortfolioDetails;
-  workList: OtherWorkList[];
-  comments: CommentList[];
+  recruit: RecruitDetailItem;
+  comments: CommentItem[];
 }
 
 interface ResponseRecruitingDetail {
   user: UserProfile;
   recruit: RecruitDetailItem;
-  comments: CommentList[];
+  comments: CommentItem[];
 }
 
 interface ResponseGoogleLogin {
