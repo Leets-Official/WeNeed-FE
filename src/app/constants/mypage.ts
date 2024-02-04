@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> a4affae (:sparkles:[feat]: mypage 상수 입력)
 export const DEPARTMENT_LIST = [
   '경영학전공',
   '글로벌경영학전공',
@@ -83,10 +78,6 @@ export const DEPARTMENT_LIST = [
 
 export const GRADE_LIST = ['1학년', '2학년', '3학년', '4학년'] as const;
 
-<<<<<<< HEAD
-=======
->>>>>>> 18bdd55 (:sparkles:[feat]: mypage 상수 입력)
->>>>>>> a4affae (:sparkles:[feat]: mypage 상수 입력)
 export const INTEREST_FIELD_LIST = [
   '기획',
   '디자인',
@@ -94,11 +85,6 @@ export const INTEREST_FIELD_LIST = [
   '예술',
   'IT',
 ] as const;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> a4affae (:sparkles:[feat]: mypage 상수 입력)
 
 export const MY_PAGE = {
   DEPARTMENT_LIST,
@@ -122,7 +108,3 @@ export const MY_PAGE = {
   WARNING_INTRODUCE: '입력된 내용이 없습니다!',
   SUCCESS_MODIFY: '변경이 완료되었습니다!',
 } as const;
-<<<<<<< HEAD
-=======
->>>>>>> 18bdd55 (:sparkles:[feat]: mypage 상수 입력)
->>>>>>> a4affae (:sparkles:[feat]: mypage 상수 입력)

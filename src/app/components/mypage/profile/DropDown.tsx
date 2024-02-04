@@ -1,8 +1,7 @@
-import { DROPDOWN_ITEM } from 'constants/dropdownitem';
-import { MY_PAGE } from 'constants/mypage';
+'use client';
 
 interface DropDownProps {
-  type: 'grade' | 'departmnet' | 'interest' | 'doublemajor';
+  sortedItemList: string[];
   selectedItem: string;
   onItemSelect: (item: string) => void;
   onOpen: () => void;
@@ -10,20 +9,20 @@ interface DropDownProps {
 }
 
 const DropDown = ({
-  type,
+  sortedItemList,
   selectedItem,
   onItemSelect,
   onOpen,
   isOpen,
 }: DropDownProps) => {
-  const getSortedItmeList = DROPDOWN_ITEM[type];
-  const handleSelect = (item: string) => {
-    onItemSelect(item);
-  };
   return (
     <>
-      <button type="button" className={``} onClick={onOpen}>
-        <span>{selectedItem}</span>
+      <button
+        type="button"
+        className={`w-[312px] h-[48px] rounded-[16px] bg-gray-500 flext justify-between items-center px-4`}
+        onClick={onOpen}
+      >
+        <span className="text-black ">{selectedItem}</span>
         <span>
           <svg
             width="18"
@@ -43,12 +42,12 @@ const DropDown = ({
       </button>
 
       {isOpen && (
-        <div>
-          {getSortedItmeList.map((item) => (
+        <div className="absolute bottom-[230px] left-0 w-[312px] max-h-48 rounded-[16px] overflow-y-scroll scrollbar-hide bg-onepink">
+          {sortedItemList.map((item) => (
             <button
               key={item}
-              className={``}
-              onClick={() => handleSelect(item)}
+              className={`w-full h-12 hobver:text-black `}
+              onClick={() => onItemSelect(item)}
               type="button"
             >
               {item}
