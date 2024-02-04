@@ -79,4 +79,3 @@ export const DETAIL_MENU_BAR = {
   댓글: 'comments',
   공유: 'share',
 } as const;
-s;
