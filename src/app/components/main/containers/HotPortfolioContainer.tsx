@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import Icons from 'components/common/Icons';
 import { bigLeftAngle, bigRightAngle } from 'ui/IconsPath';
-import HotPortfolioItem from '../portfolio/HotPortfolioItem';
+import HotPortfolioItem from '../HotPortfolioItem';
 
 interface HotPortfolioContainerProps {
   data: HotArticle[];
