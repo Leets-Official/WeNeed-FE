@@ -5,6 +5,7 @@ export const UNIV_AUTH = {
   AUTH_CODE: '인증번호',
   EMAIL_BTN: '인증번호 전송',
   EMAIL_REBTN: '인증번호 재전송',
+  EMAIL_SUCCESS: '인증번호 발송이 완료되었습니다!',
   AUTH_CODE_BTN: '인증번호 확인',
   WRONG_CODE: '인증번호가 잘못되었습니다!',
   SUCCESS_CODE: '인증 되었습니다!',
@@ -101,6 +102,7 @@ const DOUBLE_MAJOR_LIST = ['-', ...MAJOR_LIST] as const;
 const INTEREST_FIELD_LIST = ['기획', '디자인', '미디어', '예술', 'IT'] as const;
 
 export const USER_INFO = {
+  TITLE: '상세 정보 입력',
   NICKNAME: '닉네임',
   NICKNAME_BTN: '중복확인',
   NICKNAME_FAIL: '이미 사용중인 닉네임입니다!',
