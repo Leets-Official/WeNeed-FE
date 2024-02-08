@@ -1,6 +1,5 @@
-import { googleLoginMock } from 'service/googlelogin';
+import { googleLogin } from 'service/googlelogin';
 import { NextResponse } from 'next/server';
-import { getCookie, setTokens } from 'utils/cookieUtils';
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
@@ -12,30 +11,12 @@ export async function GET(request: Request): Promise<NextResponse> {
   }
 
   try {
-    //const response = await googleLogin(code as string);
-    const response = await googleLoginMock(code as string);
-    console.log('Google login response Mock Tokens :', response);
+    const response = await googleLogin(code as string);
+    console.log('Google login response Tokens :', response);
 
-    const responseData = response.body ? await response.json() : null;
-
-    const responseWithTokens = setTokens(
-      response,
-      responseData.accessToken,
-      responseData.refreshToken,
-    );
-
-    const isFirstLogin = !getCookie(request, 'firstLogin');
-    console.log('isFirstLogin : ', isFirstLogin);
-
-    if (isFirstLogin) {
-      return NextResponse.json({
-        destination: '/userinfoset',
-      });
-    } else {
-      return NextResponse.json({
-        destination: '/main',
-      });
-    }
+    return NextResponse.json({
+      destination: `/userinfoset/1?accessToken=${response.accessToken}&refreshToken=${response.refreshToken}`,
+    });
   } catch (error) {
     console.error('Error during Google login:', error);
     return NextResponse.json({ error: 'Internal Server Error' });
