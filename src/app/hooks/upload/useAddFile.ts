@@ -44,6 +44,7 @@ const useAddFile = () => {
           id: String(orderId),
           type: type,
           content: fileInfo.name,
+          url: fileInfo.url,
         },
       ]);
     } else {

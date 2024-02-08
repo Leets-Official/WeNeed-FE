@@ -8,7 +8,7 @@ import { imgAndVideo } from 'ui/upload/fileType';
 import useAddFile from 'hooks/upload/useAddFile';
 interface UploadFileProps {
   uploadInfo: UploadPropTypes;
-  closeModal?: () => void;
+  closeModal: () => void;
 }
 
 const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {

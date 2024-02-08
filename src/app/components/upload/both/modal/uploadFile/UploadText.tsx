@@ -45,7 +45,7 @@ const UploadText = ({ uploadInfo, closeModal }: UploadTextProps) => {
               </div>
             )}
           </div>
-          <div className="flex flex-row-reverse mt-[24px]">
+          <div onClick={closeModal} className="flex flex-row-reverse mt-[24px]">
             <ConfirmButton
               btnClick={() => handleConfirm(fileType)}
               btnText={text}
