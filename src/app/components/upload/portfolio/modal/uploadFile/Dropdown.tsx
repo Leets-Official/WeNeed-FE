@@ -2,25 +2,23 @@
 import { useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
-import TagItem from './TagItem';
-interface DropdownTagProps {
+
+interface DropdownProps {
   options: readonly string[];
   title: string;
   announcement: string;
 }
-const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
-  const [selectedOption, setSelectedOption] = useState<string[]>([]);
+
+const Dropdown = ({ options, title, announcement }: DropdownProps) => {
+  const [selectedOption, setSelectedOption] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const handleOptionClick = (option: string) => {
-    if (selectedOption.includes(option)) {
-      setSelectedOption(selectedOption.filter((item) => item !== option));
-    } else {
-      setSelectedOption([...selectedOption, option]);
-    }
+    console.log(option, '이 선택되었습니다.');
+    setSelectedOption(option);
+    setIsOpen(false);
   };
-  const handleRemoveOption = (option: string) => {
-    setSelectedOption(selectedOption.filter((item) => item !== option));
-  };
+
   return (
     <div className="flex flex-col">
       <div
@@ -34,16 +32,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
         </div>
         <div className="flex items-center">
           {selectedOption ? (
-            <div className="flex gap-x-[10px] text-black mr-[21px]">
-              {selectedOption.map((option) => (
-                <div key={option} className="flex items-center h-[36px]">
-                  <TagItem
-                    tagName={option}
-                    tagClick={() => handleRemoveOption(option)}
-                  />
-                </div>
-              ))}
-            </div>
+            <div className="text-black mr-[21px]">{selectedOption}</div>
           ) : (
             <div className="text-zinc-300 mr-[21px] ">{announcement}</div>
           )}
@@ -62,7 +51,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
                 `}
                 onClick={() => handleOptionClick(option)}
               >
-                <span>{option}</span>
+                {option}
               </div>
             ))}
           </div>
@@ -71,4 +60,5 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
     </div>
   );
 };
-export default DropdownTag;
+
+export default Dropdown;
