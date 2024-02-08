@@ -13,6 +13,7 @@ import { useRecoilState } from 'recoil';
 const UploadContainerP = () => {
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState(filestate);
+
   return (
     <div className="flex flex-col w-[1280px] h-auto bg-white mt-[22px] gap-y-2.5">
       <AddThumbnail thumbnailInfo={portThumbnail} />
