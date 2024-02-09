@@ -31,5 +31,5 @@ interface ResponseGoogleLogin {
 }
 
 interface ResponseUploadSearch {
-  users: userInfo[];
+  users: UserInfo[];
 }

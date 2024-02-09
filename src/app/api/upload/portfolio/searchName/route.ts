@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request: Request): Promise<NextResponse> {
-  /* production env */
-  // const data = await (userId, nickName, profile).then((data) => data);
+  const { searchParams } = new URL(request.url);
+  const name = searchParams.get('searchText');
 
-  /* development env */
   return NextResponse.json(mockTeamNames);
 }
 

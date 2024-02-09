@@ -5,25 +5,19 @@ import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import Input from 'components/common/Input';
 import SelectedNames from './SelectedNames';
+import { searchTeamMate } from 'service/searchTeamMate';
 
 const SearchTeamInput = () => {
   const [searchText, setSearchText] = useState('');
   const [relatedUsers, setRelatedUsers] = useState<UserInfo[]>([]);
   const [selectedNickName, setSelectedNickName] = useState<string[]>([]);
 
-  async function MainRecruitingPage() {
-    const { users }: ResponseUploadSearch = await fetch(
-      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio/search/${searchText}`,
-      { cache: 'no-store' },
-    ).then((res) => res.json());
-    const relatedUsers = users;
-    setRelatedUsers(relatedUsers);
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const text = event.target.value;
-    setSearchText(text);
-    MainRecruitingPage();
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+    const relatedUsers = await searchTeamMate(searchText);
+    if (relatedUsers) {
+      setRelatedUsers(relatedUsers);
+    }
   };
 
   const handleSelect = (nickname: string) => {
@@ -55,13 +49,13 @@ const SearchTeamInput = () => {
                 className="flex items-center w-[797px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
                 onClick={() => handleSelect(user.nickname)}
               >
-                {/* <Image
-                  src={user.profile}
-                  alt="프로필"
+                <Image
+                  src={user.profileImage}
+                  alt="프로필사진"
                   width="24"
                   height="24"
                   className="rounded-full"
-                /> */}
+                />
                 <div className="text-base font-semibold">{user.nickname}</div>
               </div>
             ))}
