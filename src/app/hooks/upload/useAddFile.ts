@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { filestate, orderState } from 'recoil/upload';
+import { filestate, orderState, imageForm } from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
@@ -10,18 +10,30 @@ interface FileInfo {
 }
 
 const useAddFile = () => {
+  const [orderId, setOrderId] = useRecoilState(orderState);
+  const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [imageFormData, setImageFormData] = useRecoilState<FormData>(imageForm);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
     size: 0,
     url: '',
   });
-  const [orderId, setOrderId] = useRecoilState(orderState);
-  const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
-  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
 
   const divClick = () => {
     inputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    handleFileInfo(selectedFile);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const selectedFile = e.dataTransfer.files?.[0];
+    handleFileInfo(selectedFile);
   };
 
   const handleFileInfo = (selectedFile: File | undefined) => {
@@ -36,7 +48,29 @@ const useAddFile = () => {
     }
   };
 
-  const addFile = (type: string) => {
+  const handleConfirm = (fileType: string) => {
+    const selectedFile = inputRef.current?.files?.[0];
+    if (selectedFile) {
+      if (fileType === '이미지') {
+        addFile(selectedFile, 'image');
+      } else if (fileType === '문서') {
+        addFile(selectedFile, 'docs');
+      } else if (fileType === '영상') {
+        addFile(selectedFile, 'video');
+      }
+    } else {
+      console.log('선택된 파일이 없습니다.');
+    }
+  };
+
+  const addFile = (file: File, type: string) => {
+    const blob = new Blob([file], { type: file.type });
+    imageFormData.append('file', blob, file.name);
+
+    for (const value of imageFormData.values()) {
+      console.log('formdata의 value는 다음과 같음', value);
+    }
+
     if (type === 'image') {
       setItems((prevData) => [
         ...prevData,
@@ -47,40 +81,17 @@ const useAddFile = () => {
           url: fileInfo.url,
         },
       ]);
+      setOrderId(orderId + 1);
     } else {
       setFiles((prevData) => [
         ...prevData,
         {
-          id: String(orderId),
+          id: String(file.name),
           type: type,
-          content: fileInfo.name,
+          content: file.name,
           url: fileInfo.url,
         },
       ]);
-    }
-    setOrderId(orderId + 1);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = e.target.files?.[0];
-    handleFileInfo(selectedFile);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const selectedFile = e.dataTransfer.files?.[0];
-    handleFileInfo(selectedFile);
-  };
-
-  const handleConfirm = (fileType: string) => {
-    if (fileType === '이미지') {
-      addFile('image');
-    } else if (fileType === '문서') {
-      addFile('docs');
-    } else if (fileType === '영상') {
-      addFile('video');
-    } else {
-      console.log('기타 파일을 처리합니다.');
     }
   };
 
@@ -91,6 +102,7 @@ const useAddFile = () => {
     divClick,
     handleFileChange,
     handleDrop,
+    imageFormData,
   };
 };
 export default useAddFile;
