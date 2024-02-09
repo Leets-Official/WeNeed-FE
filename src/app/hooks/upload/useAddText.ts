@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { textState } from 'recoil/upload';
-import { orderState } from 'recoil/upload';
+import { textState, uploadDataState, orderState } from 'recoil/upload';
 
 const useAddText = () => {
   const [text, setText] = useState('');
   const [items, setItems] = useRecoilState(textState);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -19,10 +19,11 @@ const useAddText = () => {
       {
         id: String(orderId),
         type: type,
-        content: text,
+        data: text,
       },
     ]);
     setOrderId(orderId + 1);
+    setUploadData({ ...uploadData, content: items });
   };
 
   const handleConfirm = (fileType: string) => {

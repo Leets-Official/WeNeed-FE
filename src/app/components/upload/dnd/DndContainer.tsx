@@ -6,9 +6,9 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { textState } from 'recoil/upload';
+import { textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
-import DndText from 'components/upload/dnd/DndText';
+import DndText from './DndText';
 import DndLink from './DndLink';
 import DndSound from './DndSound';
 import DndImage from './DndImage';
@@ -16,8 +16,8 @@ import Attatched from './Attatched';
 
 const DndContainer = () => {
   const [items, setItems] = useRecoilState(textState);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
 
-  // --- Draggable이 Droppable로 드래그 되었을 때 실행되는 이벤트
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     const _items = [...items];
@@ -29,21 +29,21 @@ const DndContainer = () => {
     }));
 
     setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
   };
 
-  // --- requestAnimationFrame 초기화
   const [enabled, setEnabled] = useState(false);
 
   const componenetByType = (item: DndTextTypes) => {
     switch (item.type) {
       case 'text':
-        return <DndText text={item.content} />;
+        return <DndText text={item.data} />;
       case 'link':
-        return <DndLink link={item.content} />;
+        return <DndLink link={item.data} />;
       case 'sound':
-        return <DndSound link={item.content} />;
+        return <DndSound link={item.data} />;
       case 'image':
-        return <DndImage fileName={item.content} url={item.url} />;
+        return <DndImage fileName={item.data} url={item.data} />;
       default:
         return null;
     }
@@ -51,6 +51,7 @@ const DndContainer = () => {
 
   useEffect(() => {
     console.log('items현황: ', items);
+    console.log('uploadData현황: ', uploadData);
     const animation = requestAnimationFrame(() => setEnabled(true));
     return () => {
       cancelAnimationFrame(animation);

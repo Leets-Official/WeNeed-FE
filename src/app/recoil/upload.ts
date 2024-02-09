@@ -29,3 +29,15 @@ export const thumbnailForm = atom<FormData>({
   key: 'thumbnailFormState',
   default: new FormData(),
 });
+
+export const uploadDataState = atom<UploadPFTypes>({
+  key: 'uploadDataState',
+  default: {
+    articleType: 'PORTFOLIO',
+    title: '',
+    content: [],
+    skills: '',
+    tags: [],
+    teamMembersId: [],
+  },
+});

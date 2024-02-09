@@ -5,6 +5,8 @@ import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { uploadDataState } from 'recoil/upload';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -12,10 +14,17 @@ interface SelectDetailProps {
 
 const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
+  const [skill, setSkill] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
 
   const handleConfirm = () => {
-    console.log('확인 버튼 클릭 시 로직');
+    setUploadData({
+      ...uploadData,
+      title: title,
+      skills: skill,
+      tags: selectedTags,
+    });
   };
 
   return (
@@ -54,7 +63,11 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
           <div className="w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 flex items-center place-content-between">
             <p>스킬</p>
             <div className="flex flex-reverse-row w-auto items-center">
-              <input className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none" />
+              <input
+                className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none"
+                value={skill}
+                onChange={(e) => setSkill(e.target.value)}
+              />
             </div>
           </div>
           {(title.trim() === '' || selectedTags.length === 0) && (
@@ -62,7 +75,7 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
               필수항목을 모두 입력해주세요!{' '}
             </div>
           )}
-          <div className="flex flex-row-reverse">
+          <div className="flex flex-row-reverse" onClick={closeModal}>
             <ConfirmButton
               btnClick={handleConfirm}
               btnText={'빈 배열인지 확인'}

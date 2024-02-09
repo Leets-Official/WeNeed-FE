@@ -8,7 +8,7 @@ import SelectedNames from './SelectedNames';
 
 const SearchTeamInput = () => {
   const [searchText, setSearchText] = useState('');
-  const [relatedUsers, setRelatedUsers] = useState<userInfo[]>([]);
+  const [relatedUsers, setRelatedUsers] = useState<UserInfo[]>([]);
   const [selectedNickName, setSelectedNickName] = useState<string[]>([]);
 
   async function MainRecruitingPage() {

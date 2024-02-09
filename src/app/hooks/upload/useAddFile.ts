@@ -73,8 +73,7 @@ const useAddFile = () => {
         {
           id: String(orderId),
           type: type,
-          content: fileInfo.name,
-          url: fileInfo.url,
+          data: fileInfo.url,
         },
       ]);
       setOrderId(orderId + 1);
@@ -85,7 +84,7 @@ const useAddFile = () => {
         {
           id: String(file.name),
           type: type,
-          content: file.name,
+          data: file.name,
           url: fileInfo.url,
         },
       ]);
