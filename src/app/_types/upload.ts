@@ -58,3 +58,18 @@ interface UploadRecruitTypes {
   skills: string[];
   tags: string[];
 }
+
+interface ContentTypes {
+  id: string;
+  type: string;
+  data: string;
+}
+
+interface UploadPFTypes {
+  articleType: string;
+  title: string;
+  content: ContentTypes[];
+  skills: string;
+  tags: string[];
+  teamMembersId: number[];
+}
