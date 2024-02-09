@@ -35,7 +35,7 @@ interface DNDFileTypes {
 interface UserInfo {
   userId: number;
   nickname: string;
-  profile: string;
+  profileImage: string;
 }
 
 interface ContentTypes {

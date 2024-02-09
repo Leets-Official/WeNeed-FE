@@ -37,5 +37,5 @@ interface ResponseSearch {
 }
 
 interface ResponseUploadSearch {
-  users: userInfo[];
+  users: UserInfo[];
 }
