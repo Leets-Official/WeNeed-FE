@@ -20,7 +20,7 @@ export const imageForm = atom<FormData>({
   default: new FormData(),
 });
 
-export const filesForm = atom<FormData>({
+export const fileForm = atom<FormData>({
   key: 'fileFormState',
   default: new FormData(),
 });

@@ -89,7 +89,7 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
               accept={accept}
             />
           </div>
-          <div className="flex flex-row-reverse mt-[14px]">
+          <div onClick={closeModal} className="flex flex-row-reverse mt-[14px]">
             <ConfirmButton
               btnClick={() => handleConfirm(fileType)}
               btnText={fileInfo.name}
