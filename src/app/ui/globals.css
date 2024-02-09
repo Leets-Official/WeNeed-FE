@@ -9,7 +9,6 @@
 
 body {
   font-family: 'Pretendard', sans-serif;
-  -ms-overflow-style: none;
 }
 
 .swiper-wrapper {
@@ -21,8 +20,4 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-::-webkit-scrollbar {
-  display: none;
 }
