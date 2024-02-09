@@ -86,5 +86,4 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
     </div>
   );
 };
-
 export default SelectDetailP;

@@ -1,13 +1,12 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import { bigWeneed } from 'ui/IconsPath';
-import Profile from '../Profile';
-import { formatUploadTime } from 'utils/date';
+import Profile from '../../common/Profile';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
-import DetailCategories from 'components/main/common/DetailCategories';
 import Link from 'next/link';
+import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -35,9 +34,9 @@ const PortfolioDetailsContainer = ({
   } = portfolio;
   const { bookmarked, hearted } = user;
   return (
-    <div className="flex flex-col items-center bg-black text-white min-h-screen">
+    <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
       {thumbnail ? (
-        <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden">
+        <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
             src={thumbnail}
             fill={true}
@@ -48,14 +47,14 @@ const PortfolioDetailsContainer = ({
           />
         </div>
       ) : (
-        <div className="relative w-screen h-96  bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
+        <div className="relative w-full h-96 bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <Icons name={bigWeneed} />
           </div>
         </div>
       )}
-      <div className="w-[1290px] mb-[143px]">
-        <div className="relative mb-[60px]">
+      <div className="w-full mb-[143px]">
+        <div className="relative mb-[60px] mt-[48px]">
           <div className="absolute top-0 left-[-96px] flex ">
             {teamMembers &&
               teamMembers.map((mem, i) => (
@@ -63,7 +62,7 @@ const PortfolioDetailsContainer = ({
                   <div
                     className="rounded-full overflow-hidden w-[80px] h-[80px]"
                     style={{
-                      marginLeft: `-${i * 30}px`, // 여기서 숫자를 조절하여 간격을 조정할 수 있습니다.
+                      marginLeft: `-${i * 30}px`,
                     }}
                   >
                     <Image
@@ -87,14 +86,7 @@ const PortfolioDetailsContainer = ({
             size="large"
           />
         </div>
-        <div className="w-full flex justify-center mb-[32px]">
-          {tags.map((tag) => (
-            <DetailCategories key={tag} category={tag} />
-          ))}
-        </div>
-        <p className="w-full text-center font-semibold tracking-[1.25px] ">
-          {formatUploadTime(createdAt)}
-        </p>
+        <DetailContentsInfo tags={tags} createdAt={createdAt} />
         <DetailContents
           title={title}
           contents={contents}

@@ -25,6 +25,11 @@ interface ResponseRecruitingDetail {
   comments: CommentList[];
 }
 
+interface ResponseGoogleLogin {
+  accessToken: string;
+  refreshToken: string;
+}
+
 interface ResponseUploadSearch {
   users: userInfo[];
 }

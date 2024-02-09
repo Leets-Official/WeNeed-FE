@@ -1,4 +1,4 @@
-import Profile from '../portfolio/Profile';
+import Profile from './Profile';
 
 interface CommentItemProps {
   comment: CommentList | RecommentList;
@@ -8,7 +8,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
   const { userId, nickname, major, profile, grade, createdAt, content } =
     comment;
   return (
-    <div className="w-full ">
+    <div className="mt-[23px] ">
       <Profile
         writer={{ userId, nickname, major, profile, grade }}
         date={createdAt}
