@@ -15,9 +15,9 @@ const Attatched = () => {
         {files.map((file: DNDFileTypes, index) => {
           switch (file.type) {
             case 'video':
-              return <DndVideo key={index} fileName={file.content} />;
+              return <DndVideo key={index} fileName={file.data} />;
             case 'docs':
-              return <DndDocs key={index} fileName={file.content} />;
+              return <DndDocs key={index} fileName={file.data} />;
             default:
               return null;
           }

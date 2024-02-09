@@ -32,7 +32,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
           <p>{title}</p>
           <p className="text-red-400">*</p>
         </div>
-        <div className="flex items-center">
+        <div className="flex w-auto items-center overflow-auto-y">
           {selectedOption ? (
             <div className="flex gap-x-[10px] text-black mr-[21px]">
               {selectedOption.map((option) => (
@@ -52,7 +52,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
       </div>
       <div className="relative">
         {isOpen && (
-          <div className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-y-auto">
+          <div className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-auto">
             {options.map((option, index) => (
               <div
                 key={option}

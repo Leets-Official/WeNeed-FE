@@ -20,7 +20,7 @@ interface ThumbnailTypes {
 
 interface DndTextTypes {
   type: string;
-  content: string;
+  data: string;
   id: string;
   url?: string;
 }
@@ -28,12 +28,27 @@ interface DndTextTypes {
 interface DNDFileTypes {
   id: string;
   type: string;
-  content: string;
+  data: string;
   url: string;
 }
 
-interface userInfo {
+interface UserInfo {
   userId: number;
   nickname: string;
   profile: string;
+}
+
+interface ContentTypes {
+  id: string;
+  type: string;
+  data: string;
+}
+
+interface UploadPFTypes {
+  articleType: string;
+  title: string;
+  content: ContentTypes[];
+  skills: string;
+  tags: string[];
+  teamMembersId: number[];
 }
