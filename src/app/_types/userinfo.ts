@@ -1,8 +1,7 @@
 interface userInfo {
-  userInfoState: boolean;
   nickname: string;
+  userGrade: number;
   major: string;
   doubleMajor: string;
   interestField: string;
-  grade: string;
 }

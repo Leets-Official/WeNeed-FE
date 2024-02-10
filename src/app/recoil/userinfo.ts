@@ -18,11 +18,15 @@ export const univAuthState = atom<boolean>({
 export const userInfoState = atom<userInfo>({
   key: 'userInfoState',
   default: {
-    userInfoState: false,
     nickname: '',
+    userGrade: 0,
     major: '',
     doubleMajor: '',
     interestField: '',
-    grade: '',
   },
+});
+
+export const userInfoSetState = atom<boolean>({
+  key: 'userInfoSetState',
+  default: false,
 });

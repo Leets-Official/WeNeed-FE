@@ -9,36 +9,70 @@ import { useRouter } from 'next/navigation';
 import UnivAuth from '../UnivAuth';
 import UserInfo from '../UserInfo';
 import { useRecoilValue } from 'recoil';
-import { univAuthState } from 'recoil/userinfo';
-import { useEffect } from 'react';
+import {
+  univAuthState,
+  userInfoSetState,
+  userInfoState,
+} from 'recoil/userinfo';
+import { NextResponse } from 'next/server';
+import { setTokens } from 'utils/cookieUtils';
 
 interface UserinfoSetContainerProps {
   slug: string;
 }
 
-const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
-  useEffect(() => {
-    const { searchParams } =
-      typeof window !== 'undefined'
-        ? new URL(window.location.href)
-        : { searchParams: new URLSearchParams() };
-    const accessToken = searchParams.get('accessToken');
-    const refreshToken = searchParams.get('refreshToken');
-    console.log(
-      `searchParams: ${searchParams}, accessToken: ${accessToken}, refreshToken: ${refreshToken}`,
+const fetchData = async (token: string | null, userInfo: userInfo) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/info?accessToken=${token}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(userInfo),
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        cache: 'no-store',
+      },
     );
-  });
+    console.log('fetch data response', response);
+    return NextResponse.json(response);
+  } catch (error) {
+    console.error('Error during Fetch Data:', error);
+    return 500;
+  }
+};
 
-  const canNext = useRecoilValue(univAuthState);
+const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
+  const successUnivAuth = useRecoilValue(univAuthState);
+  const successUserInfoSet = useRecoilValue(userInfoSetState);
+  const userInfo = useRecoilValue(userInfoState);
+
+  const { searchParams } =
+    typeof window !== 'undefined'
+      ? new URL(window.location.href)
+      : { searchParams: new URLSearchParams() };
+  const accessToken = searchParams.get('accessToken');
+  const refreshToken = searchParams.get('refreshToken');
+  console.log(
+    `searchParams: ${searchParams}, accessToken: ${accessToken}, refreshToken: ${refreshToken}`,
+  );
 
   const pageNum = slug[0];
+
+  const canNext = pageNum === '1' ? successUnivAuth : successUserInfoSet;
   const route = useRouter();
 
-  const nextRoute = () => {
+  const nextRoute = async () => {
     if (pageNum === '1') {
-      route.push('/userinfoset/2');
+      route.push(
+        `/userinfoset/2?accessToken=${accessToken}&refreshToken=${refreshToken}`,
+      );
     } else {
-      route.push('/main');
+      //const response = await fetchData(accessToken, userInfo);
+      if (accessToken && refreshToken) {
+        setTokens(accessToken, refreshToken);
+        //route.push('/main');
+      }
     }
   };
 
@@ -61,9 +95,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
                 ? 'text-white bg-gradient-to-r from-cyan-400 to-blue-500'
                 : 'bg-zinc-300 text-black'
             } rounded-[8px] justify-center items-center flex text-xs font-semibold`}
-            isDisabled={
-              (pageNum === '1' && !canNext) || (pageNum === '2' && false)
-            }
+            isDisabled={false}
             onClickHandler={nextRoute}
           />
         </div>

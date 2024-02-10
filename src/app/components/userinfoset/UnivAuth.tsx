@@ -11,10 +11,13 @@ import {
 
 const fetchEmailData = async (email: string) => {
   try {
-    const response = await fetch(`/api/v1/certify?email=${email}`, {
-      method: 'POST',
-      cache: 'no-store',
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`,
+      {
+        method: 'POST',
+        cache: 'no-store',
+      },
+    );
 
     if (response.status === 200) {
       console.log('Fetch Email Data Success:', response.statusText);
@@ -25,20 +28,25 @@ const fetchEmailData = async (email: string) => {
     }
   } catch (error) {
     console.error('Error during Fetch Email Data:', error);
+    return 500;
   }
 };
 
 const fetchCodeData = async (email: string, code: string) => {
   try {
-    const response = await fetch(`/api/v1/certifycode`, {
-      method: 'POST',
-      body: JSON.stringify({ code, email }),
-      cache: 'no-store',
-    });
-
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certifycode`,
+      {
+        method: 'POST',
+        body: JSON.stringify({ code, email }),
+        cache: 'no-store',
+      },
+    );
+    console.log('fetch data code response', response);
     return response.status;
   } catch (error) {
     console.error('Error during Fetch Code:', error);
+    return 500;
   }
 };
 
@@ -46,20 +54,22 @@ const UnivAuth = () => {
   const [univAuthEmail, setUnivAuthEmail] = useRecoilState(univAuthEmailState);
   const [univAuthCode, setUnivAuthCode] = useRecoilState(univAuthCodeState);
   const [univAuth, setUnivAuth] = useRecoilState(univAuthState);
-  const [emailPost, setEmailPost] = useState(false);
+  const [emailPost, setEmailPost] = useState(0);
   const [codePost, setCodePost] = useState(0);
 
   const emailButtonHandler = async () => {
     const emailStatus = await fetchEmailData(univAuthEmail);
     if (emailStatus === 200) {
-      setEmailPost(true);
+      setEmailPost(1);
     } else {
       console.log('Email Fetch Error:', emailStatus);
+      setEmailPost(2);
     }
   };
 
   const codeButtonHandler = async () => {
     const codeStatus = await fetchCodeData(univAuthEmail, univAuthCode);
+    console.log('codeStatus', codeStatus);
     if (codeStatus === 200) {
       setCodePost(1);
       setUnivAuth(true);
@@ -99,11 +109,15 @@ const UnivAuth = () => {
       <div className="absolute left-20 top-48 mt-3 ml-1 text-neutral-400 text-[10px] font-normal">
         {UNIV_AUTH.EMAIL_INFO}
       </div>
-      {emailPost && (
+      {emailPost === 1 ? (
         <div className="absolute right-20 top-48 mt-3 text-[#517EF3] text-[10px] font-normal">
           {UNIV_AUTH.EMAIL_SUCCESS}
         </div>
-      )}
+      ) : emailPost === 2 ? (
+        <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
+          {UNIV_AUTH.EMAIL_FAIL}
+        </div>
+      ) : null}
       <div className="absolute top-56 mt-1 flex justify-between w-[320px]">
         <input
           className="w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border border-zinc-300 justify-start items-center flex text-neutral-400 text-xs font-semibold"
