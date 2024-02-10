@@ -7,6 +7,7 @@ export const UNIV_AUTH = {
   EMAIL_REBTN: '인증번호 재전송',
   EMAIL_SUCCESS: '인증번호 발송이 완료되었습니다!',
   EMAIL_FAIL: '이메일을 다시 확인해주세요!',
+  EMAIL_EXIST: '이미 사용중인 이메일입니다!',
   AUTH_CODE_BTN: '인증번호 확인',
   WRONG_CODE: '인증번호가 잘못되었습니다!',
   SUCCESS_CODE: '인증 되었습니다!',
