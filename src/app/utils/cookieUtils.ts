@@ -1,17 +1,11 @@
 import { parse } from 'cookie';
-import { NextResponse } from 'next/server';
 
-export const setTokens = (
-  response: NextResponse<unknown>,
-  accessToken: string,
-  refreshToken: string,
-): NextResponse<unknown> => {
+export const setTokens = (accessToken: string, refreshToken: string) => {
   try {
-    response.cookies.set('accessToken', accessToken);
-    response.cookies.set('refreshToken', refreshToken);
+    document.cookie = `accessToken=${accessToken}; path=/;`;
+    document.cookie = `refreshToken=${refreshToken}; path=/;`;
 
-    console.log('cookies set on server response', response);
-    return response;
+    console.log('cookies set on server response');
   } catch (error) {
     console.error('Error during setting cookies:', error);
     throw error;
