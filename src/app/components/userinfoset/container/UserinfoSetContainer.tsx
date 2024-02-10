@@ -8,14 +8,14 @@ import { UNIV_AUTH, USER_INFO } from 'constants/userinfoset';
 import { useRouter } from 'next/navigation';
 import UnivAuth from '../UnivAuth';
 import UserInfo from '../UserInfo';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   univAuthState,
   userInfoSetState,
   userInfoState,
 } from 'recoil/userinfo';
-import { NextResponse } from 'next/server';
 import { setTokens } from 'utils/cookieUtils';
+import { useEffect } from 'react';
 
 interface UserinfoSetContainerProps {
   slug: string;
@@ -24,28 +24,46 @@ interface UserinfoSetContainerProps {
 const fetchData = async (token: string | null, userInfo: userInfo) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/user/info?accessToken=${token}`,
+      `${process.env.NEXT_PUBLIC_SERVER}/user/info`,
       {
         method: 'POST',
         body: JSON.stringify(userInfo),
         headers: {
-          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
         },
         cache: 'no-store',
       },
     ).then((res) => res.json());
     console.log('fetch data response', response);
-    return NextResponse.json(response);
+    return response;
   } catch (error) {
     console.error('Error during Fetch Data:', error);
-    return 500;
+    return error;
   }
 };
 
 const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
   const successUnivAuth = useRecoilValue(univAuthState);
-  const successUserInfoSet = useRecoilValue(userInfoSetState);
+  const [successUserInfoSet, setSuccessUserInfoSet] =
+    useRecoilState(userInfoSetState);
   const userInfo = useRecoilValue(userInfoState);
+
+  useEffect(() => {
+    if (
+      successUserInfoSet.successNickname &&
+      userInfo.nickname !== '' &&
+      userInfo.userGrade !== 0 &&
+      userInfo.major !== '' &&
+      userInfo.interestField !== '' &&
+      userInfo.doubleMajor !== ''
+    ) {
+      setSuccessUserInfoSet((prev) => ({ ...prev, canUserInfoSet: true }));
+      console.log('successUserInfoSet', successUserInfoSet);
+      console.log('userInfo', userInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [successUserInfoSet.successNickname, userInfo]);
 
   const { searchParams } =
     typeof window !== 'undefined'
@@ -53,22 +71,23 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
       : { searchParams: new URLSearchParams() };
   const accessToken = searchParams.get('accessToken');
   const refreshToken = searchParams.get('refreshToken');
-  console.log(
-    `searchParams: ${searchParams}, accessToken: ${accessToken}, refreshToken: ${refreshToken}`,
-  );
 
   const pageNum = slug[0];
 
-  const canNext = pageNum === '1' ? successUnivAuth : successUserInfoSet;
+  const canNext =
+    pageNum === '1' ? successUserInfoSet.canUserInfoSet : successUnivAuth;
   const route = useRouter();
 
   const nextRoute = async () => {
+    if (!successUserInfoSet.canUserInfoSet) return;
     if (pageNum === '1') {
-      route.push(
-        `/userinfoset/2?accessToken=${accessToken}&refreshToken=${refreshToken}`,
-      );
+      const response = await fetchData(accessToken, userInfo);
+      if (response.result) {
+        route.push(
+          `/userinfoset/2?accessToken=${accessToken}&refreshToken=${refreshToken}`,
+        );
+      }
     } else {
-      //const response = await fetchData(accessToken, userInfo);
       if (accessToken && refreshToken) {
         setTokens(accessToken, refreshToken);
         route.push('/main/portfolio');
@@ -86,7 +105,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
           <Link href="/main">
             <Icons name={loginHome} className="absolute top-4 right-6" />
           </Link>
-          {pageNum === '1' ? <UserInfo /> : <UnivAuth />}
+          {pageNum === '1' ? <UserInfo token={accessToken} /> : <UnivAuth />}
           <Button
             buttonText={pageNum === '1' ? UNIV_AUTH.BTN : USER_INFO.BTN}
             type="userinfo"
@@ -95,7 +114,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
                 ? 'text-white bg-gradient-to-r from-cyan-400 to-blue-500'
                 : 'bg-zinc-300 text-black'
             } rounded-[8px] justify-center items-center flex text-xs font-semibold`}
-            isDisabled={false}
+            isDisabled={!canNext}
             onClickHandler={nextRoute}
           />
         </div>

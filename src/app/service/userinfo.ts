@@ -63,3 +63,22 @@ export const postUserInfo = async (
     throw error;
   }
 };
+
+export const checkNickname = async (nickName: string) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/checkNickname?nickName=${nickName}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+      },
+    ).then((res) => res.json());
+
+    return response;
+  } catch (error) {
+    console.log('Error in check nickname func : ', error);
+  }
+};

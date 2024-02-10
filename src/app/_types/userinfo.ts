@@ -5,3 +5,8 @@ interface userInfo {
   doubleMajor: string;
   interestField: string;
 }
+
+interface userInfoSet {
+  canUserInfoSet: boolean;
+  successNickname: boolean;
+}

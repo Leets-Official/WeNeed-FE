@@ -26,7 +26,10 @@ export const userInfoState = atom<userInfo>({
   },
 });
 
-export const userInfoSetState = atom<boolean>({
+export const userInfoSetState = atom<userInfoSet>({
   key: 'userInfoSetState',
-  default: false,
+  default: {
+    canUserInfoSet: false,
+    successNickname: false,
+  },
 });
