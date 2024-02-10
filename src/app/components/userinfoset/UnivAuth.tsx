@@ -15,16 +15,20 @@ const fetchEmailData = async (email: string) => {
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`,
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         cache: 'no-store',
       },
-    );
+    ).then((res) => res.json());
+    console.log('response body: ', response);
 
-    if (response.status === 200) {
-      console.log('Fetch Email Data Success:', response.statusText);
-      return response.status;
+    if (response.code === 200) {
+      console.log('Fetch Email Data Success:', response.message);
+      return response.code;
     } else {
-      console.error('Fetch Email Data Error:', response.statusText);
-      return response.status;
+      console.error('Fetch Email Data Error:', response.message);
+      return response.code;
     }
   } catch (error) {
     console.error('Error during Fetch Email Data:', error);
@@ -38,12 +42,15 @@ const fetchCodeData = async (email: string, code: string) => {
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certifycode`,
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ code, email }),
         cache: 'no-store',
       },
-    );
+    ).then<unknown>((res) => res.json());
     console.log('fetch data code response', response);
-    return response.status;
+    return response;
   } catch (error) {
     console.error('Error during Fetch Code:', error);
     return 500;
