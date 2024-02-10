@@ -11,7 +11,6 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   try {
     const response = await setEmail(email as string);
-    console.log('Email fetch :', response);
 
     return NextResponse.json({ response });
   } catch (error) {

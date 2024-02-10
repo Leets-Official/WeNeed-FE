@@ -69,14 +69,12 @@ const UnivAuth = () => {
     if (emailStatus === 200) {
       setEmailPost(1);
     } else {
-      console.log('Email Fetch Error:', emailStatus);
       setEmailPost(2);
     }
   };
 
   const codeButtonHandler = async () => {
     const codeStatus = await fetchCodeData(univAuthEmail, univAuthCode);
-    console.log('codeStatus', codeStatus);
     if (codeStatus === 200) {
       setCodePost(1);
       setUnivAuth(true);
