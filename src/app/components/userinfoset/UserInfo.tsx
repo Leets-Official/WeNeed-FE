@@ -98,7 +98,13 @@ const UserInfo = ({ token }: UserInfoProps) => {
         <div className="absolute top-40 flex justify-between w-[320px]">
           <label className="relative flex items-center">
             <input
-              className="w-[239px] h-[38px] pr-4 rounded-[8px] focus:outline-none border border-zinc-300 text-[#3A3A3A] text-xs font-semibold text-right"
+              className={`w-[239px] h-[38px] pr-4 rounded-[8px] focus:outline-none border ${
+                successNickname === 1
+                  ? 'border-[#517EF3]'
+                  : successNickname === 2
+                    ? 'border-[#FF7272]'
+                    : 'border-zinc-300'
+              } text-[#3A3A3A] text-xs font-semibold text-right`}
               type="text"
               value={userInfo.nickname}
               placeholder=""
