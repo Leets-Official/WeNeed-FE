@@ -2,11 +2,17 @@ import { NextResponse } from 'next/server';
 import { getPortfolioMain } from 'service/main';
 
 export async function GET(request: Request): Promise<NextResponse> {
-  /* production env */
-  // const data = await getPortfolioMain(size, page, sort).then((data) => data);
+  const { searchParams } = new URL(request.url);
+  const size = searchParams.get('size') || '1';
+  const page = searchParams.get('page') || '1';
+  const sort = searchParams.get('sort') || '';
+  const detailTags = searchParams.get('detailTags') || [''];
+  const data = await getPortfolioMain(size, page, sort, detailTags).then(
+    (data) => data,
+  );
 
   /* development env */
-  return NextResponse.json(mockPortfolioMain);
+  return NextResponse.json(data);
 }
 
 const mockPortfolioMain = {

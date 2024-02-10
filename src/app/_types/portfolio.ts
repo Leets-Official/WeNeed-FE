@@ -15,13 +15,30 @@ interface CommonArticle {
   articleId: number;
   thumbnail: string;
   bookmarked: boolean;
-  createdAt: string;
+  createdAt?: string;
 }
 
 interface HotArticle {
   title: string;
   articleId: number;
   thumbnail: string;
+}
+
+interface Article {
+  articleId: number;
+  thumbnail: string;
+  bookmarked: boolean;
+}
+
+interface SearchArticle extends CommonArticle {
+  title: string;
+  detailTags: string[];
+  major: string;
+  grade: number;
+  writerNickname: string;
+  viewCount: number;
+  heartCount: number;
+  bookmarkCount: number;
 }
 
 interface PortfolioArticle extends CommonArticle {

@@ -29,3 +29,9 @@ interface ResponseGoogleLogin {
   accessToken: string;
   refreshToken: string;
 }
+
+interface ResponseSearch {
+  user: UserProfile;
+  pageable: Pageable;
+  articleList: SearchArticle[];
+}
