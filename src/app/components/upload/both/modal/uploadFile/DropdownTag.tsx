@@ -71,4 +71,5 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
     </div>
   );
 };
+
 export default DropdownTag;
