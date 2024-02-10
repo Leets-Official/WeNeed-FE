@@ -1,6 +1,5 @@
 'use client';
 
-import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -29,9 +28,6 @@ const DetailCategoriesContainer = () => {
 
   return (
     <div className="w-full">
-      <h1 className="mt-[65px] mb-[48px] text-3xl font-semibold">
-        {LOGGEDIN_SECTION_HEADINGS.hot}
-      </h1>
       <div className="relative flex w-full h-9 rounded-3xl ">
         <Swiper
           modules={[Navigation]}

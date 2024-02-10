@@ -33,7 +33,7 @@ const HotPortfolioContainer = ({ data }: HotPortfolioContainerProps) => {
             nextEl: '.swiper-button-next-hot',
           }}
         >
-          {data.map((article) => {
+          {data?.map((article) => {
             return (
               <SwiperSlide key={article.articleId}>
                 <HotPortfolioItem article={article} />

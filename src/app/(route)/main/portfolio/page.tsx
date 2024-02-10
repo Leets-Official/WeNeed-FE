@@ -6,11 +6,11 @@ import {
   PortfolioContainer,
   RecommendContainer,
 } from 'components/main/containers';
+import { LOGGEDIN_SECTION_HEADINGS, SORT_TYPES } from 'constants/main';
 
 export default async function MainPortfolioPage() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio`,
-    { cache: 'no-store' },
+    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio?size=${SORT_TYPES.size}`,
   );
   const {
     hotArticleList,
@@ -19,11 +19,15 @@ export default async function MainPortfolioPage() {
     pageable,
     user,
   }: ResponsePortfolioMain = await response.json();
+  console.log(recommendArticleList);
 
   return (
     <section>
       <div className="flex flex-col items-center w-full min-h-screen text-white ">
         <MainNavbar />
+        <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
+          {LOGGEDIN_SECTION_HEADINGS.hot}
+        </h1>
         <DetailCategoriesContainer />
         <HotPortfolioContainer data={hotArticleList} />
         <PortfolioContainer data={articleList} />
