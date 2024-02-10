@@ -25,10 +25,10 @@ const fetchEmailData = async (email: string) => {
 
     if (response.code === 200) {
       console.log('Fetch Email Data Success:', response.message);
-      return response.code;
+      return response;
     } else {
       console.error('Fetch Email Data Error:', response.message);
-      return response.code;
+      return response;
     }
   } catch (error) {
     console.error('Error during Fetch Email Data:', error);
@@ -66,10 +66,10 @@ const UnivAuth = () => {
 
   const emailButtonHandler = async () => {
     const emailStatus = await fetchEmailData(univAuthEmail);
-    if (emailStatus === 200) {
+    if (emailStatus.code === 200) {
       setEmailPost(1);
     } else {
-      setEmailPost(2);
+      emailStatus.message.includes('이미') ? setEmailPost(3) : setEmailPost(2);
     }
   };
 
@@ -93,7 +93,7 @@ const UnivAuth = () => {
           className={`w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border ${
             emailPost === 1
               ? 'border-[#517EF3]'
-              : emailPost === 2
+              : emailPost === 2 || emailPost === 3
                 ? 'border-[#FF7272]'
                 : 'border-zinc-300'
           } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
@@ -128,6 +128,10 @@ const UnivAuth = () => {
         <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
           {UNIV_AUTH.EMAIL_FAIL}
         </div>
+      ) : emailPost === 3 ? (
+        <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
+          {UNIV_AUTH.EMAIL_EXIST}
+        </div>
       ) : null}
       <div className="absolute top-56 mt-1 flex justify-between w-[320px]">
         <input
@@ -154,7 +158,7 @@ const UnivAuth = () => {
               ? 'bg-zinc-300 text-black'
               : 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white'
           } rounded-[8px] justify-center items-center flex text-black text-[10px] font-normal`}
-          isDisabled={false}
+          isDisabled={univAuthCode.length === 0}
           onClickHandler={codeButtonHandler}
         />
       </div>
