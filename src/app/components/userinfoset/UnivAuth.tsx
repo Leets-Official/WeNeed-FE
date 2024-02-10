@@ -48,7 +48,7 @@ const fetchCodeData = async (email: string, code: string) => {
         body: JSON.stringify({ code, email }),
         cache: 'no-store',
       },
-    ).then<unknown>((res) => res.json());
+    ).then((res) => res.json());
     console.log('fetch data code response', response);
     return response;
   } catch (error) {
@@ -75,10 +75,11 @@ const UnivAuth = () => {
 
   const codeButtonHandler = async () => {
     const codeStatus = await fetchCodeData(univAuthEmail, univAuthCode);
-    if (codeStatus === 200) {
+    if (codeStatus.success) {
       setCodePost(1);
       setUnivAuth(true);
     } else {
+      setUnivAuth(false);
       setCodePost(2);
     }
   };

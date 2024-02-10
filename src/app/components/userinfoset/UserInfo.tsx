@@ -62,14 +62,26 @@ const UserInfo = ({ token }: UserInfoProps) => {
     switch (type) {
       case 'grade':
         setIsGradeOpen((prev) => !prev);
+        setIsMajorOpen(false);
+        setIsDoubleMajorOpen(false);
+        setIsInterestFieldOpen(false);
         break;
       case 'major':
+        setIsGradeOpen(false);
         setIsMajorOpen((prev) => !prev);
+        setIsDoubleMajorOpen(false);
+        setIsInterestFieldOpen(false);
         break;
       case 'doubleMajor':
+        setIsGradeOpen(false);
+        setIsMajorOpen(false);
         setIsDoubleMajorOpen((prev) => !prev);
+        setIsInterestFieldOpen(false);
         break;
       case 'interestField':
+        setIsGradeOpen(false);
+        setIsMajorOpen(false);
+        setIsDoubleMajorOpen(false);
         setIsInterestFieldOpen((prev) => !prev);
         break;
       default:

@@ -79,7 +79,6 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
   const route = useRouter();
 
   const nextRoute = async () => {
-    if (!successUserInfoSet.canUserInfoSet) return;
     if (pageNum === '1') {
       const response = await fetchData(accessToken, userInfo);
       if (response.result) {
