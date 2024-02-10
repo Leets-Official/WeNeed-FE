@@ -33,7 +33,7 @@ const fetchData = async (token: string | null, userInfo: userInfo) => {
         },
         cache: 'no-store',
       },
-    );
+    ).then((res) => res.json());
     console.log('fetch data response', response);
     return NextResponse.json(response);
   } catch (error) {
@@ -71,7 +71,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
       //const response = await fetchData(accessToken, userInfo);
       if (accessToken && refreshToken) {
         setTokens(accessToken, refreshToken);
-        //route.push('/main');
+        route.push('/main/portfolio');
       }
     }
   };
@@ -86,7 +86,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
           <Link href="/main">
             <Icons name={loginHome} className="absolute top-4 right-6" />
           </Link>
-          {pageNum === '1' ? <UnivAuth /> : <UserInfo />}
+          {pageNum === '1' ? <UserInfo /> : <UnivAuth />}
           <Button
             buttonText={pageNum === '1' ? UNIV_AUTH.BTN : USER_INFO.BTN}
             type="userinfo"

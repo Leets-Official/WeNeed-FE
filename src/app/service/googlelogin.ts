@@ -1,6 +1,3 @@
-import { NextResponse } from 'next/server';
-
-/* BE real api func */
 export const googleLogin = async (
   authorizationCode: string,
 ): Promise<ResponseGoogleLogin> => {
@@ -14,11 +11,9 @@ export const googleLogin = async (
         },
         cache: 'no-store',
       },
-    );
-    const responseData = await response.json();
-    console.log('This is fetch response in googleLogin : ', responseData);
+    ).then((res) => res.json());
 
-    return responseData;
+    return response;
   } catch (error) {
     console.log('google login error', error);
     throw error;
