@@ -1,6 +1,5 @@
 'use client';
 import Icons from 'components/common/Icons';
-import { MY_PAGE } from 'constants/mypage';
 import { userinfoSetDownAngle, userinfoSetUpAngle } from 'ui/IconsPath';
 
 interface DropDownProps {
@@ -9,6 +8,10 @@ interface DropDownProps {
   onItemSelect: (item: string) => void;
   onOpen: () => void;
   isOpen: boolean;
+  className?: string;
+  buttonClassName?: string;
+  dropDownClassName?: string;
+  itemClassName?: string;
 }
 
 const DropDown = ({
@@ -17,16 +20,17 @@ const DropDown = ({
   onItemSelect,
   onOpen,
   isOpen,
+  className,
+  buttonClassName,
+  dropDownClassName,
+  itemClassName,
 }: DropDownProps) => {
+  console.log('selectedItem', selectedItem);
   return (
-    <>
-      <button
-        type="button"
-        className={`w-[312px] h-[48px] rounded-[16px] bg-gray-500 relative flex justify-between items-center p-4`}
-        onClick={onOpen}
-      >
-        <span className="text-black">{selectedItem || MY_PAGE.MAJOR}</span>
-        <span className="absolute right-4">
+    <div className={`${className}`}>
+      <button type="button" onClick={onOpen} className={`${buttonClassName}`}>
+        <span className="flex justify-center items-center">{selectedItem}</span>
+        <span className="relative right-0">
           {isOpen ? (
             <Icons name={userinfoSetUpAngle} />
           ) : (
@@ -36,12 +40,16 @@ const DropDown = ({
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-[230px] left-0 w-[312px] max-h-48 rounded-[16px] overflow-y-scroll scrollbar-hide bg-white">
-          {sortedItemList.map((item) => (
+        <div className={`flex flex-col items-center ${dropDownClassName}`}>
+          {sortedItemList.map((item, index) => (
             <button
               key={item}
-              className={`w-full h-12 hover:text-black ${
-                selectedItem === item ? 'text-black' : 'text-gray-500'
+              className={`text-left ${itemClassName} ${
+                selectedItem === item ? 'text-black' : 'text-neutral-400'
+              } ${
+                index === sortedItemList.length - 1
+                  ? ''
+                  : 'border-b border-stone-300'
               }`}
               onClick={() => onItemSelect(item)}
               type="button"
@@ -51,7 +59,7 @@ const DropDown = ({
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
