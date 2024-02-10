@@ -90,7 +90,13 @@ const UnivAuth = () => {
       </div>
       <div className="absolute top-40 flex justify-between w-[320px]">
         <input
-          className="w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border border-zinc-300 justify-start items-center flex text-neutral-400 text-xs font-semibold"
+          className={`w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border ${
+            emailPost === 1
+              ? 'border-[#517EF3]'
+              : emailPost === 2
+                ? 'border-[#FF7272]'
+                : 'border-zinc-300'
+          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
           type="text"
           value={univAuthEmail}
           placeholder={UNIV_AUTH.EMAIL}
@@ -125,7 +131,13 @@ const UnivAuth = () => {
       ) : null}
       <div className="absolute top-56 mt-1 flex justify-between w-[320px]">
         <input
-          className="w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border border-zinc-300 justify-start items-center flex text-neutral-400 text-xs font-semibold"
+          className={`w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border ${
+            codePost === 1
+              ? 'border-[#517EF3]'
+              : codePost === 2
+                ? 'border-[#FF7272]'
+                : 'border-zinc-300'
+          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
           type="text"
           value={univAuthCode}
           placeholder={UNIV_AUTH.AUTH_CODE}
