@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getRecruitDetail } from 'service/main';
+import { getRecruitDetail } from 'service/getRequests';
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
