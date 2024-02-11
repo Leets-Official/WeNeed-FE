@@ -1,10 +1,6 @@
-import Icons from 'components/common/Icons';
-import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
-import { bookmark, heart } from 'ui/IconsPath';
-import GradientBookmark from 'ui/gradient/GradientBookmark';
-import GradientHeart from 'ui/gradient/GradientHeart';
-import GradientView from 'ui/gradient/GradientView';
+import Counts from './Counts';
+import { PROFILE_STYLE } from 'constants/styles';
 import { formatUploadTime } from 'utils/date';
 
 interface ProfileProps {
@@ -54,29 +50,7 @@ const Profile = ({
           </div>
         </div>
       </div>
-      {count && (
-        <div className="flex gap-[32px] h-[75px] items-end justify-end w-[20%]">
-          <p className="flex  gap-[10px] cursor-pointer">
-            <GradientView width={24} height={18} /> {count[0]}
-          </p>
-          <p className="flex  gap-[10px] cursor-pointer">
-            {user?.hearted ? (
-              <GradientHeart width={24} height={24} />
-            ) : (
-              <Icons name={heart} />
-            )}
-            {count[0]}
-          </p>
-          <p className="flex  gap-[10px] cursor-pointer">
-            {user?.bookmarked ? (
-              <GradientBookmark width={17} height={24} />
-            ) : (
-              <Icons name={bookmark} />
-            )}
-            {count[0]}
-          </p>
-        </div>
-      )}
+      {count && <Counts count={count} user={user} />}
     </div>
   );
 };

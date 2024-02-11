@@ -10,7 +10,7 @@ export async function GET(request: Request): Promise<NextResponse> {
 
 const mockSearch = {
   user: {
-    nickname: 'string',
+    nickname: '위니드',
   },
   pageable: {
     size: 3,
@@ -21,8 +21,74 @@ const mockSearch = {
   articleList: [
     {
       articleId: 0,
-      thumbnail: 'string',
-      title: 'string',
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
+      detailTags: ['string'],
+      writerNickname: '위니드',
+      major: '경영학전공',
+      grade: 4,
+      viewCount: 80,
+      heartCount: 30,
+      bookmarkCount: 50,
+    },
+    {
+      articleId: 1,
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
+      detailTags: ['string'],
+      writerNickname: 'string',
+      major: '경영학전공',
+      grade: 0,
+      viewCount: 0,
+      heartCount: 0,
+      bookmarkCount: 0,
+    },
+    {
+      articleId: 1,
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
+      detailTags: ['string'],
+      writerNickname: 'string',
+      major: '경영학전공',
+      grade: 0,
+      viewCount: 0,
+      heartCount: 0,
+      bookmarkCount: 0,
+    },
+    {
+      articleId: 1,
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
+      detailTags: ['string'],
+      writerNickname: 'string',
+      major: '경영학전공',
+      grade: 0,
+      viewCount: 0,
+      heartCount: 0,
+      bookmarkCount: 0,
+    },
+    {
+      articleId: 1,
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
+      detailTags: ['string'],
+      writerNickname: 'string',
+      major: '경영학전공',
+      grade: 0,
+      viewCount: 0,
+      heartCount: 0,
+      bookmarkCount: 0,
+    },
+    {
+      articleId: 1,
+      thumbnail:
+        'https://www.billboard.com/wp-content/uploads/2023/04/aespa-press-credit-SM-Entertainment-2023-billboard-exclusive-1548.jpg',
+      title: '사진 기법 ',
       detailTags: ['string'],
       writerNickname: 'string',
       major: '경영학전공',

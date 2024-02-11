@@ -1,6 +1,3 @@
-import { ReactNode } from 'react';
-import Icons from '../components/common/Icons';
-
 export const FILE_TYPE_LIST = [
   '텍스트',
   '이미지',
