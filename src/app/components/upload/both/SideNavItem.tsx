@@ -1,3 +1,4 @@
+'use client';
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailP from '../portfolio/modal/SelectDetailP';

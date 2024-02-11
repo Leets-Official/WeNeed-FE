@@ -30,6 +30,11 @@ export const thumbnailForm = atom<FormData>({
   default: new FormData(),
 });
 
+export const userIdForm = atom<number[]>({
+  key: 'userIdFormState',
+  default: [],
+});
+
 export const uploadDataState = atom<UploadPFTypes>({
   key: 'uploadDataState',
   default: {
