@@ -1,13 +1,35 @@
+'use client';
 import TeamMate from './TeamMate';
+import { useRecoilState } from 'recoil';
+import { userIdForm } from 'recoil/upload';
 
-const SelectedNames = ({ selectedNames }: { selectedNames: string[] }) => {
+interface SelectedNamesProps {
+  selectedUsers: UserInfo[];
+  setSelectedUsers: React.Dispatch<React.SetStateAction<UserInfo[]>>;
+}
+
+const SelectedNames = ({
+  selectedUsers,
+  setSelectedUsers,
+}: SelectedNamesProps) => {
+  const [userIds, setUserIds] = useRecoilState(userIdForm);
+
+  const handleRemove = (userId: number) => {
+    setSelectedUsers((prevSelectedUsers) =>
+      prevSelectedUsers.filter((user) => user.userId !== userId),
+    );
+    setUserIds((prevUserId) =>
+      prevUserId.filter((removedId) => removedId !== userId),
+    );
+  };
   return (
     <div className="flex items-center gap-x-[15px] flex-wrap">
-      {selectedNames.map((name, index) => (
+      {selectedUsers.map((user, index) => (
         <TeamMate
-          key={index}
-          imageURL="https://cdn.icon-icons.com/icons2/510/PNG/512/image_icon-icons.com_50366.png"
-          nickName={name}
+          key={user.userId}
+          imageURL={user.profileImage}
+          nickName={user.nickname}
+          deleteId={() => handleRemove(user.userId)}
         />
       ))}
     </div>

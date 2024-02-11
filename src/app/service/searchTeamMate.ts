@@ -3,13 +3,15 @@ import { cookies } from 'next/headers';
 export const searchTeamMate = async (searchText: string) => {
   const token = cookies().get('accessToken');
   try {
-    const { users }: ResponseUploadSearch = await fetch(
-      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio/search?name=${searchText}`,
+    const users: ResponseUploadSearch = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}portfolio/team-member?nickname=${searchText}`,
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          authorization: 'Bearer ' + token?.value,
+          Authorization:
+            'Bearer ' +
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzU2ODkwOCwiZXhwIjoxNzA3NjU1MzA4LCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.lswGkAgOb68SKR3AWNAMY9Fvmvdph9jxe8xjYD_HA0w',
         },
         cache: 'no-store',
       },

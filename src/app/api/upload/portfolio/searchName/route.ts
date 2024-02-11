@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
+import { searchTeamMate } from 'service/searchTeamMate';
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
-  const name = searchParams.get('searchText');
+  const name = searchParams.get('searchText') || '';
 
-  return NextResponse.json(mockTeamNames);
+  const userInfo = await searchTeamMate(name);
+  return NextResponse.json(userInfo);
 }
-
 const mockTeamNames = [
   {
     userId: 0,

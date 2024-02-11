@@ -5,31 +5,45 @@ import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import Input from 'components/common/Input';
 import SelectedNames from './SelectedNames';
-import { searchTeamMate } from 'service/searchTeamMate';
+import { useRecoilState } from 'recoil';
+import { userIdForm } from 'recoil/upload';
 
 const SearchTeamInput = () => {
   const [searchText, setSearchText] = useState('');
   const [relatedUsers, setRelatedUsers] = useState<UserInfo[]>([]);
-  const [selectedNickName, setSelectedNickName] = useState<string[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<UserInfo[]>([]);
+  const [userIds, setUserIds] = useRecoilState(userIdForm);
+
+  const searchUser = async (searchText: string) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio/searchName?searchText=${searchText}`,
+      { cache: 'no-store' },
+    );
+    const data = await res.json();
+    return data;
+  };
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
-    const relatedUsers = await searchTeamMate(searchText);
+    setSearchText(() => event.target.value);
+    const relatedUsers = await searchUser(searchText);
     if (relatedUsers) {
       setRelatedUsers(relatedUsers);
     }
   };
 
-  const handleSelect = (nickname: string) => {
-    console.log(`${nickname} 멤버 추가 기능 실행`);
-    setSelectedNickName((prevNames) => [...prevNames, nickname]);
+  const handleSelect = (user: UserInfo) => {
+    setSelectedUsers((prevUsers) => [...prevUsers, user]);
+    setUserIds((prevUserId) => [...prevUserId, user.userId]);
   };
 
   return (
     <div>
       <div className="flex w-[842px] h-[64.5px] rounded-[9px] border border-zinc-300 items-center overflow-y-auto">
         <div className="flex items-center gap-x-[15px] flex-wrap w-[680px] ml-[110px]">
-          <SelectedNames selectedNames={selectedNickName} />
+          <SelectedNames
+            selectedUsers={selectedUsers}
+            setSelectedUsers={setSelectedUsers}
+          />
           <Input
             type={'upload'}
             className=""
@@ -47,7 +61,7 @@ const SearchTeamInput = () => {
               <div
                 key={user.userId}
                 className="flex items-center w-[797px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
-                onClick={() => handleSelect(user.nickname)}
+                onClick={() => handleSelect(user)}
               >
                 <Image
                   src={user.profileImage}
