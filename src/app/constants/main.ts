@@ -12,10 +12,10 @@ export const NOT_LOGGEDIN_SECTION_HEADING = {
 } as const;
 
 export const SORT_TYPES = {
-  size: 16,
-  recent: '최신순',
-  view: '조회수 높은순',
-  like: '좋아요 높은순',
+  SIZE: 16,
+  DESC: '최신순',
+  VIEW: '조회수 높은순',
+  HEART: '좋아요 높은순',
 } as const;
 
 export const FOOTER_TEXT = {

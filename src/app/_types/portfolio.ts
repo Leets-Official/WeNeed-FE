@@ -2,7 +2,7 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
-type SortTypes = 'recent' | 'view' | 'like';
+type SortTypes = 'DESC' | 'VIEW' | 'HEART';
 
 interface Pageable {
   size: number;

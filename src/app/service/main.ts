@@ -1,47 +1,51 @@
 import { cookies } from 'next/headers';
 
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
+
+const commonHeaders = {
+  'Content-Type': 'application/json',
+  authorization: 'Bearer ' + cookies().get('accessToken'),
+};
+
+const getRequest = async (url: string) => {
+  try {
+    const response = await fetch(url, { headers: commonHeaders }).then((res) =>
+      res.json(),
+    );
+    return response;
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
 export const getPortfolioMain = async (
   size: string,
   page: string,
   sort: string,
   detailTags: string | string[],
 ) => {
-  const token = cookies().get('accessToken');
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/portfolio`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          // authorization: 'Bearer ' + token?.value,
-          authorization:
-            'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzU2ODkwOCwiZXhwIjoxNzA3NjU1MzA4LCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.lswGkAgOb68SKR3AWNAMY9Fvmvdph9jxe8xjYD_HA0w',
-        },
-      },
-    ).then<unknown>((res) => res.json());
-    return response;
-  } catch (error) {
-    console.log('portfolio error', error);
-  }
+  const params = new URLSearchParams({
+    size,
+    page,
+    sort,
+    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
+  });
+  const url = `${SERVER_URL}/portfolio?${params.toString()}`;
+  return await getRequest(url);
 };
 
 export const getRecruitMain = async (
   size: string,
   page: string,
-  sort: string | string[],
+  detailTags: string | string[],
 ) => {
-  const token = cookies().get('accessToken');
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/recruit`, {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + token?.value,
-      },
-    }).then<unknown>((res) => res.json());
-    return response;
-  } catch (error) {
-    console.log('recruit error', error);
-  }
+  const params = new URLSearchParams({
+    size,
+    page,
+    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
+  });
+  const url = `${SERVER_URL}/recruit?${params.toString()}`;
+  return await getRequest(url);
 };
 
 export const getSearch = async (
@@ -49,52 +53,21 @@ export const getSearch = async (
   page: string,
   keyword: string,
 ) => {
-  const token = cookies().get('accessToken');
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER}/search`, {
-      headers: {
-        'Content-Type': 'application/json',
-        authorization: 'Bearer ' + token?.value,
-      },
-    }).then<unknown>((res) => res.json());
-    return response;
-  } catch (error) {
-    console.log('search error', error);
-  }
+  const params = new URLSearchParams({
+    size,
+    page,
+    keyword,
+  });
+  const url = `${SERVER_URL}/search?${params.toString()}`;
+  return await getRequest(url);
 };
 
 export const postLikes = async (articleId: string) => {
-  const token = cookies().get('accessToken');
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/likes/${articleId}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: 'Bearer ' + token?.value,
-        },
-      },
-    ).then<unknown>((res) => res.json());
-    return response;
-  } catch (error) {
-    console.log('recruit error', error);
-  }
+  const url = `${SERVER_URL}/likes/${articleId}`;
+  return await fetch(url, { method: 'POST', headers: commonHeaders });
 };
 
 export const postBookmarks = async (articleId: string) => {
-  const token = cookies().get('accessToken');
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/postBookmarks/${articleId}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: 'Bearer ' + token?.value,
-        },
-      },
-    ).then<unknown>((res) => res.json());
-    return response;
-  } catch (error) {
-    console.log('recruit error', error);
-  }
+  const url = `${SERVER_URL}/postBookmarks/${articleId}`;
+  return await fetch(url, { method: 'POST', headers: commonHeaders });
 };
