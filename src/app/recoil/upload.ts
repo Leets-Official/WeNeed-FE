@@ -48,6 +48,11 @@ export const uploadRecruitState = atom<UploadRecruitTypes>({
   },
 });
 
+export const userIdForm = atom<number[]>({
+  key: 'userIdFormState',
+  default: [],
+});
+
 export const uploadDataState = atom<UploadPFTypes>({
   key: 'uploadDataState',
   default: {
