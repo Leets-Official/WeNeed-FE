@@ -7,7 +7,7 @@ import { NO_COMMENTS } from 'constants/common';
 import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { commentClose, commentOpen, inputDrop } from 'ui/IconsPath';
+import { inputDrop } from 'ui/IconsPath';
 
 interface CommentsContainerProps {
   onRecruit?: boolean;
@@ -23,7 +23,6 @@ const CommentsContainer = ({
   user,
 }: CommentsContainerProps) => {
   const [commentValue, setCommentValue] = useState<string>('');
-  const [openChildren, setOpenChildren] = useState<boolean>(false);
   const [totalComments, setTotalComments] = useState<number>(0);
   const profileStyles = PROFILE_STYLE['medium']();
 
@@ -50,7 +49,8 @@ const CommentsContainer = ({
           body: JSON.stringify({ content: commentValue }),
         },
       );
-      console.log('res');
+      setCommentValue('');
+      window.location.reload();
     } catch (e) {
       console.log(e);
     }
@@ -111,40 +111,6 @@ const CommentsContainer = ({
                   parentId={commentId}
                   myProfile={user.profile || ''}
                 />
-                {comment.children && comment.children?.length > 0 && (
-                  <div
-                    className="w-[98px] h-[20px] rounded-[10px] bg-gradient-to-r from-[#00E0EE] to-[#517EF3]
-                      text-[12px] text-center font-normal flex justify-center items-center ml-[86px] mt-[13px] gap-1 
-                      cursor-pointer hover:from-[#fff] hover:to-[#fff]"
-                    onClick={() => setOpenChildren(!openChildren)}
-                  >
-                    {openChildren ? (
-                      <p className="py-1">
-                        <Icons name={commentClose} />
-                      </p>
-                    ) : (
-                      <p className="h-3">
-                        <Icons name={commentOpen} />
-                      </p>
-                    )}
-                    <div className="pt-0.5">답글 {children?.length}개 보기</div>
-                  </div>
-                )}
-                <div className="flex flex-col items-start">
-                  {openChildren &&
-                    children?.map((recomment) => {
-                      return (
-                        <div key={recomment.commentId} className="ml-[75px]">
-                          <CommentItem
-                            comment={recomment}
-                            articleId={articleId}
-                            parentId={commentId}
-                            myProfile={user.profile || ''}
-                          />
-                        </div>
-                      );
-                    })}
-                </div>
               </div>
             );
           })

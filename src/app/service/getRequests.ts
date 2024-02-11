@@ -4,9 +4,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
 const commonHeaders = {
   'Content-Type': 'application/json',
-  // authorization: 'Bearer ' + cookies().get('accessToken'),
-  Authorization:
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzY0NTc0MSwiZXhwIjoxNzA3NzMyMTQxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.95ZgqOifFZDCgEcGy1bQKtMLC7Mjzqy_WTwILtPqHlk',
+  Authorization: 'Bearer ' + cookies().get('accessToken'),
 };
 
 const getRequest = async (url: string) => {
@@ -47,7 +45,6 @@ export const getRecruitMain = async (
     detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
   });
   const url = `${SERVER_URL}/recruit?${params.toString()}`;
-  const res = await getRequest(url);
   return await getRequest(url);
 };
 

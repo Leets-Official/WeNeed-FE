@@ -29,7 +29,7 @@ const Profile = ({
     <div className="w-full flex justify-between items-center">
       <div className="w-[80%] flex items-center gap-[20px] ">
         <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
-          {profile && (
+          {profile ? (
             <Image
               width={onComment ? 56 : 80}
               height={onComment ? 56 : 80}
@@ -39,6 +39,8 @@ const Profile = ({
                 objectFit: 'cover',
               }}
             />
+          ) : (
+            <div className="w-full h-full bg-black" />
           )}
         </div>
         <div
