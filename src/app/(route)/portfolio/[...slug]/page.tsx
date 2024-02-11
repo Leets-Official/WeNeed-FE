@@ -9,23 +9,29 @@ export default async function PortfolioPage({
   params: { slug: string };
 }) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio?${params.slug}`,
+    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio?articleId=${params.slug[0]}`,
     { cache: 'no-store' },
   );
   const { user, portfolio, comments, workList }: ResponsePortfolioDetails =
     await response.json();
 
-  return (
-    <section className="min-h-screen flex flex-col items-center bg-black text-white ">
-      <Header isLoggedIn type="main" />
-      <div className="w-[80%] max-w-[1290px] ">
-        <PortfolioDetailsContainer user={user} portfolio={portfolio} />
-      </div>
-      <CommentsContainer comments={comments} />
-      <PortfolioWorkListContainer
-        workList={workList}
-        writer={portfolio.writer}
-      />
-    </section>
-  );
+  if (user && portfolio && comments && workList) {
+    return (
+      <section className="min-h-screen flex flex-col items-center bg-black text-white ">
+        <Header isLoggedIn type="main" />
+        <div className="w-[80%] max-w-[1290px] ">
+          <PortfolioDetailsContainer user={user} portfolio={portfolio} />
+        </div>
+        <CommentsContainer
+          comments={comments}
+          articleId={params.slug}
+          user={user}
+        />
+        <PortfolioWorkListContainer
+          workList={workList}
+          writer={portfolio?.writer}
+        />
+      </section>
+    );
+  }
 }

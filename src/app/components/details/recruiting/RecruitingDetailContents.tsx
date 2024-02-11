@@ -18,7 +18,7 @@ const RecruitingDetailContents = ({
                 key={content.id}
                 className="w-full h-auto text-black text-start leading-[31px]"
               >
-                {content.textData || ''}
+                {content.data || ''}
               </div>
             );
           case 'image':
@@ -27,14 +27,16 @@ const RecruitingDetailContents = ({
                 key={content.id}
                 className="relative flex justify-center items-center w-[1186px] rounded-[15px] h-[528px] overflow-hidden"
               >
-                <Image
-                  src={content.imageData || ''}
-                  fill={true}
-                  alt="content"
-                  style={{
-                    objectFit: 'cover',
-                  }}
-                />
+                {content.data && (
+                  <Image
+                    src={content.data}
+                    fill={true}
+                    alt="content"
+                    style={{
+                      objectFit: 'cover',
+                    }}
+                  />
+                )}
               </div>
             );
           default:
