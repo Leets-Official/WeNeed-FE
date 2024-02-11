@@ -4,21 +4,28 @@ import Icons from 'components/common/Icons';
 import Input from 'components/common/Input';
 import CommentItem from 'components/details/common/CommentItem';
 import { NO_COMMENTS } from 'constants/common';
+import { PROFILE_STYLE } from 'constants/styles';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { commentClose, commentOpen, inputDrop } from 'ui/IconsPath';
 
 interface CommentsContainerProps {
   onRecruit?: boolean;
   comments: CommentList[];
+  articleId: string;
+  user: UserProfile;
 }
 
 const CommentsContainer = ({
   onRecruit = false,
   comments = [],
+  articleId,
+  user,
 }: CommentsContainerProps) => {
   const [commentValue, setCommentValue] = useState<string>('');
   const [openChildren, setOpenChildren] = useState<boolean>(false);
   const [totalComments, setTotalComments] = useState<number>(0);
+  const profileStyles = PROFILE_STYLE['medium']();
 
   useEffect(() => {
     const countComments = () => {
@@ -31,13 +38,29 @@ const CommentsContainer = ({
     setTotalComments(countComments());
   }, [comments]);
 
-  const onSubmitHandler = () => {};
+  const onSubmitHandler = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/comments?articleId=${articleId}&parentId=0`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ content: commentValue }),
+        },
+      );
+      console.log('res');
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center w-full bg-white pt-[50px] pb-[100px]  ">
       <p
-        className={`text-xl font-semibold mb-[25px] max-w-[1290px]  ${
-          onRecruit ? 'text-black w-full' : ' w-[79%] '
+        className={`text-xl font-semibold mb-[25px] max-w-[1290px] text-black ${
+          onRecruit ? ' w-full' : ' w-[79%] '
         }`}
       >
         댓글{totalComments}개
@@ -47,7 +70,19 @@ const CommentsContainer = ({
           onRecruit ? ' w-full' : ' w-[79%]'
         }`}
       >
-        <div className="w-[56px] h-[56px] bg-neutral-300 rounded-full mr-[23px] "></div>
+        <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
+          {user.profile && (
+            <Image
+              width={56}
+              height={56}
+              alt="writer"
+              src={user.profile}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          )}
+        </div>
         <Input
           type="comment"
           textValue={commentValue}
@@ -69,9 +104,14 @@ const CommentsContainer = ({
           comments.map((comment) => {
             const { children, commentId } = comment;
             return (
-              <div key={commentId}>
-                <CommentItem comment={comment} />
-                {comment.children && (
+              <div key={commentId} className="w-full">
+                <CommentItem
+                  comment={comment}
+                  articleId={articleId}
+                  parentId={commentId}
+                  myProfile={user.profile || ''}
+                />
+                {comment.children && comment.children?.length > 0 && (
                   <div
                     className="w-[98px] h-[20px] rounded-[10px] bg-gradient-to-r from-[#00E0EE] to-[#517EF3]
                       text-[12px] text-center font-normal flex justify-center items-center ml-[86px] mt-[13px] gap-1 
@@ -87,7 +127,7 @@ const CommentsContainer = ({
                         <Icons name={commentOpen} />
                       </p>
                     )}
-                    <p className="pt-0.5">답글 {children?.length}개 보기</p>
+                    <div className="pt-0.5">답글 {children?.length}개 보기</div>
                   </div>
                 )}
                 <div className="flex flex-col items-start">
@@ -95,7 +135,12 @@ const CommentsContainer = ({
                     children?.map((recomment) => {
                       return (
                         <div key={recomment.commentId} className="ml-[75px]">
-                          <CommentItem comment={recomment} />
+                          <CommentItem
+                            comment={recomment}
+                            articleId={articleId}
+                            parentId={commentId}
+                            myProfile={user.profile || ''}
+                          />
                         </div>
                       );
                     })}

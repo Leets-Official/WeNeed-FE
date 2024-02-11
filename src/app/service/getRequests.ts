@@ -4,7 +4,9 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
 const commonHeaders = {
   'Content-Type': 'application/json',
-  Authorization: 'Bearer ' + cookies().get('accessToken'),
+  // authorization: 'Bearer ' + cookies().get('accessToken'),
+  Authorization:
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzYyNjA3MSwiZXhwIjoxNzA3NzEyNDcxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.Q3KJndoV0Pw0kUVYEDV69PkdE67PqCTu9iQqOevzxq8',
 };
 
 const getRequest = async (url: string) => {
