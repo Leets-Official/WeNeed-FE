@@ -4,10 +4,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
 const commonHeaders = {
   'Content-Type': 'application/json',
-  //   authorization: 'Bearer ' + cookies().get('accessToken'),
-  authorization:
-    'Bearer' +
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzYyNjA3MSwiZXhwIjoxNzA3NzEyNDcxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.Q3KJndoV0Pw0kUVYEDV69PkdE67PqCTu9iQqOevzxq8',
+  Authorization: 'Bearer ' + cookies().get('accessToken'),
 };
 
 const postRequest = async (url: string, body?: unknown) => {
@@ -25,15 +22,19 @@ const postRequest = async (url: string, body?: unknown) => {
 
 export const postLikes = async (articleId: string) => {
   const url = `${SERVER_URL}/likes/${articleId}`;
-  return await fetch(url, { method: 'POST', headers: commonHeaders });
+  return await postRequest(url);
 };
 
 export const postBookmarks = async (articleId: string) => {
   const url = `${SERVER_URL}/postBookmarks/${articleId}`;
-  return await fetch(url, { method: 'POST', headers: commonHeaders });
+  return await postRequest(url);
 };
 
-export const postComment = async (articleId: string, comment: string) => {
+export const postComment = async (
+  articleId: string,
+  comment: string,
+  parentId: string,
+) => {
   const url = `${SERVER_URL}/comments/${articleId}`;
-  return await postRequest(url, { comment });
+  return await postRequest(url, { comment, parentId });
 };

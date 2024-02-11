@@ -4,10 +4,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
 const commonHeaders = {
   'Content-Type': 'application/json',
-  // authorization: 'Bearer ' + cookies().get('accessToken'),
-  authorization:
-    'Bearer' +
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzYyNjA3MSwiZXhwIjoxNzA3NzEyNDcxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.Q3KJndoV0Pw0kUVYEDV69PkdE67PqCTu9iQqOevzxq8',
+  Authorization: 'Bearer ' + cookies().get('accessToken'),
 };
 
 const getRequest = async (url: string) => {
@@ -48,6 +45,7 @@ export const getRecruitMain = async (
     detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
   });
   const url = `${SERVER_URL}/recruit?${params.toString()}`;
+  const res = await getRequest(url);
   return await getRequest(url);
 };
 
@@ -67,10 +65,12 @@ export const getSearch = async (
 
 export const getPortfolioDetail = async (articleId: string) => {
   const url = `${SERVER_URL}/portfolio/${articleId}`;
+  const res = await getRequest(url);
   return await getRequest(url);
 };
 
 export const getRecruitDetail = async (articleId: string) => {
   const url = `${SERVER_URL}/recruit/${articleId}`;
+  const res = await getRequest(url);
   return await getRequest(url);
 };
