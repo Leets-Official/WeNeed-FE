@@ -6,8 +6,7 @@ const commonHeaders = {
   'Content-Type': 'application/json',
   //   authorization: 'Bearer ' + cookies().get('accessToken'),
   Authorization:
-    'Bearer' +
-    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzYyNjA3MSwiZXhwIjoxNzA3NzEyNDcxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.Q3KJndoV0Pw0kUVYEDV69PkdE67PqCTu9iQqOevzxq8',
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzY0NTc0MSwiZXhwIjoxNzA3NzMyMTQxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.95ZgqOifFZDCgEcGy1bQKtMLC7Mjzqy_WTwILtPqHlk',
 };
 
 const postRequest = async (url: string, body?: unknown) => {
@@ -38,7 +37,6 @@ export const postComment = async (
   comment: { content: string },
   parentId: string,
 ) => {
-  console.log(comment);
   const url = `${SERVER_URL}/comments/${articleId}`;
   return await postRequest(url, { ...comment, parentId: parentId });
 };
