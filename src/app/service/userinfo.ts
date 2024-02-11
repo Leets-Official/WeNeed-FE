@@ -10,18 +10,11 @@ export const setEmail = async (email: string) => {
         },
         cache: 'no-store',
       },
-    );
-    console.log('Set Email Response : ', response);
-
-    if (!response.ok) {
-      throw new Error(
-        `이메일을 가져오는 데 실패했습니다: ${response.status} ${response.statusText}`,
-      );
-    }
+    ).then((res) => res.json());
 
     return response;
   } catch (error) {
-    console.log('이메일 설정 오류', error);
+    console.log('Error in set Email func : ', error);
   }
 };
 
@@ -38,18 +31,11 @@ export const postCode = async (code: string, email: string) => {
         body: JSON.stringify({ code, email }),
         cache: 'no-store',
       },
-    );
-    console.log('set code response : ', response);
-
-    if (!response.ok) {
-      throw new Error(
-        `코드를 보내는 데 실패했습니다: ${response.status} ${response.statusText}`,
-      );
-    }
+    ).then((res) => res.json());
 
     return response;
   } catch (error) {
-    console.log('코드 설정 오류', error);
+    console.log('Error in post code func : ', error);
   }
 };
 
@@ -69,19 +55,30 @@ export const postUserInfo = async (
         body: JSON.stringify(userInfo),
         cache: 'no-store',
       },
-    );
-
-    if (!response.ok) {
-      throw new Error(
-        `유저 정보를 보내는 데 실패했습니다: ${response.status} ${response.statusText}`,
-      );
-    }
-
-    console.log('set user info response : ', response);
+    ).then((res) => res.json());
 
     return response;
   } catch (error) {
-    console.log('유저 정보 설정 오류', error);
+    console.log('Error in post userinfo func : ', error);
     throw error;
+  }
+};
+
+export const checkNickname = async (nickName: string) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/checkNickname?nickName=${nickName}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        cache: 'no-store',
+      },
+    ).then((res) => res.json());
+
+    return response;
+  } catch (error) {
+    console.log('Error in check nickname func : ', error);
   }
 };

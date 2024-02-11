@@ -15,16 +15,20 @@ const fetchEmailData = async (email: string) => {
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`,
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         cache: 'no-store',
       },
-    );
+    ).then((res) => res.json());
+    console.log('response body: ', response);
 
-    if (response.status === 200) {
-      console.log('Fetch Email Data Success:', response.statusText);
-      return response.status;
+    if (response.code === 200) {
+      console.log('Fetch Email Data Success:', response.message);
+      return response;
     } else {
-      console.error('Fetch Email Data Error:', response.statusText);
-      return response.status;
+      console.error('Fetch Email Data Error:', response.message);
+      return response;
     }
   } catch (error) {
     console.error('Error during Fetch Email Data:', error);
@@ -38,12 +42,15 @@ const fetchCodeData = async (email: string, code: string) => {
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certifycode`,
       {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ code, email }),
         cache: 'no-store',
       },
-    );
+    ).then((res) => res.json());
     console.log('fetch data code response', response);
-    return response.status;
+    return response;
   } catch (error) {
     console.error('Error during Fetch Code:', error);
     return 500;
@@ -59,21 +66,20 @@ const UnivAuth = () => {
 
   const emailButtonHandler = async () => {
     const emailStatus = await fetchEmailData(univAuthEmail);
-    if (emailStatus === 200) {
+    if (emailStatus.code === 200) {
       setEmailPost(1);
     } else {
-      console.log('Email Fetch Error:', emailStatus);
-      setEmailPost(2);
+      emailStatus.message.includes('이미') ? setEmailPost(3) : setEmailPost(2);
     }
   };
 
   const codeButtonHandler = async () => {
     const codeStatus = await fetchCodeData(univAuthEmail, univAuthCode);
-    console.log('codeStatus', codeStatus);
-    if (codeStatus === 200) {
+    if (codeStatus.success) {
       setCodePost(1);
       setUnivAuth(true);
     } else {
+      setUnivAuth(false);
       setCodePost(2);
     }
   };
@@ -85,7 +91,13 @@ const UnivAuth = () => {
       </div>
       <div className="absolute top-40 flex justify-between w-[320px]">
         <input
-          className="w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border border-zinc-300 justify-start items-center flex text-neutral-400 text-xs font-semibold"
+          className={`w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border ${
+            emailPost === 1
+              ? 'border-[#517EF3]'
+              : emailPost === 2 || emailPost === 3
+                ? 'border-[#FF7272]'
+                : 'border-zinc-300'
+          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
           type="text"
           value={univAuthEmail}
           placeholder={UNIV_AUTH.EMAIL}
@@ -117,10 +129,20 @@ const UnivAuth = () => {
         <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
           {UNIV_AUTH.EMAIL_FAIL}
         </div>
+      ) : emailPost === 3 ? (
+        <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
+          {UNIV_AUTH.EMAIL_EXIST}
+        </div>
       ) : null}
       <div className="absolute top-56 mt-1 flex justify-between w-[320px]">
         <input
-          className="w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border border-zinc-300 justify-start items-center flex text-neutral-400 text-xs font-semibold"
+          className={`w-[217px] h-[38px] pl-4 rounded-[8px] focus:outline-none border ${
+            codePost === 1
+              ? 'border-[#517EF3]'
+              : codePost === 2
+                ? 'border-[#FF7272]'
+                : 'border-zinc-300'
+          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
           type="text"
           value={univAuthCode}
           placeholder={UNIV_AUTH.AUTH_CODE}
@@ -137,7 +159,7 @@ const UnivAuth = () => {
               ? 'bg-zinc-300 text-black'
               : 'bg-gradient-to-r from-cyan-400 to-blue-500 text-white'
           } rounded-[8px] justify-center items-center flex text-black text-[10px] font-normal`}
-          isDisabled={false}
+          isDisabled={univAuthCode.length === 0}
           onClickHandler={codeButtonHandler}
         />
       </div>

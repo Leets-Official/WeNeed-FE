@@ -13,7 +13,6 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   try {
     const response = await postCode(code as string, email as string);
-    console.log('code fetch :', response);
 
     return NextResponse.json({ response });
   } catch (error) {

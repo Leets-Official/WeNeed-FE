@@ -25,7 +25,6 @@ const DropDown = ({
   dropDownClassName,
   itemClassName,
 }: DropDownProps) => {
-  console.log('selectedItem', selectedItem);
   return (
     <div className={`${className}`}>
       <button type="button" onClick={onOpen} className={`${buttonClassName}`}>
