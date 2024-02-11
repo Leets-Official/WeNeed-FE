@@ -3,9 +3,13 @@ import PortfolioDetailsContainer from 'components/details/portfolio/containers/P
 import PortfolioWorkListContainer from 'components/details/portfolio/containers/PortfolioWorkListContainer';
 import Header from 'components/layout/Header';
 
-export default async function PortfolioPage() {
+export default async function PortfolioPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio`,
+    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio?${params.slug}`,
     { cache: 'no-store' },
   );
   const { user, portfolio, comments, workList }: ResponsePortfolioDetails =

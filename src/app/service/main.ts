@@ -62,6 +62,16 @@ export const getSearch = async (
   return await getRequest(url);
 };
 
+export const getPortfolioDetail = async (articleId: string) => {
+  const url = `${SERVER_URL}/portfolio/${articleId}`;
+  return await getRequest(url);
+};
+
+export const getRecruitDetail = async (articleId: string) => {
+  const url = `${SERVER_URL}/recruit/${articleId}`;
+  return await getRequest(url);
+};
+
 export const postLikes = async (articleId: string) => {
   const url = `${SERVER_URL}/likes/${articleId}`;
   return await fetch(url, { method: 'POST', headers: commonHeaders });

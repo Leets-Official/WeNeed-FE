@@ -3,9 +3,13 @@ import CommentsContainer from 'components/details/portfolio/containers/CommentsC
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
 
-export default async function PortfolioPage() {
+export default async function PortfolioPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const { user, recruit, comments }: ResponseRecruitingDetail = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting`,
+    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?${params.slug}`,
     { cache: 'no-store' },
   ).then((res) => res.json());
 

@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
+import { getRecruitDetail } from 'service/main';
 
 export async function GET(request: Request): Promise<NextResponse> {
-  /* production env */
-  // const data = await getPortfolioDetails(size, page, sort).then((data) => data);
+  const { searchParams } = new URL(request.url);
+  const articleId = searchParams.get('articleId') || '';
+  const data = await getRecruitDetail(articleId).then((data) => data);
 
-  /* development env */
-  return NextResponse.json(mockRecruitingDetails);
+  return NextResponse.json(data);
 }
 
 const mockRecruitingDetails = {
