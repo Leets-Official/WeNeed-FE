@@ -143,7 +143,9 @@ export const MY_PAGE = {
   MY_OUTPUT: 'MY OUTPUT',
   YOUR_OUTPUT: 'OUTPUT',
   MY_CREW: 'MY CREW',
+  MY_FINDING_CREW: '나의 모집 크루',
   INTEREST_OUTPUT: '관심 게시글',
   INTEREST_CREW: '관심 크루 찾기',
   TAG_RESET: '선택 초기화',
+  postNum: (num: number) => `총 ${num}개`,
 } as const;
