@@ -9,9 +9,6 @@ export const searchTeamMate = async (searchText: string) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization:
-            'Bearer ' +
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzU2ODkwOCwiZXhwIjoxNzA3NjU1MzA4LCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.lswGkAgOb68SKR3AWNAMY9Fvmvdph9jxe8xjYD_HA0w',
         },
         cache: 'no-store',
       },
