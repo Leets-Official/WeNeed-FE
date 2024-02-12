@@ -2,7 +2,7 @@ import Footer from 'components/layout/Footer';
 import MainNavbar from 'components/main/common/MainNavbar';
 import {
   DetailCategoriesContainer,
-  HotPortfolioContainer,
+  HotItemsContainer,
   PortfolioContainer,
   RecommendContainer,
 } from 'components/main/containers';
@@ -28,7 +28,7 @@ export default async function MainPortfolioPage() {
           {LOGGEDIN_SECTION_HEADINGS.hot}
         </h1>
         <DetailCategoriesContainer />
-        <HotPortfolioContainer data={hotArticleList} />
+        <HotItemsContainer data={hotArticleList} />
         <PortfolioContainer data={articleList} />
         <RecommendContainer data={recommendArticleList} />
       </div>

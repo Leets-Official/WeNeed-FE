@@ -26,7 +26,7 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
             이번 달 HOT
           </div>
         </div>
-        <div className="z-10 absolute bottom-0 w-full h-16 bg-gradient-to-b from-transparent to-neutral-900 rounded-lg"></div>
+        <div className="z-10 absolute bottom-0 w-full h-16 bg-gradient-to-b from-transparent to-black rounded-lg"></div>
       </div>
     </Link>
   );
