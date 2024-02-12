@@ -1,7 +1,7 @@
 'use client';
 import TeamMate from './TeamMate';
 import { useRecoilState } from 'recoil';
-import { userIdForm } from 'recoil/upload';
+import { userId } from 'recoil/upload';
 
 interface SelectedNamesProps {
   selectedUsers: UserInfo[];
@@ -12,7 +12,7 @@ const SelectedNames = ({
   selectedUsers,
   setSelectedUsers,
 }: SelectedNamesProps) => {
-  const [userIds, setUserIds] = useRecoilState(userIdForm);
+  const [userIds, setUserIds] = useRecoilState(userId);
 
   const handleRemove = (userId: number) => {
     setSelectedUsers((prevSelectedUsers) =>

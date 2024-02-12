@@ -3,7 +3,7 @@ import Icons from 'components/common/Icons';
 import SearchTeamInput from './SearchTeamInput';
 import Button from 'components/common/Button';
 import { closeIcon } from 'ui/IconsPath';
-import { uploadDataState, userIdForm } from 'recoil/upload';
+import { uploadDataState, userId } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 interface SearchTeamProps {
   closeModal?: () => void;
@@ -11,7 +11,7 @@ interface SearchTeamProps {
 
 const SearchTeam = ({ closeModal }: SearchTeamProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [userIds, setUserIds] = useRecoilState(userIdForm);
+  const [userIds, setUserIds] = useRecoilState(userId);
 
   const addUserId = () => {
     setUploadData({
