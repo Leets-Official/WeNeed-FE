@@ -1,7 +1,7 @@
 interface ResponseRecruitingMain {
   user: UserProfile;
   pageable: Pageable;
-  recrutingList: RecruitListItem[];
+  recruitList: RecruitListItem[];
 }
 
 interface ResponsePortfolioMain {

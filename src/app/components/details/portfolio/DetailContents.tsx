@@ -22,11 +22,9 @@ const DetailContents = ({
         switch (content.type) {
           case 'text':
             return (
-              <div
-                key={content.id}
-                className="max-w-[842px] h-auto"
-                dangerouslySetInnerHTML={{ __html: content.textData ?? '' }}
-              ></div>
+              <div key={content.id} className="max-w-[842px] h-auto">
+                {content.data}
+              </div>
             );
           case 'image':
             return (
@@ -34,18 +32,20 @@ const DetailContents = ({
                 key={content.id}
                 className="flex justify-center items-center w-full h-auto overflow-hidden"
               >
-                <Image
-                  src={content.imageData || ''}
-                  width={1280}
-                  height={748}
-                  alt="content"
-                  style={{
-                    objectFit: 'cover',
-                    objectPosition: 'center center',
-                    width: '100%',
-                    height: '100%',
-                  }}
-                />
+                {content.data && (
+                  <Image
+                    src={content.data}
+                    width={1280}
+                    height={748}
+                    alt="content"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center center',
+                      width: '100%',
+                      height: '100%',
+                    }}
+                  />
+                )}
               </div>
             );
           default:

@@ -13,21 +13,20 @@ const RecruitingItem = ({ article }: RecruitingItemProps) => {
         {title}
       </h3>
       <div className="relative w-full h-[388px] overflow-hidden rounded-[15px] mt-[15px] mb-[32px]">
-        <Image
-          src={thumbnail}
-          fill={true}
-          style={{ objectFit: 'cover' }}
-          alt="recruitItem"
-        />
+        {thumbnail && (
+          <Image
+            src={thumbnail}
+            fill={true}
+            style={{ objectFit: 'cover' }}
+            alt="recruitItem"
+          />
+        )}
       </div>
       <div className="flex flex-col w-full text-lg mb-[35px]">
         <p className="pb-[18px] border-b border-black mb-[20px] ">
           나누고 싶은 큰 문장
         </p>
-        <div
-          className="h-[79px] overflow-hidden"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <div className="h-[79px] overflow-hidden">{content}</div>
       </div>
       <RecruitingItemInfo article={article} />
     </div>

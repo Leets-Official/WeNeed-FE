@@ -2,7 +2,7 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
-type SortTypes = 'recent' | 'view' | 'like';
+type SortTypes = 'DESC' | 'VIEW' | 'HEART';
 
 interface Pageable {
   size: number;
@@ -57,6 +57,7 @@ interface UserProfile {
   sameUser: boolean;
   hearted: boolean;
   bookmarked: boolean;
+  profile?: string;
 }
 
 interface WriterProfile {
@@ -70,8 +71,7 @@ interface WriterProfile {
 interface Content {
   id: number;
   type: 'text' | 'image' | 'links' | 'audio';
-  textData?: string;
-  imageData?: string;
+  data: string;
 }
 
 interface TeamMember {

@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 's3-alpha-sig.figma.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 's3.ap-northeast-2.amazonaws.com',
+        port: '',
+      },
     ],
   },
   reactStrictMode: false,

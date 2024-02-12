@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import SearchItem from './SearchItem';
 
 interface SearchListContainerProps {
@@ -12,15 +13,19 @@ const SearchListContainer = ({
   user,
 }: SearchListContainerProps) => {
   return (
-    <div>
+    <>
       {searchList?.map((article) => {
         return (
-          <div key={article.articleId} className="w-[1290px] text-white ">
+          <Link
+            href={`/portfolio/${article.articleId}`}
+            key={article.articleId}
+            className="w-full text-white "
+          >
             <SearchItem article={article} user={user} />
-          </div>
+          </Link>
         );
       })}
-    </div>
+    </>
   );
 };
 

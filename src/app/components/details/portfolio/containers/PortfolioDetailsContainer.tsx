@@ -65,15 +65,17 @@ const PortfolioDetailsContainer = ({
                       marginLeft: `-${i * 30}px`,
                     }}
                   >
-                    <Image
-                      width={80}
-                      height={80}
-                      alt="writer"
-                      src={mem.profile}
-                      style={{
-                        objectFit: 'cover',
-                      }}
-                    />
+                    {mem.profile && (
+                      <Image
+                        width={80}
+                        height={80}
+                        alt="writer"
+                        src={mem.profile}
+                        style={{
+                          objectFit: 'cover',
+                        }}
+                      />
+                    )}
                   </div>
                 </Link>
               ))}

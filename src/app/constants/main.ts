@@ -11,11 +11,12 @@ export const NOT_LOGGEDIN_SECTION_HEADING = {
   recommend_sub: '로그인하고 자유롭게 게시물을 열람하세요.',
 } as const;
 
+export const MAIN_SIZE = 16;
+
 export const SORT_TYPES = {
-  size: 16,
-  recent: '최신순',
-  view: '조회수 높은순',
-  like: '좋아요 높은순',
+  DESC: '최신순',
+  VIEW: '조회수 높은순',
+  HEART: '좋아요 높은순',
 } as const;
 
 export const FOOTER_TEXT = {
