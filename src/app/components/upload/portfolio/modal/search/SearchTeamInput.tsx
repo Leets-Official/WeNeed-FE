@@ -6,13 +6,13 @@ import Image from 'next/image';
 import Input from 'components/common/Input';
 import SelectedNames from './SelectedNames';
 import { useRecoilState } from 'recoil';
-import { userIdForm } from 'recoil/upload';
+import { userId } from 'recoil/upload';
 
 const SearchTeamInput = () => {
   const [searchText, setSearchText] = useState('');
   const [relatedUsers, setRelatedUsers] = useState<UserInfo[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<UserInfo[]>([]);
-  const [userIds, setUserIds] = useRecoilState(userIdForm);
+  const [userIds, setUserIds] = useRecoilState(userId);
 
   const searchUser = async (searchText: string) => {
     const res = await fetch(
