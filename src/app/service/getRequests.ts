@@ -33,6 +33,7 @@ export const getPortfolioMain = async (
     detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
   });
   const url = `${SERVER_URL}/portfolio?${params.toString()}`;
+  console.log(url);
   return await getRequest(url);
 };
 
