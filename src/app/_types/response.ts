@@ -1,7 +1,7 @@
 interface ResponseRecruitingMain {
   user: UserProfile;
   pageable: Pageable;
-  recrutingList: RecruitListItem[];
+  recruitList: RecruitListItem[];
 }
 
 interface ResponsePortfolioMain {
@@ -28,6 +28,12 @@ interface ResponseRecruitingDetail {
 interface ResponseGoogleLogin {
   accessToken: string;
   refreshToken: string;
+}
+
+interface ResponseSearch {
+  user: UserProfile;
+  pageable: Pageable;
+  articleList: SearchArticle[];
 }
 
 interface ResponseUploadSearch {

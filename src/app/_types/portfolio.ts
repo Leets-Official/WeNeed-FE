@@ -2,7 +2,7 @@ interface InterestedFieldWithTags {
   [key: string]: string[];
 }
 
-type SortTypes = 'recent' | 'view' | 'like';
+type SortTypes = 'DESC' | 'VIEW' | 'HEART';
 
 interface Pageable {
   size: number;
@@ -15,13 +15,30 @@ interface CommonArticle {
   articleId: number;
   thumbnail: string;
   bookmarked: boolean;
-  createdAt: string;
+  createdAt?: string;
 }
 
 interface HotArticle {
   title: string;
   articleId: number;
   thumbnail: string;
+}
+
+interface Article {
+  articleId: number;
+  thumbnail: string;
+  bookmarked: boolean;
+}
+
+interface SearchArticle extends CommonArticle {
+  title: string;
+  detailTags: string[];
+  major: string;
+  grade: number;
+  writerNickname: string;
+  viewCount: number;
+  heartCount: number;
+  bookmarkCount: number;
 }
 
 interface PortfolioArticle extends CommonArticle {
@@ -40,6 +57,7 @@ interface UserProfile {
   sameUser: boolean;
   hearted: boolean;
   bookmarked: boolean;
+  profile?: string;
 }
 
 interface WriterProfile {
@@ -53,8 +71,7 @@ interface WriterProfile {
 interface Content {
   id: number;
   type: 'text' | 'image' | 'links' | 'audio';
-  textData?: string;
-  imageData?: string;
+  data: string;
 }
 
 interface TeamMember {

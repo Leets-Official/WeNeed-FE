@@ -9,7 +9,7 @@ const ProfileCol = ({ user }: ProfileColProps) => {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-[10px] mb-[66px]">
       <div className="w-[76px] h-[76px] overflow-hidden rounded-full">
-        <Image src={profile} width={76} height={76} alt="writer" />
+        {profile && <Image src={profile} width={76} height={76} alt="writer" />}
       </div>
       <p className="text-lg">{nickname}</p>
       <div className="flex gap-2">

@@ -37,7 +37,7 @@ const RecommendContainer = ({ data }: RecommendContainerProps) => {
             delay: 1500,
           }}
         >
-          {data.map((article) => (
+          {data?.map((article) => (
             <SwiperSlide key={article.articleId}>
               <Link href={`/portfolio/${article.articleId}`}>
                 <PortfolioItem article={article} onRecommend />

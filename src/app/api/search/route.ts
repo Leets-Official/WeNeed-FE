@@ -1,35 +1,12 @@
 import { NextResponse } from 'next/server';
+import { getSearch } from 'service/getRequests';
 
 export async function GET(request: Request): Promise<NextResponse> {
-  /* production env */
-  // const data = await (size, page, sort).then((data) => data);
+  const { searchParams } = new URL(request.url);
+  const size = searchParams.get('size') || '16';
+  const page = searchParams.get('page') || '1';
+  const keyword = searchParams.get('keyword') || '';
+  const data = await getSearch(size, page, keyword).then((data) => data);
 
-  /* development env */
-  return NextResponse.json(mockSearch);
+  return NextResponse.json(data);
 }
-
-const mockSearch = {
-  user: {
-    nickname: 'string',
-  },
-  pageable: {
-    size: 3,
-    page: 0,
-    totalPages: 0,
-    totalElements: 0,
-  },
-  articleList: [
-    {
-      articleId: 0,
-      thumbnail: 'string',
-      title: 'string',
-      detailTags: ['string'],
-      writerNickname: 'string',
-      major: '경영학전공',
-      grade: 0,
-      viewCount: 0,
-      heartCount: 0,
-      bookmarkCount: 0,
-    },
-  ],
-};

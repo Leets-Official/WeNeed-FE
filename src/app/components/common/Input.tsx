@@ -31,7 +31,7 @@ const Input = ({
       placeholder={placeholder}
       onFocus={onFocus}
       onBlur={onBlur}
-      onKeyPress={(e) => e.key === 'Enter' && onEnterPress}
+      onKeyPress={(e) => e.key === 'Enter' && onEnterPress && onEnterPress()}
       onChange={onChange}
       className={buttonStyles}
     />
