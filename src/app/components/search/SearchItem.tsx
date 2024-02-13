@@ -14,7 +14,7 @@ const SearchItem = ({ article, user }: SearchItemProps) => {
   const {
     thumbnail,
     viewCount,
-    heartCount,
+    heatCount,
     bookmarkCount,
     title,
     writerNickname,
@@ -77,7 +77,7 @@ const SearchItem = ({ article, user }: SearchItemProps) => {
           </p>
         </div>
         <div className="ml-[79px] ">
-          <Counts count={[viewCount, heartCount, bookmarkCount]} user={user} />
+          <Counts count={[viewCount, heatCount, bookmarkCount]} user={user} />
         </div>
       </div>
     </div>

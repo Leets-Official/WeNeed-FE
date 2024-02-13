@@ -25,22 +25,20 @@ const HotItemsContainer = ({ data }: HotItemsContainerProps) => {
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 2200,
   };
 
   return (
-    <>
-      <Slider
-        {...settings}
-        className="relative flex justify-center items-center w-screen mt-10 "
-      >
-        {data?.map((article) => (
-          <div key={article.articleId} className="mx-[15px] text-center">
-            <HotPortfolioItem article={article} />
-          </div>
-        ))}
-      </Slider>
-    </>
+    <Slider
+      {...settings}
+      className="relative flex justify-center items-center w-screen mt-10 "
+    >
+      {data?.map((article) => (
+        <div key={article.articleId} className="mx-[15px] text-center">
+          <HotPortfolioItem article={article} />
+        </div>
+      ))}
+    </Slider>
   );
 };
 
@@ -50,7 +48,7 @@ const CustomPrevArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute z-20 top-[235px] left-[200px] flex justify-center items-center custom-next-arrow bg-[#3A3A3A] w-8 h-8 rounded-full cursor-pointer"
+      className="absolute z-10 top-[235px] left-[200px] flex justify-center items-center custom-next-arrow bg-[#3A3A3A] w-8 h-8 rounded-full cursor-pointer"
       onClick={onClick}
     >
       <Icons name={leftAngle} />

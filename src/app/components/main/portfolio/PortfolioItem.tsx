@@ -49,7 +49,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
               <Icons name={view} />
               <p>{(article as PortfolioArticle).viewCount}</p>
               <GradientHeart width={18} height={25} />
-              <p>{(article as PortfolioArticle).heartCount}</p>
+              <p>{(article as PortfolioArticle).heatCount}</p>
             </div>
           )}
         </div>

@@ -7,5 +7,5 @@ export const selectedCategories = atom<string[]>({
 
 export const selectedSortType = atom<SortTypes>({
   key: 'selectedSortTypeState',
-  default: 'recent',
+  default: 'DESC',
 });

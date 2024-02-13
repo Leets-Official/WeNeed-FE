@@ -6,7 +6,7 @@ const commonHeaders = {
   'Content-Type': 'application/json',
   // Authorization: 'Bearer ' + cookies().get('accessToken'),
   Authorization:
-    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzcxMzM5NSwiZXhwIjoxNzA3Nzk5Nzk1LCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.vMgLhxLF7TE0SWyWalOnWxj6kNp1dM33jPBNZASQM8I',
+    'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzgwMjE3MCwiZXhwIjoxNzA3ODg4NTcwLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.FL5GCdjrjDAKEnILaqMwAskwYpN2Nma_9_nEdp2kpeQ',
 };
 
 const getRequest = async (url: string) => {
@@ -33,6 +33,7 @@ export const getPortfolioMain = async (
     detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
   });
   const url = `${SERVER_URL}/portfolio?${params.toString()}`;
+  console.log(await getRequest(url));
   return await getRequest(url);
 };
 

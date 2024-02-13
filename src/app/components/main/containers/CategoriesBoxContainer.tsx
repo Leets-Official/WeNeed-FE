@@ -1,8 +1,16 @@
 import CategoriesBox from '../common/CategoriesBox';
 
-const CategoriesBoxContainer = () => {
+interface CategoriesBoxContainerProps {
+  onClose: () => void;
+}
+
+const CategoriesBoxContainer = ({ onClose }: CategoriesBoxContainerProps) => {
   return (
-    <div className="flex flex-col items-center z-20 absolute w-[480px] h-[490px] border border-white bg-black rounded-b-2xl p-[35px]">
+    <div
+      className="flex flex-col items-center z-20 absolute w-[480px] h-[490px] border border-white bg-black rounded-b-2xl p-[35px]"
+      onBlur={onClose}
+      tabIndex={0}
+    >
       <div className="flex gap-[92px]">
         {<CategoriesBox field="미디어" />}
         {<CategoriesBox field="디자인" />}
