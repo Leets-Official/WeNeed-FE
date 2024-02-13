@@ -20,7 +20,7 @@ const UploadContainerP = () => {
       <div className="relative">
         {items.length > 0 || files.length > 0 ? (
           <div className="items-center w-full h-[740px] overflow-auto px-[37px] pt-[36.15px]">
-            <DndContainer />
+            <DndContainer articleType={'portfolio'} />
           </div>
         ) : (
           <FirstSelectP />

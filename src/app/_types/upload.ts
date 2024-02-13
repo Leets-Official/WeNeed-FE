@@ -51,3 +51,10 @@ interface UploadPFTypes {
   tags: string[];
   teamMembersId: number[];
 }
+interface UploadRecruitTypes {
+  articleType: string;
+  title: string;
+  content: ContentTypes[];
+  skills: string[];
+  tags: string[];
+}

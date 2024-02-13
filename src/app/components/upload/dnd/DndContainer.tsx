@@ -14,10 +14,15 @@ import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
 
-const DndContainer = () => {
+interface DndContainerProps {
+  articleType: string;
+}
+
+const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-
+  const [enabled, setEnabled] = useState(false);
+  const height = articleType === 'portfolio' ? 680 : 645;
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     const _items = [...items];
@@ -31,8 +36,6 @@ const DndContainer = () => {
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
   };
-
-  const [enabled, setEnabled] = useState(false);
 
   const componenetByType = (item: DndTextTypes) => {
     switch (item.type) {
@@ -64,7 +67,9 @@ const DndContainer = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full h-[680px] overflow-y-auto gap-y-[16px]">
+    <div
+      className={`flex flex-col items-center w-full h-[${height}px] overflow-y-auto gap-y-[16px]`}
+    >
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (
@@ -91,7 +96,7 @@ const DndContainer = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <Attatched />
+      {articleType === 'portfolio' && <Attatched />}
     </div>
   );
 };

@@ -36,3 +36,14 @@ export const uploadDataState = atom<UploadPFTypes>({
     teamMembersId: [],
   },
 });
+
+export const uploadRecruitState = atom<UploadRecruitTypes>({
+  key: 'uploadRecruitState',
+  default: {
+    articleType: 'PORTFOLIO',
+    title: '',
+    content: [],
+    skills: [],
+    tags: [],
+  },
+});
