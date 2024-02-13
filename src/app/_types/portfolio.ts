@@ -53,6 +53,7 @@ interface RecommendArticle extends CommonArticle {
 }
 
 interface UserProfile {
+  userId: number;
   nickname: string;
   sameUser: boolean;
   hearted: boolean;

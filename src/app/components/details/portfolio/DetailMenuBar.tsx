@@ -17,18 +17,57 @@ import {
 interface DetailMenuBarProps {
   userId: number;
   user: UserProfile;
+  articleId: string;
 }
 
-const DetailMenuBar = ({ userId, user }: DetailMenuBarProps) => {
+const DetailMenuBar = ({ userId, user, articleId }: DetailMenuBarProps) => {
   const [hovered, setHovered] = useState<boolean>(false);
   const router = useRouter();
   const DETAIL_MENU_HANDLERS: Record<string, () => void> = {
-    프로필: () => router.push(`/profile/${userId}`),
+    프로필: () => router.push(`/mypage/${userId}`),
     크루제안: () => alert('준비중인 서비스입니다 :)'),
-    좋아요: () => {},
-    북마크: () => {},
+    좋아요: () => {
+      onSubmitLike();
+    },
+    북마크: () => {
+      onSubmitBookmark();
+    },
     댓글: () => {},
     공유: () => {},
+  };
+
+  const onSubmitLike = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/like?articleId=${articleId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onSubmitBookmark = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/bookmark?articleId=${articleId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

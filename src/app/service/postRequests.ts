@@ -29,7 +29,7 @@ export const postLikes = async (articleId: string) => {
 };
 
 export const postBookmarks = async (articleId: string) => {
-  const url = `${SERVER_URL}/postBookmarks/${articleId}`;
+  const url = `${SERVER_URL}/bookmarks/${articleId}`;
   return await postRequest(url);
 };
 
