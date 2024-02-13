@@ -118,11 +118,14 @@ export const INTERESTED_TAG_LIST = [
   '보안',
 ] as const;
 
+const ITEM_LIST = ['복수전공', '관심분야', '이메일', '링크', '소개'];
+
 export const MY_PAGE = {
   DEPARTMENT_LIST,
   GRADE_LIST,
   INTEREST_FIELD_LIST,
   INTERESTED_TAG_LIST,
+  ITEM_LIST,
   TITLE: '프로필',
   PROFILE_IMAGE_CHANGE: '프로필 이미지 변경',
   MODIFY_PROFILE: '프로필 수정',
