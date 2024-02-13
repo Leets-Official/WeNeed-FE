@@ -1,13 +1,22 @@
 'use client';
 
 import Icons from 'components/common/Icons';
-import { hamburger, write } from 'ui/IconsPath';
 import CategoriesBoxContainer from '../containers/CategoriesBoxContainer';
-import { useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
+import { hamburger, write } from 'ui/IconsPath';
+import { useRouter } from 'next/navigation';
+import { selectedCategories } from 'recoil/main';
+import { useRecoilValue } from 'recoil';
 
 const MainNavbar = () => {
   const [openCategoriesBox, setOpenCategoriesBox] = useState<boolean>(false);
+  const selectedCategoriesValue = useRecoilValue(selectedCategories);
+  const router = useRouter();
+
+  const onCloseCategoriesBox = () => {
+    //page.tsx의 next.js 의
+  };
 
   return (
     <div className="relative w-full max-w-[1162px]">
@@ -36,7 +45,9 @@ const MainNavbar = () => {
           <p>글쓰기</p>
         </div>
       </div>
-      {openCategoriesBox && <CategoriesBoxContainer />}
+      {openCategoriesBox && (
+        <CategoriesBoxContainer onClose={onCloseCategoriesBox} />
+      )}
     </div>
   );
 };

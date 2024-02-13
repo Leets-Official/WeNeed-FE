@@ -13,9 +13,8 @@ export default async function RecruitingPage({
     { cache: 'no-store' },
   ).then((res) => res.json());
 
-  const { writer, createdAt, viewCount, heartCount, bookmarkCount } = recruit;
+  const { writer, createdAt, viewCount, heatCount, bookmarkCount } = recruit;
   const { bookmarked, hearted } = user;
-  console.log(recruit);
 
   if (recruit && user && comments) {
     return (
@@ -26,7 +25,7 @@ export default async function RecruitingPage({
             <Profile
               writer={writer}
               date={createdAt}
-              count={[viewCount, heartCount, bookmarkCount]}
+              count={[viewCount, heatCount, bookmarkCount]}
               user={{ bookmarked, hearted }}
               size="large"
             />

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Counts from './Counts';
 import { PROFILE_STYLE } from 'constants/styles';
 import { formatUploadTime } from 'utils/date';
+import GradientProfile from 'ui/gradient/GradientProfile';
 
 interface ProfileProps {
   writer: WriterProfile;
@@ -31,8 +32,8 @@ const Profile = ({
         <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
           {profile ? (
             <Image
-              width={onComment ? 56 : 80}
-              height={onComment ? 56 : 80}
+              width={onComment ? 56 : 76}
+              height={onComment ? 56 : 76}
               alt="writer"
               src={profile}
               style={{
@@ -40,7 +41,7 @@ const Profile = ({
               }}
             />
           ) : (
-            <div className="w-full h-full bg-black" />
+            <GradientProfile />
           )}
         </div>
         <div

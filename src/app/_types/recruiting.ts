@@ -9,7 +9,7 @@ interface RecruitListItem {
   content: string;
   commentCount: number;
   viewCount: number;
-  heartCount: number;
+  heatCount: number;
   bookmarkCount: number;
 }
 
