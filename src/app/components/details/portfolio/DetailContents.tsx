@@ -17,7 +17,6 @@ const DetailContents = ({
   files,
   skills,
 }: DetailContentsProps) => {
-  console.log(links);
   return (
     <div className="flex flex-col items-center mt-[95px] min-h-[300px] gap-[40px] ">
       <h1 className="mb-[87px] text-3xl font-bold"> {title}</h1>
@@ -26,6 +25,16 @@ const DetailContents = ({
           case 'text':
             return (
               <div key={content.id} className="max-w-[842px] h-auto">
+                {content.data}
+              </div>
+            );
+          case 'links':
+            return (
+              <div
+                key={content.id}
+                className="flex gap-3 w-full h-auto text-[#00E0EE] font-semibold"
+              >
+                <Icons name={fileMini} />
                 {content.data}
               </div>
             );

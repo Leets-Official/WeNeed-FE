@@ -11,11 +11,13 @@ import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
   portfolio: PortfolioDetails;
+  articleId: string;
 }
 
 const PortfolioDetailsContainer = ({
   user,
   portfolio,
+  articleId,
 }: PortfolioDetailsContainerProps) => {
   const {
     thumbnail,
@@ -96,7 +98,11 @@ const PortfolioDetailsContainer = ({
           files={files}
           skills={skills}
         />
-        <DetailMenuBar userId={writer.userId} user={user} />
+        <DetailMenuBar
+          userId={writer.userId}
+          user={user}
+          articleId={articleId}
+        />
         {user.sameUser && <WriterOptions />}
       </div>
     </div>

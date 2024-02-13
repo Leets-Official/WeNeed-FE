@@ -12,6 +12,7 @@ import {
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
 import { useRecoilValue } from 'recoil';
 import { selectedCategories } from 'recoil/main';
+import Header from 'components/layout/Header';
 
 export default function MainPortfolioPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
@@ -36,6 +37,12 @@ export default function MainPortfolioPage() {
   if (data)
     return (
       <section>
+        <Header
+          type={'main'}
+          isLoggedIn
+          nickname={data.user.nickname}
+          userId={data.user.userId}
+        />
         <div className="flex flex-col items-center w-full min-h-screen text-white ">
           <MainNavbar />
           <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
