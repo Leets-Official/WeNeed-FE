@@ -22,7 +22,7 @@ const PortfolioWorkListContainer = ({
         <ProfileCol user={writer} />
         <div className="flex justify-between w-full ">
           <h3 className="w-[80%] text-3xl font-semibold mb-[43px] ">
-            {writer.nickname}님의 작업 목록
+            {writer.writerNickname}님의 작업 목록
           </h3>
           <div className="w-[10%] text-end cursor-pointer">
             <Link href={`/mypage/${writer.userId}`}>{'>'} 프로필 보러가기</Link>

@@ -22,7 +22,7 @@ const PortfolioDetailsContainer = ({
     writer,
     createdAt,
     viewCount,
-    heatCount,
+    heartCount,
     bookmarkCount,
     tags,
     title,
@@ -83,7 +83,7 @@ const PortfolioDetailsContainer = ({
           <Profile
             writer={writer}
             date={createdAt}
-            count={[viewCount, heatCount, bookmarkCount]}
+            count={[viewCount, heartCount, bookmarkCount]}
             user={{ bookmarked, hearted }}
             size="large"
           />

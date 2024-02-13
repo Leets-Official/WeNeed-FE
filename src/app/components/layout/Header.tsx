@@ -1,5 +1,4 @@
 import Icons from 'components/common/Icons';
-import Input from 'components/common/Input';
 import SearchBar from 'components/common/SearchBar';
 import Link from 'next/link';
 import { search, weneed } from 'ui/IconsPath';
@@ -23,7 +22,7 @@ const Header = ({ type, isLoggedIn = false, username }: HeaderProps) => {
         </div>
       </div>
       <div className="flex gap-[40px] cursor-pointer">
-        <p>마이페이지</p>
+        <Link href={`/mypage`}>마이페이지</Link>
         {username && username !== 'guest' ? <p>{username}님</p> : <p>로그인</p>}
       </div>
     </header>

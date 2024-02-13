@@ -37,14 +37,14 @@ interface SearchArticle extends CommonArticle {
   grade: number;
   writerNickname: string;
   viewCount: number;
-  heatCount: number;
+  heartCount: number;
   bookmarkCount: number;
 }
 
 interface PortfolioArticle extends CommonArticle {
   writerNickname: string;
   viewCount: number;
-  heatCount: number;
+  heartCount: number;
 }
 
 interface RecommendArticle extends CommonArticle {
@@ -62,7 +62,7 @@ interface UserProfile {
 
 interface WriterProfile {
   userId: number;
-  nickname: string;
+  writerNickname: string;
   major: string;
   profile: string;
   grade: number;
@@ -84,7 +84,7 @@ interface PortfolioDetails {
   thumbnail: string;
   title: string;
   createdAt: string;
-  heatCount: number;
+  heartCount: number;
   viewCount: number;
   bookmarkCount: number;
   tags: string[];

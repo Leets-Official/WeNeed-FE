@@ -1,5 +1,5 @@
 const Loading = () => {
-  return <div>loading component</div>;
+  return <div className="bg-black w-screen h-screen"></div>;
 };
 
 export default Loading;
