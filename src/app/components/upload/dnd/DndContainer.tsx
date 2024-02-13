@@ -68,9 +68,13 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   }
 
   return (
+<<<<<<< HEAD
     <div
       className={`flex flex-col items-center w-full h-[${height}px] overflow-y-auto gap-y-[16px]`}
     >
+=======
+    <div className="flex flex-col items-center w-full h-[680px] overflow-y-auto gap-y-[16px]">
+>>>>>>> c4a5323 (:sparkles:[feat]: 포트폴리오 게시물 작성 api 연결)
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

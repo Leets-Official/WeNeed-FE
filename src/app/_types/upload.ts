@@ -48,7 +48,7 @@ interface UploadPFTypes {
   articleType: string;
   title: string;
   content: ContentTypes[];
-  skills: string;
+  skills: string[];
   tags: string[];
   teamMembersId: number[];
 }
