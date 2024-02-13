@@ -23,7 +23,6 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [enabled, setEnabled] = useState(false);
   const height = articleType === 'portfolio' ? 680 : 645;
-
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
     const _items = [...items];
