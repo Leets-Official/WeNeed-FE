@@ -62,7 +62,7 @@ interface UserProfile {
 
 interface WriterProfile {
   userId: number;
-  nickname: string;
+  writerNickname: string;
   major: string;
   profile: string;
   grade: number;

@@ -24,7 +24,7 @@ const Counts = ({ count, user }: CountsProps) => {
         ) : (
           <Icons name={heart} />
         )}
-        {count[0]}
+        {count[1]}
       </p>
       <p className="flex  gap-[10px] cursor-pointer">
         {user?.bookmarked ? (
@@ -32,7 +32,7 @@ const Counts = ({ count, user }: CountsProps) => {
         ) : (
           <Icons name={bookmark} />
         )}
-        {count[0]}
+        {count[2]}
       </p>
     </div>
   );

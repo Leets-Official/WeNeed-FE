@@ -15,7 +15,6 @@ export default async function RecruitingPage({
 
   const { writer, createdAt, viewCount, heartCount, bookmarkCount } = recruit;
   const { bookmarked, hearted } = user;
-  console.log(recruit);
 
   if (recruit && user && comments) {
     return (
