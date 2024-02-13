@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { imageForm, thumbnailForm } from 'recoil/upload';
+import { uploadForm } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
 interface FileInfo {
@@ -9,8 +9,8 @@ interface FileInfo {
 }
 
 const useAddThumbnail = () => {
-  const [thumbnailData, setThumbnailData] =
-    useRecoilState<FormData>(thumbnailForm);
+  const [uploadFormData, setUploadFormData] =
+    useRecoilState<FormData>(uploadForm);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
@@ -48,16 +48,13 @@ const useAddThumbnail = () => {
   const handleConfirm = (fileType: string) => {
     const selectedFile = inputRef.current?.files?.[0];
     if (selectedFile) {
-      if (thumbnailData.has('file')) {
-        thumbnailData.delete('file');
+      if (uploadFormData.has('thumbnail')) {
+        uploadFormData.delete('thumbnail');
       }
       const blob = new Blob([selectedFile], { type: selectedFile.type });
-      thumbnailData.append('file', blob, selectedFile.name);
+      uploadFormData.append('thumbnail', blob, selectedFile.name);
     } else {
       console.log('선택된 파일이 없습니다.');
-    }
-    for (const value of thumbnailData.values()) {
-      console.log('썸네일data의 value는 다음과 같음', value);
     }
   };
 

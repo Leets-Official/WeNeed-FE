@@ -64,7 +64,7 @@ const DndContainer = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full h-[740px] overflow-y-auto gap-y-[16px]">
+    <div className="flex flex-col items-center w-full h-[680px] overflow-y-auto gap-y-[16px]">
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
           {(provided) => (

@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { filestate, orderState, imageForm, fileForm } from 'recoil/upload';
+import { filestate, orderState, uploadForm } from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
@@ -13,8 +13,8 @@ const useAddFile = () => {
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
-  const [imageFormData, setImageFormData] = useRecoilState<FormData>(imageForm);
-  const [fileFormData, setFileFormData] = useRecoilState<FormData>(fileForm);
+  const [uploadFormData, setUploadFormData] =
+    useRecoilState<FormData>(uploadForm);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
@@ -67,7 +67,7 @@ const useAddFile = () => {
   const addFile = (file: File, type: string) => {
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
-      imageFormData.append('file', blob, file.name);
+      uploadFormData.append('images', blob, file.name);
       setItems((prevData) => [
         ...prevData,
         {
@@ -78,7 +78,7 @@ const useAddFile = () => {
       ]);
       setOrderId(orderId + 1);
     } else {
-      fileFormData.append('file', blob, file.name);
+      uploadFormData.append('files', file);
       setFiles((prevData) => [
         ...prevData,
         {
@@ -89,14 +89,6 @@ const useAddFile = () => {
         },
       ]);
     }
-
-    for (const value of imageFormData.values()) {
-      console.log('이미지의 폼의 value는 다음과 같음', value);
-    }
-
-    for (const value of fileFormData.values()) {
-      console.log('file의 폼의 value는 다음과 같음', value);
-    }
   };
 
   return {
@@ -106,7 +98,6 @@ const useAddFile = () => {
     divClick,
     handleFileChange,
     handleDrop,
-    imageFormData,
   };
 };
 export default useAddFile;
