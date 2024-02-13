@@ -15,11 +15,7 @@ import { selectedCategories } from 'recoil/main';
 
 export default function MainPortfolioPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
-  const [data, setData] = useState({
-    articleList: [],
-    hotArticleList: [],
-    recommendArticleList: [],
-  });
+  const [data, setData] = useState<ResponsePortfolioMain | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
