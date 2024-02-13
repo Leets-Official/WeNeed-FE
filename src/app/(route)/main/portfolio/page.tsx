@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import Footer from 'components/layout/Footer';
 import MainNavbar from 'components/main/common/MainNavbar';
 import {
@@ -7,29 +10,34 @@ import {
   RecommendContainer,
 } from 'components/main/containers';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
+import { useRecoilValue } from 'recoil';
+import { selectedCategories } from 'recoil/main';
 
-interface MainPortfolioPageProps {
-  params: {
-    slug: string[];
-  };
-}
+export default function MainPortfolioPage() {
+  const selectedCategoriesValue = useRecoilValue(selectedCategories);
+  const [data, setData] = useState({
+    articleList: [],
+    hotArticleList: [],
+    recommendArticleList: [],
+  });
 
-export default async function MainPortfolioPage({
-  params,
-}: MainPortfolioPageProps) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/main/portfolio?size=${MAIN_SIZE}&page=${1}&sort=${'DESC'}&detailTags=${'전체'}
-    )}`,
-  );
-  const {
-    hotArticleList,
-    articleList,
-    recommendArticleList,
-    pageable,
-    user,
-  }: ResponsePortfolioMain = await response.json();
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        `${
+          process.env.NEXT_PUBLIC_NEXT_SERVER
+        }/api/main/portfolio?size=${MAIN_SIZE}&page=${1}&sort=${'DESC'}&detailTags=${
+          selectedCategoriesValue || '전체'
+        }`,
+      );
+      const responseData = await response.json();
+      setData(responseData);
+    };
 
-  if (articleList)
+    fetchData();
+  }, [selectedCategoriesValue]);
+
+  if (data)
     return (
       <section>
         <div className="flex flex-col items-center w-full min-h-screen text-white ">
@@ -38,9 +46,9 @@ export default async function MainPortfolioPage({
             {LOGGEDIN_SECTION_HEADINGS.hot}
           </h1>
           <DetailCategoriesContainer />
-          <HotItemsContainer data={hotArticleList} />
-          <PortfolioContainer data={articleList} />
-          <RecommendContainer data={recommendArticleList} />
+          <HotItemsContainer data={data.hotArticleList} />
+          <PortfolioContainer data={data.articleList} />
+          <RecommendContainer data={data.recommendArticleList} />
         </div>
         <Footer />
       </section>

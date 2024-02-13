@@ -8,6 +8,7 @@ import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { inputDrop } from 'ui/IconsPath';
+import GradientProfileSM from 'ui/gradient/GradientProfileMD';
 
 interface CommentsContainerProps {
   onRecruit?: boolean;
@@ -71,7 +72,7 @@ const CommentsContainer = ({
         }`}
       >
         <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
-          {user.profile && (
+          {user.profile ? (
             <Image
               width={56}
               height={56}
@@ -81,6 +82,8 @@ const CommentsContainer = ({
                 objectFit: 'cover',
               }}
             />
+          ) : (
+            <GradientProfileSM />
           )}
         </div>
         <Input
@@ -89,9 +92,9 @@ const CommentsContainer = ({
           onChange={(e) => setCommentValue(e.target.value)}
           onEnterPress={onSubmitHandler}
           placeholder="댓글을 입력해주세요."
-          className="w-[90%]"
+          className="w-[87%] ml-[20px]"
         />
-        <div className="absolute top-[30%] right-[4.5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
+        <div className="absolute top-[30%] right-[8.5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
           <Icons name={inputDrop} />
         </div>
       </div>
@@ -102,7 +105,7 @@ const CommentsContainer = ({
       >
         {comments.length ? (
           comments.map((comment) => {
-            const { children, commentId } = comment;
+            const { commentId } = comment;
             return (
               <div key={commentId} className="w-full">
                 <CommentItem
