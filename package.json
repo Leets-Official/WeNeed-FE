@@ -37,6 +37,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/cookie": "^0.6.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-beautiful-dnd": "^13.1.8",
