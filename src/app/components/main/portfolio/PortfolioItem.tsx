@@ -3,6 +3,8 @@ import Icons from 'components/common/Icons';
 import { bookmark, view } from 'ui/IconsPath';
 import GradientHeart from 'ui/gradient/GradientHeart';
 import GradientBookmark from 'ui/gradient/GradientBookmark';
+import GradientItemDefault from 'ui/gradient/GradientItemDefault';
+import GradientProfileSM from 'ui/gradient/GradientProfileSM';
 
 interface PortfolioItemsProps {
   article: PortfolioArticle | RecommendArticle | OtherWorkList;
@@ -20,14 +22,18 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
         )}
       </div>
       <div className="relative w-[296px] h-[296px] rounded-lg text-sm overflow-hidden">
-        <Image
-          src={article.thumbnail}
-          fill={true}
-          alt="postImage"
-          style={{
-            objectFit: 'cover',
-          }}
-        />
+        {article.thumbnail ? (
+          <Image
+            src={article.thumbnail}
+            fill={true}
+            alt="postImage"
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        ) : (
+          <GradientItemDefault />
+        )}
       </div>
       {onRecommend ? (
         <>
@@ -39,7 +45,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
       ) : (
         <div className="flex justify-between w-full h-[35px] mt-[11px]">
           <div className="flex justify-center items-center gap-[10px]">
-            <div className="w-8 h-8 bg-zinc-300 rounded-full"></div>
+            <GradientProfileSM />
             <p className="font-semibold w-[130px] truncate">
               {(article as PortfolioArticle).writerNickname}
             </p>

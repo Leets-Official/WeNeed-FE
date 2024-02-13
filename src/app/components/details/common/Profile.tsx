@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Counts from './Counts';
 import { PROFILE_STYLE } from 'constants/styles';
 import { formatUploadTime } from 'utils/date';
+import GradientProfile from 'ui/gradient/GradientProfile';
+import GradientProfileSM from 'ui/gradient/GradientProfileMD';
 
 interface ProfileProps {
   writer: WriterProfile;
@@ -23,7 +25,7 @@ const Profile = ({
   size,
   user,
 }: ProfileProps) => {
-  const { nickname, major, profile, grade } = writer;
+  const { writerNickname, major, profile, grade } = writer;
   const profileStyles = PROFILE_STYLE[size || '']();
   return (
     <div className="w-full flex justify-between items-center">
@@ -31,22 +33,24 @@ const Profile = ({
         <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
           {profile ? (
             <Image
-              width={onComment ? 56 : 80}
-              height={onComment ? 56 : 80}
+              width={onComment ? 56 : 76}
+              height={onComment ? 56 : 76}
               alt="writer"
               src={profile}
               style={{
                 objectFit: 'cover',
               }}
             />
+          ) : onComment ? (
+            <GradientProfileSM />
           ) : (
-            <div className="w-full h-full bg-black" />
+            <GradientProfile />
           )}
         </div>
         <div
           className={`flex ${onComment ? 'items-center' : 'flex-col'} gap-3`}
         >
-          <p className="text-lg">{nickname}</p>
+          <p className="text-lg">{writerNickname}</p>
           <div className="font-normal flex gap-1.5 text-sm">
             <p>{major} |</p>
             <p>{grade}학년 |</p>

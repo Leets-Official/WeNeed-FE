@@ -7,12 +7,14 @@ import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import { commentClose, commentOpen } from 'ui/IconsPath';
+import GradientProfileMD from 'ui/gradient/GradientProfileMD';
 
 interface CommentItemProps {
   comment: CommentList | RecommentList;
   articleId: string;
   parentId: number;
   myProfile: string;
+  hasChildren?: boolean;
 }
 
 const CommentItem = ({
@@ -20,11 +22,12 @@ const CommentItem = ({
   articleId,
   parentId,
   myProfile,
+  hasChildren,
 }: CommentItemProps) => {
   const {
     commentId,
     userId,
-    nickname,
+    writerNickname,
     major,
     profile,
     grade,
@@ -59,19 +62,21 @@ const CommentItem = ({
     <>
       <div className="mt-[23px] w-[90%]">
         <Profile
-          writer={{ userId, nickname, major, profile, grade }}
+          writer={{ userId, writerNickname, major, profile, grade }}
           date={createdAt}
           onComment={true}
           size="medium"
         />
         <div className="w-[90%] relative bg-[#8C8C8C] h-[50px] ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
           {content}
-          <div
-            className="absolute bottom-[-14px] right-[-76px] text-xs cursor-pointer font-normal text-black p-3"
-            onClick={() => setOpenInput(!openInput)}
-          >
-            답글 달기
-          </div>
+          {!hasChildren && (
+            <div
+              className="absolute bottom-[-14px] right-[-76px] text-xs cursor-pointer font-normal text-black p-3"
+              onClick={() => setOpenInput(!openInput)}
+            >
+              답글 달기
+            </div>
+          )}
         </div>
       </div>
       {children && children?.length > 0 && (
@@ -103,6 +108,7 @@ const CommentItem = ({
                   articleId={articleId}
                   parentId={commentId}
                   myProfile={myProfile}
+                  hasChildren={true}
                 />
               </div>
             );
@@ -113,7 +119,7 @@ const CommentItem = ({
           <div
             className={`rounded-full overflow-hidden ${profileStyles} z-20 `}
           >
-            {myProfile && (
+            {myProfile ? (
               <Image
                 width={56}
                 height={56}
@@ -123,6 +129,8 @@ const CommentItem = ({
                   objectFit: 'cover',
                 }}
               />
+            ) : (
+              <GradientProfileMD />
             )}
           </div>
           <Input
@@ -131,7 +139,7 @@ const CommentItem = ({
             onChange={(e) => setRecommentValue(e.target.value)}
             onEnterPress={onSubmitHandler}
             placeholder="댓글을 입력해주세요."
-            className="w-[90.25%]"
+            className="w-[87.25%]"
           />
         </div>
       )}
