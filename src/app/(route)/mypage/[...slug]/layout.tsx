@@ -8,7 +8,7 @@ export default function MyPageLayout({
   return (
     <section>
       <Header type={'main'} isLoggedIn />
-      <div className="w-full h-full">{children}</div>
+      <div className="w-full h-full relative z-0">{children}</div>
     </section>
   );
 }
