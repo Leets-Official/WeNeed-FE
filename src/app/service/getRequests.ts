@@ -35,13 +35,13 @@ export const getPortfolioMain = async (
 export const getRecruitMain = async (
   size: string,
   page: string,
-  detailTags: string | string[],
+  detailTags: string,
   accessToken: string,
 ) => {
   const params = new URLSearchParams({
     size,
     page,
-    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
+    detailTags: detailTags,
   });
   const url = `${SERVER_URL}/recruit?${params.toString()}`;
   return await getRequest(url, accessToken);
