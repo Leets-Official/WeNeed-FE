@@ -112,7 +112,6 @@ interface OtherWorkList {
 }
 
 interface CommentList extends WriterProfile {
-  nickname?: string;
   commentId: number;
   content: string;
   createdAt: string;

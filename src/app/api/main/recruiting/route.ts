@@ -7,7 +7,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const size = searchParams.get('size') || '10';
   const page = searchParams.get('page') || '1';
-  const detailTags = searchParams.get('detailTags') || '전체';
+  const detailTags = searchParams.get('detailTags') || [];
   const data = await getRecruitMain(size, page, detailTags, accessToken).then(
     (data) => data,
   );
