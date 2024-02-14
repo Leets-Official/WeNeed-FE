@@ -33,6 +33,7 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
       skills: skill,
       tags: selectedTags,
     });
+
     const articleRequest = {
       ...uploadData,
       title: title,
