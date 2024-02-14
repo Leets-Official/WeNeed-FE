@@ -45,6 +45,7 @@ interface PortfolioArticle extends CommonArticle {
   writerNickname: string;
   viewCount: number;
   heartCount: number;
+  profile: string | null;
 }
 
 interface RecommendArticle extends CommonArticle {
@@ -115,6 +116,7 @@ interface CommentList extends WriterProfile {
   content: string;
   createdAt: string;
   children?: CommentList[];
+  nickname?: string;
 }
 
 interface RecommentList extends CommentList {

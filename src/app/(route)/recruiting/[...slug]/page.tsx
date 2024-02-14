@@ -1,4 +1,5 @@
 import Profile from 'components/details/common/Profile';
+import DetailMenuBar from 'components/details/portfolio/DetailMenuBar';
 import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
@@ -17,9 +18,9 @@ export default async function RecruitingPage({
 
   if (recruit && user && comments) {
     return (
-      <section className="min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
-        <Header nickname={user.nickname} userId={user.userId} />
-        <div className=" w-[80%] max-w-[1290px]">
+      <section className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
+        <div className="  w-[80%]  max-w-[1290px] ">
+          <Header nickname={user.nickname} userId={user.userId} />
           <div className="my-[40px]">
             <Profile
               writer={writer}
@@ -29,7 +30,7 @@ export default async function RecruitingPage({
               size="large"
             />
           </div>
-          <div className="bg-white rounded-[10px] py-[54px] px-[47px] mb-[100px]">
+          <div className="relative bg-white rounded-[10px] py-[54px] px-[47px] mb-[100px]">
             <RecruitingDetailContainers recruit={recruit} user={user} />
             <CommentsContainer
               comments={comments}
@@ -37,6 +38,14 @@ export default async function RecruitingPage({
               articleId={params.slug}
               user={user}
             />
+            <div className="fixed top-[105px] right-[5%] ">
+              <DetailMenuBar
+                articleId={params.slug}
+                user={user}
+                userId={user.userId}
+                onRecruit
+              />
+            </div>
           </div>
         </div>
       </section>

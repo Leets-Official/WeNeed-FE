@@ -1,5 +1,6 @@
 interface RecruitListItem {
   articleId: number;
+  profile: string;
   nickname: string;
   major: string;
   grade: number;
