@@ -4,14 +4,13 @@ import Link from 'next/link';
 import { search, weneed } from 'ui/IconsPath';
 
 interface HeaderProps {
-  type: 'main';
-  isLoggedIn: boolean;
-  username?: string;
+  nickname: string;
+  userId: number;
 }
 
-const Header = ({ type, isLoggedIn = false, username }: HeaderProps) => {
+const Header = ({ nickname, userId }: HeaderProps) => {
   return (
-    <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center px-[10%]">
+    <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center">
       <div className="h-full flex items-center gap-[78px]">
         <Link href={'/main/portfolio'}>
           <Icons name={weneed} />
@@ -22,8 +21,14 @@ const Header = ({ type, isLoggedIn = false, username }: HeaderProps) => {
         </div>
       </div>
       <div className="flex gap-[40px] cursor-pointer">
-        <Link href={`/mypage`}>마이페이지</Link>
-        {username && username !== 'guest' ? <p>{username}님</p> : <p>로그인</p>}
+        <Link href={userId === -1 ? '/login' : `/mypage/${userId}`}>
+          마이페이지
+        </Link>
+        {nickname !== 'guest' ? (
+          <p>{nickname}님</p>
+        ) : (
+          <Link href={'/login'}>로그인</Link>
+        )}
       </div>
     </header>
   );

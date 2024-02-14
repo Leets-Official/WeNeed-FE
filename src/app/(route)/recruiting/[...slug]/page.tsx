@@ -12,14 +12,13 @@ export default async function RecruitingPage({
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${params.slug}`,
     { cache: 'no-store' },
   ).then((res) => res.json());
-
   const { writer, createdAt, viewCount, heartCount, bookmarkCount } = recruit;
   const { bookmarked, hearted } = user;
 
   if (recruit && user && comments) {
     return (
       <section className="min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
-        <Header isLoggedIn type="main" />
+        <Header nickname={user.nickname} userId={user.userId} />
         <div className=" w-[80%] max-w-[1290px]">
           <div className="my-[40px]">
             <Profile

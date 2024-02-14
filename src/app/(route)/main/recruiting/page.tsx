@@ -7,8 +7,9 @@ import { DetailCategoriesContainer } from 'components/main/containers';
 import { useRecoilValue } from 'recoil';
 import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
+import Header from 'components/layout/Header';
 
-export default async function MainRecruitingPage() {
+export default function MainRecruitingPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
   const [data, setData] = useState<ResponseRecruitingMain | null>(null);
 
@@ -31,6 +32,7 @@ export default async function MainRecruitingPage() {
   if (data)
     return (
       <section className="flex flex-col items-center w-full min-h-screen text-white ">
+        <Header nickname={data.user.nickname} userId={data.user.userId} />
         <MainNavbar />
         <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
           {LOGGEDIN_SECTION_HEADINGS.crew}

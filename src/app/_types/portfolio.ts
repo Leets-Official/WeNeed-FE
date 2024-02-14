@@ -53,6 +53,7 @@ interface RecommendArticle extends CommonArticle {
 }
 
 interface UserProfile {
+  userId: number;
   nickname: string;
   sameUser: boolean;
   hearted: boolean;
@@ -61,10 +62,10 @@ interface UserProfile {
 }
 
 interface WriterProfile {
-  userId: number;
+  userId: number | null;
   writerNickname: string;
   major: string;
-  profile: string;
+  profile: string | null;
   grade: number;
 }
 
