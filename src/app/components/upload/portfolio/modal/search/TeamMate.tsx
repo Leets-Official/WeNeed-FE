@@ -1,3 +1,4 @@
+'use client';
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import { cancelIcon } from 'ui/IconsPath';
@@ -5,11 +6,12 @@ import { cancelIcon } from 'ui/IconsPath';
 interface TeamMateProps {
   imageURL: string;
   nickName: string;
+  deleteId: () => void;
 }
 
-const TeamMate = ({ imageURL, nickName }: TeamMateProps) => {
+const TeamMate = ({ imageURL, nickName, deleteId }: TeamMateProps) => {
   return (
-    <div className="flex w-[auto] h-[37px] gap-x-[12px] items-center text-[16px] pl-[8px] pr-[12px] rounded-[9px] border border-cyan-400">
+    <div className="flex w-[auto] h-[37px] gap-x-3 items-center text-[16px] pl-2 pr-3 rounded-[9px] border border-[#00E0EE]">
       <Image
         src={imageURL}
         alt="프로필"
@@ -18,7 +20,7 @@ const TeamMate = ({ imageURL, nickName }: TeamMateProps) => {
         className="rounded-[24px]"
       />
       <div className="text-neutral-700 font-semibold">{nickName}</div>
-      <Icons name={cancelIcon} className="cursor-pointer" />
+      <Icons onClick={deleteId} name={cancelIcon} className="cursor-pointer" />
     </div>
   );
 };
