@@ -95,7 +95,7 @@ const CommentsContainer = ({
           className="w-[87%] ml-[20px]"
         />
         <div className="absolute top-[30%] right-[8.5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
-          <Icons name={inputDrop} />
+          <Icons name={inputDrop} onClick={onSubmitHandler} />
         </div>
       </div>
       <div

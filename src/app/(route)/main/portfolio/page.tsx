@@ -43,18 +43,25 @@ export default function MainPortfolioPage() {
     setPageNumber(() => selected + 1);
   };
 
-  if (data)
+  if (data) {
+    const {
+      articleList,
+      hotArticleList,
+      pageable,
+      recommendArticleList,
+      user,
+    } = data;
     return (
       <section>
-        <Header nickname={data.user.nickname} userId={data.user.userId} />
+        <Header nickname={user.nickname} userId={user.userId} />
         <div className="flex flex-col items-center justify-center w-full  text-white ">
           <MainNavbar />
           <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
             {LOGGEDIN_SECTION_HEADINGS.hot}
           </h1>
           <DetailCategoriesContainer />
-          <HotItemsContainer data={data.hotArticleList} />
-          <PortfolioContainer data={data.articleList} />
+          <HotItemsContainer data={hotArticleList} />
+          <PortfolioContainer data={articleList} />
           <ReactPaginate
             className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
             previousLabel={
@@ -68,14 +75,15 @@ export default function MainPortfolioPage() {
               </div>
             }
             breakLabel={'...'}
-            pageCount={data.pageable.totalPages}
+            pageCount={pageable.totalPages}
             onPageChange={handlePageChange}
             activeClassName={'active text-white'}
             disabledClassName={'pagination-disabled'}
           />
-          <RecommendContainer data={data.recommendArticleList} />
+          <RecommendContainer data={recommendArticleList} />
         </div>
         <Footer />
       </section>
     );
+  }
 }
