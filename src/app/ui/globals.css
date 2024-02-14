@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+}
+
+.swiper-wrapper {
+  width: 100% !important;
+}
+
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
