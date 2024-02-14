@@ -4,7 +4,7 @@ import UploadContainerP from 'components/upload/portfolio/containers/UploadConta
 export default async function UploadPortfolioPage() {
   return (
     <section className="flex flex-col items-center w-full min-h-screen bg-black">
-      <Header isLoggedIn type="main" />
+      {/* <Header isLoggedIn type="main" /> */}
       <UploadContainerP />
     </section>
   );

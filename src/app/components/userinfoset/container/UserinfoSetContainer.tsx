@@ -24,7 +24,16 @@ interface UserinfoSetContainerProps {
 const fetchData = async (token: string | null, userInfo: userInfo) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/user/info`,
+      `${process.env.NEXT_PUBLIC_SERVER}/user/info`,
+      {
+        method: 'POST',
+        body: JSON.stringify(userInfo),
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        cache: 'no-store',
+      },
     ).then((res) => res.json());
     console.log('fetch data response', response);
     return response;

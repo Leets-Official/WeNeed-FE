@@ -16,13 +16,7 @@ const DetailContentsInfo = ({
     <>
       <div className="w-full flex justify-center mb-[32px]">
         {tags.map((tag) => (
-          <DetailCategories
-            key={tag}
-            category={tag}
-            onSelect={(tag) => {
-              console.log(tag);
-            }}
-          />
+          <DetailCategories key={tag} category={tag} />
         ))}
       </div>
       <p

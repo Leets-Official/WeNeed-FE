@@ -6,7 +6,8 @@ export async function POST(req: Request): Promise<NextResponse> {
   const accessToken = searchParams.get('accessToken');
   console.log(`searchParams: ${searchParams}, accessToken: ${accessToken}`);
 
-  const userInfo = req.json();
+  const userInfo = await req.json();
+  console.log(`userInfo: ${userInfo}`);
   const response = await postUserInfo(accessToken, userInfo);
   const data = await response.json();
   return NextResponse.json(data);
