@@ -37,7 +37,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
       </div>
       {onRecommend ? (
         <>
-          <p className="absolute z-10 w-[220px] top-[20px] left-[20px] truncate font-semibold">
+          <p className="absolute z-20 w-[220px] top-[20px] left-[20px] truncate font-semibold">
             {(article as RecommendArticle).title}
           </p>
           <div className="absolute top-0 h-20 w-[296px] bg-gradient-to-t from-transparent to-neutral-950 rounded-md"></div>

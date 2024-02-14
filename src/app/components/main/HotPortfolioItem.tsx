@@ -18,7 +18,7 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
             objectFit: 'cover',
           }}
         />
-        <span className="absolute bottom-[30px] left-[30px] text-3xl font-semibold ">
+        <span className="absolute z-20 bottom-[30px] left-[30px] text-3xl font-semibold ">
           {title}
         </span>
         <div className="absolute top-[15px] left-[15px] w-32 h-7 flex bg-black rounded-2xl text-center">
