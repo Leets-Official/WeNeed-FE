@@ -1,3 +1,5 @@
+'use client';
+
 import Icons from 'components/common/Icons';
 import { SORT_TYPES } from 'constants/main';
 import { drop, smallCheck } from 'ui/IconsPath';
