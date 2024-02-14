@@ -14,6 +14,7 @@ export default async function PortfolioPage({
   );
   const { user, portfolio, comments, workList }: ResponsePortfolioDetails =
     await response.json();
+  console.log(portfolio.writer);
 
   if (user && portfolio && comments && workList) {
     return (
