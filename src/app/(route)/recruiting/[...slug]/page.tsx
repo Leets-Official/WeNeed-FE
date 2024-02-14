@@ -12,7 +12,6 @@ export default async function RecruitingPage({
     `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${params.slug}`,
     { cache: 'no-store' },
   ).then((res) => res.json());
-
   const { writer, createdAt, viewCount, heartCount, bookmarkCount } = recruit;
   const { bookmarked, hearted } = user;
 
