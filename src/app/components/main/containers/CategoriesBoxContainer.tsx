@@ -7,7 +7,7 @@ interface CategoriesBoxContainerProps {
 const CategoriesBoxContainer = ({ onClose }: CategoriesBoxContainerProps) => {
   return (
     <div
-      className="flex flex-col items-center z-20 absolute w-[480px] h-[490px] border border-white bg-black rounded-b-2xl p-[35px]"
+      className="flex flex-col items-center z-50 absolute w-[480px] h-[490px] border border-white bg-black rounded-b-2xl p-[35px]"
       onBlur={onClose}
       tabIndex={0}
     >
