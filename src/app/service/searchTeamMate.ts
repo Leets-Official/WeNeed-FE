@@ -4,7 +4,7 @@ export const searchTeamMate = async (searchText: string) => {
   const token = cookies().get('accessToken');
   try {
     const users: ResponseUploadSearch = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}portfolio/team-member?nickname=${searchText}`,
+      `${process.env.NEXT_PUBLIC_SERVER}/portfolio/team-member?nickname=${searchText}`,
       {
         method: 'GET',
         headers: {

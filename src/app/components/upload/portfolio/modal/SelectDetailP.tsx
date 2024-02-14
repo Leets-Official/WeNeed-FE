@@ -55,7 +55,7 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
     }
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}api/upload/portfolio`,
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio`,
         {
           method: 'POST',
           body: uploadFormData,
