@@ -10,12 +10,14 @@ import {
   RecommendContainer,
 } from 'components/main/containers';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
-import { useRecoilValue } from 'recoil';
-import { selectedCategories } from 'recoil/main';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { selectedCategories, selectedSortType } from 'recoil/main';
 import Header from 'components/layout/Header';
 
 export default function MainPortfolioPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
+  const [selectedSortTypeValue, setSelectedSortType] =
+    useRecoilState(selectedSortType);
   const [data, setData] = useState<ResponsePortfolioMain | null>(null);
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export default function MainPortfolioPage() {
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_NEXT_SERVER
-        }/api/main/portfolio?size=${MAIN_SIZE}&page=${1}&sort=${'DESC'}&detailTags=${
+        }/api/main/portfolio?size=${MAIN_SIZE}&page=${1}&sort=${selectedSortTypeValue}&detailTags=${
           selectedCategoriesValue || '전체'
         }`,
       );
@@ -32,7 +34,7 @@ export default function MainPortfolioPage() {
     };
 
     fetchData();
-  }, [selectedCategoriesValue]);
+  }, [selectedCategoriesValue, selectedSortTypeValue]);
 
   if (data)
     return (

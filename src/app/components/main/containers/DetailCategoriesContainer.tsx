@@ -40,7 +40,7 @@ const DetailCategoriesContainer = () => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full relative ">
       <div
         className="relative flex justify-start items-start w-auto h-9 rounded-3xl gap-[20px]"
         style={{
@@ -76,6 +76,7 @@ const DetailCategoriesContainer = () => {
                 );
               })}
         </Swiper>
+
         {(selectedCategoriesValue.length > 9 ||
           selectedCategoriesValue.length === 0) && (
           <>
@@ -86,6 +87,14 @@ const DetailCategoriesContainer = () => {
           </>
         )}
       </div>
+      {selectedCategoriesValue.length !== 0 && (
+        <div
+          className=" absolute top-2 right-[5%] font-normal text-sm border-b-1 border-[#FFFFFF] text-[#FFFFFF] cursor-pointer"
+          onClick={() => setSelectedCategories([])}
+        >
+          초기화
+        </div>
+      )}
     </div>
   );
 };
