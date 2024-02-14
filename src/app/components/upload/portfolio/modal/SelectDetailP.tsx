@@ -1,27 +1,125 @@
 'use client';
-import Button from 'components/common/Button';
-import GradientCompleted from 'ui/gradient/GradientCompleted';
+import Icons from 'components/common/Icons';
+import { closeIcon, titleIcon } from 'ui/IconsPath';
+import { INTERESTED_TAG_LIST } from 'constants/portfolio';
+import ConfirmButton from 'components/upload/both/ConfirmButton';
+import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { uploadDataState, uploadForm } from 'recoil/upload';
 
-const SubmitCompleted = () => {
+interface SelectDetailProps {
+  closeModal?: () => void;
+}
+
+const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
+  const [title, setTitle] = useState('');
+  const [skill, setSkill] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [uploadFormData, setUploadFormData] =
+    useRecoilState<FormData>(uploadForm);
+
+  const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const skillsArray = value.split(',');
+    setSkill(skillsArray);
+  };
+
+  const handleConfirm = async () => {
+    setUploadData({
+      ...uploadData,
+      title: title,
+      skills: skill,
+      tags: selectedTags,
+    });
+    const articleRequest = {
+      ...uploadData,
+      title: title,
+      skills: skill,
+      tags: selectedTags,
+    };
+
+    uploadFormData.append(
+      'request',
+      new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
+    );
+
+    for (const key of uploadFormData.keys()) {
+      console.log(
+        'api보내기 전 폼데이터 현황',
+        key,
+        ':',
+        uploadFormData.get(key),
+      );
+    }
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}api/upload/portfolio`,
+        {
+          method: 'POST',
+          body: uploadFormData,
+        },
+      );
+    } catch (e) {
+      console.log('넥스트 서버 보내기 전 오류발생', e);
+    }
+  };
+
   return (
-    <div className="relative w-[922px] h-[340px] items-center bg-white rounded-[9px]">
-      <div className="absolute top-[57.5px] left-[409px]">
-        <GradientCompleted />
+    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
+        <div
+          onClick={closeModal}
+          className="flex flex-row-reverse mt-[15px] mr-3.5"
+        >
+          <Icons name={closeIcon} />
+        </div>
+        <div className="w-[825px] ml-10 mb-[34px] text-black text-lg font-bold ">
+          게시물 업로드
+        </div>
+        <div className="flex flex-col gap-y-[10px] mr-[58px] ml-10">
+          <div className="w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 flex items-center place-content-between">
+            <div className="flex gap-x-[2px]">
+              <p>제목</p>
+              <p className="text-red-400">*</p>
+            </div>
+            <div className="flex flex-reverse-row w-auto items-center">
+              <input
+                className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <Icons name={titleIcon} />
+            </div>
+          </div>
+          <DropdownTag
+            options={INTERESTED_TAG_LIST}
+            title={'태그'}
+            announcement={'게시물에 관련된 태그를 모두 선택해주세요!'}
+            onSelect={(tags) => setSelectedTags(tags)}
+          />
+          <div className="w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 flex items-center place-content-between">
+            <p>스킬</p>
+            <div className="flex flex-reverse-row w-auto items-center">
+              <input
+                className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none"
+                value={skill.join(',')}
+                onChange={handleSkillChange}
+              />
+            </div>
+          </div>
+          {(title.trim() === '' || selectedTags.length === 0) && (
+            <div className="flex flex-row-reverse text-red-400 text-[10px] font-light ">
+              필수항목을 모두 입력해주세요!{' '}
+            </div>
+          )}
+          <div className="flex flex-row-reverse">
+            <ConfirmButton btnClick={handleConfirm} btnText={title} />
+          </div>
+        </div>
       </div>
-      <div className="absolute top-[199px] left-[392.5px] text-neutral-500 text-3xl font-bold">
-        업로드 완료
-      </div>
-      <Button
-        buttonText={'다음'}
-        type={'upload'}
-        isDisabled={false}
-        onClickHandler={function (): void {
-          console.log('다음 모달로 이동');
-        }}
-        className="absolute bottom-[22.5px] left-[40.3px] bg-[#D9D9D9] hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:text-white"
-      />
     </div>
   );
 };
-
-export default SubmitCompleted;
+export default SelectDetailP;

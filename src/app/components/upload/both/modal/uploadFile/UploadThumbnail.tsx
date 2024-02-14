@@ -5,13 +5,14 @@ import ProgressBar from './ProgressBar';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import { closeIcon } from 'ui/IconsPath';
 import { imgAndVideo } from 'ui/upload/fileType';
-import useAddFile from 'hooks/upload/useAddFile';
-interface UploadFileProps {
+import useAddThumbnail from 'hooks/upload/useAddThumbnail';
+
+interface UploadThumbnailProps {
   uploadInfo: UploadPropTypes;
   closeModal: () => void;
 }
 
-const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
+const UploadThumbnail = ({ uploadInfo, closeModal }: UploadThumbnailProps) => {
   const { fileType, sizeLimit, announcement, rule, accept } = uploadInfo;
   const {
     fileInfo,
@@ -20,7 +21,7 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
     divClick,
     handleFileChange,
     handleDrop,
-  } = useAddFile();
+  } = useAddThumbnail();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -45,24 +46,13 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
             {fileInfo.name != '' ? (
               <div className="flex gap-x-[12px] mt-[30px] ml-[22px] text-black text-xs font-medium">
                 <div>
-                  {fileType === '이미지' && (
-                    <Image
-                      src={fileInfo.url}
-                      alt={fileInfo.name}
-                      {...imgAndVideo}
-                    />
-                  )}
-                  {fileType === '영상' && (
-                    <video src={fileInfo.url} {...imgAndVideo} />
-                  )}
+                  <Image
+                    src={fileInfo.url}
+                    alt={fileInfo.name}
+                    {...imgAndVideo}
+                  />
                 </div>
-                <div
-                  className={`flex ${
-                    fileType === '문서'
-                      ? 'gap-x-[20px] items-center'
-                      : 'flex-col gap-y-[12px]'
-                  }`}
-                >
+                <div className="flex flex-col gap-y-[12px]">
                   <div>{fileInfo.name}</div>
                   <div>
                     {fileInfo.size >= 100000
@@ -89,7 +79,7 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
               accept={accept}
             />
           </div>
-          <div onClick={closeModal} className="flex flex-row-reverse mt-[14px]">
+          <div className="flex flex-row-reverse mt-[14px]" onClick={closeModal}>
             <ConfirmButton
               btnClick={() => handleConfirm(fileType)}
               btnText={fileInfo.name}
@@ -101,4 +91,4 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
   );
 };
 
-export default UploadFile;
+export default UploadThumbnail;

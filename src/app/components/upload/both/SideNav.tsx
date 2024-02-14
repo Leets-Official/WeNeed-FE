@@ -8,7 +8,7 @@ interface SideNavProps {
 
 const SideNav = ({ navItemIconPath, iconNameArr }: SideNavProps) => {
   return (
-    <div className="flex flex-col w-[76px] h-[371px] justify-start items-center gap-y-[25px]">
+    <div className="absolute top-0 right-[-96px] flex flex-col w-[76px] h-[371px] justify-start items-center gap-y-[25px]">
       {navItemIconPath.map((item, index) => (
         <SideNavItem
           key={item}

@@ -1,16 +1,25 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
 import TagItem from './TagItem';
+
 interface DropdownTagProps {
   options: readonly string[];
   title: string;
   announcement: string;
+  onSelect: (selectedTags: string[]) => void;
 }
-const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
+
+const DropdownTag = ({
+  options,
+  title,
+  announcement,
+  onSelect,
+}: DropdownTagProps) => {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const handleOptionClick = (option: string) => {
     if (selectedOption.includes(option)) {
       setSelectedOption(selectedOption.filter((item) => item !== option));
@@ -18,9 +27,15 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
       setSelectedOption([...selectedOption, option]);
     }
   };
+
   const handleRemoveOption = (option: string) => {
     setSelectedOption(selectedOption.filter((item) => item !== option));
   };
+
+  useEffect(() => {
+    onSelect(selectedOption);
+  }, [selectedOption, onSelect]);
+
   return (
     <div className="flex flex-col">
       <div
@@ -32,7 +47,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
           <p>{title}</p>
           <p className="text-red-400">*</p>
         </div>
-        <div className="flex items-center">
+        <div className="flex w-auto items-center overflow-auto-y">
           {selectedOption ? (
             <div className="flex gap-x-[10px] text-black mr-[21px]">
               {selectedOption.map((option) => (
@@ -52,7 +67,7 @@ const DropdownTag = ({ options, title, announcement }: DropdownTagProps) => {
       </div>
       <div className="relative">
         {isOpen && (
-          <div className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-y-auto">
+          <div className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-auto">
             {options.map((option, index) => (
               <div
                 key={option}
