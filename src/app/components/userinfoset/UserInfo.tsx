@@ -141,7 +141,7 @@ const UserInfo = ({ token }: UserInfoProps) => {
               {USER_INFO.NICKNAME_SUCCESS}
             </div>
           ) : successNickname === 2 ? (
-            <div className="absolute right-20 top-48 mt-3 text-[#FF7272] text-[10px] font-normal">
+            <div className="absolute right-1 top-8 mt-3 text-[#FF7272] text-[10px] font-normal">
               {USER_INFO.NICKNAME_FAIL}
             </div>
           ) : null}
@@ -173,7 +173,7 @@ const UserInfo = ({ token }: UserInfoProps) => {
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
         <DropDown
-          sortedItemList={[...USER_INFO.MAJOR_LIST]}
+          sortedItemList={[...USER_INFO.MAJOR_LIST].sort()}
           selectedItem={
             userInfo.major.length === 0 ? USER_INFO.MAJOR : userInfo.major
           }
@@ -186,7 +186,7 @@ const UserInfo = ({ token }: UserInfoProps) => {
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
         <DropDown
-          sortedItemList={[...USER_INFO.DOUBLE_MAJOR_LIST]}
+          sortedItemList={[...USER_INFO.DOUBLE_MAJOR_LIST].sort()}
           selectedItem={
             userInfo.doubleMajor.length === 0
               ? USER_INFO.DOUBLE_MAJOR

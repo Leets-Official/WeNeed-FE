@@ -8,7 +8,7 @@ export async function GET(request: Request): Promise<NextResponse> {
   const size = searchParams.get('size') || '16';
   const page = searchParams.get('page') || '1';
   const sort = searchParams.get('sort') || 'DESC';
-  const detailTags = searchParams.get('detailTags') || ['전체'];
+  const detailTags = searchParams.get('detailTags') || [];
   const data = await getPortfolioMain(
     size,
     page,

@@ -7,6 +7,7 @@ import DetailMenuBar from '../DetailMenuBar';
 import WriterOptions from '../WriterOptions';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
+import GradientProfile from 'ui/gradient/GradientProfile';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -67,7 +68,7 @@ const PortfolioDetailsContainer = ({
                       marginLeft: `-${i * 30}px`,
                     }}
                   >
-                    {mem.profile && (
+                    {mem.profile ? (
                       <Image
                         width={80}
                         height={80}
@@ -77,6 +78,8 @@ const PortfolioDetailsContainer = ({
                           objectFit: 'cover',
                         }}
                       />
+                    ) : (
+                      <GradientProfile />
                     )}
                   </div>
                 </Link>

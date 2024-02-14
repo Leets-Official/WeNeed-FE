@@ -21,3 +21,12 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.pagination-page {
+  cursor: pointer;
+}
+
+.pagination-disabled {
+  color: gray;
+  cursor: not-allowed;
+}

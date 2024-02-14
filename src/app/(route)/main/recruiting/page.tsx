@@ -19,7 +19,7 @@ export default function MainRecruitingPage() {
         `${
           process.env.NEXT_PUBLIC_NEXT_SERVER
         }/api/main/recruiting?size=${MAIN_SIZE}&page=${1}&detailTags=${
-          selectedCategoriesValue || '전체'
+          selectedCategoriesValue || ''
         }`,
       );
       const responseData = await response.json();
