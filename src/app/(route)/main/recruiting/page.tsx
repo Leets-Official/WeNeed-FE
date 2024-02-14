@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 export default function MainRecruitingPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
   const [data, setData] = useState<ResponseRecruitingMain | null>(null);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
