@@ -7,7 +7,7 @@ export default function MyPageLayout({
 }) {
   return (
     <section>
-      <Header type={'main'} isLoggedIn />
+      <Header nickname="위니드" userId={1} />
       <div className="w-full h-full relative z-0">{children}</div>
     </section>
   );
