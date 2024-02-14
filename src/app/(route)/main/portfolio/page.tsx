@@ -51,7 +51,6 @@ export default function MainPortfolioPage() {
       recommendArticleList,
       user,
     } = data;
-
     return (
       <section>
         <Header nickname={user.nickname} userId={user.userId} />
