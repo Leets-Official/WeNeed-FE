@@ -26,6 +26,7 @@ export const postLikes = async (articleId: string, accessToken: string) => {
   return await postRequest(url, accessToken);
 };
 
+
 export const postBookmarks = async (articleId: string, accessToken: string) => {
   const url = `${SERVER_URL}/bookmarks/${articleId}`;
   return await postRequest(url, accessToken);
