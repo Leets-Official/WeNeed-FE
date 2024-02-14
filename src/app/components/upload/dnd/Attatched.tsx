@@ -1,3 +1,4 @@
+'use client';
 import DndVideo from './DndVideo';
 import DndDocs from './DndDocs';
 import { filestate } from 'recoil/upload';
@@ -5,6 +6,7 @@ import { useRecoilValue } from 'recoil';
 
 const Attatched = () => {
   const files = useRecoilValue(filestate);
+  console.log('files현황: ', files);
 
   return (
     <div className="flex w-[1206px] h-[214px] bg-black">
