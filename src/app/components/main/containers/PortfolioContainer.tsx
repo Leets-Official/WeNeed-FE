@@ -1,7 +1,6 @@
 'use client';
 
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import Pages from 'components/common/Pages';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedSortType } from 'recoil/main';
@@ -44,9 +43,6 @@ const PortfolioContainer = ({ data }: PortfolioContainerProps) => {
               <PortfolioItem article={article} />
             </Link>
           ))}
-        </div>
-        <div className="w-full flex justify-center mt-[80px]">
-          <Pages />
         </div>
       </div>
     );
