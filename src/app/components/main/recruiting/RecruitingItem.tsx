@@ -8,7 +8,7 @@ interface RecruitingItemProps {
 const RecruitingItem = ({ article }: RecruitingItemProps) => {
   const { title, thumbnail, content } = article;
   return (
-    <div className="w-[1280px] h-[809px] flex flex-col items-center bg-white text-black rounded-2xl pt-[40px] pb-[30px] px-[43px]">
+    <div className="w-[1280px] h-[809px] flex flex-col items-center bg-white text-black rounded-2xl pt-[40px] px-[43px]">
       <h3 className="flex flex-wrap text-[30px] w-full h-[87px] font-bold clamp-2">
         {title}
       </h3>
@@ -22,11 +22,11 @@ const RecruitingItem = ({ article }: RecruitingItemProps) => {
           />
         )}
       </div>
-      <div className="flex flex-col w-full text-lg mb-[35px]">
-        <p className="pb-[18px] border-b border-black mb-[20px] ">
+      <div className="flex flex-col w-full text-lg mb-[40px]">
+        {/* <p className="pb-[18px] border-b border-black mb-[20px] ">
           나누고 싶은 큰 문장
-        </p>
-        <div className="h-[79px] overflow-hidden">{content}</div>
+        </p> */}
+        <div className="h-[85px] overflow-hidden">{content}</div>
       </div>
       <RecruitingItemInfo article={article} />
     </div>

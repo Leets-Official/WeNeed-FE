@@ -18,7 +18,7 @@ export default async function PortfolioPage({
   if (user && portfolio && comments && workList) {
     return (
       <section className="min-h-screen flex flex-col items-center bg-black text-white ">
-        <Header isLoggedIn type="main" nickname={user.nickname} />
+        <Header nickname={user.nickname} userId={user.userId} />
         <div className="w-[80%] max-w-[1290px] ">
           <PortfolioDetailsContainer
             user={user}

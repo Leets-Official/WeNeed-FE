@@ -62,10 +62,10 @@ interface UserProfile {
 }
 
 interface WriterProfile {
-  userId: number;
+  userId: number | null;
   writerNickname: string;
   major: string;
-  profile: string;
+  profile: string | null;
   grade: number;
 }
 

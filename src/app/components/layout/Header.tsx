@@ -4,18 +4,11 @@ import Link from 'next/link';
 import { search, weneed } from 'ui/IconsPath';
 
 interface HeaderProps {
-  type: 'main';
-  isLoggedIn: boolean;
-  nickname?: string;
-  userId?: number;
+  nickname: string;
+  userId: number;
 }
 
-const Header = ({
-  type,
-  isLoggedIn = false,
-  nickname,
-  userId,
-}: HeaderProps) => {
+const Header = ({ nickname, userId }: HeaderProps) => {
   return (
     <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center">
       <div className="h-full flex items-center gap-[78px]">

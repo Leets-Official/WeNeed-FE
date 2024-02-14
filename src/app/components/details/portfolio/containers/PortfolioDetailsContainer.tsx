@@ -99,7 +99,7 @@ const PortfolioDetailsContainer = ({
           skills={skills}
         />
         <DetailMenuBar
-          userId={writer.userId}
+          userId={writer.userId || -1}
           user={user}
           articleId={articleId}
         />
