@@ -7,13 +7,7 @@ const commonHeaders = {
 const getRequest = async (url: string, accessToken: string) => {
   try {
     const response = await fetch(url, {
-      // headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
-      headers: {
-        ...commonHeaders,
-        Authorization:
-          'Bearer ' +
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzg5MzUzNCwiZXhwIjoxNzA3OTc5OTM0LCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjR9.Jat_v3VPcNH2M7yC3_PsvYFqH5jN6fCbM_l28zIQIqE',
-      },
+      headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
     }).then((res) => res.json());
     return response;
   } catch (error) {
@@ -41,13 +35,13 @@ export const getPortfolioMain = async (
 export const getRecruitMain = async (
   size: string,
   page: string,
-  detailTags: string,
+  detailTags: string | string[],
   accessToken: string,
 ) => {
   const params = new URLSearchParams({
     size,
     page,
-    detailTags: detailTags,
+    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
   });
   const url = `${SERVER_URL}/recruit?${params.toString()}`;
   return await getRequest(url, accessToken);
