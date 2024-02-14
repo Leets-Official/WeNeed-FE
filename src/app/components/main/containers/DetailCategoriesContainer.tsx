@@ -64,20 +64,14 @@ const DetailCategoriesContainer = () => {
             ? INTERESTED_TAG_LIST.map((category) => {
                 return (
                   <SwiperSlide key={category}>
-                    <DetailCategories
-                      category={category}
-                      onSelect={onSelectCategory}
-                    />
+                    <DetailCategories category={category} />
                   </SwiperSlide>
                 );
               })
             : selectedCategoriesValue.map((category) => {
                 return (
                   <SwiperSlide key={category}>
-                    <DetailCategories
-                      category={category}
-                      onSelect={onSelectCategory}
-                    />
+                    <DetailCategories category={category} />
                   </SwiperSlide>
                 );
               })}

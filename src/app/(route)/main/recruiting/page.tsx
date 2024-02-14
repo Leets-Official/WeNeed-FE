@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
 
-export default async function MainRecruitingPage() {
+export default function MainRecruitingPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
   const [data, setData] = useState<ResponseRecruitingMain | null>(null);
 
