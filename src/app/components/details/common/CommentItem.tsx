@@ -34,6 +34,7 @@ const CommentItem = ({
     createdAt,
     content,
     children,
+    nickname,
   } = comment;
   const [openInput, setOpenInput] = useState<boolean>(false);
   const [openChildren, setOpenChildren] = useState<boolean>(false);
@@ -62,7 +63,13 @@ const CommentItem = ({
     <>
       <div className="mt-[23px] w-[90%]">
         <Profile
-          writer={{ userId, writerNickname, major, profile, grade }}
+          writer={{
+            userId,
+            writerNickname: nickname ? nickname : writerNickname,
+            major,
+            profile,
+            grade,
+          }}
           date={createdAt}
           onComment={true}
           size="medium"

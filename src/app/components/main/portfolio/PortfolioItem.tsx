@@ -45,7 +45,19 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
       ) : (
         <div className="flex justify-between w-full h-[35px] mt-[11px]">
           <div className="flex justify-center items-center gap-[10px]">
-            <GradientProfileSM />
+            {(article as PortfolioArticle).profile ? (
+              <Image
+                width={24}
+                height={24}
+                alt="writer"
+                src={(article as PortfolioArticle).profile || ''}
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            ) : (
+              <GradientProfileSM />
+            )}
             <p className="font-semibold w-[130px] truncate">
               {(article as PortfolioArticle).writerNickname}
             </p>
