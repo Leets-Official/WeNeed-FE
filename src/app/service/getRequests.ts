@@ -7,13 +7,7 @@ const commonHeaders = {
 const getRequest = async (url: string, accessToken: string) => {
   try {
     const response = await fetch(url, {
-      // headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
-      headers: {
-        ...commonHeaders,
-        Authorization:
-          'Bearer ' +
-          'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ3ZW5lZWQyMDI0QGdtYWlsLmNvbSIsImlhdCI6MTcwNzkxOTM5MSwiZXhwIjoxNzA4MDA1NzkxLCJzdWIiOiJza2R1ZDM2NjlAZ21haWwuY29tIiwiaWQiOjl9.hpadT3Vph8RteGA2q0WIqd-aI5Q-uBRuOcYG7dwkBGY',
-      },
+      headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
     }).then((res) => res.json());
     return response;
   } catch (error) {
