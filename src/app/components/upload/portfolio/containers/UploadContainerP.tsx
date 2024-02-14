@@ -28,6 +28,7 @@ const UploadContainerP = () => {
         <SideNav
           navItemIconPath={navItemIconPath_P}
           iconNameArr={SIDENAV_ITEM_NAME}
+          articleType={'portfolio'}
         />
       </div>
       <div className="flex justify-center pb-[46px]">
