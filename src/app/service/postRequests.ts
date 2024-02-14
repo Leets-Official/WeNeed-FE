@@ -1,5 +1,4 @@
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
-
 const commonHeaders = {
   'Content-Type': 'application/json',
 };
@@ -25,7 +24,6 @@ export const postLikes = async (articleId: string, accessToken: string) => {
   const url = `${SERVER_URL}/likes/${articleId}`;
   return await postRequest(url, accessToken);
 };
-
 
 export const postBookmarks = async (articleId: string, accessToken: string) => {
   const url = `${SERVER_URL}/bookmarks/${articleId}`;
