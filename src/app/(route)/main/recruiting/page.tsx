@@ -12,6 +12,7 @@ import Header from 'components/layout/Header';
 export default function MainRecruitingPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
   const [data, setData] = useState<ResponseRecruitingMain | null>(null);
+  console.log(data);
 
   useEffect(() => {
     const fetchData = async () => {
