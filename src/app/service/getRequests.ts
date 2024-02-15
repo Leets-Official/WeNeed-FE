@@ -4,10 +4,13 @@ const commonHeaders = {
   'Content-Type': 'application/json',
 };
 
-const getRequest = async (url: string, accessToken: string) => {
+const getRequest = async (url: string, accessToken?: string) => {
   try {
+    const headers = accessToken
+      ? { ...commonHeaders, Authorization: 'Bearer ' + accessToken }
+      : commonHeaders;
     const response = await fetch(url, {
-      headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
+      headers: headers,
     }).then((res) => res.json());
     return response;
   } catch (error) {
