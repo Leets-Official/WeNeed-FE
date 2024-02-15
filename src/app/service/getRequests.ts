@@ -22,13 +22,23 @@ export const getPortfolioMain = async (
   detailTags: string | string[],
   accessToken: string,
 ) => {
-  const params = new URLSearchParams({
-    size,
-    page,
-    sort,
-    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
-  });
-  const url = `${SERVER_URL}/portfolio?${params.toString()}`;
+  let url;
+  if (detailTags.length === 0) {
+    const params = new URLSearchParams({
+      size,
+      page,
+      sort,
+    });
+    url = `${SERVER_URL}/portfolio/all?${params.toString()}`;
+  } else {
+    const params = new URLSearchParams({
+      size,
+      page,
+      sort,
+      detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
+    });
+    url = `${SERVER_URL}/portfolio?${params.toString()}`;
+  }
   return await getRequest(url, accessToken);
 };
 
@@ -38,12 +48,21 @@ export const getRecruitMain = async (
   detailTags: string | string[],
   accessToken: string,
 ) => {
-  const params = new URLSearchParams({
-    size,
-    page,
-    detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
-  });
-  const url = `${SERVER_URL}/recruit?${params.toString()}`;
+  let url;
+  if (detailTags.length === 0) {
+    const params = new URLSearchParams({
+      size,
+      page,
+    });
+    url = `${SERVER_URL}/recruit/all?${params.toString()}`;
+  } else {
+    const params = new URLSearchParams({
+      size,
+      page,
+      detailTags: Array.isArray(detailTags) ? detailTags.join(',') : detailTags,
+    });
+    url = `${SERVER_URL}/recruit?${params.toString()}`;
+  }
   return await getRequest(url, accessToken);
 };
 
