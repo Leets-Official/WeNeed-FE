@@ -28,6 +28,7 @@ export const getPortfolioMain = async (
       size,
       page,
       sort,
+      detailTags: 'ALL',
     });
     url = `${SERVER_URL}/portfolio/all?${params.toString()}`;
   } else {
@@ -53,6 +54,7 @@ export const getRecruitMain = async (
     const params = new URLSearchParams({
       size,
       page,
+      detailTags: 'ALL',
     });
     url = `${SERVER_URL}/recruit/all?${params.toString()}`;
   } else {
