@@ -21,7 +21,7 @@ const Header = ({ nickname, userId }: HeaderProps) => {
         </div>
       </div>
       <div className="flex gap-[40px] cursor-pointer">
-        <Link href={userId === -1 ? '/login' : `/mypage/${userId}`}>
+        <Link href={userId == -1 ? '/login' : `/mypage/${userId}`}>
           마이페이지
         </Link>
         {nickname !== 'guest' ? (

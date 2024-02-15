@@ -17,8 +17,8 @@ const RecruitingDetailContainers = ({
   recruit,
   user,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents } = recruit;
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const { createdAt, tags, title, contents, files, links, skills } = recruit;
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(user.userId !== -1);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -34,26 +34,34 @@ const RecruitingDetailContainers = ({
 
   return (
     <>
-      <div className="flex flex-col items-center w-full mt-[40px] min-h-screen ">
+      <div className="flex flex-col items-center w-full mt-[40px] min-h-[400px] ">
         <DetailContentsInfo tags={tags} createdAt={createdAt} recruit />
         <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
           {title}
         </h3>
-        <RecruitingDetailContents contents={contents} />
-        <div className="text-black  mt-[100px]">
-          {user.sameUser && <WriterOptions onRecruit />}
-        </div>
+        <RecruitingDetailContents
+          contents={contents}
+          links={links}
+          files={files}
+          skills={skills}
+        />
+        {user.userId !== -1 && (
+          <div className="text-black  mt-[100px]">
+            {user.sameUser && <WriterOptions onRecruit />}
+          </div>
+        )}
       </div>
-      {!isLoggedIn && (
-        <ModalPortal nodeName="needLoginPortal">
-          <ModalOutside
-            onClose={() => {}}
-            className="absolute top-[63px] left-0 w-full h-full flex justify-center items-center "
-          >
-            <NeedLoginModal />
-          </ModalOutside>
-        </ModalPortal>
-      )}
+      {!isLoggedIn ||
+        (user.userId == -1 && (
+          <ModalPortal nodeName="needLoginPortal">
+            <ModalOutside
+              onClose={() => {}}
+              className="absolute top-[63px] left-0 w-full h-full flex justify-center items-center "
+            >
+              <NeedLoginModal />
+            </ModalOutside>
+          </ModalPortal>
+        ))}
     </>
   );
 };
