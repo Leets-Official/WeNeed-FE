@@ -11,17 +11,7 @@ const RecruitingContainer = ({ data, user }: RecruitingContainerProps) => {
   return (
     <div className="mt-[75px] flex flex-col gap-[50px]">
       {data.map((article) => {
-        const {
-          nickname,
-          major,
-          grade,
-          createdAt,
-          viewCount,
-          heartCount,
-          bookmarkCount,
-        } = article;
-        const { hearted, bookmarked } = user;
-        console.log(article);
+        const { nickname, major, grade, createdAt, profile } = article;
         return (
           <div key={article.articleId}>
             <div className="mb-[11px]">
@@ -29,7 +19,7 @@ const RecruitingContainer = ({ data, user }: RecruitingContainerProps) => {
                 writer={{
                   major,
                   grade,
-                  profile: null,
+                  profile: profile,
                   userId: null,
                   writerNickname: nickname,
                 }}

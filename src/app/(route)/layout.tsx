@@ -5,6 +5,9 @@ import RecoilProvider from 'context/RecoilProvider';
 export const metadata: Metadata = {
   title: '위닛',
   description: 'We need, Win it!',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

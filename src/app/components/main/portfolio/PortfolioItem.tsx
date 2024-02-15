@@ -37,7 +37,7 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
       </div>
       {onRecommend ? (
         <>
-          <p className="absolute z-10 w-[220px] top-[20px] left-[20px] truncate font-semibold">
+          <p className="absolute z-20 w-[220px] top-[20px] left-[20px] truncate font-semibold">
             {(article as RecommendArticle).title}
           </p>
           <div className="absolute top-0 h-20 w-[296px] bg-gradient-to-t from-transparent to-neutral-950 rounded-md"></div>
@@ -45,7 +45,19 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
       ) : (
         <div className="flex justify-between w-full h-[35px] mt-[11px]">
           <div className="flex justify-center items-center gap-[10px]">
-            <GradientProfileSM />
+            {(article as PortfolioArticle).profile ? (
+              <Image
+                width={24}
+                height={24}
+                alt="writer"
+                src={(article as PortfolioArticle).profile || ''}
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            ) : (
+              <GradientProfileSM />
+            )}
             <p className="font-semibold w-[130px] truncate">
               {(article as PortfolioArticle).writerNickname}
             </p>

@@ -17,7 +17,7 @@ const RecruitingDetailContainers = ({
   recruit,
   user,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents } = recruit;
+  const { createdAt, tags, title, contents, files, links, skills } = recruit;
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   useEffect(() => {
@@ -34,12 +34,17 @@ const RecruitingDetailContainers = ({
 
   return (
     <>
-      <div className="flex flex-col items-center w-full mt-[40px] min-h-screen ">
+      <div className="flex flex-col items-center w-full mt-[40px] min-h-[400px] ">
         <DetailContentsInfo tags={tags} createdAt={createdAt} recruit />
         <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
           {title}
         </h3>
-        <RecruitingDetailContents contents={contents} />
+        <RecruitingDetailContents
+          contents={contents}
+          links={links}
+          files={files}
+          skills={skills}
+        />
         <div className="text-black  mt-[100px]">
           {user.sameUser && <WriterOptions onRecruit />}
         </div>

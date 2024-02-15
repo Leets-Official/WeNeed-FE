@@ -1,27 +1,23 @@
 'use client';
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
-import SelectDetailP from '../portfolio/modal/SelectDetailP';
-import SearchTeam from '../portfolio/modal/search/SearchTeam';
+import SelectDetailR from '../recruiting/modal/SelectDetailR';
 
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
   label: string;
 }
 
-const SideNavItem = ({ iconInfo, label }: SideNavItemProps) => {
+const SideNavItemR = ({ iconInfo, label }: SideNavItemProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   let navComponent;
 
   switch (label) {
     case '미리보기':
-      navComponent = <SelectDetailP closeModal={closeModal} />;
+      navComponent = <SelectDetailR closeModal={closeModal} />;
       break;
     case '업로드':
-      navComponent = <SelectDetailP closeModal={closeModal} />;
-      break;
-    case '팀원 추가':
-      navComponent = <SearchTeam closeModal={closeModal} />;
+      navComponent = <SelectDetailR closeModal={closeModal} />;
       break;
     default:
       break;
@@ -43,4 +39,4 @@ const SideNavItem = ({ iconInfo, label }: SideNavItemProps) => {
   );
 };
 
-export default SideNavItem;
+export default SideNavItemR;
