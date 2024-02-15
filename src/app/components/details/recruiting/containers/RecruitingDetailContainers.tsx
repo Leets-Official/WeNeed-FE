@@ -18,7 +18,7 @@ const RecruitingDetailContainers = ({
   user,
 }: RecruitingDetailContainersProps) => {
   const { createdAt, tags, title, contents, files, links, skills } = recruit;
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(user.userId !== -1);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -45,20 +45,23 @@ const RecruitingDetailContainers = ({
           files={files}
           skills={skills}
         />
-        <div className="text-black  mt-[100px]">
-          {user.sameUser && <WriterOptions onRecruit />}
-        </div>
+        {user.userId !== -1 && (
+          <div className="text-black  mt-[100px]">
+            {user.sameUser && <WriterOptions onRecruit />}
+          </div>
+        )}
       </div>
-      {!isLoggedIn && (
-        <ModalPortal nodeName="needLoginPortal">
-          <ModalOutside
-            onClose={() => {}}
-            className="absolute top-[63px] left-0 w-full h-full flex justify-center items-center "
-          >
-            <NeedLoginModal />
-          </ModalOutside>
-        </ModalPortal>
-      )}
+      {!isLoggedIn ||
+        (user.userId == -1 && (
+          <ModalPortal nodeName="needLoginPortal">
+            <ModalOutside
+              onClose={() => {}}
+              className="absolute top-[63px] left-0 w-full h-full flex justify-center items-center "
+            >
+              <NeedLoginModal />
+            </ModalOutside>
+          </ModalPortal>
+        ))}
     </>
   );
 };
