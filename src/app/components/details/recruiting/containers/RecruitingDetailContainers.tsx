@@ -45,9 +45,11 @@ const RecruitingDetailContainers = ({
           files={files}
           skills={skills}
         />
-        <div className="text-black  mt-[100px]">
-          {user.sameUser && <WriterOptions onRecruit />}
-        </div>
+        {user.userId !== -1 && (
+          <div className="text-black  mt-[100px]">
+            {user.sameUser && <WriterOptions onRecruit />}
+          </div>
+        )}
       </div>
       {!isLoggedIn ||
         (user.userId == -1 && (
