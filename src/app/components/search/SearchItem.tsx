@@ -76,7 +76,7 @@ const SearchItem = ({ article, user }: SearchItemProps) => {
             {major} | {grade} 학년
           </p>
         </div>
-        <div className="ml-[79px] ">
+        <div className="ml-[10px] ">
           <Counts count={[viewCount, heartCount, bookmarkCount]} user={user} />
         </div>
       </div>
