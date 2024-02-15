@@ -34,6 +34,7 @@ export default function MainPortfolioPage() {
       );
       const responseData = await response.json();
       setData((prev) => responseData);
+      console.log(data);
     };
 
     fetchData();
@@ -51,9 +52,11 @@ export default function MainPortfolioPage() {
       recommendArticleList,
       user,
     } = data;
+    console.log(data);
+
     return (
       <section>
-        {/* <Header nickname={user.nickname} userId={user.userId} /> */}
+        <Header nickname={user.nickname} userId={user.userId} />
         <div className="flex flex-col items-center justify-center w-full  text-white ">
           <MainNavbar />
           <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
