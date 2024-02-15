@@ -1,6 +1,7 @@
 import { weneedLarge } from 'ui/IconsPath';
 import Icons from '../Icons';
 import { NEED_LOGIN_MODAL } from 'constants/common';
+import GoogleLoginButton from 'components/login/GoogleLoginButton';
 
 const NeedLoginModal = () => {
   return (
@@ -14,7 +15,7 @@ const NeedLoginModal = () => {
       <div className="font-bold text-lg mb-[66px]">
         {NEED_LOGIN_MODAL.sub_title}
       </div>
-      {/* 로그인버튼 */}
+      <GoogleLoginButton />
     </div>
   );
 };

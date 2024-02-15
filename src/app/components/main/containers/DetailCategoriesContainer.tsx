@@ -39,6 +39,12 @@ const DetailCategoriesContainer = () => {
     setSelectedCategories((prev) => [...prev, category]);
   };
 
+  const onRemoveCategory = (categoryToRemove: string) => {
+    setSelectedCategories((prev) =>
+      prev.filter((category) => category !== categoryToRemove),
+    );
+  };
+
   return (
     <div className="w-full relative ">
       <div
@@ -64,14 +70,20 @@ const DetailCategoriesContainer = () => {
             ? INTERESTED_TAG_LIST.map((category) => {
                 return (
                   <SwiperSlide key={category}>
-                    <DetailCategories category={category} />
+                    <DetailCategories
+                      category={category}
+                      onRemoveCategory={onRemoveCategory}
+                    />
                   </SwiperSlide>
                 );
               })
             : selectedCategoriesValue.map((category) => {
                 return (
                   <SwiperSlide key={category}>
-                    <DetailCategories category={category} />
+                    <DetailCategories
+                      category={category}
+                      onRemoveCategory={onRemoveCategory}
+                    />
                   </SwiperSlide>
                 );
               })}
