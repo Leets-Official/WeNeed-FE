@@ -7,7 +7,7 @@ import GradientProfileSM from 'ui/gradient/GradientProfileMD';
 
 interface ProfileProps {
   writer: WriterProfile;
-  date: string;
+  date?: string;
   size: 'large' | 'medium' | 'small';
   onComment?: boolean;
   count?: number[];
@@ -52,9 +52,9 @@ const Profile = ({
         >
           <p className="text-lg">{writerNickname}</p>
           <div className="font-normal flex gap-1.5 text-sm">
-            <p>{major} |</p>
-            <p>{grade}학년 |</p>
-            <p>{formatUploadTime(date)}</p>
+            <p>{major} </p>
+            <p>| {grade}학년 </p>
+            <div>{date && <p> | {formatUploadTime(date)}</p>}</div>
           </div>
         </div>
       </div>
