@@ -7,8 +7,7 @@ export default function MyPageLayout({
 }) {
   return (
     <section>
-      <Header nickname="위니드" userId={1} />
-      <div className="w-full h-full relative z-0">{children}</div>
+      <div className="max-w-[1280px] min-w-[1100px] mx-auto">{children}</div>
     </section>
   );
 }
