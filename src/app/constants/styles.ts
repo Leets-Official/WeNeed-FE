@@ -16,10 +16,18 @@ export const INPUT_STYLE = {
   default: () => 'w-full h-full ',
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
+  upload_recruiter: (className: string) =>
+    `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
 } as const;
 
 export const PROFILE_STYLE = {
   large: () => 'w-[80px]  h-[80px]',
   medium: () => 'w-[56px] h-[56px]',
   small: () => 'w-[24px] h-[24px]',
+} as const;
+
+export const QUESTIONS_BOX_STYLE = {
+  mini: () =>
+    'flex flex-col justify-start items-start w-full h-[153px] bg-white px-[32px] py-[30px] rounded-lg',
+  requirement: () => 'text-red-400 text-sm font-normal',
 } as const;
