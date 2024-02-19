@@ -1,5 +1,6 @@
 'use client';
 
+import Input from 'components/common/Input';
 import { DetailCategoriesContainer } from 'components/main/containers';
 import { RECRUITER_QUESTIONS } from 'constants/crew';
 import { QUESTIONS_BOX_STYLE } from 'constants/styles';
@@ -27,10 +28,31 @@ const ProjectInfoQ = () => {
       </div>
       <div className={QUESTIONS_BOX_STYLE.mini()}>
         <p>{RECRUITER_QUESTIONS.deadline[0]}</p>
-        {/* <Input type="upload_recruiter" /> */}
+        <div className="w-[38%]">
+          <Input
+            type="upload_recruiter"
+            onChange={() => {}}
+            textValue=""
+            placeholder="입력해주세요."
+          />
+          <p className={QUESTIONS_BOX_STYLE.guide()}>
+            {RECRUITER_QUESTIONS.deadline[1]}
+          </p>
+        </div>
       </div>
       <div className={QUESTIONS_BOX_STYLE.mini()}>
         <p>{RECRUITER_QUESTIONS.description[0]}</p>
+        <div className="w-full">
+          <Input
+            type="upload_recruiter"
+            onChange={() => {}}
+            textValue=""
+            placeholder={RECRUITER_QUESTIONS.description[1]}
+          />
+          <p className={QUESTIONS_BOX_STYLE.guide()}>
+            {RECRUITER_QUESTIONS.description[2]}
+          </p>
+        </div>
       </div>
     </div>
   );
