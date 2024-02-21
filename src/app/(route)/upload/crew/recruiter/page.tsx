@@ -1,8 +1,9 @@
-import CrewHeader from 'components/upload/crew/common/CrewHeader';
-import ContentsQ from 'components/upload/crew/recruiter/ContentsQ';
-import MemberInfoQ from 'components/upload/crew/recruiter/MemberInfoQ';
-import ProjectInfoQ from 'components/upload/crew/recruiter/ProjectInfoQ';
-import RecruiteSubmission from 'components/upload/crew/recruiter/RecruiteSubmission';
+
+import CrewHeader from 'components/crew/common/CrewHeader';
+import ContentsQ from 'components/crew/recruiter/ContentsQ';
+import MemberInfoQ from 'components/crew/recruiter/MemberInfoQ';
+import ProjectInfoQ from 'components/crew/recruiter/ProjectInfoQ';
+import RecruiteSubmission from 'components/crew/recruiter/RecruiteSubmission';
 import { HEADER_RECRUITER } from 'constants/crew';
 
 export default async function CrewRecruiterPage() {
