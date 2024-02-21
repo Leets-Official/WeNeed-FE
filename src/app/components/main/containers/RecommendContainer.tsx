@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
 import Link from 'next/link';
 import PortfolioItem from '../portfolio/PortfolioItem';
 
@@ -12,6 +13,17 @@ interface RecommendContainerProps {
 }
 
 const RecommendContainer = ({ data }: RecommendContainerProps) => {
+  const settings = {
+    infinite: true,
+    slidesToScroll: 1,
+    variableWidth: true,
+    centerPadding: '20px',
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 1200,
+    prevArrow: <></>,
+  };
+
   return (
     <div className="relative flex flex-col items-center w-[98vw] h-[525px] scrollbar-hide mt-[68px] bg-neutral-700 pt-[50px] pb-[60px]">
       <div className="flex flex-col gap-[20px] w-[1280px]">
@@ -22,30 +34,15 @@ const RecommendContainer = ({ data }: RecommendContainerProps) => {
           {LOGGEDIN_SECTION_HEADINGS.recommend_sub}
         </h3>
       </div>
-      <div className="w-full h-[310px] mt-[38px]">
-        <Swiper
-          modules={[Autoplay]}
-          loop={true}
-          breakpoints={{
-            1280: { slidesPerView: 5.5 },
-            1024: { slidesPerView: 4 },
-            1920: { slidesPerView: 7 },
-          }}
-          slidesPerView="auto"
-          grabCursor={true}
-          autoplay={{
-            delay: 1500,
-          }}
-        >
-          {data?.map((article) => (
-            <SwiperSlide key={article.articleId}>
-              <Link href={`/portfolio/${article.articleId}`}>
-                <PortfolioItem article={article} onRecommend />
-              </Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      <Slider {...settings} className="w-full h-[310px] mt-[38px]">
+        {data?.map((article) => (
+          <div className="mx-[32px]" key={article.articleId}>
+            <Link href={`/portfolio/${article.articleId}`}>
+              <PortfolioItem article={article} onRecommend />
+            </Link>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
