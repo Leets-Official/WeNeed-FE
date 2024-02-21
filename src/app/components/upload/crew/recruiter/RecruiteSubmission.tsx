@@ -2,11 +2,15 @@
 
 import Button from 'components/common/Button';
 
-const RecruiteSubmission = () => {
+interface RecruiteSubmissionProps {
+  text: string;
+}
+
+const RecruiteSubmission = ({ text }: RecruiteSubmissionProps) => {
   return (
     <div className="w-[80%] flex justify-end mt-[37px] mb-[100px]">
       <Button
-        buttonText="완료"
+        buttonText={text}
         isDisabled={false}
         onClickHandler={() => console.log('제출됨')}
         type="upload_recruiter"

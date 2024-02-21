@@ -13,7 +13,7 @@ export const BUTTON_STYLE = {
   upload: (className: string) =>
     `w-[843px] h-[44px] rounded-[9px] cursor-pointer ${className}`,
   upload_recruiter: (className: string) =>
-    `w-[406px] h-[50px] bg-zinc-300 rounded-lg text-black font-bold flex justify-center items-center ${className}`,
+    `w-[406px] h-[50px] bg-zinc-300 rounded-lg text-black font-bold flex justify-center items-center  hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:text-white ${className}`,
   default: () => 'w-full h-full',
 } as const;
 
