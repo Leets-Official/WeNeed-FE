@@ -36,3 +36,14 @@ export const RECRUITER_QUESTIONS = {
   content: '크루를 하고 싶은 분께 하고 싶은 말을 작성해주세요.',
   keywords: '이런 분과 함께 하고 싶어요.',
 } as const;
+
+export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
+  deadline: '모집 기간',
+  description: '프로젝트 한줄 소개',
+  task_need: '필요한 크루의 업무',
+  member_count: '필요한 크루의 인원',
+  phone: '연락처',
+  crew_questions: '궁금한 질문',
+  content: '전하고 싶은 말',
+  keywords: '이런 분과 함께 크루를 하고 싶어요!',
+} as const;
