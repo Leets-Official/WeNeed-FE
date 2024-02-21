@@ -52,7 +52,6 @@ export default function MainPortfolioPage() {
       recommendArticleList,
       user,
     } = data;
-    console.log(data);
 
     return (
       <section>

@@ -1,96 +1,83 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/scrollbar';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { bigLeftAngle } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import { selectedCategories } from 'recoil/main';
 import { useRecoilState } from 'recoil';
-import { useEffect, useState } from 'react';
 import DetailCategories from '../common/DetailCategories';
 
 const DetailCategoriesContainer = () => {
   const [selectedCategoriesValue, setSelectedCategories] =
     useRecoilState(selectedCategories);
-  const [slidesPerView, setSlidesPerView] = useState<number>(9.75);
-  const [containerWidth, setContainerWidth] = useState<number | null>(null);
 
-  useEffect(() => {
-    if (
-      selectedCategoriesValue.length === 0 ||
-      selectedCategoriesValue.length > 9
-    ) {
-      setSlidesPerView(9.75);
-    } else {
-      setSlidesPerView(Math.min(selectedCategoriesValue.length));
-    }
-  }, [selectedCategoriesValue]);
+  const onRemoveAllCategories = () => {
+    setSelectedCategories([]);
+  };
 
-  useEffect(() => {
-    const totalWidth = selectedCategoriesValue.length * 125;
-    setContainerWidth(totalWidth);
-  }, [selectedCategoriesValue]);
-
-  const onSelectCategory = (category: string) => {
-    setSelectedCategories((prev) => [...prev, category]);
+  const settings = {
+    infinite: false,
+    slidesToScroll: 3,
+    variableWidth: true,
+    centerPadding: '20px',
+    nextArrow: (
+      <CustomNextArrow
+        selectedCategoriesValue={selectedCategoriesValue}
+        onRemoveAllCategories={onRemoveAllCategories}
+      />
+    ),
+    prevArrow: <></>,
   };
 
   return (
-    <div className="w-full relative ">
-      <div
-        className="relative flex justify-start items-start w-auto h-9 rounded-3xl gap-[20px]"
-        style={{
-          width:
-            selectedCategoriesValue.length > 9 ||
-            selectedCategoriesValue.length === 0
-              ? '100%'
-              : containerWidth + 'px',
-        }}
+    <div className="w-full h-[35px] relative">
+      <Slider
+        {...settings}
+        className={`relative flex justify-center items-center ${
+          selectedCategoriesValue.length > 9 ? 'w-[90%]' : 'w-full'
+        }  h-full`}
       >
-        <Swiper
-          modules={[Navigation]}
-          slidesPerView={slidesPerView}
-          navigation={{
-            nextEl: '.swiper-button-next-category',
-          }}
-          centeredSlides={false}
-          grabCursor={true}
-        >
-          {selectedCategoriesValue.length === 0
-            ? INTERESTED_TAG_LIST.map((category) => {
-                return (
-                  <SwiperSlide key={category}>
-                    <DetailCategories category={category} />
-                  </SwiperSlide>
-                );
-              })
-            : selectedCategoriesValue.map((category) => {
-                return (
-                  <SwiperSlide key={category}>
-                    <DetailCategories category={category} />
-                  </SwiperSlide>
-                );
-              })}
-        </Swiper>
+        {selectedCategoriesValue.length === 0
+          ? INTERESTED_TAG_LIST.map((category) => (
+              <DetailCategories key={category} category={category} />
+            ))
+          : selectedCategoriesValue.map((category) => (
+              <DetailCategories key={category} category={category} />
+            ))}
+      </Slider>
+    </div>
+  );
+};
 
-        {(selectedCategoriesValue.length > 9 ||
-          selectedCategoriesValue.length === 0) && (
-          <>
-            <div className="z-20 swiper-button-next-category flex justify-center items-center absolute right-1 top-1.5 w-6 h-6 pl-1 bg-zinc-300 rounded-full cursor-pointer">
-              <Icons name={bigLeftAngle} />
-            </div>
-            <div className="z-10 absolute top-0 right-[-1%] w-32 h-9 bg-gradient-to-r from-transparent to-neutral-950 rounded-xl"></div>
-          </>
-        )}
-      </div>
-      {selectedCategoriesValue.length !== 0 && (
+export default DetailCategoriesContainer;
+
+const CustomNextArrow = (props: any) => {
+  const { onClick, selectedCategoriesValue, onRemoveAllCategories } = props;
+  return (
+    <div className="flex items-center justify-center ">
+      {(selectedCategoriesValue.length === 0 ||
+        selectedCategoriesValue.length > 10) && (
+        <>
+          <div className="z-10 absolute top-0 right-[-1%] w-40 h-9 bg-gradient-to-r from-transparent to-neutral-950 rounded-xl"></div>
+
+          <div
+            className="z-30 flex justify-center items-center absolute right-1 top-1.5 w-6 h-6 pl-1 bg-zinc-300 rounded-full cursor-pointer"
+            onClick={onClick}
+          >
+            <Icons name={bigLeftAngle} />
+          </div>
+        </>
+      )}
+      {selectedCategoriesValue.length > 0 && (
         <div
-          className=" absolute top-2 right-[5%] font-normal text-sm border-b-1 border-[#FFFFFF] text-[#FFFFFF] cursor-pointer"
-          onClick={() => setSelectedCategories([])}
+          className={`flex justify-center items-center h-full z-20 absolute top-0  text-white text-sm font-normal cursor-pointer ${
+            selectedCategoriesValue.length > 9 ? 'right-[-5%]' : 'right-5'
+          } `}
+          onClick={onRemoveAllCategories}
         >
           초기화
         </div>
@@ -98,5 +85,3 @@ const DetailCategoriesContainer = () => {
     </div>
   );
 };
-
-export default DetailCategoriesContainer;
