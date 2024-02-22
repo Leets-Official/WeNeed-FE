@@ -11,7 +11,7 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
   return (
     <div className="w-[80%] h-[1274px] bg-white rounded-lg px-[39px] py-[43px] ">
       <Profile writer={mockWriter} size="large" date="" />
-      <div className="w-full flex mt-[70px] text-white">
+      <div className="w-full flex mt-[40px] text-white">
         {mockInfo.detailTag.map((category) => (
           <DetailCategories key={category} category={category} />
         ))}

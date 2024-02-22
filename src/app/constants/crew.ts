@@ -37,6 +37,42 @@ export const RECRUITER_QUESTIONS = {
   keywords: '이런 분과 함께 하고 싶어요.',
 } as const;
 
+export const APPLICANT_QUESTIONS = {
+  name: '이름',
+  major: '학과',
+  doubleMajor: ['복수전공', '복수 전공인 경우만 작성해주세요.'],
+  international: ['내국인', '외국인'], //boolean
+  grade: ['학년', '1학년'],
+  status: ['학적 상태', '재학'],
+  phone: [
+    '전화번호를 입력해주세요.',
+    '지원서를 열람하는 분만 연락처를 볼 수 있습니다.',
+  ],
+  available_time: '작업을 할 수 있는 시간대는 언제인가요?',
+  about_me: '본인을 표현할 수 있는 한마디를 작성해주세요.',
+  appeal: ['어필 할 수 있는 파일을 올려주세요.', '파일'],
+  content: '크루를 하고 싶은 분께 하고 싶은 말을 작성해주세요. ',
+  keywords: ['저를 표현 할 수 있는 태그를 선택해 주세요.'],
+} as const;
+
+export const APPLICANT_COMPLETE = {
+  name: '이름',
+  major: '학과',
+  doubleMajor: ['복수전공', '복수 전공인 경우만 작성해주세요.'],
+  international: ['내국인', '외국인'], //boolean
+  grade: ['학년', '1학년'],
+  status: ['학적 상태', '재학'],
+  phone: [
+    '전화번호를 입력해주세요.',
+    '지원서를 열람하는 분만 연락처를 볼 수 있습니다.',
+  ],
+  available_time: '작업을 할 수 있는 시간대는 언제인가요?',
+  about_me: '본인을 표현할 수 있는 한마디를 작성해주세요.',
+  appeal: ['어필 할 수 있는 파일을 올려주세요.', '파일'],
+  content: '크루를 하고 싶은 분께 하고 싶은 말을 작성해주세요. ',
+  keywords: ['저를 표현 할 수 있는 태그를 선택해 주세요.'],
+} as const;
+
 export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
   deadline: '모집 기간',
   description: '프로젝트 한줄 소개',
@@ -47,3 +83,20 @@ export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
   content: '전하고 싶은 말',
   keywords: '이런 분과 함께 크루를 하고 싶어요!',
 } as const;
+
+export const CREW_KEYWORDS = [
+  '센스',
+  '능력갑',
+  '친절',
+  '시간이많아요',
+  '배려',
+  '열정적',
+  '긍정적',
+  '다재다능',
+  '리더쉽',
+  '효울적',
+  '공과사구분',
+  '같은연령대',
+  '같은성별원해요',
+  '정리를잘해요',
+];
