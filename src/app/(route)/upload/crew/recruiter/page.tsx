@@ -1,3 +1,4 @@
+
 import CrewHeader from 'components/crew/common/CrewHeader';
 import ContentsQ from 'components/crew/recruiter/ContentsQ';
 import MemberInfoQ from 'components/crew/recruiter/MemberInfoQ';
@@ -12,7 +13,7 @@ export default async function CrewRecruiterPage() {
       <ProjectInfoQ />
       <MemberInfoQ />
       <ContentsQ />
-      <RecruiteSubmission />
+      <RecruiteSubmission text="완료" />
     </section>
   );
 }

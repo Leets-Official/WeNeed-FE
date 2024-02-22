@@ -58,3 +58,14 @@ interface UploadRecruitTypes {
   skills: string[];
   tags: string[];
 }
+
+interface RecruitmentComplete {
+  deadline: string;
+  description: string;
+  task_need: string;
+  member_count: string;
+  phone: string;
+  crew_questions: string;
+  content: string;
+  keywords: string;
+}
