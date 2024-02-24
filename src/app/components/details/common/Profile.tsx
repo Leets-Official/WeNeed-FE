@@ -14,17 +14,11 @@ interface ProfileProps {
   user?: {
     bookmarked: boolean;
     hearted: boolean;
+    userId?: number;
   };
 }
 
-const Profile = ({
-  writer,
-  date,
-  count,
-  onComment,
-  size,
-  user,
-}: ProfileProps) => {
+const Profile = ({ writer, date, count, onComment, size }: ProfileProps) => {
   const { writerNickname, major, profile, grade } = writer;
   const profileStyles = PROFILE_STYLE[size || '']();
   return (
@@ -58,7 +52,7 @@ const Profile = ({
           </div>
         </div>
       </div>
-      {count && <Counts count={count} user={user} />}
+      {count && <Counts count={count} />}
     </div>
   );
 };
