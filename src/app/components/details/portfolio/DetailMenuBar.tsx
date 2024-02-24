@@ -1,7 +1,7 @@
 'use client';
 
 import Icons from 'components/common/Icons';
-import { useRouter } from 'next/navigation';
+import useMenuHandlers from 'hooks/details/useMenuHandlers';
 import { useState } from 'react';
 import {
   comment,
@@ -28,45 +28,7 @@ const DetailMenuBar = ({
   onRecruit,
 }: DetailMenuBarProps) => {
   const [hovered, setHovered] = useState<boolean>(false);
-  const router = useRouter();
-  const DETAIL_MENU_HANDLERS: Record<string, () => void> = {
-    프로필: () => router.push(`/mypage/${userId}`),
-    크루제안: () => alert('준비중인 서비스입니다 :)'),
-    좋아요: () => {
-      onSubmitOption('like');
-    },
-    북마크: () => {
-      onSubmitOption('bookmark');
-    },
-    댓글: () => {
-      scrollToComments();
-    },
-    공유: () => {},
-  };
-
-  const scrollToComments = () => {
-    window.scrollTo({
-      top: window.scrollY + 400,
-      behavior: 'smooth',
-    });
-  };
-
-  const onSubmitOption = async (type: string) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/${type}?articleId=${articleId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-      window.location.reload();
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const DETAIL_MENU_HANDLERS = useMenuHandlers(userId, articleId);
 
   return (
     <div
