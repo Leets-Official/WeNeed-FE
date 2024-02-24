@@ -34,7 +34,6 @@ export default function MainPortfolioPage() {
       );
       const responseData = await response.json();
       setData((prev) => responseData);
-      console.log(data);
     };
 
     fetchData();

@@ -7,8 +7,8 @@ import GradientProfileSM from 'ui/gradient/GradientProfileMD';
 
 interface ProfileProps {
   writer: WriterProfile;
-  date?: string;
   size: 'large' | 'medium' | 'small';
+  date?: string;
   onComment?: boolean;
   count?: number[];
   user?: {
