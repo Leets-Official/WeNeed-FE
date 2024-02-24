@@ -2,7 +2,6 @@
 
 import Icons from 'components/common/Icons';
 import useMenuHandlers from 'hooks/details/useMenuHandlers';
-import { useState } from 'react';
 import {
   comment,
   crewPlus,
@@ -27,8 +26,11 @@ const DetailMenuBar = ({
   articleId,
   onRecruit,
 }: DetailMenuBarProps) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const DETAIL_MENU_HANDLERS = useMenuHandlers(userId, articleId);
+  const { detailMenuHandlers, hearted, bookmarked } = useMenuHandlers(
+    userId,
+    articleId,
+    user,
+  );
 
   return (
     <div
@@ -46,9 +48,9 @@ const DetailMenuBar = ({
           >
             <div
               className="flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white"
-              onClick={DETAIL_MENU_HANDLERS[menu]}
+              onClick={detailMenuHandlers[menu]}
             >
-              {icon(user.hearted, user.bookmarked, hovered)}
+              {icon(hearted, bookmarked)}
             </div>
             <div>{menu}</div>
           </div>
@@ -62,11 +64,7 @@ export default DetailMenuBar;
 
 const DETAIL_MENU_RENDER: Record<
   string,
-  (
-    filledheart: boolean,
-    filledBookmark: boolean,
-    hovered: boolean,
-  ) => React.ReactNode
+  (filledheart: boolean, filledBookmark: boolean) => React.ReactNode
 > = {
   프로필: () => (
     <Icons name={goToprofile} className="hover:fill-black w-full" />
