@@ -12,6 +12,7 @@ import {
   heartCountState,
   heartedPostState,
 } from 'recoil/details';
+import useMenuHandlers from 'hooks/details/useMenuHandlers';
 
 interface CountsProps {
   count: number[];

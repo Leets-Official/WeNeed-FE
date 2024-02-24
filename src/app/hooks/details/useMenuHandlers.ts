@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   bookmarkCountState,
   bookmarkedPostState,
@@ -16,8 +16,8 @@ const useMenuHandlers = (
   const router = useRouter();
   const [hearted, setHearted] = useRecoilState(heartedPostState);
   const [bookmarked, setBookmarked] = useRecoilState(bookmarkedPostState);
-  const [heartCount, setHeartCount] = useRecoilState(heartCountState);
-  const [bookmarkCount, setBookmarkCount] = useRecoilState(bookmarkCountState);
+  const setHeartCount = useSetRecoilState(heartCountState);
+  const setBookmarkCount = useSetRecoilState(bookmarkCountState);
 
   useEffect(() => {
     setHearted(user.hearted);
