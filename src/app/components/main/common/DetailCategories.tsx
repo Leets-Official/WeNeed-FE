@@ -6,7 +6,7 @@ interface DetailCategoriesProps {
 const DetailCategories = ({ category, noBg }: DetailCategoriesProps) => {
   return (
     <div
-      className={`flex mr-[20px] w-[105px] max-w-[120px] px-2 h-9 pt-1 ${
+      className={`flex mr-[15px] px-[18px] h-9 pt-1 cursor-pointer ${
         noBg
           ? 'border border-black '
           : 'bg-gradient-to-r from-[#00E0EE] to-[#517EF3]'
