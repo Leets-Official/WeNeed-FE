@@ -7,6 +7,8 @@ import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { uploadDataState, uploadForm } from 'recoil/upload';
+import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
+import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -16,6 +18,8 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
@@ -27,6 +31,7 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
+    setLoading(true);
     setUploadData({
       ...uploadData,
       title: title,
@@ -62,6 +67,12 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
           body: uploadFormData,
         },
       );
+      if (true) {
+        setTimeout(() => {
+          setLoading(false);
+          setCompleted(true);
+        }, 2000);
+      }
     } catch (e) {
       console.log('넥스트 서버 보내기 전 오류발생', e);
     }
@@ -69,6 +80,8 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      {loading && <SubmitLoading />}
+      {completed && <SubmitCompleted />}
       <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
         <div
           onClick={closeModal}
