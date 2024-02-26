@@ -16,7 +16,7 @@ const UploadContainerR = () => {
 
   return (
     <div className="bg-black">
-      <div className="flex flex-col w-[1280px] mt-[22px] h-auto bg-white gap-y-2.5">
+      <div className="relative flex flex-col w-[100%] h-auto mt-[22px] bg-white gap-y-2.5">
         <AddThumbnail thumbnailInfo={recruitThumbnail} />
         <div className="relative">
           {items.length > 0 ? (
@@ -35,7 +35,7 @@ const UploadContainerR = () => {
         <div className="flex justify-center pb-[46px]">
           {items.length > 0 && <SelectFileR />}
         </div>
-        {/* <BigSentence /> */}
+        <BigSentence />
       </div>
     </div>
   );
