@@ -47,3 +47,8 @@ export const uploadRecruitState = atom<UploadRecruitTypes>({
     tags: [],
   },
 });
+
+export const crewRecruiterState = atom<null>({
+  key: 'crewRecruiterState',
+  default: null,
+});
