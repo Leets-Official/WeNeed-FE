@@ -34,7 +34,6 @@ export default function MainPortfolioPage() {
       );
       const responseData = await response.json();
       setData((prev) => responseData);
-      console.log(data);
     };
 
     fetchData();
@@ -52,6 +51,7 @@ export default function MainPortfolioPage() {
       recommendArticleList,
       user,
     } = data;
+
     return (
       <section>
         <Header nickname={user.nickname} userId={user.userId} />

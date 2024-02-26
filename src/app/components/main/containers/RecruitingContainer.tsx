@@ -9,7 +9,7 @@ interface RecruitingContainerProps {
 
 const RecruitingContainer = ({ data, user }: RecruitingContainerProps) => {
   return (
-    <div className="mt-[75px] flex flex-col gap-[50px]">
+    <div className="mt-[75px] flex flex-col gap-[50px] w-full">
       {data.map((article) => {
         const { nickname, major, grade, createdAt, profile } = article;
         return (

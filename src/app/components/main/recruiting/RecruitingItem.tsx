@@ -8,7 +8,7 @@ interface RecruitingItemProps {
 const RecruitingItem = ({ article }: RecruitingItemProps) => {
   const { title, thumbnail, content } = article;
   return (
-    <div className="w-[1280px] h-[809px] flex flex-col items-center bg-white text-black rounded-2xl pt-[40px] px-[43px]">
+    <div className="w-full h-[809px] flex flex-col items-center bg-white text-black rounded-2xl pt-[40px] px-[43px]">
       <h3 className="flex flex-wrap text-[30px] w-full h-[87px] font-bold clamp-2">
         {title}
       </h3>
