@@ -1,8 +1,7 @@
 'use client';
 
 import Icons from 'components/common/Icons';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import useMenuHandlers from 'hooks/details/useMenuHandlers';
 import {
   comment,
   crewPlus,
@@ -27,46 +26,11 @@ const DetailMenuBar = ({
   articleId,
   onRecruit,
 }: DetailMenuBarProps) => {
-  const [hovered, setHovered] = useState<boolean>(false);
-  const router = useRouter();
-  const DETAIL_MENU_HANDLERS: Record<string, () => void> = {
-    프로필: () => router.push(`/mypage/${userId}`),
-    크루제안: () => alert('준비중인 서비스입니다 :)'),
-    좋아요: () => {
-      onSubmitOption('like');
-    },
-    북마크: () => {
-      onSubmitOption('bookmark');
-    },
-    댓글: () => {
-      scrollToComments();
-    },
-    공유: () => {},
-  };
-
-  const scrollToComments = () => {
-    window.scrollTo({
-      top: window.scrollY + 400,
-      behavior: 'smooth',
-    });
-  };
-
-  const onSubmitOption = async (type: string) => {
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/${type}?articleId=${articleId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-      window.location.reload();
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const { detailMenuHandlers, hearted, bookmarked } = useMenuHandlers(
+    userId,
+    articleId,
+    user,
+  );
 
   return (
     <div
@@ -84,9 +48,9 @@ const DetailMenuBar = ({
           >
             <div
               className="flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white"
-              onClick={DETAIL_MENU_HANDLERS[menu]}
+              onClick={detailMenuHandlers[menu]}
             >
-              {icon(user.hearted, user.bookmarked, hovered)}
+              {icon(hearted, bookmarked)}
             </div>
             <div>{menu}</div>
           </div>
@@ -100,11 +64,7 @@ export default DetailMenuBar;
 
 const DETAIL_MENU_RENDER: Record<
   string,
-  (
-    filledheart: boolean,
-    filledBookmark: boolean,
-    hovered: boolean,
-  ) => React.ReactNode
+  (filledheart: boolean, filledBookmark: boolean) => React.ReactNode
 > = {
   프로필: () => (
     <Icons name={goToprofile} className="hover:fill-black w-full" />

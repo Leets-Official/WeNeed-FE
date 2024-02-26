@@ -1,38 +1,54 @@
+'use client';
 import { bookmark, heart } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
 import GradientBookmark from 'ui/gradient/GradientBookmark';
 import GradientHeart from 'ui/gradient/GradientHeart';
 import GradientView from 'ui/gradient/GradientView';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  bookmarkCountState,
+  bookmarkedPostState,
+  heartCountState,
+  heartedPostState,
+} from 'recoil/details';
+import useMenuHandlers from 'hooks/details/useMenuHandlers';
 
 interface CountsProps {
   count: number[];
-  user?: {
-    bookmarked: boolean;
-    hearted: boolean;
-  };
 }
 
-const Counts = ({ count, user }: CountsProps) => {
+const Counts = ({ count }: CountsProps) => {
+  const [heartCount, setHeartCount] = useRecoilState(heartCountState);
+  const [bookmarkCount, setBookmarkCount] = useRecoilState(bookmarkCountState);
+  const hearted = useRecoilValue(heartedPostState);
+  const bookmarked = useRecoilValue(bookmarkedPostState);
+
+  useEffect(() => {
+    setHeartCount(() => count[1]);
+    setBookmarkCount(() => count[2]);
+  }, []);
+
   return (
     <div className="flex gap-[32px] h-[75px] items-center justify-center w-[20%]">
       <p className="flex gap-[10px] cursor-pointer">
         <GradientView width={24} height={18} /> {count[0]}
       </p>
       <p className="flex gap-[10px] cursor-pointer">
-        {user?.hearted ? (
+        {hearted ? (
           <GradientHeart width={24} height={24} />
         ) : (
           <Icons name={heart} />
         )}
-        {count[1]}
+        {heartCount}
       </p>
       <p className="flex  gap-[10px] cursor-pointer">
-        {user?.bookmarked ? (
+        {bookmarked ? (
           <GradientBookmark width={17} height={24} />
         ) : (
           <Icons name={bookmark} />
         )}
-        {count[2]}
+        {bookmarkCount}
       </p>
     </div>
   );
