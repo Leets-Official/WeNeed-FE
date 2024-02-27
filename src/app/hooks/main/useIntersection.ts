@@ -1,19 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-interface useIntersectionTypes {
+interface useIntersectionProps {
   root?: null;
   rootMargin?: string;
   threshold?: number;
-  onIntersect: () => void;
+  onIntersect: IntersectionObserverCallback;
 }
 
 const useIntersection = ({
   root,
-  rootMargin = '0px',
+  rootMargin = '100px',
   threshold = 0.5,
   onIntersect,
-}: useIntersectionTypes) => {
-  const [target, setTarget] = useState<HTMLDivElement | null>(null);
+}: useIntersectionProps) => {
+  const [target, setTarget] = useState<HTMLElement | null | undefined>(null);
+
+  useEffect(() => {
+    if (!target) return;
+
+    const observer: IntersectionObserver = new IntersectionObserver(
+      onIntersect,
+      { root, rootMargin, threshold },
+    );
+    observer.observe(target);
+
+    return () => observer.unobserve(target);
+  }, [onIntersect, root, rootMargin, target, threshold]);
+  return { setTarget };
 };
 
 export default useIntersection;
