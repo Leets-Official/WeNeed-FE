@@ -14,7 +14,7 @@ const SideNav = ({
   articleType,
 }: SideNavProps) => {
   return (
-    <div className="fixed top-[32%] right-[8%] flex flex-col w-[76px] h-[371px] justify-start items-center gap-y-[25px]">
+    <div className="fixed top-[32%] right-[2%] flex flex-col w-[76px] h-[371px] justify-start items-center gap-y-[25px]">
       {navItemIconPath.map((item, index) =>
         articleType === 'portfolio' ? (
           <SideNavItemP

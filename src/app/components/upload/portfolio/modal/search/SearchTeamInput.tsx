@@ -24,10 +24,13 @@ const SearchTeamInput = () => {
   };
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(() => event.target.value);
-    const relatedUsers = await searchUser(searchText);
-    if (relatedUsers) {
-      setRelatedUsers(relatedUsers);
+    const searchText = event.target.value;
+    setSearchText(searchText);
+    if (searchText !== '') {
+      const relatedUsers = await searchUser(searchText);
+      if (relatedUsers) {
+        setRelatedUsers(relatedUsers);
+      }
     }
   };
 
