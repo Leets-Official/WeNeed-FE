@@ -11,7 +11,9 @@ import Header from 'components/layout/Header';
 
 export default function MainRecruitingPage() {
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
-  const [data, setData] = useState<ResponseRecruitingMain | null>(null);
+  const [data, setData] = useState<ResponseRecruitingMain | null | undefined>(
+    null,
+  );
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
@@ -24,14 +26,12 @@ export default function MainRecruitingPage() {
         }`,
       );
       const responseData = await response.json();
-      if (responseData) {
-        setData((prevData: ResponseRecruitingMain | null) => ({
-          ...prevData,
-          recruitList: prevData
-            ? [...prevData.recruitList, ...responseData.recruitList]
-            : responseData.recruitList,
-        }));
-      }
+      setData((prevData: ResponseRecruitingMain | null | undefined) => ({
+        ...prevData!,
+        recruitList: prevData
+          ? [...prevData.recruitList, ...responseData.recruitList]
+          : responseData.recruitList,
+      }));
     };
 
     fetchData();
