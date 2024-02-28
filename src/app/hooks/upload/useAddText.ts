@@ -26,6 +26,10 @@ const useAddText = () => {
     setUploadData({ ...uploadData, content: items });
   };
 
+  const addShare = () => {
+    setUploadData({ ...uploadData, sharedText: text });
+  };
+
   const handleConfirm = (fileType: string) => {
     if (fileType === '링크') {
       addText('link');
@@ -34,7 +38,8 @@ const useAddText = () => {
     } else if (fileType === '음성') {
       addText('sound');
     } else {
-      console.log('기타 파일을 처리합니다.');
+      addShare();
+      console.log('나누고 싶은 문장 추가', text);
     }
   };
 

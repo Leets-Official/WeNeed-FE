@@ -1,4 +1,12 @@
-import { docs, image, link, sound, text, video } from 'ui/upload/fileType';
+import {
+  docs,
+  image,
+  link,
+  share,
+  sound,
+  text,
+  video,
+} from 'ui/upload/fileType';
 import UploadFile from './uploadFile/UploadFile';
 import UploadText from './uploadFile/UploadText';
 
@@ -19,6 +27,8 @@ const ModalSelector = ({ fileType, closeModal }: ModalSelectorProps) => {
       return <UploadFile uploadInfo={image} closeModal={closeModal} />;
     case '문서':
       return <UploadFile uploadInfo={docs} closeModal={closeModal} />;
+    case '나누고 싶은 문장':
+      return <UploadText uploadInfo={share} closeModal={closeModal} />;
     case '비디오':
       return <UploadFile uploadInfo={video} closeModal={closeModal} />;
     default:

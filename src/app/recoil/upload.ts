@@ -34,19 +34,21 @@ export const uploadDataState = atom<UploadPFTypes>({
     skills: [],
     tags: [],
     teamMembersId: [],
+    sharedText: '',
   },
 });
 
-export const uploadRecruitState = atom<UploadRecruitTypes>({
-  key: 'uploadRecruitState',
-  default: {
-    articleType: 'PORTFOLIO',
-    title: '',
-    content: [],
-    skills: [],
-    tags: [],
-  },
-});
+// export const uploadRecruitState = atom<UploadRecruitTypes>({
+//   key: 'uploadRecruitState',
+//   default: {
+//     articleType: 'RECRUTING',
+//     title: '',
+//     content: [],
+//     skills: [],
+//     tags: [],
+//     sharedText: '',
+//   },
+// });
 
 export const crewRecruiterState = atom<null>({
   key: 'crewRecruiterState',

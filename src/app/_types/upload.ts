@@ -50,14 +50,16 @@ interface UploadPFTypes {
   skills: string[];
   tags: string[];
   teamMembersId: number[];
+  sharedText?: string;
 }
-interface UploadRecruitTypes {
-  articleType: string;
-  title: string;
-  content: ContentTypes[];
-  skills: string[];
-  tags: string[];
-}
+// interface UploadRecruitTypes {
+//   articleType: string;
+//   title: string;
+//   content: ContentTypes[];
+//   skills: string[];
+//   tags: string[];
+//   sharedText?: string;
+// }
 
 interface RecruitmentComplete {
   deadline: string;

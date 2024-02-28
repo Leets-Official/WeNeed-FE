@@ -40,6 +40,11 @@ export const link = {
   announcement: '링크를 입력하세요!',
 };
 
+export const share = {
+  fileType: '나누고 싶은 큰 문장',
+  announcement: '나누고 싶은 문장을 입력하세요!',
+};
+
 export const imgAndVideo = {
   width: 118,
   height: 118,
