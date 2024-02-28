@@ -28,6 +28,7 @@ export default function MainRecruitingPage() {
       const responseData = await response.json();
       setData((prevData: ResponseRecruitingMain | null | undefined) => ({
         ...prevData!,
+        user: responseData.user,
         recruitList: prevData
           ? [...prevData.recruitList, ...responseData.recruitList]
           : responseData.recruitList,
@@ -45,19 +46,18 @@ export default function MainRecruitingPage() {
     }
   };
 
-  if (data)
+  if (data) {
+    const { user, recruitList } = data;
     return (
       <section className="flex flex-col items-center w-full min-h-screen text-white ">
-        <Header nickname={data.user?.nickname} userId={data.user?.userId} />
+        <Header nickname={user.nickname} userId={user.userId} />
         <MainNavbar />
         <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
           {LOGGEDIN_SECTION_HEADINGS.crew}
         </h1>
         <DetailCategoriesContainer />
-        <RecruitingContainer
-          onIntersect={onIntersect}
-          data={data.recruitList}
-        />
+        <RecruitingContainer onIntersect={onIntersect} data={recruitList} />
       </section>
     );
+  }
 }
