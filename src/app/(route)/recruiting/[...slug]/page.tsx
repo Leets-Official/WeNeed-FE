@@ -56,7 +56,7 @@ export default function RecruitingPage({
               articleId={params.slug}
               user={data.user}
             />
-            <div className="fixed top-[105px] right-[5%] ">
+            <div className="fixed top-[105px] right-[2%] ">
               <DetailMenuBar
                 articleId={params.slug}
                 user={data.user}
