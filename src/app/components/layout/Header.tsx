@@ -10,7 +10,7 @@ interface HeaderProps {
 
 const Header = ({ nickname, userId }: HeaderProps) => {
   return (
-    <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center">
+    <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center min-w-[800px]">
       <div className="h-full flex items-center gap-[78px]">
         <Link href={'/main/portfolio'}>
           <Icons name={weneed} />

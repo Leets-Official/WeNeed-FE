@@ -28,6 +28,7 @@ export default function MainRecruitingPage() {
       const responseData = await response.json();
       setData((prevData: ResponseRecruitingMain | null | undefined) => ({
         ...prevData!,
+        pageable: responseData.pageable,
         user: responseData.user,
         recruitList: prevData
           ? [...prevData.recruitList, ...responseData.recruitList]
@@ -41,7 +42,7 @@ export default function MainRecruitingPage() {
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
-    if (isIntersecting) {
+    if (isIntersecting && page != data?.pageable.totalPages) {
       setPage((prevPage) => prevPage + 1);
     }
   };
@@ -56,7 +57,11 @@ export default function MainRecruitingPage() {
           {LOGGEDIN_SECTION_HEADINGS.crew}
         </h1>
         <DetailCategoriesContainer />
-        <RecruitingContainer onIntersect={onIntersect} data={recruitList} />
+        <RecruitingContainer
+          onIntersect={onIntersect}
+          data={data.recruitList}
+          user={data.user}
+        />
       </section>
     );
   }

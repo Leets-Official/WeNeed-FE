@@ -85,13 +85,15 @@ const PortfolioDetailsContainer = ({
                 </Link>
               ))}
           </div>
-          <Profile
-            writer={writer}
-            date={createdAt}
-            count={[viewCount, heartCount, bookmarkCount]}
-            user={{ bookmarked, hearted }}
-            size="large"
-          />
+          <Link href={`/mypage/${writer.userId}`}>
+            <Profile
+              writer={writer}
+              date={createdAt}
+              count={[viewCount, heartCount, bookmarkCount]}
+              user={{ bookmarked, hearted }}
+              size="large"
+            />
+          </Link>
         </div>
         <DetailContentsInfo tags={tags} createdAt={createdAt} />
         <DetailContents

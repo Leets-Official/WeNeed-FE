@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
   bookmarkCountState,
   bookmarkedPostState,
@@ -11,17 +11,19 @@ import {
 const useMenuHandlers = (
   userId: number,
   articleId: string,
-  user: UserProfile,
+  user?: UserProfile,
 ) => {
   const router = useRouter();
   const [hearted, setHearted] = useRecoilState(heartedPostState);
   const [bookmarked, setBookmarked] = useRecoilState(bookmarkedPostState);
-  const setHeartCount = useSetRecoilState(heartCountState);
-  const setBookmarkCount = useSetRecoilState(bookmarkCountState);
+  const [heartCount, setHeartCount] = useRecoilState(heartCountState);
+  const [bookmarkCount, setBookmarkCount] = useRecoilState(bookmarkCountState);
 
   useEffect(() => {
-    setHearted(user.hearted);
-    setBookmarked(user.bookmarked);
+    if (user) {
+      setHearted(user.hearted);
+      setBookmarked(user.bookmarked);
+    }
   }, []);
 
   const scrollToComments = () => {
@@ -31,8 +33,10 @@ const useMenuHandlers = (
     });
   };
 
-  const goToProfile = () => {
-    router.push(`/mypage/${userId}`);
+  const goToPage = (type: string) => {
+    type === 'mypage'
+      ? router.push(`/${type}/${userId}`)
+      : router.push(`/${type}/${articleId}`);
   };
 
   const onSubmitOption = async (type: string) => {
@@ -61,8 +65,8 @@ const useMenuHandlers = (
   };
 
   const detailMenuHandlers: Record<string, () => void> = {
-    프로필: () => goToProfile(),
-    크루제안: () => alert('준비중인 서비스입니다 :)'),
+    프로필: () => goToPage('mypage'),
+    크루제안: () => goToPage('crew/recruitment'),
     좋아요: () => {
       onSubmitOption('like');
     },
@@ -74,7 +78,14 @@ const useMenuHandlers = (
     },
     공유: () => {},
   };
-  return { detailMenuHandlers, hearted, bookmarked, onSubmitOption };
+  return {
+    detailMenuHandlers,
+    hearted,
+    bookmarked,
+    heartCount,
+    bookmarkCount,
+    onSubmitOption,
+  };
 };
 
 export default useMenuHandlers;
