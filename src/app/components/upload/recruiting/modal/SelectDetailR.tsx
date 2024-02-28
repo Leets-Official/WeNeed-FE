@@ -6,6 +6,8 @@ import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
+import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
+import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -15,6 +17,8 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
@@ -26,7 +30,9 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
+    setLoading(true);
     const { teamMembersId, articleType, ...rest } = uploadData;
+
     const articleRequest = {
       articleType: 'RECRUITING',
       ...rest,
@@ -34,6 +40,7 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
       skills: skill,
       tags: selectedTags,
     };
+
     uploadFormData.append(
       'request',
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
@@ -57,12 +64,20 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
           body: uploadFormData,
         },
       );
+      if (true) {
+        setTimeout(() => {
+          setLoading(false);
+          setCompleted(true);
+        }, 2000);
+      }
     } catch (e) {
       console.log('넥스트 서버 보내기 전 오류발생', e);
     }
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      {loading && <SubmitLoading />}
+      {completed && <SubmitCompleted />}
       <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
         <div
           onClick={closeModal}

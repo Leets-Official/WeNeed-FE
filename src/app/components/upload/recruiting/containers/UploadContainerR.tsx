@@ -15,12 +15,12 @@ const UploadContainerR = () => {
   const [items, setItems] = useRecoilState(textState);
 
   return (
-    <div className="bg-black">
-      <div className="relative flex flex-col w-[100%] h-auto mt-[22px] bg-white gap-y-2.5">
-        <AddThumbnail thumbnailInfo={recruitThumbnail} />
+    <div className="bg-black mt-5 mb-8">
+      <AddThumbnail thumbnailInfo={recruitThumbnail} />
+      <div className="relative flex flex-col w-[100%] h-auto mt-2  bg-white">
         <div className="relative">
           {items.length > 0 ? (
-            <div className="items-center w-full h-[645px] overflow-auto px-[37px] pt-[24.15px]">
+            <div className="items-center w-full h-[559px] overflow-auto px-[37px] pt-[24.15px]">
               <DndContainer articleType={'recruit'} />
             </div>
           ) : (
@@ -35,8 +35,8 @@ const UploadContainerR = () => {
         <div className="flex justify-center pb-[46px]">
           {items.length > 0 && <SelectFileR />}
         </div>
-        <BigSentence />
       </div>
+      <BigSentence />
     </div>
   );
 };
