@@ -40,8 +40,28 @@ interface ResponseUploadSearch {
   users: UserInfo[];
 }
 
-interface ResponseUploadSearch {
-  userId: number;
-  nickname: string;
-  profile: string;
+interface ResponseCrewRecruiter {
+  deadline: string;
+  description: string;
+  task_need: string;
+  member_count: number;
+  phone: string;
+  crew_questions: string[];
+  content: string;
+  keywords: string[];
+}
+
+interface ResponseCrewApplicant {
+  name: string;
+  major: string;
+  doubleMajor?: string;
+  international: boolean;
+  grade: string;
+  status: string;
+  phone: string;
+  available_time: string;
+  about_me: string;
+  appeal: string[];
+  content: string;
+  keywords: string[];
 }
