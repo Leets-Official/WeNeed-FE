@@ -7,15 +7,16 @@ import useIntersection from 'hooks/main/useIntersection';
 
 interface RecruitingContainerProps {
   data: RecruitListItem[];
+  user: SimpleUser;
   onIntersect: IntersectionObserverCallback;
 }
 
 const RecruitingContainer = ({
   data,
+  user,
   onIntersect,
 }: RecruitingContainerProps) => {
   const { setTarget } = useIntersection({ onIntersect });
-
   return (
     <>
       <div className="mt-[75px] flex flex-col gap-[50px] w-full">
@@ -36,9 +37,7 @@ const RecruitingContainer = ({
                   size="large"
                 />
               </div>
-              <Link href={`/recruiting/${article.articleId}`}>
-                <RecruitingItem article={article} />
-              </Link>
+              <RecruitingItem article={article} user={user} />
             </div>
           );
         })}

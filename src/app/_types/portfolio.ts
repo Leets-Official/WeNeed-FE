@@ -53,9 +53,12 @@ interface RecommendArticle extends CommonArticle {
   subTitle: string;
 }
 
-interface UserProfile {
+interface SimpleUser {
   userId: number;
   nickname: string;
+}
+
+interface UserProfile extends SimpleUser {
   sameUser: boolean;
   hearted: boolean;
   bookmarked: boolean;
