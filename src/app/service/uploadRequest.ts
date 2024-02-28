@@ -9,11 +9,11 @@ const postRequest = async (
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        Authorization: 'Bearer ' + { accessToken },
+        Authorization: 'Bearer ' + accessToken,
       },
       body: body,
     });
-    console.log('실제 서버에 넣어 보내기', body);
+    console.log('실제 서버에 넣어 보내기 성공 res', response);
     return response;
   } catch (error) {
     console.log('Error:', error);

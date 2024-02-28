@@ -37,6 +37,8 @@ const SearchTeamInput = () => {
   const handleSelect = (user: UserInfo) => {
     setSelectedUsers((prevUsers) => [...prevUsers, user]);
     setUserIds((prevUserId) => [...prevUserId, user.userId]);
+    setSearchText('');
+    setRelatedUsers([]);
   };
 
   return (
