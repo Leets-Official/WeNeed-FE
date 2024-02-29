@@ -36,7 +36,7 @@ const DetailMenuBar = ({
     <div
       className={`flex ${
         onRecruit
-          ? 'flex-col w-[120px] gap-[20px]'
+          ? 'flex-col w-[80px] gap-[20px] '
           : 'w-full mt-[200px] gap-[40px] mb-[80px]'
       }  justify-center items-center`}
     >
