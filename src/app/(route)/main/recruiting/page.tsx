@@ -46,6 +46,7 @@ export default function MainRecruitingPage() {
       setPage((prevPage) => prevPage + 1);
     }
   };
+  console.log(data);
 
   if (data) {
     const { user, recruitList } = data;
