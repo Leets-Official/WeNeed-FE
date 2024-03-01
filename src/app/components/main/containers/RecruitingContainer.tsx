@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import RecruitingItem from '../recruiting/RecruitingItem';
 import Profile from 'components/details/common/Profile';
 import useIntersection from 'hooks/main/useIntersection';
