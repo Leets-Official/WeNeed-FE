@@ -13,6 +13,8 @@ import DndLink from './DndLink';
 import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
+import DeleteIcon from 'ui/upload/DeleteIcon';
+import EditIcon from 'ui/upload/EditIcon';
 
 interface DndContainerProps {
   articleType: string;
@@ -22,6 +24,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [enabled, setEnabled] = useState(false);
+  const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
 
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -33,26 +36,38 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       ...item,
       id: String(index),
     }));
-
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
   };
 
-  const componenetByType = (item: DndTextTypes) => {
+  const deleteItem = (itemId: string) => {
+    const updatedItems = items.filter((item) => item.id !== itemId);
+    setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
+  };
+
+  const startEdit = (item: DndTextTypes) => {
+    setEditItemId(item.id === editItemId ? null : item.id);
+  };
+
+  const editByType = (item: DndTextTypes) => {
     switch (item.type) {
       case 'text':
-        return <DndText text={item.data} />;
+        console.log('텍스트');
+        return;
       case 'link':
-        return <DndLink link={item.data} />;
+        console.log('링크');
+        return;
       case 'sound':
-        return <DndSound link={item.data} />;
+        console.log('사운드');
+        return;
       case 'image':
-        return <DndImage fileName={item.data} url={item.data} />;
+        console.log('이미지');
+        return;
       default:
         return null;
     }
   };
-
   useEffect(() => {
     console.log('items현황: ', items);
     console.log('uploadData현황: ', uploadData);
@@ -80,17 +95,43 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
               className="flex flex-col gap-y-[17px]"
             >
               {items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+                <div key={item.id}>
+                  <div
+                    onClick={() => startEdit(item)}
+                    className="relative flex justify-center items-center"
+                  >
+                    {editItemId === item.id && (
+                      <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9">
+                        <div onClick={() => deleteItem(item.id)}>
+                          <DeleteIcon />
+                        </div>
+                        <div onClick={() => editByType(item)}>
+                          <EditIcon />
+                        </div>
+                      </div>
+                    )}
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
                     >
-                      {componenetByType(item)}
-                    </div>
-                  )}
-                </Draggable>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={
+                            editItemId === item.id
+                              ? 'blur-sm brightness-50'
+                              : ''
+                          }
+                        >
+                          {componenetByType(item)}
+                        </div>
+                      )}
+                    </Draggable>
+                  </div>
+                </div>
               ))}
               {provided.placeholder}
             </div>
@@ -102,3 +143,18 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   );
 };
 export default DndContainer;
+
+const componenetByType = (item: DndTextTypes) => {
+  switch (item.type) {
+    case 'text':
+      return <DndText text={item.data} />;
+    case 'link':
+      return <DndLink link={item.data} />;
+    case 'sound':
+      return <DndSound link={item.data} />;
+    case 'image':
+      return <DndImage fileName={item.data} url={item.data} />;
+    default:
+      return null;
+  }
+};
