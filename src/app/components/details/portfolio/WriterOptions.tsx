@@ -1,15 +1,31 @@
 'use client';
 import Icons from 'components/common/Icons';
-import { useRouter } from 'next/navigation';
 import { pencil, trashcan } from 'ui/IconsPath';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface WriterOptionsProps {
   onRecruit?: boolean;
   articleId: string;
+  userId: number;
+  nickname: string;
 }
 
-const WriterOptions = ({ onRecruit, articleId }: WriterOptionsProps) => {
+const WriterOptions = ({
+  onRecruit,
+  articleId,
+  userId,
+  nickname,
+}: WriterOptionsProps) => {
+  const pathName = usePathname();
   const router = useRouter();
+
+  const onLinkHandler = () => {
+    router.push(
+      `/update/${pathName.split('/')[1]}/${
+        pathName.split('/')[2]
+      }?nickname=${nickname}&userId=${userId}`,
+    );
+  };
 
   const deleteArticle = async (articleId: string) => {
     const res = await fetch(
@@ -31,7 +47,10 @@ const WriterOptions = ({ onRecruit, articleId }: WriterOptionsProps) => {
         <p className="pt-1">삭제하기</p>
       </div>
       |
-      <div className="flex items-center gap-[10px] cursor-pointer">
+      <div
+        className="flex items-center gap-[10px] cursor-pointer"
+        onClick={onLinkHandler}
+      >
         <Icons name={pencil} className={`${onRecruit && 'fill-black'}`} />
         <p>수정하기</p>
       </div>

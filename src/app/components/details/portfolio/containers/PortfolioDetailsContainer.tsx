@@ -108,7 +108,13 @@ const PortfolioDetailsContainer = ({
           user={user}
           articleId={articleId}
         />
-        {user.sameUser && <WriterOptions articleId={articleId} />}
+        {user.sameUser && (
+          <WriterOptions
+            articleId={articleId}
+            userId={writer.userId || -1}
+            nickname={writer.writerNickname}
+          />
+        )}
       </div>
     </div>
   );
