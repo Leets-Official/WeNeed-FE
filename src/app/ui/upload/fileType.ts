@@ -50,3 +50,16 @@ export const imgAndVideo = {
   height: 118,
   className: 'w-[118px] h-[118px] object-cover rounded-[9px]',
 };
+
+interface TransType {
+  [key: string]: string;
+}
+export const transType: TransType = {
+  text: '텍스트',
+  link: '링크',
+  sound: '오디오',
+  docs: '문서',
+  image: '이미지',
+  video: '비디오',
+  share: '나누고 싶은 문장',
+};

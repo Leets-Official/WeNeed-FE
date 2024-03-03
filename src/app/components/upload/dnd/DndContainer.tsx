@@ -47,30 +47,13 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   };
 
   const startEdit = (item: DndTextTypes) => {
-    setEditItemId(item.id === editItemId ? null : item.id);
+    setEditItemId(item.id === editItemId ? editItemId : item.id);
+    console.log('edit 눌림');
   };
 
-  const editByType = (item: DndTextTypes) => {
-    switch (item.type) {
-      case 'text':
-        console.log('텍스트');
-        return;
-      case 'link':
-        console.log('링크');
-        return;
-      case 'sound':
-        console.log('사운드');
-        return;
-      case 'image':
-        console.log('이미지');
-        return;
-      default:
-        return null;
-    }
-  };
   useEffect(() => {
-    console.log('items현황: ', items);
-    console.log('uploadData현황: ', uploadData);
+    // console.log('items현황:', items);
+    // console.log('uploadData현황: ', uploadData);
     const animation = requestAnimationFrame(() => setEnabled(true));
     return () => {
       cancelAnimationFrame(animation);
@@ -105,8 +88,8 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
                         <div onClick={() => deleteItem(item.id)}>
                           <DeleteIcon />
                         </div>
-                        <div onClick={() => editByType(item)}>
-                          <EditIcon />
+                        <div>
+                          <EditIcon type={item.type} />
                         </div>
                       </div>
                     )}
