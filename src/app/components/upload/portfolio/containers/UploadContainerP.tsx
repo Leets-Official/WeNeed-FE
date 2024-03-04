@@ -17,9 +17,9 @@ const UploadContainerP = () => {
   return (
     <div className="relative flex flex-col w-[100%] h-auto bg-white mt-[22px] gap-y-2.5">
       <AddThumbnail thumbnailInfo={portThumbnail} />
-      <div className="">
+      <div>
         {items.length > 0 || files.length > 0 ? (
-          <div className="items-center w-full h-[740px] overflow-auto px-[37px] pt-[36.15px]">
+          <div className="items-center w-full h-[740px] overflow-y-auto px-9 pt-[36.15px]">
             <DndContainer articleType={'portfolio'} />
           </div>
         ) : (
