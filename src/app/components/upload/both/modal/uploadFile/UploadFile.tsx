@@ -9,9 +9,16 @@ import useAddFile from 'hooks/upload/useAddFile';
 interface UploadFileProps {
   uploadInfo: UploadPropTypes;
   closeModal: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
+const UploadFile = ({
+  uploadInfo,
+  closeModal,
+  isEdit,
+  id,
+}: UploadFileProps) => {
   const { fileType, sizeLimit, announcement, rule, accept } = uploadInfo;
   const {
     fileInfo,
@@ -20,6 +27,7 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
     divClick,
     handleFileChange,
     handleDrop,
+    updateFile,
   } = useAddFile();
 
   return (
@@ -92,7 +100,11 @@ const UploadFile = ({ uploadInfo, closeModal }: UploadFileProps) => {
           <div onClick={closeModal} className="flex flex-row-reverse mt-[14px]">
             <ConfirmButton
               isWritten={fileInfo.name === ''}
-              btnClick={() => handleConfirm(fileType)}
+              btnClick={
+                !isEdit
+                  ? () => handleConfirm(fileType)
+                  : () => updateFile(id || '', fileType)
+              }
               btnText={fileInfo.name}
             />
           </div>

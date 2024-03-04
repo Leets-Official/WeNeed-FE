@@ -52,13 +52,41 @@ const ModalSelector = ({
         />
       );
     case '이미지':
-      return <UploadFile uploadInfo={image} closeModal={closeModal} />;
+      return (
+        <UploadFile
+          uploadInfo={image}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '문서':
-      return <UploadFile uploadInfo={docs} closeModal={closeModal} />;
+      return (
+        <UploadFile
+          uploadInfo={docs}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '나누고 싶은 문장':
-      return <UploadText uploadInfo={share} closeModal={closeModal} />;
+      return (
+        <UploadText
+          uploadInfo={share}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '비디오':
-      return <UploadFile uploadInfo={video} closeModal={closeModal} />;
+      return (
+        <UploadFile
+          uploadInfo={video}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     default:
       return null;
   }

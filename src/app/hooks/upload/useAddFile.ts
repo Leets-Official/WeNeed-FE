@@ -64,6 +64,30 @@ const useAddFile = () => {
     }
   };
 
+  const updateFile = (id: string, fileType: string) => {
+    const file = inputRef.current?.files?.[0];
+    if (file) {
+      const blob = new Blob([file], { type: file.type });
+      if (fileType === '이미지') {
+        uploadFormData.append('images', blob, file.name);
+        setItems((prevItems) =>
+          prevItems.map((item) =>
+            item.id === id ? { ...item, data: fileInfo.url } : item,
+          ),
+        );
+      } else {
+        uploadFormData.append('files', file);
+        setFiles((prevFiles) =>
+          prevFiles.map((item) =>
+            item.id === id
+              ? { ...item, data: file.name, url: fileInfo.url }
+              : item,
+          ),
+        );
+      }
+    }
+  };
+
   const addFile = (file: File, type: string) => {
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
@@ -98,6 +122,7 @@ const useAddFile = () => {
     divClick,
     handleFileChange,
     handleDrop,
+    updateFile,
   };
 };
 export default useAddFile;
