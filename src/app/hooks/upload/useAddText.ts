@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { textState, uploadDataState, orderState } from 'recoil/upload';
+import { reverseType } from 'ui/upload/fileType';
 
 const useAddText = () => {
   const [text, setText] = useState('');
@@ -11,6 +12,15 @@ const useAddText = () => {
 
   const startEdit = () => {
     setIsEditing(true);
+  };
+
+  const updateText = (id: string, content: string) => {
+    setItems((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, data: content } : item,
+      ),
+    );
+    setUploadData({ ...uploadData, content: items });
   };
 
   const addText = (type: string) => {
@@ -43,7 +53,15 @@ const useAddText = () => {
     }
   };
 
-  return { text, setText, addText, handleConfirm, isEditing, startEdit };
+  return {
+    text,
+    setText,
+    addText,
+    handleConfirm,
+    isEditing,
+    startEdit,
+    updateText,
+  };
 };
 
 export default useAddText;

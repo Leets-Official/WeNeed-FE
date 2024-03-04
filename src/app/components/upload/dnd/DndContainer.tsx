@@ -48,13 +48,13 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
 
   const startEdit = (item: DndTextTypes) => {
     setEditItemId(item.id === editItemId ? editItemId : item.id);
-    console.log('edit 눌림');
   };
 
   useEffect(() => {
-    // console.log('items현황:', items);
-    // console.log('uploadData현황: ', uploadData);
+    console.log('items현황:', items);
+    console.log('uploadData현황: ', uploadData);
     const animation = requestAnimationFrame(() => setEnabled(true));
+    setEditItemId(null);
     return () => {
       cancelAnimationFrame(animation);
       setEnabled(false);
@@ -89,7 +89,11 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
                           <DeleteIcon />
                         </div>
                         <div>
-                          <EditIcon type={item.type} />
+                          <EditIcon
+                            type={item.type}
+                            id={item.id}
+                            isEdit={true}
+                          />
                         </div>
                       </div>
                     )}

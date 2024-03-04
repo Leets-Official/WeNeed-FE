@@ -13,16 +13,44 @@ import UploadText from './uploadFile/UploadText';
 interface ModalSelectorProps {
   fileType: string;
   closeModal: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const ModalSelector = ({ fileType, closeModal }: ModalSelectorProps) => {
+const ModalSelector = ({
+  fileType,
+  closeModal,
+  isEdit,
+  id,
+}: ModalSelectorProps) => {
   switch (fileType) {
     case '텍스트':
-      return <UploadText uploadInfo={text} closeModal={closeModal} />;
+      return (
+        <UploadText
+          uploadInfo={text}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '오디오':
-      return <UploadText uploadInfo={sound} closeModal={closeModal} />;
+      return (
+        <UploadText
+          uploadInfo={sound}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '링크':
-      return <UploadText uploadInfo={link} closeModal={closeModal} />;
+      return (
+        <UploadText
+          uploadInfo={link}
+          closeModal={closeModal}
+          isEdit={isEdit}
+          id={id}
+        />
+      );
     case '이미지':
       return <UploadFile uploadInfo={image} closeModal={closeModal} />;
     case '문서':

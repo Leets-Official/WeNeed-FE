@@ -6,11 +6,19 @@ import useAddText from 'hooks/upload/useAddText';
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
   closeModal?: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const UploadText = ({ uploadInfo, closeModal }: UploadTextProps) => {
+const UploadText = ({
+  uploadInfo,
+  closeModal,
+  isEdit,
+  id,
+}: UploadTextProps) => {
   const { fileType, announcement, rule } = uploadInfo;
-  const { text, setText, handleConfirm, isEditing, startEdit } = useAddText();
+  const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
+    useAddText();
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -47,7 +55,11 @@ const UploadText = ({ uploadInfo, closeModal }: UploadTextProps) => {
           </div>
           <div onClick={closeModal} className="flex flex-row-reverse mt-[24px]">
             <ConfirmButton
-              btnClick={() => handleConfirm(fileType)}
+              btnClick={
+                !isEdit
+                  ? () => handleConfirm(fileType)
+                  : () => updateText(id || '', text)
+              }
               btnText={text}
             />
           </div>

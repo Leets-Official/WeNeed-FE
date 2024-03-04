@@ -16,9 +16,11 @@ const unHovered = {
 
 interface EditIconProps {
   type: string;
+  id: string;
+  isEdit: boolean;
 }
 
-const EditIcon = ({ type }: EditIconProps) => {
+const EditIcon = ({ type, isEdit, id }: EditIconProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   const color = isHovered ? hovered : unHovered;
@@ -69,7 +71,12 @@ const EditIcon = ({ type }: EditIconProps) => {
       </div>
       <div onClick={handleModalClick}>
         {isOpen && (
-          <ModalSelector fileType={transType[type]} closeModal={closeModal} />
+          <ModalSelector
+            fileType={transType[type]}
+            closeModal={closeModal}
+            isEdit={isEdit}
+            id={id}
+          />
         )}
       </div>
     </div>
