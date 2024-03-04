@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { textState, uploadDataState, orderState } from 'recoil/upload';
-import { reverseType } from 'ui/upload/fileType';
 
 const useAddText = () => {
   const [text, setText] = useState('');

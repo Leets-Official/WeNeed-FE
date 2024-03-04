@@ -63,13 +63,3 @@ export const transType: TransType = {
   video: '비디오',
   share: '나누고 싶은 문장',
 };
-
-export const reverseType: TransType = {
-  텍스트: 'text',
-  링크: 'link',
-  오디오: 'sound',
-  문서: 'docs',
-  이미지: 'image',
-  비디오: 'video',
-  '나누고 싶은 문장': 'share',
-};
