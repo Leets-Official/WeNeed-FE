@@ -61,6 +61,7 @@ const UploadText = ({
                   : () => updateText(id || '', text)
               }
               btnText={text}
+              isWritten={text.trim() === ''}
             />
           </div>
         </div>

@@ -129,7 +129,15 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
             </div>
           )}
           <div className="flex flex-row-reverse">
-            <ConfirmButton btnClick={handleConfirm} btnText={title} />
+            <ConfirmButton
+              btnClick={handleConfirm}
+              btnText={title}
+              isWritten={
+                skill.join(',').length === 0 ||
+                selectedTags.length === 0 ||
+                title.trim() === ''
+              }
+            />
           </div>
         </div>
       </div>
