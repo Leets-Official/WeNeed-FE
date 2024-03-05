@@ -3,10 +3,5 @@ export default function RecruitingDetailLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main className=" min-w-[850px] mx-auto">
-      {children}
-      <div id="needLoginPortal" />
-    </main>
-  );
+  return <main className=" min-w-[850px] mx-auto">{children}</main>;
 }
