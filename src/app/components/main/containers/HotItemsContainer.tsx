@@ -7,12 +7,22 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Icons from 'components/common/Icons';
 import { leftAngle, rightAngle } from 'ui/IconsPath';
+import { MouseEventHandler } from 'react';
 
 interface HotItemsContainerProps {
   data: HotArticle[];
+  user: UserProfile;
+  onClickItem: (
+    userId: number,
+    articleId: number,
+  ) => MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const HotItemsContainer = ({ data }: HotItemsContainerProps) => {
+const HotItemsContainer = ({
+  data,
+  user,
+  onClickItem,
+}: HotItemsContainerProps) => {
   const settings = {
     infinite: true,
     slidesToShow: 1,
@@ -33,8 +43,12 @@ const HotItemsContainer = ({ data }: HotItemsContainerProps) => {
       {...settings}
       className="relative flex justify-center items-center w-screen mt-10 "
     >
-      {data?.map((article) => (
-        <div key={article.articleId} className="mx-[15px] text-center">
+      {data.map((article) => (
+        <div
+          key={article.articleId}
+          className="mx-[15px] text-center"
+          onClick={() => onClickItem(user.userId, article.articleId)}
+        >
           <HotPortfolioItem article={article} />
         </div>
       ))}
