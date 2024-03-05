@@ -41,14 +41,9 @@ interface ResponseUploadSearch {
 }
 
 interface ResponseCrewRecruiter {
-  deadline: string;
-  description: string;
-  task_need: string;
-  member_count: number;
-  phone: string;
-  crew_questions: string[];
-  content: string;
-  keywords: string[];
+  user: WriterProfile;
+  article: RecruitFormArticle;
+  recruitForm: RecruitForm;
 }
 
 interface ResponseCrewApplicant {

@@ -67,7 +67,8 @@ interface UserProfile extends SimpleUser {
 
 interface WriterProfile {
   userId: number | null;
-  writerNickname: string;
+  writerNickname?: string;
+  nickname?: string;
   major: string;
   profile: string | null;
   grade: number;
