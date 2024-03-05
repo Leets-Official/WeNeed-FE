@@ -99,4 +99,30 @@ export const CREW_KEYWORDS = [
   '같은연령대',
   '같은성별원해요',
   '정리를잘해요',
-];
+] as const;
+
+export const defaulRecruitForm = {
+  deadline: '',
+  detailTags: [],
+  description: '',
+  taskNeed: '',
+  memberCount: 0,
+  phone: '',
+  crewQuestions: [],
+  content: '',
+  keywords: [],
+};
+
+export const defaulApplicantForm = {
+  name: '',
+  major: '',
+  doubleMajor: '',
+  international: false,
+  grade: 0,
+  status: '',
+  phone: '',
+  aboutMe: '',
+  content: '',
+  keywords: [],
+  crewAnswers: [],
+};
