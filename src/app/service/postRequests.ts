@@ -42,3 +42,21 @@ export const postComment = async (
     parentId: parentId,
   });
 };
+
+export const postRecruiter = async (
+  articleId: string,
+  bodyData: FormData,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/recruitForms/${articleId}`;
+  return await postRequest(url, accessToken, bodyData);
+};
+
+export const postApplicant = async (
+  articleId: string,
+  bodyData: FormData,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/${articleId}`;
+  return await postRequest(url, accessToken, bodyData);
+};
