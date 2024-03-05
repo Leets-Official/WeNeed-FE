@@ -48,6 +48,7 @@ export default function RecruitingPage({
             <RecruitingDetailContainers
               recruit={data.recruit}
               user={data.user}
+              articleId={params.slug}
             />
             <CommentsContainer
               comments={data.comments}
