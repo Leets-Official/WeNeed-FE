@@ -12,17 +12,11 @@ const ProjectInfoQ = () => {
   return (
     <div className="font-semibold w-[80%] flex flex-col gap-[20px]">
       <div className={QUESTIONS_BOX_STYLE.mini()}>
-        <div className="flex gap-1">
-          {RECRUITER_QUESTIONS.category[0]}
-          {REQUIREMENT}
-        </div>
-      </div>
-      <div className={QUESTIONS_BOX_STYLE.mini()}>
-        <div className="flex gap-1">
+        <div className="flex gap-1 ">
           {RECRUITER_QUESTIONS.detailTag}
           {REQUIREMENT}
         </div>
-        <div className="w-full overflow-hidden ">
+        <div className="w-full overflow-hidden text-white font-medium">
           <DetailCategoriesContainer />
         </div>
       </div>

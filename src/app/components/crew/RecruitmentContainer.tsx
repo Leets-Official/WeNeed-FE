@@ -47,17 +47,4 @@ const mockWriter = {
   grade: 3,
 };
 
-const mockInfo = {
-  //   category: ['대표적인 카테고리를 선택해주세요.', '카테고리'],
-  detailTag: ['BIBX', '웹', '앱'],
-  deadline: '2024/11/2',
-  description: '제가 하고 있는 프로젝트는 3D모델링을 하고 있는데요.',
-  task_need: '그래픽 디자이너 ',
-  member_count: 1,
-  phone: '01022223333',
-  crew_questions: '피그마 써 보셨나영?',
-  content: '크루를 하고 싶은 분께 하고 싶은 말 ...',
-  keywords: ['센스', '친절', '소수인원'],
-};
-
 export default RecruitmentContainer;
