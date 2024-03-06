@@ -5,7 +5,6 @@ import { fileMini, skillsList } from 'ui/IconsPath';
 interface DetailContentsProps {
   title: string;
   contents: Array<Content>;
-  links: string[];
   files: string[];
   skills: string[];
 }
@@ -13,7 +12,6 @@ interface DetailContentsProps {
 const DetailContents = ({
   title,
   contents,
-  links,
   files,
   skills,
 }: DetailContentsProps) => {
@@ -28,14 +26,17 @@ const DetailContents = ({
                 {content.data}
               </div>
             );
-          case 'links':
+          case 'link':
+          case 'sound':
             return (
               <div
                 key={content.id}
                 className="flex gap-3 w-full h-auto text-[#00E0EE] font-semibold"
               >
                 <Icons name={fileMini} />
-                {content.data}
+                <a href={content.data} target="_blank" rel="noreferrer">
+                  {content.data}
+                </a>
               </div>
             );
           case 'image':
