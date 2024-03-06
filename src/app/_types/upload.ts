@@ -71,3 +71,9 @@ interface RecruitmentComplete {
   content: string;
   keywords: string;
 }
+
+interface BlobImages {
+  id: string;
+  blob: Blob;
+  filename: string;
+}

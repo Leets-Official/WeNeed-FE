@@ -1,5 +1,10 @@
 import { useRecoilState } from 'recoil';
-import { filestate, orderState, uploadForm } from 'recoil/upload';
+import {
+  filestate,
+  imageBlobState,
+  orderState,
+  uploadForm,
+} from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
@@ -13,6 +18,7 @@ const useAddFile = () => {
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,10 +72,20 @@ const useAddFile = () => {
 
   const updateFile = (id: string, fileType: string) => {
     const file = inputRef.current?.files?.[0];
+
     if (file) {
       const blob = new Blob([file], { type: file.type });
+      console.log('blob이미지 배열', images);
+
       if (fileType === '이미지') {
-        uploadFormData.append('images', blob, file.name);
+        // uploadFormData.append('images', blob, file.name);
+        setImgaes((prevImages) =>
+          prevImages.map((image) =>
+            image.id === id
+              ? { id: id, blob: blob, filename: file.name }
+              : image,
+          ),
+        );
         setItems((prevItems) =>
           prevItems.map((item) =>
             item.id === id ? { ...item, data: fileInfo.url } : item,
@@ -77,6 +93,7 @@ const useAddFile = () => {
         );
       } else {
         uploadFormData.append('files', file);
+        console.log('파일 관리아이디는 다음과 같음', id);
         setFiles((prevFiles) =>
           prevFiles.map((item) =>
             item.id === id
@@ -91,7 +108,8 @@ const useAddFile = () => {
   const addFile = (file: File, type: string) => {
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
-      uploadFormData.append('images', blob, file.name);
+      console.log('사진 추가', file);
+
       setItems((prevData) => [
         ...prevData,
         {
@@ -100,7 +118,20 @@ const useAddFile = () => {
           data: fileInfo.url,
         },
       ]);
+
+      setImgaes((prevImages) => [
+        ...prevImages,
+        {
+          id: String(orderId),
+          blob: blob,
+          filename: file.name,
+        },
+      ]);
       setOrderId(orderId + 1);
+      console.log('추가 후 orderId', orderId);
+      console.log('추가 후 images', images);
+
+      // uploadFormData.append('images', blob, file.name);
     } else {
       uploadFormData.append('files', file);
       setFiles((prevData) => [

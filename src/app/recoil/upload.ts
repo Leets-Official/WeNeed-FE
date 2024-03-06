@@ -38,19 +38,12 @@ export const uploadDataState = atom<UploadPFTypes>({
   },
 });
 
-// export const uploadRecruitState = atom<UploadRecruitTypes>({
-//   key: 'uploadRecruitState',
-//   default: {
-//     articleType: 'RECRUTING',
-//     title: '',
-//     content: [],
-//     skills: [],
-//     tags: [],
-//     sharedText: '',
-//   },
-// });
-
 export const crewRecruiterState = atom<null>({
   key: 'crewRecruiterState',
   default: null,
+});
+
+export const imageBlobState = atom<BlobImages[]>({
+  key: 'imageBlobState',
+  default: [],
 });
