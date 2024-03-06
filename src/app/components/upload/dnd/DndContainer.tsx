@@ -6,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { textState, uploadDataState } from 'recoil/upload';
+import { imageBlobState, textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from './DndText';
 import DndLink from './DndLink';
@@ -14,7 +14,8 @@ import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
 import DeleteIcon from 'ui/upload/DeleteIcon';
-import EditIcon from 'ui/upload/EditIcon';
+import EditText from 'components/update/EditText';
+import EditFile from 'components/update/EditFile';
 
 interface DndContainerProps {
   articleType: string;
@@ -23,7 +24,9 @@ interface DndContainerProps {
 const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [images, setImages] = useRecoilState(imageBlobState);
   const [enabled, setEnabled] = useState(false);
+  const [isEditFile, setIsEditFile] = useState(false);
   const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
 
@@ -36,6 +39,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       ...item,
       id: String(index),
     }));
+
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
   };
@@ -55,6 +59,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
     console.log('uploadData현황: ', uploadData);
     const animation = requestAnimationFrame(() => setEnabled(true));
     setEditItemId(null);
+    setIsEditFile(false);
     return () => {
       cancelAnimationFrame(animation);
       setEnabled(false);
@@ -89,7 +94,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
                           <DeleteIcon />
                         </div>
                         <div>
-                          <EditIcon
+                          <EditText
                             type={item.type}
                             id={item.id}
                             isEdit={true}
@@ -125,7 +130,24 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
           )}
         </Droppable>
       </DragDropContext>
-      {articleType === 'portfolio' && <Attatched />}
+      <div
+        onClick={() => setIsEditFile(true)}
+        className=" relative cursor-pointer"
+      >
+        <div className={isEditFile ? 'blur-[2px] brightness-30' : ''}>
+          {articleType === 'portfolio' && <Attatched />}
+        </div>
+        {isEditFile && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 ">
+            <div onClick={() => console.log('삭제 클릭')}>
+              <DeleteIcon />
+            </div>
+            <div>
+              <EditFile />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

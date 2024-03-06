@@ -23,16 +23,18 @@ const useAddText = () => {
   };
 
   const addText = (type: string) => {
-    setItems((prevData) => [
-      ...prevData,
+    const updatedItems = [
+      ...items,
       {
         id: String(orderId),
         type: type,
         data: text,
       },
-    ]);
+    ];
+    setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
     setOrderId(orderId + 1);
-    setUploadData({ ...uploadData, content: items });
+    console.log('데이터 추가');
   };
 
   const addShare = () => {
