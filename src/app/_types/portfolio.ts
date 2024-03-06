@@ -75,7 +75,7 @@ interface WriterProfile {
 
 interface Content {
   id: number;
-  type: 'text' | 'image' | 'links' | 'audio';
+  type: 'text' | 'image' | 'link' | 'sound';
   data: string;
 }
 
