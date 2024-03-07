@@ -6,7 +6,13 @@ import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { imageBlobState, uploadDataState, uploadForm } from 'recoil/upload';
+import {
+  fileBlobState,
+  filestate,
+  imageBlobState,
+  uploadDataState,
+  uploadForm,
+} from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
 
@@ -24,6 +30,7 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
+  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -32,11 +39,15 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
+    setLoading(true);
     images.forEach((image) => {
-      console.log(image, '삽입');
       uploadFormData.append('images', image.blob, image.filename);
     });
-    setLoading(true);
+
+    blobFiles.forEach((file) => {
+      console.log('다음 파일 업로드', file);
+      uploadFormData.append('files', file.file, file.filename);
+    });
     setUploadData({
       ...uploadData,
       title: title,

@@ -77,3 +77,9 @@ interface BlobImages {
   blob: Blob;
   filename: string;
 }
+
+interface BlobFiles {
+  id: string;
+  file: File;
+  filename: string;
+}

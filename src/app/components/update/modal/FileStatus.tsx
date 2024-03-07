@@ -52,7 +52,7 @@ const FileStatus = ({ fileType, closeStatus }: FileStatusProps) => {
           </div>
           <div className="flex flex-row-reverse mt-5">
             <ConfirmButton
-              btnClick={() => console.log('클릭')}
+              btnClick={closeStatus}
               btnText={fileType}
               isWritten={false}
             />

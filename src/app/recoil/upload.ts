@@ -47,3 +47,8 @@ export const imageBlobState = atom<BlobImages[]>({
   key: 'imageBlobState',
   default: [],
 });
+
+export const fileBlobState = atom<BlobFiles[]>({
+  key: 'fileBlobState',
+  default: [],
+});

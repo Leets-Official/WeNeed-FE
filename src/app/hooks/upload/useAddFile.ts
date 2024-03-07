@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
 import {
+  fileBlobState,
   filestate,
   imageBlobState,
   orderState,
-  uploadForm,
 } from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
@@ -19,8 +19,7 @@ const useAddFile = () => {
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
+  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
@@ -66,7 +65,7 @@ const useAddFile = () => {
         addFile(selectedFile, 'video');
       }
     } else {
-      console.log('선택된 파일이 없습니다.');
+      alert('선택된 파일이 없습니다.');
     }
   };
 
@@ -78,7 +77,6 @@ const useAddFile = () => {
       console.log('blob이미지 배열', images);
 
       if (fileType === '이미지') {
-        // uploadFormData.append('images', blob, file.name);
         setImgaes((prevImages) =>
           prevImages.map((image) =>
             image.id === id
@@ -92,13 +90,21 @@ const useAddFile = () => {
           ),
         );
       } else {
-        uploadFormData.append('files', file);
-        console.log('파일 관리아이디는 다음과 같음', id);
+        console.log('가져온 파일 관리아이디는 다음과 같음', id);
         setFiles((prevFiles) =>
           prevFiles.map((item) =>
             item.id === id
-              ? { ...item, data: file.name, url: fileInfo.url }
+              ? { ...item, id: file.name, data: file.name, url: fileInfo.url }
               : item,
+          ),
+        );
+        console.log('다음 파일로 변경', file);
+
+        setBlobFiles((prevFiles) =>
+          prevFiles.map((editedfile) =>
+            editedfile.id === id
+              ? { id: file.name, file: file, filename: file.name }
+              : editedfile,
           ),
         );
       }
@@ -128,21 +134,28 @@ const useAddFile = () => {
         },
       ]);
       setOrderId(orderId + 1);
+
       console.log('추가 후 orderId', orderId);
       console.log('추가 후 images', images);
-
-      // uploadFormData.append('images', blob, file.name);
     } else {
-      uploadFormData.append('files', file);
       setFiles((prevData) => [
         ...prevData,
         {
-          id: String(file.name),
+          id: file.name,
           type: type,
           data: file.name,
           url: fileInfo.url,
         },
       ]);
+      setBlobFiles((prevFiles) => [
+        ...prevFiles,
+        {
+          id: file.name,
+          file: file,
+          filename: file.name,
+        },
+      ]);
+      console.log('추가 후 file', blobFiles);
     }
   };
 
