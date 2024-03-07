@@ -9,30 +9,12 @@ import { HEADER_RECRUITER } from 'constants/crew';
 import { useRecoilValue } from 'recoil';
 import { postRecruiterState } from 'recoil/crew';
 
-export default async function CrewRecruiterPage({
+export default function CrewRecruiterPage({
   params,
 }: {
   params: { slug: string };
 }) {
   const recruiterValue = useRecoilValue(postRecruiterState);
-
-  const onSubmitRecruiter = async () => {
-    try {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/crew/recruiter?articleId=${params.slug}`,
-        {
-          method: 'POST',
-          body: JSON.stringify(recruiterValue),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-      console.log('제출완료 ~.~');
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   return (
     <section className="flex flex-col items-center w-full min-h-screen ">
@@ -40,7 +22,7 @@ export default async function CrewRecruiterPage({
       <ProjectInfoQ />
       <MemberInfoQ />
       <ContentsQ />
-      <RecruiteSubmission text="완료" />
+      <RecruiteSubmission text="완료" articleId={params.slug} />
     </section>
   );
 }

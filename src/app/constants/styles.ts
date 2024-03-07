@@ -22,7 +22,7 @@ export const INPUT_STYLE = {
     `w-96 h-8 bg-neutral-800 rounded-3xl px-8 outline-none ${className}`,
   comment: (className: string) =>
     `relative w-[1210px] h-[50px] px-[21px] bg-zinc-300 rounded-lg placeholder-white ${className}`,
-  default: () => 'w-full h-full ',
+  default: (className: string) => `w-full h-full ${className}`,
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
   upload_recruiter: (className: string) =>

@@ -27,11 +27,12 @@ interface RecruitFormArticle {
 }
 
 interface RecruitForm {
-  deadline: string;
+  [key: string]: string | string[];
+  deadline: string[];
   detailTags: string[];
   description: string;
   taskNeed: string;
-  memberCount: number;
+  memberCount: string;
   phone: string;
   crewQuestions: string[];
   content: string;

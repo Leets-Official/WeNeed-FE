@@ -6,8 +6,8 @@ export async function POST(request: Request): Promise<NextResponse> {
   const accessToken = getCookie(request, 'accessToken');
   const { searchParams } = new URL(request.url);
   const articleId = searchParams.get('articleId') || '';
-  const res = await request.formData();
-  const data = await postRecruiter(articleId, res, accessToken).then(
+  const requestBody = await request.json();
+  const data = await postRecruiter(articleId, requestBody, accessToken).then(
     (data) => data,
   );
 

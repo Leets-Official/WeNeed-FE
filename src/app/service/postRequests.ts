@@ -45,7 +45,7 @@ export const postComment = async (
 
 export const postRecruiter = async (
   articleId: string,
-  bodyData: FormData,
+  bodyData: RecruitForm,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruitForms/${articleId}`;
