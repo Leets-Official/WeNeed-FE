@@ -4,11 +4,16 @@ import Input from 'components/common/Input';
 import Profile from 'components/details/common/Profile';
 import { RECRUITER_QUESTIONS } from 'constants/crew';
 import { QUESTIONS_BOX_STYLE } from 'constants/styles';
+import useInputChange from 'hooks/upload/useInputChange';
+import { useEffect } from 'react';
 
 const MemberInfoQ = () => {
+  const { onChangeInput, recruiterData } = useInputChange();
   const REQUIREMENT = (
     <div className={QUESTIONS_BOX_STYLE.requirement()}>*</div>
   );
+
+  useEffect(() => {}, []); // fetch
 
   return (
     <div className="font-semibold w-[80%] flex flex-col gap-[20px] bg-white my-[20px] rounded-lg p-[30px]">
@@ -23,8 +28,9 @@ const MemberInfoQ = () => {
         <div className="flex gap-1">{RECRUITER_QUESTIONS.task_need[0]}</div>
         <Input
           type="upload_recruiter"
-          onChange={() => {}}
-          textValue=""
+          name="taskNeed"
+          onChange={(e) => onChangeInput(e)}
+          textValue={recruiterData.taskNeed}
           placeholder="입력해주세요."
         />
         <p className="text-neutral-500 text-xs font-light ">
@@ -36,21 +42,23 @@ const MemberInfoQ = () => {
         <div className="flex gap-3 justify-center items-center">
           <Input
             type="upload_recruiter"
-            onChange={() => {}}
-            textValue=""
+            name="memberCount"
+            onChange={(e) => onChangeInput(e)}
+            textValue={recruiterData.memberCount}
             placeholder="입력해주세요."
           />
-          <div className="w-[120px] h-[50px] mt-[6px] bg-black rounded-lg flex justify-center items-center gap-2.5 ">
+          {/* <div className="w-[120px] h-[50px] mt-[6px] bg-black rounded-lg flex justify-center items-center gap-2.5 ">
             <div className="text-xs text-white ">직접입력</div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div>
         <div className="flex gap-1">{RECRUITER_QUESTIONS.phone}</div>
         <Input
           type="upload_recruiter"
-          onChange={() => {}}
-          textValue=""
+          name="phone"
+          onChange={(e) => onChangeInput(e)}
+          textValue={recruiterData.phone}
           placeholder="입력해주세요."
         />
       </div>

@@ -102,11 +102,11 @@ export const CREW_KEYWORDS = [
 ] as const;
 
 export const defaulRecruitForm = {
-  deadline: '',
+  deadline: ['', '', ''],
   detailTags: [],
   description: '',
   taskNeed: '',
-  memberCount: 0,
+  memberCount: '',
   phone: '',
   crewQuestions: [],
   content: '',
