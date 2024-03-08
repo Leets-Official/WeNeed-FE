@@ -2,7 +2,7 @@ import { INFOBOX_STYLE } from 'constants/styles';
 
 interface InfoBoxProps {
   title: string;
-  content: string;
+  content: string | string[];
   type: string;
 }
 

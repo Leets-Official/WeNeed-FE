@@ -6,13 +6,22 @@ import Button from 'components/common/Button';
 import { useRouter } from 'next/navigation';
 
 interface InfoBoxContainerProps {
-  userInfoItemList: string[];
+  doubleMajor: string;
+  interestFiled: string;
+  email: string;
+  links: string[];
+  selfIntro: string;
 }
 
 export const InfoBoxContainer = ({
-  userInfoItemList,
+  doubleMajor,
+  interestFiled,
+  email,
+  links,
+  selfIntro,
 }: InfoBoxContainerProps) => {
   const router = useRouter();
+  const itemList = [doubleMajor, interestFiled, email, links, selfIntro];
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">
@@ -21,7 +30,7 @@ export const InfoBoxContainer = ({
           type={index === 4 ? 'explanation' : 'default'}
           key={index}
           title={item}
-          content={userInfoItemList[index]}
+          content={itemList[index]}
         />
       ))}
       <Button

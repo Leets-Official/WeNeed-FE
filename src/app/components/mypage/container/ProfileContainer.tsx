@@ -3,23 +3,46 @@
 import { InfoBoxContainer } from './InfoBoxContainer';
 import { UserInfoContainer } from './UserInfoContainer';
 
-export const ProfileContainer = () => {
-  const userInfoItemList = [
-    '-',
-    '디자인',
-    'weneed@gmail.com',
-    'loud.kr/m/88100v2r',
-    '안녕하세요 시각디자인과 박명수입니다 \n  3D모델링 위주의 작업을 합니다! 😁',
-  ];
+interface ProfileContainerProps {
+  userInfoItemList: MypageUserInfo | undefined;
+}
 
-  return (
-    <div
-      className={`w-[40%] min-h-screen h-auto flex flex-col items-end bg-neutral-900`}
-    >
-      <div className="h-full mt-20 flex flex-col items-center gap-16 mr-[5%]">
-        <UserInfoContainer />
-        <InfoBoxContainer userInfoItemList={userInfoItemList} />
+export const ProfileContainer = ({
+  userInfoItemList,
+}: ProfileContainerProps) => {
+  if (userInfoItemList) {
+    const {
+      profile,
+      nickname,
+      major,
+      userGrade,
+      doubleMajor,
+      interestFiled,
+      email,
+      lnks,
+      selfIntro,
+    } = userInfoItemList;
+
+    return (
+      <div
+        className={`w-[40%] min-h-screen h-auto flex flex-col items-end bg-neutral-900`}
+      >
+        <div className="h-full mt-20 flex flex-col items-center gap-16 mr-[5%]">
+          <UserInfoContainer
+            profile={profile}
+            nickname={nickname}
+            major={major}
+            userGrade={userGrade}
+          />
+          <InfoBoxContainer
+            doubleMajor={doubleMajor}
+            interestFiled={interestFiled}
+            email={email}
+            links={lnks}
+            selfIntro={selfIntro}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
