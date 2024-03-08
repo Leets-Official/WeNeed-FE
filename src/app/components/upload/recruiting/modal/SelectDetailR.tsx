@@ -46,16 +46,6 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
     );
 
-    console.log('현재articleRequest 데이터는 다음과 같음', articleRequest);
-
-    for (const key of uploadFormData.keys()) {
-      console.log(
-        'api보내기 전 폼데이터 현황',
-        key,
-        ':',
-        uploadFormData.get(key),
-      );
-    }
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/recruit`,

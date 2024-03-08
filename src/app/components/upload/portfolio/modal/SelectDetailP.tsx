@@ -67,14 +67,6 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
     );
 
-    for (const key of uploadFormData.keys()) {
-      console.log(
-        'api보내기 전 폼데이터 현황',
-        key,
-        ':',
-        uploadFormData.get(key),
-      );
-    }
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio`,
