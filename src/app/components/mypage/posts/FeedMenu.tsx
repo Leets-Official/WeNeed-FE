@@ -2,7 +2,7 @@
 
 import { MY_PAGE } from 'constants/mypage';
 import { useRecoilState } from 'recoil';
-import { menuState } from 'recoil/mypagemenu';
+import { menuState } from 'recoil/mypage';
 
 const FeedMenu = () => {
   const [menu, setMenu] = useRecoilState(menuState);
