@@ -1,6 +1,6 @@
 import FeedMenuContainer from './FeedMenuContainer';
 
-const PortfolioContainer = () => {
+const PostContainer = () => {
   return (
     <div className="w-[60%] items-center min-h-[850px] h-screen flex bg-white">
       <div className="w-full">
@@ -10,4 +10,4 @@ const PortfolioContainer = () => {
   );
 };
 
-export default PortfolioContainer;
+export default PostContainer;

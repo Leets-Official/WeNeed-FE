@@ -1,5 +1,5 @@
 import Header from 'components/layout/Header';
-import PortfolioContainer from 'components/mypage/container/PortfolioContainer';
+import PostContainer from 'components/mypage/container/PostContainer';
 import { ProfileContainer } from 'components/mypage/container/ProfileContainer';
 
 export default function MyPage() {
@@ -10,7 +10,7 @@ export default function MyPage() {
       </div>
       <div className="w-full flex">
         <ProfileContainer />
-        <PortfolioContainer />
+        <PostContainer />
       </div>
     </section>
   );
