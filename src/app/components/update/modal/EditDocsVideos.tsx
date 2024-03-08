@@ -1,6 +1,5 @@
 'use client';
 import Icons from 'components/common/Icons';
-import ModalSelector from 'components/upload/both/modal/ModalSelector';
 import { useModal } from 'hooks/upload/useModal';
 import FileStatus from './FileStatus';
 

@@ -1,6 +1,6 @@
 'use client';
 import { useRecoilState } from 'recoil';
-import { fileBlobState, filestate } from 'recoil/upload';
+import { filestate } from 'recoil/upload';
 import { closeIcon } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
@@ -11,8 +11,7 @@ import DeleteIcon from 'ui/upload/DeleteIcon';
 import useAddFile from 'hooks/upload/useAddFile';
 
 const DeleteDocsVideos = () => {
-  const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  const { isOpen, openModal, closeModal } = useModal(false);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const { removeAllFile } = useAddFile();
 

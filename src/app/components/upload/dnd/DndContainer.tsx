@@ -13,10 +13,10 @@ import DndLink from './DndLink';
 import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
-import DeleteIcon from 'ui/upload/DeleteIcon';
 import EditText from 'components/update/EditText';
 import EditFile from 'components/update/EditFile';
 import DeleteDocsVideos from 'components/update/modal/DeleteDocsVideos';
+import CheckDelete from 'components/update/modal/CheckDelete';
 
 interface DndContainerProps {
   articleType: string;
@@ -25,7 +25,6 @@ interface DndContainerProps {
 const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [images, setImages] = useRecoilState(imageBlobState);
   const [enabled, setEnabled] = useState(false);
   const [isEditFile, setIsEditFile] = useState(false);
   const [editItemId, setEditItemId] = useState<string | null>(null);
@@ -91,9 +90,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
                   >
                     {editItemId === item.id && (
                       <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9">
-                        <div onClick={() => deleteItem(item.id)}>
-                          <DeleteIcon />
-                        </div>
+                        <CheckDelete deleteText={() => deleteItem(item.id)} />
                         <div>
                           <EditText
                             type={item.type}
