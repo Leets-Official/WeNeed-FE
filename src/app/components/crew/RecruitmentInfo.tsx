@@ -1,16 +1,20 @@
 import DetailCategories from 'components/main/common/DetailCategories';
 import { RECRUITMENT_COMPLETE } from 'constants/crew';
 
-const RecruitmentInfo = () => {
+interface RecruitmentInfoProps {
+  recruitForm: RecruitFormFromServer;
+}
+
+const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
   const {
     deadline,
     description,
-    task_need,
-    member_count,
+    taskNeed,
+    memberCount,
     phone,
-    crew_questions,
+    crewQuestions,
     keywords,
-  } = mockInfo;
+  } = recruitForm;
 
   const renderContent = (questionKey: string) => {
     switch (questionKey) {
@@ -30,19 +34,31 @@ const RecruitmentInfo = () => {
             ))}
           </div>
         );
-      case 'member_count':
+      case 'description':
         return (
           <div className="flex border-b border-black px-[30px]">
-            {member_count}명
+            {description}
           </div>
         );
+      case 'taskNeed':
+        return (
+          <div className="flex border-b border-black px-[30px]">{taskNeed}</div>
+        );
+      case 'memberCount':
+        return (
+          <div className="flex border-b border-black px-[30px]">
+            {memberCount}명
+          </div>
+        );
+      case 'crewQuestions':
+        return crewQuestions.map((question) => (
+          <div key={question} className="flex border-b border-black px-[30px]">
+            {question}
+          </div>
+        ));
       case 'phone':
         return (
-          <div className="flex border-b border-black px-[30px] ">
-            {String(phone).split('').slice(0, 3)}-
-            {String(phone).split('').slice(3, 7)}-
-            {String(phone).split('').slice(7)}
-          </div>
+          <div className="flex border-b border-black px-[30px] ">{phone}</div>
         );
       case 'keywords':
         return (
@@ -55,7 +71,7 @@ const RecruitmentInfo = () => {
       default:
         return (
           <div className="flex border-b border-black px-[30px]">
-            {mockInfo[questionKey as keyof typeof mockInfo]}
+            {recruitForm[questionKey as keyof typeof recruitForm]}
           </div>
         );
     }
@@ -77,15 +93,3 @@ const RecruitmentInfo = () => {
 };
 
 export default RecruitmentInfo;
-
-const mockInfo = {
-  detailTag: ['BIBX', '웹', '앱'],
-  deadline: '2024/11/2',
-  description: '제가 하고 있는 프로젝트는 3D모델링을 하고 있는데요.',
-  task_need: '그래픽 디자이너 ',
-  member_count: 1,
-  phone: '01022223333',
-  crew_questions: '피그마 써 보셨나영?',
-  content: '크루를 하고 싶은 분께 하고 싶은 말 ...',
-  keywords: ['센스', '친절', '소수인원'],
-};

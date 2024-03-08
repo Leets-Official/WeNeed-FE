@@ -12,7 +12,7 @@ export default async function CrewRecruitmentPage({
     <section className="flex flex-col items-center w-full min-h-screen bg-black">
       <CrewHeader header={HEADER_COMPLETE} />
       <RecruitmentContainer articleId={params.slug} />
-      <RecruiteSubmission text="지원서 작성하러 가기" />
+      <RecruiteSubmission articleId={params.slug} text="지원서 작성하러 가기" />
     </section>
   );
 }
