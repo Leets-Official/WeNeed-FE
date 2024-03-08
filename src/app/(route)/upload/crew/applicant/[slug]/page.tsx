@@ -12,7 +12,7 @@ export default async function CrewApplicantPage() {
         <RecruitmentContainer articleId="1" />
         <ApplicantContainer />
       </div>
-      <RecruiteSubmission text="완료" />
+      <RecruiteSubmission text="완료" articleId="1" />
     </section>
   );
 }
