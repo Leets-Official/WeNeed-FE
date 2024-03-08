@@ -6,8 +6,8 @@ export default function MyPageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <div className="max-w-[1280px] min-w-[1100px] mx-auto">{children}</div>
+    <section className="bg-black">
+      <div className="min-w-[850px] mx-auto">{children}</div>
     </section>
   );
 }
