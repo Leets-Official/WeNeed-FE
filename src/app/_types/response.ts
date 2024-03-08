@@ -43,7 +43,7 @@ interface ResponseUploadSearch {
 interface ResponseCrewRecruiter {
   user: WriterProfile;
   article: RecruitFormArticle;
-  recruitForm: RecruitForm;
+  recruitForm: RecruitFormFromServer;
 }
 
 interface ResponseCrewApplicant {

@@ -39,6 +39,18 @@ interface RecruitForm {
   keywords: string[];
 }
 
+interface RecruitFormFromServer {
+  deadline: string;
+  detailTags: string[];
+  description: string;
+  taskNeed: string;
+  memberCount: string;
+  phone: string;
+  crewQuestions: string[];
+  content: string;
+  keywords: string[];
+}
+
 interface ApplicationForm {
   name: string;
   major: string;
