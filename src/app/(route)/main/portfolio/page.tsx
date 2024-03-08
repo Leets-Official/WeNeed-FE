@@ -34,7 +34,6 @@ export default function MainPortfolioPage() {
       );
       const responseData = await response.json();
       setData((prev) => responseData);
-      console.log(data);
     };
 
     fetchData();
@@ -52,7 +51,6 @@ export default function MainPortfolioPage() {
       recommendArticleList,
       user,
     } = data;
-    console.log(data);
 
     return (
       <section>

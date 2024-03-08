@@ -19,7 +19,7 @@ export const UserInfoContainer = ({
       <div className="flex flex-col justify-center items-center">
         <div className="text-white text-xl font-bold">{nickname}</div>
         <div className="gap-2.5 flex text-stone-300 text-small font-medium">
-          {major} | {userGrade}
+          {major} | {userGrade}학년
         </div>
       </div>
     </div>
