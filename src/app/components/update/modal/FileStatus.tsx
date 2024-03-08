@@ -37,6 +37,7 @@ const FileStatus = ({ fileType, closeStatus }: FileStatusProps) => {
                     key={index}
                     fileName={file.data}
                     id={file.id}
+                    deleteMode={false}
                   />
                 );
               } else if (fileType === '비디오' && file.type === 'video') {
@@ -45,6 +46,7 @@ const FileStatus = ({ fileType, closeStatus }: FileStatusProps) => {
                     key={index}
                     fileName={file.data}
                     id={file.id}
+                    deleteMode={false}
                   />
                 );
               }

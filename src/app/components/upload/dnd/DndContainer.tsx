@@ -16,6 +16,7 @@ import Attatched from './Attatched';
 import DeleteIcon from 'ui/upload/DeleteIcon';
 import EditText from 'components/update/EditText';
 import EditFile from 'components/update/EditFile';
+import DeleteDocsVideos from 'components/update/modal/DeleteDocsVideos';
 
 interface DndContainerProps {
   articleType: string;
@@ -139,8 +140,8 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
         </div>
         {isEditFile && (
           <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 ">
-            <div onClick={() => console.log('삭제 클릭')}>
-              <DeleteIcon />
+            <div>
+              <DeleteDocsVideos />
             </div>
             <div>
               <EditFile />

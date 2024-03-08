@@ -515,3 +515,10 @@ export const updatePen = {
   height: 8,
   fill: '#4EF4FF',
 } as const;
+
+export const deleteFile = {
+  path: 'M8.66145 3.61849L8.3079 3.26493L5.65625 5.91658L3.0046 3.26493L2.65105 3.61848L5.3027 6.27014L2.65105 8.92179L3.0046 9.27534L5.65625 6.62369L8.3079 9.27534L8.66145 8.92179L6.0098 6.27014L8.66145 3.61849Z',
+  width: 12,
+  height: 12,
+  fill: '#4EF4FF',
+} as const;

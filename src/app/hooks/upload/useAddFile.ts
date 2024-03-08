@@ -18,7 +18,7 @@ const useAddFile = () => {
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
-  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
+  const [images, setImages] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
@@ -77,7 +77,7 @@ const useAddFile = () => {
       console.log('blob이미지 배열', images);
 
       if (fileType === '이미지') {
-        setImgaes((prevImages) =>
+        setImages((prevImages) =>
           prevImages.map((image) =>
             image.id === id
               ? { id: id, blob: blob, filename: file.name }
@@ -125,7 +125,7 @@ const useAddFile = () => {
         },
       ]);
 
-      setImgaes((prevImages) => [
+      setImages((prevImages) => [
         ...prevImages,
         {
           id: String(orderId),
@@ -159,6 +159,23 @@ const useAddFile = () => {
     }
   };
 
+  const removeFile = (id: string, fileType: string) => {
+    if (fileType === 'image') {
+      setImages((prevImages) => prevImages.filter((image) => image.id !== id));
+    } else {
+      setFiles((prevFiles) => prevFiles.filter((file) => file.id !== id));
+      setBlobFiles((prevBlobFiles) =>
+        prevBlobFiles.filter((blobFile) => blobFile.id !== id),
+      );
+    }
+    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const removeAllFile = () => {
+    setFiles([]);
+    setBlobFiles([]);
+  };
+
   return {
     fileInfo,
     handleConfirm,
@@ -167,6 +184,8 @@ const useAddFile = () => {
     handleFileChange,
     handleDrop,
     updateFile,
+    removeFile,
+    removeAllFile,
   };
 };
 export default useAddFile;
