@@ -11,7 +11,15 @@ import { selectedCategories } from 'recoil/main';
 import { useRecoilState } from 'recoil';
 import DetailCategories from '../common/DetailCategories';
 
-const DetailCategoriesContainer = () => {
+interface DetailCategoriesContainerProps {
+  onCrew?: boolean;
+  onSelectKeyword?: (name: string, keyword: string) => void;
+}
+
+const DetailCategoriesContainer = ({
+  onCrew,
+  onSelectKeyword,
+}: DetailCategoriesContainerProps) => {
   const [selectedCategoriesValue, setSelectedCategories] =
     useRecoilState(selectedCategories);
 
@@ -26,6 +34,7 @@ const DetailCategoriesContainer = () => {
     centerPadding: '20px',
     nextArrow: (
       <CustomNextArrow
+        onCrew={onCrew}
         selectedCategoriesValue={selectedCategoriesValue}
         onRemoveAllCategories={onRemoveAllCategories}
       />
@@ -43,7 +52,14 @@ const DetailCategoriesContainer = () => {
       >
         {selectedCategoriesValue.length === 0
           ? INTERESTED_TAG_LIST.map((category) => (
-              <DetailCategories key={category} category={category} />
+              <div
+                key={category}
+                onClick={() =>
+                  onSelectKeyword && onSelectKeyword('detailTags', category)
+                }
+              >
+                <DetailCategories key={category} category={category} />
+              </div>
             ))
           : selectedCategoriesValue.map((category) => (
               <DetailCategories key={category} category={category} />
@@ -56,14 +72,16 @@ const DetailCategoriesContainer = () => {
 export default DetailCategoriesContainer;
 
 const CustomNextArrow = (props: any) => {
-  const { onClick, selectedCategoriesValue, onRemoveAllCategories } = props;
+  const { onClick, onCrew, selectedCategoriesValue, onRemoveAllCategories } =
+    props;
   return (
     <div className="flex items-center justify-center ">
       {(selectedCategoriesValue.length === 0 ||
         selectedCategoriesValue.length > 10) && (
         <>
-          <div className="z-10 absolute top-0 right-[-1%] w-40 h-9 bg-gradient-to-r from-transparent to-neutral-950 rounded-xl"></div>
-
+          {!onCrew && (
+            <div className="z-10 absolute top-0 right-[-1%] w-40 h-9 bg-gradient-to-r from-transparent to-neutral-950 rounded-xl"></div>
+          )}
           <div
             className="z-30 flex justify-center items-center absolute right-1 top-1.5 w-6 h-6 pl-1 bg-zinc-300 rounded-full cursor-pointer"
             onClick={onClick}
