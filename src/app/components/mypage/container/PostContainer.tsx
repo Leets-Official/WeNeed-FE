@@ -5,7 +5,7 @@ import FeedMenuContainer from './FeedMenuContainer';
 const PostContainer = () => {
   return (
     <div className="w-[60%] flex bg-white">
-      <div className="w-full h-full flex flex-col mt-20 mb-5">
+      <div className="w-full h-full flex flex-col pt-20">
         <FeedMenuContainer />
         <CategoriesContainers />
         <FeedItemsContainer article={myOutputList} />
