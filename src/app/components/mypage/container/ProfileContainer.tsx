@@ -14,9 +14,9 @@ export const ProfileContainer = () => {
 
   return (
     <div
-      className={`w-[40%] min-h-screen h-full flex flex-col items-end bg-neutral-900`}
+      className={`w-[40%] min-h-screen h-auto flex flex-col items-end bg-neutral-900`}
     >
-      <div className="h-full mt-20 flex flex-col justify-center items-center gap-16 mr-[5%]">
+      <div className="h-full mt-20 flex flex-col items-center gap-16 mr-[5%]">
         <UserInfoContainer />
         <InfoBoxContainer userInfoItemList={userInfoItemList} />
       </div>

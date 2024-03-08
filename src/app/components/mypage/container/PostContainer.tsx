@@ -21,7 +21,7 @@ const myOutputList = [
     articleId: 93,
     thumbnail:
       'https://s3.ap-northeast-2.amazonaws.com/weneedbucket/files/d4d73ffd-ff47-4d23-b1bf-153d5f5d00a9.png',
-    teamProfiles: [],
+    teamProfiles: ['1', '2', '3'],
     title: '피드 제목입니다.',
     viewCount: 1,
     heartCount: 0,

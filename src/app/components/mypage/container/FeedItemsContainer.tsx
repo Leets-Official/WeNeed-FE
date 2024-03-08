@@ -7,7 +7,7 @@ interface FeedItemsProps {
 
 const FeedItemsContainer = ({ article }: FeedItemsProps) => {
   return (
-    <div className="w-full mt-6 p-4 h-[60%]">
+    <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[60%]">
       <div className="w-full mb-4 h-5 text-black text-base font-semibold">
         총 {article.length}개
       </div>

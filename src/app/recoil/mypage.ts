@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const menuState = atom({
   key: 'menuState',
-  default: '',
+  default: 'MY OUTPUT',
 });
 
 export const selectedCategoriesState = atom({
