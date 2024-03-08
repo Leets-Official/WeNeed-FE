@@ -7,7 +7,7 @@ export default function MyPageLayout({
 }) {
   return (
     <section className="bg-black">
-      <div className="min-w-[850px] mx-auto">{children}</div>
+      <div className="min-w-[850px] min-h-[690px] mx-auto">{children}</div>
     </section>
   );
 }

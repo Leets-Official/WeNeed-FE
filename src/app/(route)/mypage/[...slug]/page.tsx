@@ -8,7 +8,7 @@ export default function MyPage() {
       <div className="w-[80%] max-w-[1290px]">
         <Header nickname="위니드" userId={1} />
       </div>
-      <div className="w-full flex">
+      <div className="w-full min-h-screen flex">
         <ProfileContainer />
         <PostContainer />
       </div>

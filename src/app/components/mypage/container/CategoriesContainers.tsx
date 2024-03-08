@@ -55,7 +55,10 @@ const CategoriesContainers = () => {
 
   return (
     <div className="w-full pl-2 relative">
-      <div className="w-[80%] flex justify-end my-4 text-black text-[10px] font-light underline">
+      <div
+        className="w-[80%] flex justify-end my-3 text-black text-[10px] font-light underline cursor-pointer"
+        onClick={handleResetSelection}
+      >
         {MY_PAGE.TAG_RESET}
       </div>
       <div className="w-[80%]">

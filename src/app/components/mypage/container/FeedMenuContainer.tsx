@@ -1,6 +1,10 @@
 import FeedMenu from '../posts/FeedMenu';
 const FeedMenuContainer = () => {
-  return <FeedMenu />;
+  return (
+    <div>
+      <FeedMenu />
+    </div>
+  );
 };
 
 export default FeedMenuContainer;
