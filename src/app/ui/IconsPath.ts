@@ -503,3 +503,13 @@ export const questions_plus = {
   height: 32,
   fill: 'black',
 };
+
+export const nextCrewArrow = {
+  path: 'M1.37273 9.61719L5.80469 5.61719L1.37273 1.61719',
+  width: 7,
+  height: 15,
+  fill: 'none',
+  options: {
+    stroke: 'black',
+  },
+};

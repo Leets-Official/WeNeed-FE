@@ -5,7 +5,7 @@ import FeedMenuContainer from './FeedMenuContainer';
 const PostContainer = () => {
   return (
     <div className="w-[60%] flex bg-white">
-      <div className="w-full h-full flex flex-col justify-center mb-5">
+      <div className="w-full h-full flex flex-col mt-20 mb-5">
         <FeedMenuContainer />
         <CategoriesContainers />
         <FeedItemsContainer article={myOutputList} />
@@ -42,33 +42,6 @@ const myOutputList = [
     teamProfiles: [],
     title: '피드 제목',
     viewCount: 2,
-    heartCount: 0,
-  },
-  {
-    articleId: 90,
-    thumbnail:
-      'https://s3.ap-northeast-2.amazonaws.com/weneedbucket/files/72178f8d-8532-4e11-b163-ce8dfc9aa97c.png',
-    teamProfiles: [],
-    title: '피드 제목',
-    viewCount: 2,
-    heartCount: 0,
-  },
-  {
-    articleId: 89,
-    thumbnail:
-      'https://s3.ap-northeast-2.amazonaws.com/weneedbucket/files/32dec634-c0aa-4198-8d84-3fb43bdc95ce.jpg',
-    teamProfiles: [],
-    title: '피드 제목',
-    viewCount: 1,
-    heartCount: 0,
-  },
-  {
-    articleId: 88,
-    thumbnail:
-      'https://s3.ap-northeast-2.amazonaws.com/weneedbucket/files/23149fab-8f7b-428e-843a-901d68d5f8f5.jpg',
-    teamProfiles: [],
-    title: '피드 제목',
-    viewCount: 3,
     heartCount: 0,
   },
 ];
