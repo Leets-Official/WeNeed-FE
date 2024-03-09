@@ -19,11 +19,11 @@ const useFillData = () => {
     useRecoilState<FormData>(uploadForm);
 
   const fillPF = ({ user, portfolio }: useFillDataProps) => {
-    setUploadData({
-      ...uploadData,
-      title: portfolio.title,
-      content: [...portfolio.contents],
-    });
+    // setUploadData({
+    //   ...uploadData,
+    //   title: portfolio.title,
+    //   content: [...portfolio.contents],
+    // });
     console.log(portfolio.title);
     console.log('//');
     console.log(portfolio.contents);
