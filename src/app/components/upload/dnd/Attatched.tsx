@@ -7,24 +7,18 @@ import { useRecoilValue } from 'recoil';
 const Attatched = () => {
   const files = useRecoilValue(filestate);
   console.log('files현황: ', files);
-
   return (
-    <div className="flex w-[1206px] h-[214px] bg-black">
-      <div className="flex justify-center items-center w-[156.35px] h-[213.89px] bg-[#C5C5C5] text-[16px]">
-        파일
-      </div>
-      <div className="flex flex-col w-[1049px] h-full px-[16.6px] py-[12.5px] gap-y-[16px] overflow-y-auto bg-zinc-300">
-        {files.map((file: DNDFileTypes, index) => {
-          switch (file.type) {
-            case 'video':
-              return <DndVideo key={index} fileName={file.data} />;
-            case 'docs':
-              return <DndDocs key={index} fileName={file.data} />;
-            default:
-              return null;
-          }
-        })}
-      </div>
+    <div className="w-[1206px] h-[196px] bg-black px-5 py-3 flex flex-col gap-y-2.5 overflow-y-auto">
+      {files.map((file: DNDFileTypes, index) => {
+        switch (file.type) {
+          case 'video':
+            return <DndVideo key={index} fileName={file.data} />;
+          case 'docs':
+            return <DndDocs key={index} fileName={file.data} />;
+          default:
+            return null;
+        }
+      })}
     </div>
   );
 };

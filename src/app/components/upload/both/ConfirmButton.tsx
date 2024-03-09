@@ -3,14 +3,19 @@ import Button from 'components/common/Button';
 interface ConfirmButtonProps {
   btnClick: () => void;
   btnText: string | undefined;
+  isWritten: boolean;
 }
 
-const ConfirmButton = ({ btnClick, btnText }: ConfirmButtonProps) => {
+const ConfirmButton = ({
+  btnClick,
+  btnText,
+  isWritten,
+}: ConfirmButtonProps) => {
   return (
     <Button
       buttonText={'확인'}
       type={'small'}
-      isDisabled={false}
+      isDisabled={isWritten}
       onClickHandler={btnClick}
       className={`flex w-[186px] h-[36px] text-neutral-700 text-base rounded-[10px] justify-center items-center ${
         btnText

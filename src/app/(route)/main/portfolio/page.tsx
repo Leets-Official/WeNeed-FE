@@ -56,7 +56,7 @@ export default function MainPortfolioPage() {
       <section>
         <Header nickname={user.nickname} userId={user.userId} />
         <div className="flex flex-col items-center justify-center w-full  text-white ">
-          <MainNavbar />
+          <MainNavbar nickname={user.nickname} userId={user.userId} />
           <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
             {LOGGEDIN_SECTION_HEADINGS.hot}
           </h1>

@@ -9,16 +9,6 @@ export const deletePost = async (id: string, accessToken: string) => {
     }).then((res) => res.json());
     return response;
   } catch (error) {
-    console.log('google login error', error);
+    console.log('삭제 중 error발생', error);
   }
-};
-
-//게시물 조회에서 머튼과 이벤트 연결할 delete로직
-const deleteConfirm = async (articleId: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/delete/post?articleId=${articleId}`,
-    {
-      method: 'DELETE',
-    },
-  );
 };
