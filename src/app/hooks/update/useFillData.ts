@@ -19,14 +19,17 @@ const useFillData = () => {
     useRecoilState<FormData>(uploadForm);
 
   const fillPF = ({ user, portfolio }: useFillDataProps) => {
-    // setUploadData({
-    //   ...uploadData,
-    //   title: portfolio.title,
-    //   content: [...portfolio.contents],
-    // });
-    console.log(portfolio.title);
+    console.log(portfolio);
+    setUploadData({
+      ...uploadData,
+      title: portfolio.title,
+      skills: portfolio.skills,
+      tags: portfolio.tags,
+      content: [...portfolio.contents],
+    });
+    setItems([...portfolio.contents]);
     console.log('//');
-    console.log(portfolio.contents);
+    console.log(portfolio.title, '로 타이틀 변경');
   };
 
   return { fillPF };

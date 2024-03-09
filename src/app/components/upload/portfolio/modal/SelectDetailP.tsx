@@ -4,7 +4,7 @@ import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   fileBlobState,
@@ -85,6 +85,11 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
       console.log('넥스트 서버 보내기 전 오류발생', e);
     }
   };
+
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSkill(uploadData.skills);
+  }, []);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

@@ -64,7 +64,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       cancelAnimationFrame(animation);
       setEnabled(false);
     };
-  }, [items, uploadData]);
+  }, [items]);
 
   if (!enabled) {
     return null;
