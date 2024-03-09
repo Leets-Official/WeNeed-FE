@@ -76,10 +76,10 @@ export const APPLICANT_COMPLETE = {
 export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
   deadline: '모집 기간',
   description: '프로젝트 한줄 소개',
-  task_need: '필요한 크루의 업무',
-  member_count: '필요한 크루의 인원',
+  taskNeed: '필요한 크루의 업무',
+  memberCount: '필요한 크루의 인원',
   phone: '연락처',
-  crew_questions: '궁금한 질문',
+  crewQuestions: '궁금한 질문',
   content: '전하고 싶은 말',
   keywords: '이런 분과 함께 크루를 하고 싶어요!',
 } as const;
@@ -99,4 +99,30 @@ export const CREW_KEYWORDS = [
   '같은연령대',
   '같은성별원해요',
   '정리를잘해요',
-];
+] as const;
+
+export const defaulRecruitForm = {
+  deadline: ['', '', ''],
+  detailTags: [],
+  description: '',
+  taskNeed: '',
+  memberCount: '',
+  phone: '',
+  crewQuestions: [],
+  content: '',
+  keywords: [],
+};
+
+export const defaulApplicantForm = {
+  name: '',
+  major: '',
+  doubleMajor: '',
+  international: false,
+  grade: 0,
+  status: '',
+  phone: '',
+  aboutMe: '',
+  content: '',
+  keywords: [],
+  crewAnswers: [],
+};
