@@ -10,7 +10,12 @@ import FirstSelectP from '../FirstSelectP';
 import { filestate, textState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 
-const UploadContainerP = () => {
+interface UploadContainerPProps {
+  isEdit: boolean;
+  id: string;
+}
+
+const UploadContainerP = ({ id, isEdit }: UploadContainerPProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState(filestate);
 
@@ -29,6 +34,8 @@ const UploadContainerP = () => {
           navItemIconPath={navItemIconPath_P}
           iconNameArr={SIDENAV_ITEM_NAME}
           articleType={'portfolio'}
+          isEdit={isEdit}
+          id={id}
         />
       </div>
       <div className="flex justify-center pb-[46px]">

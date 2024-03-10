@@ -7,9 +7,11 @@ import SearchTeam from '../portfolio/modal/search/SearchTeam';
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
   label: string;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const SideNavItemP = ({ iconInfo, label }: SideNavItemProps) => {
+const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   let navComponent;
 
@@ -18,7 +20,9 @@ const SideNavItemP = ({ iconInfo, label }: SideNavItemProps) => {
       navComponent = <SelectDetailP closeModal={closeModal} />;
       break;
     case '업로드':
-      navComponent = <SelectDetailP closeModal={closeModal} />;
+      navComponent = (
+        <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />
+      );
       break;
     case '팀원 추가':
       navComponent = <SearchTeam closeModal={closeModal} />;

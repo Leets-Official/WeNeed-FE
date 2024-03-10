@@ -57,6 +57,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   useEffect(() => {
     console.log('items현황:', items);
     console.log('uploadData현황: ', uploadData);
+    setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
     setEditItemId(null);
     setIsEditFile(false);
