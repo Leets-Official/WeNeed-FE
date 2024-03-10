@@ -16,6 +16,7 @@ interface RecruitListItem {
 
 interface RecruitDetailItem extends PortfolioDetails {
   commentCount: number;
+  sharedText: string;
   teamMembers: TeamMember[];
 }
 
@@ -51,12 +52,27 @@ interface RecruitFormFromServer {
   keywords: string[];
 }
 
-interface ApplicationForm {
+interface ApplicationFormBeforeSubmit {
+  [key: string]: string | string[];
   name: string;
   major: string;
   doubleMajor: string;
-  international: boolean;
-  grade: number;
+  grade: string;
+  status: string;
+  phone: string;
+  aboutMe: string;
+  content: string;
+  keywords: string[];
+  crewAnswers: string[];
+}
+
+interface ApplicationForm {
+  [key: string]: string | string[];
+  name: string;
+  major: string;
+  doubleMajor: string;
+  // international: boolean;
+  grade: string;
   status: string;
   phone: string;
   aboutMe: string;

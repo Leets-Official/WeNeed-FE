@@ -19,7 +19,8 @@ const RecruitingDetailContainers = ({
   user,
   articleId,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents, files, links, skills } = recruit;
+  const { createdAt, tags, title, contents, files, skills, sharedText } =
+    recruit;
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(user.userId !== -1);
 
   useEffect(() => {
@@ -43,7 +44,6 @@ const RecruitingDetailContainers = ({
         </h3>
         <RecruitingDetailContents
           contents={contents}
-          links={links}
           files={files}
           skills={skills}
         />

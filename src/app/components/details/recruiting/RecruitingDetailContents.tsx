@@ -5,14 +5,12 @@ import { fileMini, skillsList } from 'ui/IconsPath';
 
 interface RecruitingDetailContentsProps {
   contents: Content[];
-  links: string[];
   files: string[];
   skills: string[];
 }
 
 const RecruitingDetailContents = ({
   contents,
-  links,
   files,
   skills,
 }: RecruitingDetailContentsProps) => {

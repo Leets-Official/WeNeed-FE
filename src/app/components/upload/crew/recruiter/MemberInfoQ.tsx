@@ -8,7 +8,7 @@ import useInputChange from 'hooks/upload/useInputChange';
 import { useEffect } from 'react';
 
 const MemberInfoQ = () => {
-  const { onChangeInput, recruiterData } = useInputChange();
+  const { onChangeInput, recruiterData } = useInputChange('recruiter');
   const REQUIREMENT = (
     <div className={QUESTIONS_BOX_STYLE.requirement()}>*</div>
   );
