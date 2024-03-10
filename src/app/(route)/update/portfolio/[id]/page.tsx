@@ -36,7 +36,7 @@ export default async function PortfolioPage({
         <div className=" w-[1280px] mx-auto ">
           <Header nickname={user.nickname} userId={Number(user.userId)} />
           <div className="w-[100%] mx-auto">
-            <UploadContainerP />
+            <UploadContainerP isEdit={true} id={params.id} />
           </div>
         </div>
       </section>
