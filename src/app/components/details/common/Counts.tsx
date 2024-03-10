@@ -18,7 +18,7 @@ interface CountsProps {
   count: number[];
 }
 
-const Counts = ({ count, noBg }: CountsProps) => {
+const Counts = ({ count, noBg = false }: CountsProps) => {
   const [heartCount, setHeartCount] = useRecoilState(heartCountState);
   const [bookmarkCount, setBookmarkCount] = useRecoilState(bookmarkCountState);
   const hearted = useRecoilValue(heartedPostState);
@@ -27,7 +27,7 @@ const Counts = ({ count, noBg }: CountsProps) => {
   useEffect(() => {
     setHeartCount(() => count[1]);
     setBookmarkCount(() => count[2]);
-  }, []);
+  }, [count, setBookmarkCount, setHeartCount]);
 
   return (
     <div className="flex gap-[32px] h-[75px] items-center justify-center w-[20%]">
@@ -35,7 +35,7 @@ const Counts = ({ count, noBg }: CountsProps) => {
         <GradientView width={24} height={18} /> {count[0]}
       </p>
       <p className="flex gap-[10px] cursor-pointer">
-        {hearted || noBg ? (
+        {hearted || !noBg ? (
           <GradientHeart width={24} height={24} />
         ) : (
           <Icons name={heart} />
@@ -43,7 +43,7 @@ const Counts = ({ count, noBg }: CountsProps) => {
         {heartCount}
       </p>
       <p className="flex  gap-[10px] cursor-pointer">
-        {bookmarked || noBg ? (
+        {bookmarked || !noBg ? (
           <GradientBookmark width={17} height={24} />
         ) : (
           <Icons name={bookmark} />

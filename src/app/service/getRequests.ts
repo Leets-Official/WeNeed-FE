@@ -109,3 +109,11 @@ export const getRecruitForm = async (
   const url = `${SERVER_URL}/recruitmentForms/${articleId}`;
   return await getRequest(url, accessToken);
 };
+
+export const getApplicantForm = async (
+  articleId: string,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/recruitmentForms/${articleId}`;
+  return await getRequest(url, accessToken);
+};
