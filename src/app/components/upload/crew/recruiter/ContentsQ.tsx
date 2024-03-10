@@ -10,7 +10,7 @@ import { questions_plus } from 'ui/IconsPath';
 
 const ContentsQ = () => {
   const { recruiterData, onChangeInput, onChangeInputArray, onSelectKeyword } =
-    useInputChange();
+    useInputChange('recruiter');
   const [qCount, setQCount] = useState<number>(1);
 
   return (

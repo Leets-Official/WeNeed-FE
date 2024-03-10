@@ -7,14 +7,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const articleId = searchParams.get('articleId') || '';
   const res = await request.formData();
-  const data = await postApplicant(articleId, res, accessToken).then(
-    (data) => data,
-  );
-
-  //   return NextResponse.json(JSON.stringify(data), {
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data',
-  //     },
-  //   });
-  return NextResponse.json(data);
+  const data = await postApplicant(articleId, res, accessToken);
+  return NextResponse.json(JSON.stringify(data), {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 }

@@ -9,7 +9,7 @@ import DetailCategories from 'components/main/common/DetailCategories';
 
 const ProjectInfoQ = () => {
   const { onChangeDate, onChangeInput, onSelectKeyword, recruiterData } =
-    useInputChange();
+    useInputChange('recruiter');
   const REQUIREMENT = (
     <div className={QUESTIONS_BOX_STYLE.requirement()}>*</div>
   );
