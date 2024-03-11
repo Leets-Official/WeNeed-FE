@@ -10,6 +10,8 @@ import FirstSelectR from '../FirstSelectR';
 import DndContainer from 'components/upload/dnd/DndContainer';
 import { navItemIconPath_R } from 'ui/IconsPath';
 import { SIDENAV_ITEM_NAME_R } from 'constants/recruit';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface UploadContainerRProps {
   isEdit: boolean;
@@ -22,6 +24,7 @@ const UploadContainerR = ({ id, isEdit }: UploadContainerRProps) => {
   return (
     <div className="bg-black mt-5 mb-8">
       <AddThumbnail thumbnailInfo={recruitThumbnail} />
+      <ToastContainer />
       <div className="relative flex flex-col w-[100%] h-auto mt-2  bg-white">
         <div className="relative">
           {items.length > 0 ? (
