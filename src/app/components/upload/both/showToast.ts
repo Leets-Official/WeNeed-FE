@@ -20,3 +20,23 @@ export const deleteAlert = () => {
     position: 'top-center',
   });
 };
+
+export const exceedAlert = () => {
+  toast.warning('최대 2명까지 추가 가능합니다', {
+    icon: () => '🚫',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 3000,
+    position: 'top-center',
+  });
+};
+
+export const overlapAlert = () => {
+  toast.warning('회원은 중복해서 추가할 수 없습니다.', {
+    icon: () => '🚫',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 3000,
+    position: 'top-center',
+  });
+};
