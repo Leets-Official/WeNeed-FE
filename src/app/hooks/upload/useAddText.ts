@@ -1,3 +1,4 @@
+import { editAlert } from 'components/upload/both/showToast';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { textState, uploadDataState, orderState } from 'recoil/upload';
@@ -20,6 +21,7 @@ const useAddText = () => {
       ),
     );
     setUploadData({ ...uploadData, content: items });
+    editAlert();
   };
 
   const addText = (type: string) => {
