@@ -12,7 +12,7 @@ const SelectFileP = () => {
     <div>
       <div
         onClick={openModal}
-        className="flex items-center justify-center w-[1200px] h-[66px] gap-x-[10px] cursor-pointer border border-dashed border-neutral-400"
+        className="flex items-center justify-center w-[1206px] h-[66px] gap-x-[10px] cursor-pointer border border-dashed border-neutral-400"
       >
         <Icons name={selectFileIcon} />
         <div onClick={handleModalClick}>

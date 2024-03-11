@@ -1,6 +1,6 @@
 import RecruitmentContainer from 'components/crew/RecruitmentContainer';
 import CrewHeader from 'components/upload/crew/common/CrewHeader';
-import RecruiteSubmission from 'components/upload/crew/recruiter/RecruiteSubmission';
+import CrewSubmission from 'components/upload/crew/recruiter/CrewSubmission';
 import { HEADER_COMPLETE } from 'constants/crew';
 
 export default async function CrewRecruitmentPage({
@@ -12,7 +12,11 @@ export default async function CrewRecruitmentPage({
     <section className="flex flex-col items-center w-full min-h-screen bg-black">
       <CrewHeader header={HEADER_COMPLETE} />
       <RecruitmentContainer articleId={params.slug} />
-      <RecruiteSubmission text="지원서 작성하러 가기" />
+      <CrewSubmission
+        articleId={params.slug}
+        text="지원서 작성하러 가기"
+        type="routerApplicant"
+      />
     </section>
   );
 }

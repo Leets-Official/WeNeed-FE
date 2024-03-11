@@ -7,12 +7,10 @@ interface DndVideoProps {
 
 const DndVideo = ({ fileName }: DndVideoProps) => {
   return (
-    <div className="flex">
-      <div className="flex items-center h-[36px] px-[21px] py-[6px] gap-x-[17.5px] rounded-[10px] bg-black">
+    <div className="flex h-auto">
+      <div className="flex items-center h-9 px-5 py-2 gap-x-4 rounded-[10px] bg-black">
         <Icons name={dndVideoIcon} />
-        <div className="flex text-[#00E0EE] text-sm font-normal">
-          {fileName}
-        </div>
+        <div className="text-[#00E0EE] text-sm font-normal">{fileName}</div>
       </div>
     </div>
   );

@@ -9,3 +9,13 @@ export const dropdownItemsState = atom<DropdownItems>({
     grade: '',
   },
 });
+
+export const crewCategoriesState = atom({
+  key: 'crewCategories',
+  default: '',
+});
+
+export const crewMembersState = atom({
+  key: 'crewMembers',
+  default: 0,
+});

@@ -7,11 +7,13 @@ import WriterOptions from 'components/details/portfolio/WriterOptions';
 interface RecruitingDetailContainersProps {
   recruit: RecruitDetailItem;
   user: UserProfile;
+  articleId: string;
 }
 
 const RecruitingDetailContainers = ({
   recruit,
   user,
+  articleId,
 }: RecruitingDetailContainersProps) => {
   const { createdAt, tags, title, contents, files, links, skills } = recruit;
 
@@ -24,13 +26,12 @@ const RecruitingDetailContainers = ({
         </h3>
         <RecruitingDetailContents
           contents={contents}
-          links={links}
           files={files}
           skills={skills}
         />
         {user.userId !== -1 && (
           <div className="text-black  mt-[100px]">
-            {user.sameUser && <WriterOptions onRecruit />}
+            {user.sameUser && <WriterOptions onRecruit articleId={articleId} />}
           </div>
         )}
       </div>

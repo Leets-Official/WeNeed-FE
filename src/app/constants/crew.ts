@@ -41,15 +41,14 @@ export const APPLICANT_QUESTIONS = {
   name: '이름',
   major: '학과',
   doubleMajor: ['복수전공', '복수 전공인 경우만 작성해주세요.'],
-  international: ['내국인', '외국인'], //boolean
+  international: ['내국인', '외국인'],
   grade: ['학년', '1학년'],
   status: ['학적 상태', '재학'],
   phone: [
     '전화번호를 입력해주세요.',
     '지원서를 열람하는 분만 연락처를 볼 수 있습니다.',
   ],
-  available_time: '작업을 할 수 있는 시간대는 언제인가요?',
-  about_me: '본인을 표현할 수 있는 한마디를 작성해주세요.',
+  aboutMe: '본인을 표현할 수 있는 한마디를 작성해주세요.',
   appeal: ['어필 할 수 있는 파일을 올려주세요.', '파일'],
   content: '크루를 하고 싶은 분께 하고 싶은 말을 작성해주세요. ',
   keywords: ['저를 표현 할 수 있는 태그를 선택해 주세요.'],
@@ -59,15 +58,14 @@ export const APPLICANT_COMPLETE = {
   name: '이름',
   major: '학과',
   doubleMajor: ['복수전공', '복수 전공인 경우만 작성해주세요.'],
-  international: ['내국인', '외국인'], //boolean
+  international: ['내국인', '외국인'],
   grade: ['학년', '1학년'],
   status: ['학적 상태', '재학'],
   phone: [
     '전화번호를 입력해주세요.',
     '지원서를 열람하는 분만 연락처를 볼 수 있습니다.',
   ],
-  available_time: '작업을 할 수 있는 시간대는 언제인가요?',
-  about_me: '본인을 표현할 수 있는 한마디를 작성해주세요.',
+  aboutMe: '본인을 표현할 수 있는 한마디를 작성해주세요.',
   appeal: ['어필 할 수 있는 파일을 올려주세요.', '파일'],
   content: '크루를 하고 싶은 분께 하고 싶은 말을 작성해주세요. ',
   keywords: ['저를 표현 할 수 있는 태그를 선택해 주세요.'],
@@ -76,10 +74,10 @@ export const APPLICANT_COMPLETE = {
 export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
   deadline: '모집 기간',
   description: '프로젝트 한줄 소개',
-  task_need: '필요한 크루의 업무',
-  member_count: '필요한 크루의 인원',
+  taskNeed: '필요한 크루의 업무',
+  memberCount: '필요한 크루의 인원',
   phone: '연락처',
-  crew_questions: '궁금한 질문',
+  crewQuestions: '궁금한 질문',
   content: '전하고 싶은 말',
   keywords: '이런 분과 함께 크루를 하고 싶어요!',
 } as const;
@@ -99,4 +97,29 @@ export const CREW_KEYWORDS = [
   '같은연령대',
   '같은성별원해요',
   '정리를잘해요',
-];
+] as const;
+
+export const defaulRecruitForm = {
+  deadline: ['', '', ''],
+  detailTags: [],
+  description: '',
+  taskNeed: '',
+  memberCount: '',
+  phone: '',
+  crewQuestions: [],
+  content: '',
+  keywords: [],
+};
+
+export const defaulApplicantForm = {
+  name: '',
+  major: '',
+  doubleMajor: '',
+  grade: '1',
+  status: '재학',
+  phone: '',
+  aboutMe: '',
+  content: '',
+  keywords: [],
+  crewAnswers: [],
+};

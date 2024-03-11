@@ -54,6 +54,7 @@ export default function MainRecruitingPage() {
       setPage((prevPage) => prevPage + 1);
     }
   };
+  console.log(data);
 
   const onClickItem = (userId: number, articleId: number) => {
     if (userId == -1) {
@@ -74,7 +75,7 @@ export default function MainRecruitingPage() {
     return (
       <section className="flex flex-col items-center w-full min-h-screen text-white ">
         <Header nickname={user.nickname} userId={user.userId} />
-        <MainNavbar />
+        <MainNavbar nickname={user.nickname} userId={user.userId} />
         <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
           {LOGGEDIN_SECTION_HEADINGS.crew}
         </h1>

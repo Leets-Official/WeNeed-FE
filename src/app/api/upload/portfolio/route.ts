@@ -1,12 +1,14 @@
 import { NextResponse } from 'next/server';
-import { uploadPortfolio } from 'service/uploadPortfolio';
+import { uploadPortfolio } from 'service/uploadRequest';
+import { getCookie } from 'utils/cookieUtils';
 
 export async function POST(request: Request) {
-  console.log('넥스트 서버에서 받은 요청 데이터', request);
+  const accessToken = getCookie(request, 'accessToken');
+  console.log('포폴 작성 넥스트 서버 요청 데이터', request);
   try {
     const res = await request.formData();
     console.log('실제 서버로 요청할 데이터', res);
-    const data = await uploadPortfolio(res);
+    const data = await uploadPortfolio(res, accessToken);
     return new Response(JSON.stringify(res), {
       headers: {
         'Content-Type': 'multipart/form-data',
