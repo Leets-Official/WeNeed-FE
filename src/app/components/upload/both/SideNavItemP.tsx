@@ -10,26 +10,16 @@ interface SideNavItemProps {
   isEdit?: boolean;
   id?: string;
 }
+type NavComponent = Record<string, JSX.Element>;
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  let navComponent;
 
-  switch (label) {
-    case '미리보기':
-      navComponent = <SelectDetailP closeModal={closeModal} />;
-      break;
-    case '업로드':
-      navComponent = (
-        <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />
-      );
-      break;
-    case '팀원 추가':
-      navComponent = <SearchTeam closeModal={closeModal} />;
-      break;
-    default:
-      break;
-  }
+  const navComponent: NavComponent = {
+    미리보기: <SelectDetailP closeModal={closeModal} />,
+    업로드: <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />,
+    '팀원 추가': <SearchTeam closeModal={closeModal} />,
+  };
 
   return (
     <div
@@ -42,7 +32,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       <div className="flex justify-center w-auto h-[21px] text-zinc-300 text-[16px]">
         {label}
       </div>
-      <div onClick={handleModalClick}>{isOpen && navComponent}</div>
+      <div onClick={handleModalClick}>{isOpen && navComponent[label]}</div>
     </div>
   );
 };
