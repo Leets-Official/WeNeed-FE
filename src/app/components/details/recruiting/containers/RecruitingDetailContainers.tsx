@@ -1,5 +1,3 @@
-'use client';
-
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import RecruitingDetailContents from '../RecruitingDetailContents';
 import WriterOptions from 'components/details/portfolio/WriterOptions';
@@ -15,7 +13,9 @@ const RecruitingDetailContainers = ({
   user,
   articleId,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents, files, links, skills } = recruit;
+  const { createdAt, tags, title, contents, files, skills, sharedText } =
+    recruit;
+  const { nickname, userId } = user;
 
   return (
     <>
@@ -28,10 +28,18 @@ const RecruitingDetailContainers = ({
           contents={contents}
           files={files}
           skills={skills}
+          sharedText={sharedText}
         />
-        {user.userId !== -1 && (
+        {userId !== -1 && (
           <div className="text-black  mt-[100px]">
-            {user.sameUser && <WriterOptions onRecruit articleId={articleId} />}
+            {user.sameUser && (
+              <WriterOptions
+                nickname={nickname}
+                userId={userId}
+                onRecruit
+                articleId={articleId}
+              />
+            )}
           </div>
         )}
       </div>

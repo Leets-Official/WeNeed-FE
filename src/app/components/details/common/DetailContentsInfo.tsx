@@ -14,13 +14,13 @@ const DetailContentsInfo = ({
 }: DetailContentsInfoProps) => {
   return (
     <>
-      <div className="w-full flex justify-center mb-[32px]">
+      <div className="w-full flex gap-[18px] items-center justify-center mb-[32px]">
         {tags.map((tag) => (
           <DetailCategories key={tag} category={tag} />
         ))}
       </div>
       <p
-        className={`w-full text-center font-bold tracking-[1.15px] ${
+        className={`w-full flex items-center justify-center font-bold tracking-[1.15px] ${
           recruit && 'text-black'
         }`}
       >

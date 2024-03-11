@@ -1,17 +1,15 @@
 import Image from 'next/image';
-import RecruitingItemInfo from './RecruitingItemMenuBar';
 
 interface RecruitingItemProps {
   article: RecruitListItem;
-  user: SimpleUser;
 }
 
-const RecruitingItem = ({ article, user }: RecruitingItemProps) => {
-  const { title, thumbnail, content } = article;
+const RecruitingItem = ({ article }: RecruitingItemProps) => {
+  const { title, thumbnail, sharedText } = article;
 
   return (
     <>
-      <div className="w-full max-h-[829px] flex flex-col items-center bg-white text-black rounded-2xl pt-[40px] px-[43px]">
+      <div className="w-full max-h-[829px] flex flex-col items-center">
         <div className="w-full">
           <h3 className="flex flex-wrap text-[30px] w-full h-[87px] font-bold clamp-2">
             {title}
@@ -30,10 +28,9 @@ const RecruitingItem = ({ article, user }: RecruitingItemProps) => {
             <p className="pb-[18px] border-b border-black mb-[20px] ">
               나누고 싶은 큰 문장
             </p>
-            <div className="max-h-[80px] overflow-hidden">{content}</div>
+            <div className="max-h-[80px] overflow-hidden">{sharedText}</div>
           </div>
         </div>
-        <RecruitingItemInfo article={article} user={user} />
       </div>
     </>
   );
