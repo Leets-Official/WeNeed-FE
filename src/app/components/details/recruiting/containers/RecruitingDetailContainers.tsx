@@ -49,7 +49,14 @@ const RecruitingDetailContainers = ({
         />
         {user.userId !== -1 && (
           <div className="text-black  mt-[100px]">
-            {user.sameUser && <WriterOptions onRecruit articleId={articleId} />}
+            {user.sameUser && (
+              <WriterOptions
+                onRecruit
+                articleId={articleId}
+                userId={user.userId || -1}
+                nickname={user.nickname || ''}
+              />
+            )}
           </div>
         )}
       </div>

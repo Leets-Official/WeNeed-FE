@@ -6,9 +6,11 @@ import SelectDetailR from '../recruiting/modal/SelectDetailR';
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
   label: string;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const SideNavItemR = ({ iconInfo, label }: SideNavItemProps) => {
+const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   let navComponent;
 
@@ -17,7 +19,9 @@ const SideNavItemR = ({ iconInfo, label }: SideNavItemProps) => {
       navComponent = <SelectDetailR closeModal={closeModal} />;
       break;
     case '업로드':
-      navComponent = <SelectDetailR closeModal={closeModal} />;
+      navComponent = (
+        <SelectDetailR closeModal={closeModal} isEdit={isEdit} id={id} />
+      );
       break;
     default:
       break;

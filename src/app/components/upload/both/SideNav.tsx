@@ -33,6 +33,8 @@ const SideNav = ({
             key={item}
             iconInfo={{ ...navItemIcons, path: item }}
             label={iconNameArr[index]}
+            isEdit={isEdit}
+            id={id}
           />
         ),
       )}

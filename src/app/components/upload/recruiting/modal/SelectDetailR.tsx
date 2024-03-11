@@ -1,7 +1,7 @@
 import Icons from 'components/common/Icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { uploadDataState, uploadForm } from 'recoil/upload';
+import { imageBlobState, uploadDataState, uploadForm } from 'recoil/upload';
 import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
@@ -11,9 +11,11 @@ import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted
 
 interface SelectDetailProps {
   closeModal?: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
+const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -22,6 +24,12 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
+  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
+
+  const reqPath = isEdit
+    ? `api/update/recruiting?articleId=${id}`
+    : 'api/upload/recruit';
+  const apiMode = isEdit ? 'PATCH' : 'POST';
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -30,12 +38,22 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
+    uploadFormData.delete('request');
     setLoading(true);
-    const { teamMembersId, articleType, ...rest } = uploadData;
+    images.forEach((image) => {
+      uploadFormData.append('images', image.blob, image.filename);
+    });
+
+    setUploadData({
+      ...uploadData,
+      title: title,
+      skills: skill,
+      tags: selectedTags,
+    });
 
     const articleRequest = {
+      ...uploadData,
       articleType: 'RECRUITING',
-      ...rest,
       title: title,
       skills: skill,
       tags: selectedTags,
@@ -46,24 +64,25 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
     );
 
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/recruit`,
-        {
-          method: 'POST',
-          body: uploadFormData,
-        },
-      );
-      if (true) {
-        setTimeout(() => {
-          setLoading(false);
-          setCompleted(true);
-        }, 2000);
-      }
-    } catch (e) {
-      console.log('넥스트 서버 보내기 전 오류발생', e);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
+      {
+        method: apiMode,
+        body: uploadFormData,
+      },
+    );
+    if (true) {
+      setTimeout(() => {
+        setLoading(false);
+        setCompleted(true);
+      }, 2000);
     }
   };
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSkill(uploadData.skills);
+  }, []);
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       {loading && <SubmitLoading />}

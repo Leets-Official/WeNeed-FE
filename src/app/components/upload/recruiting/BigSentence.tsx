@@ -4,7 +4,11 @@ import React from 'react';
 import { selectFileRIcon } from 'ui/IconsPath';
 import ModalSelector from '../both/modal/ModalSelector';
 
-const BigSentence = () => {
+interface BigSentenceProps {
+  isEdit: boolean;
+}
+
+const BigSentence = ({ isEdit }: BigSentenceProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   return (
     <div
@@ -20,6 +24,7 @@ const BigSentence = () => {
           <ModalSelector
             fileType={'나누고 싶은 문장'}
             closeModal={closeModal}
+            isEdit={isEdit}
           />
         )}
       </div>

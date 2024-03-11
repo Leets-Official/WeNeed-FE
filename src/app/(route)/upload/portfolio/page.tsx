@@ -12,7 +12,7 @@ export default function UploadPortfolioPage() {
       <div className=" w-[1280px] mx-auto ">
         <Header nickname={nickname} userId={Number(userId)} />
         <div className="w-[100%] mx-auto">
-          <UploadContainerP />
+          <UploadContainerP isEdit={false} id={''} />
         </div>
       </div>
     </section>

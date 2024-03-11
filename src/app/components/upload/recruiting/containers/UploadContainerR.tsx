@@ -11,7 +11,12 @@ import DndContainer from 'components/upload/dnd/DndContainer';
 import { navItemIconPath_R } from 'ui/IconsPath';
 import { SIDENAV_ITEM_NAME_R } from 'constants/recruit';
 
-const UploadContainerR = () => {
+interface UploadContainerRProps {
+  isEdit: boolean;
+  id: string;
+}
+
+const UploadContainerR = ({ id, isEdit }: UploadContainerRProps) => {
   const [items, setItems] = useRecoilState(textState);
 
   return (
@@ -30,13 +35,15 @@ const UploadContainerR = () => {
             navItemIconPath={navItemIconPath_R}
             iconNameArr={SIDENAV_ITEM_NAME_R}
             articleType={'recruit'}
+            isEdit={isEdit}
+            id={id}
           />
         </div>
-        <div className="flex justify-center pb-[46px]">
+        <div className="flex justify-center pb-[40px] pt-3">
           {items.length > 0 && <SelectFileR />}
         </div>
       </div>
-      <BigSentence />
+      <BigSentence isEdit={isEdit} />
     </div>
   );
 };

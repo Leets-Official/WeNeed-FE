@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   fileBlobState,
-  filestate,
   imageBlobState,
   uploadDataState,
   uploadForm,
@@ -39,6 +38,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
   const apiMode = isEdit ? 'PATCH' : 'POST';
+
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const skillsArray = value.split(',');

@@ -32,6 +32,7 @@ const useAddText = () => {
       },
     ];
     setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
     setOrderId(orderId + 1);
   };
 

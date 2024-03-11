@@ -12,7 +12,7 @@ export default function UploadRecruitPage() {
       <div className=" w-[1280px] mx-auto ">
         <Header nickname={nickname} userId={Number(userId)} />
         <div className="w-[100%] mx-auto">
-          <UploadContainerR />
+          <UploadContainerR isEdit={false} id={''} />
         </div>
       </div>
     </section>

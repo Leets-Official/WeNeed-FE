@@ -16,6 +16,7 @@ interface RecruitListItem {
 
 interface RecruitDetailItem extends PortfolioDetails {
   commentCount: number;
+  sharedText: string;
   teamMembers: TeamMember[];
 }
 

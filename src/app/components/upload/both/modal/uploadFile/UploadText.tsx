@@ -3,6 +3,9 @@ import Icons from 'components/common/Icons';
 import { closeIcon } from 'ui/IconsPath';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import useAddText from 'hooks/upload/useAddText';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { uploadDataState } from 'recoil/upload';
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
   closeModal?: () => void;
@@ -16,10 +19,25 @@ const UploadText = ({
   isEdit,
   id,
 }: UploadTextProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const { fileType, announcement, rule } = uploadInfo;
   const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
     useAddText();
 
+  useEffect(() => {
+    if (id) {
+      if (id === 'share') {
+        setText(uploadData.sharedText || '');
+      } else {
+        const content = uploadData.content.find((item) => item.id === id);
+        if (content) {
+          if (content.type === 'text' || 'link' || 'audio') {
+            setText(content.data);
+          }
+        }
+      }
+    }
+  }, []);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
