@@ -6,12 +6,22 @@ import DetailCategories from 'components/main/common/DetailCategories';
 import { CREW_KEYWORDS, RECRUITER_QUESTIONS } from 'constants/crew';
 import useInputChange from 'hooks/upload/useInputChange';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { postRecruiterState } from 'recoil/crew';
 import { questions_plus } from 'ui/IconsPath';
 
 const ContentsQ = () => {
+  const setRecruiterData = useSetRecoilState(postRecruiterState);
   const { recruiterData, onChangeInput, onChangeInputArray, onSelectKeyword } =
     useInputChange('recruiter');
   const [qCount, setQCount] = useState<number>(1);
+
+  const onRemovekeyword = (tag: string) => {
+    setRecruiterData((prev) => ({
+      ...prev,
+      keywords: recruiterData.keywords.filter((cat) => cat !== tag),
+    }));
+  };
 
   return (
     <div className="font-semibold w-[80%] flex flex-col bg-white rounded-lg p-[30px]">
@@ -44,7 +54,9 @@ const ContentsQ = () => {
         />
       </div>
       <div>
-        <div className="flex gap-1">{RECRUITER_QUESTIONS.keywords}</div>
+        <div className="flex gap-1 mt-[30px] mb-[5px]">
+          {RECRUITER_QUESTIONS.keywords}
+        </div>
         <div className="flex text-white h-[130px] flex-wrap">
           {CREW_KEYWORDS.map((keyword) => (
             <div
@@ -55,6 +67,16 @@ const ContentsQ = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="flex items-center gap-5 text-white flex-wrap">
+        <p className="text-black">선택 :</p>
+        {recruiterData.keywords.map((tag) => (
+          <DetailCategories
+            category={tag}
+            key={tag}
+            onClick={() => onRemovekeyword(tag)}
+          />
+        ))}
       </div>
     </div>
   );

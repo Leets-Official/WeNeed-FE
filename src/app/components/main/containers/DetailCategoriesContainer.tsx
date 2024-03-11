@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import Slider from 'react-slick';
@@ -57,6 +56,7 @@ const DetailCategoriesContainer = ({
                 onClick={() =>
                   onSelectKeyword && onSelectKeyword('detailTags', category)
                 }
+                className="flex "
               >
                 <DetailCategories key={category} category={category} />
               </div>

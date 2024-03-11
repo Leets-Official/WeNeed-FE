@@ -33,7 +33,7 @@ const RecruitingItemMenuBar = ({ article, user }: RecruitingItemInfoProps) => {
   ];
 
   return (
-    <div className="w-full flex justify-between border-t border-black items-center text-[#3A3A3A] font-bold text-[18px] bg-white h-[86px] ">
+    <div className="w-full flex justify-between border-t border-black items-center text-[#3A3A3A] font-bold text-[18px] bg-white h-[86px] roun ">
       {menuItems.map(({ menu, icon, count }) => (
         <div
           key={menu}

@@ -16,7 +16,7 @@ export default function CrewRecruiterPage({
     <section className="flex flex-col items-center w-full min-h-screen ">
       <CrewHeader header={HEADER_RECRUITER} />
       <ProjectInfoQ />
-      <MemberInfoQ />
+      <MemberInfoQ articleId={params.slug} />
       <ContentsQ />
       <CrewSubmission
         text="완료"

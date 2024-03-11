@@ -77,8 +77,13 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
         break;
       case 'submitRecruit':
         onSubmitRecruiter();
+        break;
       case 'submitApplicant':
         onSubmitApplicant();
+        break;
+      case 'onCloseApplication':
+        router.back(); // 로직 수정 필요
+        break;
       default:
         break;
     }

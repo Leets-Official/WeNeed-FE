@@ -47,16 +47,8 @@ interface ResponseCrewRecruiter {
 }
 
 interface ResponseCrewApplicant {
-  name: string;
-  major: string;
-  doubleMajor?: string;
-  international: boolean;
-  grade: string;
-  status: string;
-  phone: string;
-  available_time: string;
-  about_me: string;
-  appeal: string[];
-  content: string;
-  keywords: string[];
+  user: WriterProfile;
+  applicationForm: ApplicationFormBeforeSubmit;
+  sameUser: boolean;
+  nickname: string;
 }

@@ -6,13 +6,15 @@ const commonHeaders = {
 const postRequest = async (
   url: string,
   accessToken: string,
-  body?: any,
+  body: any = null,
   isFormData: boolean = false,
 ) => {
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: { Authorization: 'Bearer ' + accessToken },
+      headers: isFormData
+        ? { Authorization: 'Bearer ' + accessToken }
+        : { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
       body: isFormData ? body : JSON.stringify(body),
     }).then((res) => res.json());
     return response;
@@ -59,5 +61,7 @@ export const postApplicant = async (
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/application-forms/${articleId}`;
-  return await postRequest(url, accessToken, bodyData, true);
+  const res = await postRequest(url, accessToken, bodyData, true);
+  console.log(res);
+  return res;
 };
