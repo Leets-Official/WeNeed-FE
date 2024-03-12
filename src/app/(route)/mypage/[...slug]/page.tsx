@@ -35,16 +35,20 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data;
     if ('userNickname' in data) {
       const { userNickname, sameUser, userInfo } = data;
-      setUserInfoData((prev) => userInfo);
-
+      if (!userInfoData) {
+        setUserInfoData((prev) => userInfo);
+      }
       return (
         <section className="w-full flex items-center flex-col">
           <div className="w-[80%] max-w-[1290px]">
             <Header nickname={userNickname} userId={userId} />
           </div>
           <div className="w-full min-h-screen flex">
-            <ProfileContainer userInfoItemList={userInfoData} />
-            <PostContainer myOutputList={myOutputList} />
+            <ProfileContainer
+              sameUser={sameUser}
+              userInfoItemList={userInfoData}
+            />
+            <PostContainer sameUser={sameUser} myOutputList={myOutputList} />
           </div>
         </section>
       );

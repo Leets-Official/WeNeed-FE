@@ -5,7 +5,7 @@ export const menuState = atom({
   default: 'MY OUTPUT',
 });
 
-export const selectedCategoriesState = atom({
-  key: 'selectedCategoriesState',
+export const selectedMypageCategoriesState = atom({
+  key: 'selectedMypageCategoriesState',
   default: ['전체'],
 });

@@ -5,10 +5,12 @@ import { UserInfoContainer } from './UserInfoContainer';
 
 interface ProfileContainerProps {
   userInfoItemList: MypageUserInfo | undefined;
+  sameUser: boolean;
 }
 
 export const ProfileContainer = ({
   userInfoItemList,
+  sameUser,
 }: ProfileContainerProps) => {
   if (userInfoItemList) {
     const {
@@ -40,6 +42,7 @@ export const ProfileContainer = ({
             email={email}
             links={lnks}
             selfIntro={selfIntro}
+            sameUser={sameUser}
           />
         </div>
       </div>

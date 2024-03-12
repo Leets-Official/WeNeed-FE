@@ -10,9 +10,10 @@ import { MY_PAGE } from 'constants/mypage';
 
 interface FeedItemsProps {
   article: FeedItems[];
+  sameUser: boolean;
 }
 
-const FeedItemsContainer = ({ article }: FeedItemsProps) => {
+const FeedItemsContainer = ({ article, sameUser }: FeedItemsProps) => {
   const selectedMenu = useRecoilValue(menuState);
 
   return selectedMenu === 'MY CREW' ? (

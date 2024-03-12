@@ -1,8 +1,13 @@
 import FeedMenu from '../posts/FeedMenu';
-const FeedMenuContainer = () => {
+
+interface FeedMenuContainerProps {
+  sameUser: boolean;
+}
+
+const FeedMenuContainer = ({ sameUser }: FeedMenuContainerProps) => {
   return (
     <div>
-      <FeedMenu />
+      <FeedMenu sameUser={sameUser} />
     </div>
   );
 };

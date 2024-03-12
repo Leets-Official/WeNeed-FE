@@ -11,6 +11,7 @@ interface InfoBoxContainerProps {
   email: string;
   links: string[];
   selfIntro: string;
+  sameUser: boolean;
 }
 
 export const InfoBoxContainer = ({
@@ -19,6 +20,7 @@ export const InfoBoxContainer = ({
   email,
   links,
   selfIntro,
+  sameUser,
 }: InfoBoxContainerProps) => {
   const router = useRouter();
   const itemList = [doubleMajor, interestFiled, email, links, selfIntro];
@@ -33,13 +35,15 @@ export const InfoBoxContainer = ({
           content={itemList[index]}
         />
       ))}
-      <Button
-        buttonText={MY_PAGE.MODIFY_PROFILE}
-        type="userinfo"
-        className={`w-[300px] h-[40px] text-zinc-300 text-xs font-semibold relative rounded-[10px] bg-neutral-700 justify-center items-center flex px-8 hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100`}
-        isDisabled={false}
-        onClickHandler={() => router.push('/edit')}
-      />
+      {!sameUser && (
+        <Button
+          buttonText={MY_PAGE.MODIFY_PROFILE}
+          type="userinfo"
+          className={`w-[300px] h-[40px] text-zinc-300 text-xs font-semibold relative rounded-[10px] bg-neutral-700 justify-center items-center flex px-8 hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100`}
+          isDisabled={false}
+          onClickHandler={() => router.push('/edit')}
+        />
+      )}
     </div>
   );
 };

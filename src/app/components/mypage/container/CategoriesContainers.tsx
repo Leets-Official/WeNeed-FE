@@ -6,14 +6,14 @@ import { useRecoilState } from 'recoil';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { MY_PAGE } from 'constants/mypage';
-import { selectedCategoriesState } from 'recoil/mypage';
+import { selectedMypageCategoriesState } from 'recoil/mypage';
 import Slider from 'react-slick';
 import Icons from 'components/common/Icons';
 import { bigLeftAngle } from 'ui/IconsPath';
 
 const CategoriesContainers = () => {
   const [selectedCategories, setSelectedCategories] = useRecoilState(
-    selectedCategoriesState,
+    selectedMypageCategoriesState,
   );
 
   const CategoriesList: ReadonlyArray<string> = [
