@@ -9,7 +9,7 @@ export default function UploadPortfolioPage() {
   const userId = searchParams.get('userId') || 0;
   return (
     <section className="flex flex-col items-center min-h-screen bg-black">
-      <div className=" w-[1280px] mx-auto ">
+      <div className=" w-[1280px] mx-auto">
         <Header nickname={nickname} userId={Number(userId)} />
         <div className="w-[100%] mx-auto">
           <UploadContainerP isEdit={false} id={''} />

@@ -26,7 +26,7 @@ const UploadContainerP = ({ id, isEdit }: UploadContainerPProps) => {
       <ToastContainer />
       <div>
         {items.length > 0 || files.length > 0 ? (
-          <div className="items-center w-full h-[740px] overflow-y-auto px-9 pt-[36.15px]">
+          <div className="items-center w-full h-[740px] overflow-y-auto scrollbar-hide px-9 pt-[36.15px]">
             <DndContainer articleType={'portfolio'} />
           </div>
         ) : (
