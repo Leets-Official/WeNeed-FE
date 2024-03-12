@@ -3,6 +3,10 @@ import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
+import PreviewContainer from './containers/PreviewContainer';
+import { useRecoilState } from 'recoil';
+import { filestate, imageBlobState, uploadDataState } from 'recoil/upload';
+import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
 
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
@@ -13,10 +17,26 @@ interface SideNavItemProps {
 type NavComponent = Record<string, JSX.Element>;
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [images, setImages] = useRecoilState<BlobImages[]>(imageBlobState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
+  console.log('데이터, 파일, 이미지');
+
+  console.log('======================================');
+  console.log(uploadData);
+  console.log(files);
+  console.log(images);
+  console.log('======================================');
+
+  const previewPF = {
+    ...PORTFOLIO_PREVIEW,
+  };
 
   const navComponent: NavComponent = {
-    미리보기: <SelectDetailP closeModal={closeModal} />,
+    미리보기: (
+      <PreviewContainer user={USER_PREVIEW} portfolio={PORTFOLIO_PREVIEW} />
+    ),
     업로드: <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />,
     '팀원 추가': <SearchTeam closeModal={closeModal} />,
   };
