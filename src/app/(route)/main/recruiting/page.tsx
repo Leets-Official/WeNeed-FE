@@ -2,19 +2,27 @@
 
 import MainNavbar from 'components/main/common/MainNavbar';
 import RecruitingContainer from 'components/main/containers/RecruitingContainer';
+import Header from 'components/layout/Header';
+import useLoginModal from 'hooks/upload/useLoginModal';
+import ModalPortal from 'components/common/modal/ModalPortal';
+import ModalOutside from 'components/common/modal/ModalOutside';
+import NeedLoginModal from 'components/common/modal/NeedLoginModal';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
 import { DetailCategoriesContainer } from 'components/main/containers';
 import { useRecoilValue } from 'recoil';
 import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
-import Header from 'components/layout/Header';
+import { useRouter } from 'next/navigation';
 
 export default function MainRecruitingPage() {
-  const selectedCategoriesValue = useRecoilValue(selectedCategories);
+  const [page, setPage] = useState<number>(1);
   const [data, setData] = useState<ResponseRecruitingMain | null | undefined>(
     null,
   );
-  const [page, setPage] = useState<number>(1);
+  const [loginModal, setLoginModal] = useState<boolean>(false);
+  const selectedCategoriesValue = useRecoilValue(selectedCategories);
+  const loginModalState = useLoginModal(loginModal);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,21 +56,46 @@ export default function MainRecruitingPage() {
   };
   console.log(data);
 
+  const onClickItem = (userId: number, articleId: number) => {
+    if (userId == -1) {
+      setLoginModal(() => true);
+    } else {
+      router.push(`/recruiting/${articleId}`);
+    }
+    return undefined;
+  };
+
+  const onClose = () => {
+    setLoginModal(false);
+    document.body.style.overflow = 'auto';
+  };
+
   if (data) {
     const { user, recruitList } = data;
     return (
       <section className="flex flex-col items-center w-full min-h-screen text-white ">
         <Header nickname={user.nickname} userId={user.userId} />
-        <MainNavbar />
+        <MainNavbar nickname={user.nickname} userId={user.userId} />
         <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
           {LOGGEDIN_SECTION_HEADINGS.crew}
         </h1>
         <DetailCategoriesContainer />
         <RecruitingContainer
           onIntersect={onIntersect}
-          data={data.recruitList}
-          user={data.user}
+          data={recruitList}
+          user={user}
+          onClickItem={onClickItem}
         />
+        {loginModalState && (
+          <ModalPortal nodeName="needLoginPortal">
+            <ModalOutside
+              onClose={onClose}
+              className="absolute left-0 w-full h-full flex justify-center items-center"
+            >
+              <NeedLoginModal />
+            </ModalOutside>
+          </ModalPortal>
+        )}
       </section>
     );
   }

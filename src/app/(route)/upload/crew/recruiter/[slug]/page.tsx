@@ -4,25 +4,25 @@ import CrewHeader from 'components/upload/crew/common/CrewHeader';
 import ContentsQ from 'components/upload/crew/recruiter/ContentsQ';
 import MemberInfoQ from 'components/upload/crew/recruiter/MemberInfoQ';
 import ProjectInfoQ from 'components/upload/crew/recruiter/ProjectInfoQ';
-import RecruiteSubmission from 'components/upload/crew/recruiter/RecruiteSubmission';
+import CrewSubmission from 'components/upload/crew/recruiter/CrewSubmission';
 import { HEADER_RECRUITER } from 'constants/crew';
-import { useRecoilValue } from 'recoil';
-import { postRecruiterState } from 'recoil/crew';
 
 export default function CrewRecruiterPage({
   params,
 }: {
   params: { slug: string };
 }) {
-  const recruiterValue = useRecoilValue(postRecruiterState);
-
   return (
     <section className="flex flex-col items-center w-full min-h-screen ">
       <CrewHeader header={HEADER_RECRUITER} />
       <ProjectInfoQ />
-      <MemberInfoQ />
+      <MemberInfoQ articleId={params.slug} />
       <ContentsQ />
-      <RecruiteSubmission text="완료" articleId={params.slug} />
+      <CrewSubmission
+        text="완료"
+        articleId={params.slug}
+        type="submitRecruit"
+      />
     </section>
   );
 }

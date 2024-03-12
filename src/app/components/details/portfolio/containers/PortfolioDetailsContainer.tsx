@@ -34,7 +34,6 @@ const PortfolioDetailsContainer = ({
     files,
     skills,
   } = portfolio;
-  console.log('ss', portfolio);
   const { bookmarked, hearted } = user;
   return (
     <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
@@ -107,7 +106,13 @@ const PortfolioDetailsContainer = ({
           user={user}
           articleId={articleId}
         />
-        {user.sameUser && <WriterOptions articleId={articleId} />}
+        {user.sameUser && (
+          <WriterOptions
+            articleId={articleId}
+            userId={writer.userId || -1}
+            nickname={writer.writerNickname || ''}
+          />
+        )}
       </div>
     </div>
   );

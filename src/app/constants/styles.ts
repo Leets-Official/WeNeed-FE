@@ -36,6 +36,8 @@ export const PROFILE_STYLE = {
 } as const;
 
 export const QUESTIONS_BOX_STYLE = {
+  categories: () =>
+    'flex flex-col gap-[10px] justify-start items-start w-full bg-white px-[32px] py-[30px] rounded-lg ',
   mini: () =>
     'flex flex-col gap-[10px] justify-start items-start w-full h-[169px] bg-white px-[32px] py-[30px] rounded-lg',
   requirement: () => 'text-red-400 text-sm font-normal',

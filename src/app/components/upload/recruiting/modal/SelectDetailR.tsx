@@ -6,6 +6,8 @@ import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
+import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
+import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -15,6 +17,8 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
@@ -26,7 +30,9 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
+    setLoading(true);
     const { teamMembersId, articleType, ...rest } = uploadData;
+
     const articleRequest = {
       articleType: 'RECRUITING',
       ...rest,
@@ -34,21 +40,12 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
       skills: skill,
       tags: selectedTags,
     };
+
     uploadFormData.append(
       'request',
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
     );
 
-    console.log('현재articleRequest 데이터는 다음과 같음', articleRequest);
-
-    for (const key of uploadFormData.keys()) {
-      console.log(
-        'api보내기 전 폼데이터 현황',
-        key,
-        ':',
-        uploadFormData.get(key),
-      );
-    }
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/recruit`,
@@ -57,12 +54,20 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
           body: uploadFormData,
         },
       );
+      if (true) {
+        setTimeout(() => {
+          setLoading(false);
+          setCompleted(true);
+        }, 2000);
+      }
     } catch (e) {
       console.log('넥스트 서버 보내기 전 오류발생', e);
     }
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      {loading && <SubmitLoading />}
+      {completed && <SubmitCompleted />}
       <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
         <div
           onClick={closeModal}
@@ -110,7 +115,15 @@ const SelectDetailR = ({ closeModal }: SelectDetailProps) => {
             </div>
           )}
           <div className="flex flex-row-reverse">
-            <ConfirmButton btnClick={handleConfirm} btnText={title} />
+            <ConfirmButton
+              btnClick={handleConfirm}
+              btnText={title}
+              isWritten={
+                skill.join(',').length === 0 ||
+                selectedTags.length === 0 ||
+                title.trim() === ''
+              }
+            />
           </div>
         </div>
       </div>

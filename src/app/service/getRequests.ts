@@ -107,6 +107,15 @@ export const getRecruitForm = async (
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruitmentForms/${articleId}`;
+  const res = await getRequest(url, accessToken);
+  return res;
+};
+
+export const getApplicantForm = async (
+  applicationId: string,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/${applicationId}`;
   return await getRequest(url, accessToken);
 };
 

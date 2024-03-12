@@ -15,3 +15,8 @@ export const postApplicantAppealState = atom<File | null>({
   key: 'postApplicantAppealState',
   default: null,
 });
+
+export const postApplicantBoolState = atom<boolean>({
+  key: 'postApplicantBoolState',
+  default: false,
+});

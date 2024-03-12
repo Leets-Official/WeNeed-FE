@@ -15,11 +15,11 @@ const UploadContainerP = () => {
   const [files, setFiles] = useRecoilState(filestate);
 
   return (
-    <div className="flex flex-col w-[1280px] h-auto bg-white mt-[22px] gap-y-2.5">
+    <div className="relative flex flex-col w-[100%] h-auto bg-white mt-[22px] gap-y-2.5">
       <AddThumbnail thumbnailInfo={portThumbnail} />
-      <div className="relative">
+      <div>
         {items.length > 0 || files.length > 0 ? (
-          <div className="items-center w-full h-[740px] overflow-auto px-[37px] pt-[36.15px]">
+          <div className="items-center w-full h-[740px] overflow-y-auto px-9 pt-[36.15px]">
             <DndContainer articleType={'portfolio'} />
           </div>
         ) : (

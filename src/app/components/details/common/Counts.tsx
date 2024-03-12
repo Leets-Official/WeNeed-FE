@@ -14,11 +14,11 @@ import {
 } from 'recoil/details';
 
 interface CountsProps {
-  noBg?: boolean;
   count: number[];
+  gradient?: boolean;
 }
 
-const Counts = ({ count, noBg }: CountsProps) => {
+const Counts = ({ count, gradient = false }: CountsProps) => {
   const [heartCount, setHeartCount] = useRecoilState(heartCountState);
   const [bookmarkCount, setBookmarkCount] = useRecoilState(bookmarkCountState);
   const hearted = useRecoilValue(heartedPostState);
@@ -27,29 +27,44 @@ const Counts = ({ count, noBg }: CountsProps) => {
   useEffect(() => {
     setHeartCount(() => count[1]);
     setBookmarkCount(() => count[2]);
-  }, []);
+  }, [count, setBookmarkCount, setHeartCount]);
 
   return (
     <div className="flex gap-[32px] h-[75px] items-center justify-center w-[20%]">
       <p className="flex gap-[10px] cursor-pointer">
         <GradientView width={24} height={18} /> {count[0]}
       </p>
-      <p className="flex gap-[10px] cursor-pointer">
-        {hearted || noBg ? (
-          <GradientHeart width={24} height={24} />
-        ) : (
-          <Icons name={heart} />
-        )}
-        {heartCount}
-      </p>
-      <p className="flex  gap-[10px] cursor-pointer">
-        {bookmarked || noBg ? (
-          <GradientBookmark width={17} height={24} />
-        ) : (
-          <Icons name={bookmark} />
-        )}
-        {bookmarkCount}
-      </p>
+      {gradient ? (
+        <>
+          <p className="flex gap-[10px] cursor-pointer">
+            <GradientHeart width={24} height={24} />
+            {heartCount}
+          </p>
+          <p className="flex  gap-[10px] cursor-pointer">
+            <GradientBookmark width={17} height={24} />
+            {bookmarkCount}
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="flex gap-[10px] cursor-pointer">
+            {hearted ? (
+              <GradientHeart width={24} height={24} />
+            ) : (
+              <Icons name={heart} />
+            )}
+            {heartCount}
+          </p>
+          <p className="flex  gap-[10px] cursor-pointer">
+            {bookmarked ? (
+              <GradientBookmark width={17} height={24} />
+            ) : (
+              <Icons name={bookmark} />
+            )}
+            {bookmarkCount}
+          </p>
+        </>
+      )}
     </div>
   );
 };
