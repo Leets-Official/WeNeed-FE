@@ -48,7 +48,7 @@ interface ResponseCrewRecruiter {
 
 interface ResponseCrewApplicant {
   user: WriterProfile;
-  applicationForm: ApplicationFormBeforeSubmit;
+  applicationForm: ApplicationFormResponse;
   sameUser: boolean;
   nickname: string;
 }

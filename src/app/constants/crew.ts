@@ -82,6 +82,17 @@ export const RECRUITMENT_COMPLETE: RecruitmentComplete = {
   keywords: '이런 분과 함께 크루를 하고 싶어요!',
 } as const;
 
+export const APPLICATION_COMPLETE: ApplicationComplete = {
+  name: (_) => '이름',
+  major: (_) => '학과',
+  grade: (_) => '학년',
+  status: (_) => '학적 상태',
+  phone: (name) => `${name} 님의 연락처`,
+  aboutMe: (name) => `${name} 님을 표현할 수 있는 한마디`,
+  content: (_) => '하고 싶은 말',
+  keywords: (name) => `${name} 님을 표현할 수 있는 태그`,
+} as const;
+
 export const CREW_KEYWORDS = [
   '센스',
   '능력갑',

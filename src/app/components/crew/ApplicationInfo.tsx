@@ -1,54 +1,49 @@
 import DetailCategories from 'components/main/common/DetailCategories';
-import { RECRUITMENT_COMPLETE } from 'constants/crew';
+import { APPLICATION_COMPLETE } from 'constants/crew';
 
 interface ApplicationInfoProps {
-  applicationForm: ApplicationForm;
+  applicationForm: ApplicationFormResponse;
 }
 
 const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
-  const {
-    name,
-    major,
-    doubleMajor,
-    status,
-    phone,
-    keywords,
-    aboutMe,
-    content,
-    crewAnswers,
-    grade,
-  } = applicationForm;
+  const { name, phone, keywords, grade, crewAnswers, major, crewQuestions } =
+    applicationForm;
 
   const renderContent = (questionKey: string) => {
     switch (questionKey) {
       case 'name':
-        return (
-          <div className="flex border-b border-black px-[30px]">{name}</div>
-        );
+        return <div className="">{name}</div>;
       case 'major':
         return (
-          <div className="flex border-b border-black px-[30px]">
-            {`${major}, ${doubleMajor}`}
+          <div className="flex gap-[50px] relative">
+            <div className="">{major}</div>
+            <div className="absolute top-[-50px] right-[-180px] h-[200px] ">
+              <p className="font-semibold mb-[26px]">복수전공 </p>
+              <div className=" border-b border-black px-[30px]">{`${major}`}</div>
+            </div>
           </div>
-        );
-      case 'status':
-        return (
-          <div className="flex border-b border-black px-[30px]">{status}</div>
         );
       case 'phone':
         return (
-          <div className="flex border-b border-black px-[30px]">{phone}</div>
+          <div className="w-full">
+            <div className=" border-b border-black px-[30px]">{phone}</div>
+            <div className="mt-[40px]">
+              {crewQuestions.map((question, i) => (
+                <div key={question} className="font-semibold">
+                  <div>{question}</div>
+                  <div className="mt-[32px] px-[30px] border-b border-black">
+                    {crewAnswers[i]}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         );
-      //   case 'crewQuestions':
-      //     return crewQuestions.map((question) => (
-      //       <div key={question} className="flex border-b border-black px-[30px]">
-      //         {question}
-      //       </div>
-      //     ));
-
+      case 'grade':
+        return <div className="">{grade}학년</div>;
       case 'keywords':
         return (
-          <div className="flex ">
+          <div>
             {keywords.map((keyword) => (
               <DetailCategories key={keyword} category={keyword} noBg />
             ))}
@@ -56,7 +51,7 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
         );
       default:
         return (
-          <div className="flex border-b border-black px-[30px]">
+          <div>
             {applicationForm[questionKey as keyof typeof applicationForm]}
           </div>
         );
@@ -65,12 +60,22 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
 
   return (
     <div className="flex flex-col gap-[46px] mt-[46px]">
-      {Object.keys(RECRUITMENT_COMPLETE).map((key) => {
-        const questionKey = key as keyof RecruitmentComplete;
+      {Object.keys(APPLICATION_COMPLETE).map((key) => {
+        const questionKey = key as keyof ApplicationComplete;
         return (
           <div className="flex flex-col gap-[28px] " key={questionKey}>
-            <p className="font-semibold">{RECRUITMENT_COMPLETE[questionKey]}</p>
-            {renderContent(questionKey)}
+            <p className="font-semibold">
+              {APPLICATION_COMPLETE[questionKey](name)}
+            </p>
+            <div
+              className={`w-fit  ${
+                !(questionKey === 'phone' || questionKey === 'keywords')
+                  ? 'px-[30px] border-b border-black'
+                  : ''
+              }`}
+            >
+              {renderContent(questionKey)}
+            </div>
           </div>
         );
       })}
