@@ -62,7 +62,6 @@ const DetailContents = ({
               </div>
             );
           default:
-            break;
         }
       })}
       <div className="flex flex-col items-start justify-center w-full gap-[40px] text-[#00E0EE] font-semibold mt-[39px]">

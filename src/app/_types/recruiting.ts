@@ -53,7 +53,7 @@ interface RecruitFormFromServer {
   keywords: string[];
 }
 
-interface ApplicationFormBeforeSubmit {
+interface ApplicationFormResponse {
   [key: string]: string | string[];
   name: string;
   major: string;
@@ -64,7 +64,9 @@ interface ApplicationFormBeforeSubmit {
   aboutMe: string;
   content: string;
   keywords: string[];
+  detailTags: string[];
   crewAnswers: string[];
+  crewQuestions: string[];
 }
 
 interface ApplicationForm {
