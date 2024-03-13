@@ -121,7 +121,6 @@ interface CommentList extends WriterProfile {
   content: string;
   createdAt: string;
   children?: CommentList[];
-  nickname?: string;
 }
 
 interface RecommentList extends CommentList {
