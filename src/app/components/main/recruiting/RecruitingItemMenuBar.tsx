@@ -14,14 +14,19 @@ import {
 interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
+  page?: string;
 }
 
-const RecruitingItemMenuBar = ({ article, user }: RecruitingItemInfoProps) => {
+const RecruitingItemMenuBar = ({
+  article,
+  user,
+  page,
+}: RecruitingItemInfoProps) => {
   const {
     detailMenuHandlers,
     heartCount: heart,
     bookmarkCount: bookmark,
-  } = useMenuHandlers(user.userId, String(article.articleId));
+  } = useMenuHandlers(user.userId, String(article.articleId), page);
 
   const menuItems = [
     { menu: '프로필', icon: goToProfileGray },

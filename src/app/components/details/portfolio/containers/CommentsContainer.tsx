@@ -61,7 +61,7 @@ const CommentsContainer = ({
     <div className="flex flex-col justify-center items-center w-full bg-white pt-[50px] pb-[100px]  ">
       <p
         className={`text-xl font-semibold mb-[25px] max-w-[1290px] text-black ${
-          onRecruit ? ' w-full' : ' w-[79%] '
+          onRecruit ? ' w-full' : ' w-[79%]'
         }`}
       >
         댓글{totalComments}개
@@ -92,7 +92,7 @@ const CommentsContainer = ({
           onChange={(e) => setCommentValue(e.target.value)}
           onEnterPress={onSubmitHandler}
           placeholder="댓글을 입력해주세요."
-          className="w-[87%] ml-[20px]"
+          className="w-[87%] ml-[20px] text-black"
         />
         <div className="absolute top-[30%] right-[8.5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
           <Icons name={inputDrop} onClick={onSubmitHandler} />

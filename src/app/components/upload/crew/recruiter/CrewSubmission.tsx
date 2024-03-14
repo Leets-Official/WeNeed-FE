@@ -24,6 +24,13 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
   const router = useRouter();
 
   const onSubmitRecruiter = async () => {
+    const keys = Object.keys(recruiterValue);
+    for (const key of keys) {
+      if (!recruiterValue[key]) {
+        alert('모든 항목을 작성해주세요.');
+        return;
+      }
+    }
     const newData = {
       ...recruiterValue,
       deadline: recruiterValue.deadline.join('/'),

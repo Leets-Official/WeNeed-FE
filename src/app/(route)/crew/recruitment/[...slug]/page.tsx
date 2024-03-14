@@ -10,7 +10,9 @@ export default async function CrewRecruitmentPage({
 }) {
   return (
     <section className="flex flex-col items-center w-full min-h-screen bg-black">
-      <CrewHeader header={HEADER_COMPLETE} />
+      <div className="mt-[60px]">
+        <CrewHeader header={HEADER_COMPLETE} />
+      </div>
       <RecruitmentContainer articleId={params.slug} />
       <CrewSubmission
         articleId={params.slug}

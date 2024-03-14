@@ -1,6 +1,5 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
-import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../../common/Profile';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
@@ -8,6 +7,7 @@ import WriterOptions from '../WriterOptions';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import GradientProfile from 'ui/gradient/GradientProfile';
+import { bigWeneed } from 'ui/IconsPath';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;

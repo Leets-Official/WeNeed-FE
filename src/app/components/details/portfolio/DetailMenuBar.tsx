@@ -29,6 +29,7 @@ const DetailMenuBar = ({
   const { detailMenuHandlers, hearted, bookmarked } = useMenuHandlers(
     userId,
     articleId,
+    'portfolio',
     user,
   );
 
