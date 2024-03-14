@@ -40,3 +40,13 @@ export const overlapAlert = () => {
     position: 'top-center',
   });
 };
+
+export const previewAlert = () => {
+  toast.info('더블클릭으로 작성으로 돌아가기', {
+    icon: () => '🖱️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 3000,
+    position: 'top-center',
+  });
+};

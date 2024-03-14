@@ -5,37 +5,42 @@ import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
 import PreviewContainer from './containers/PreviewContainer';
 import { useRecoilState } from 'recoil';
-import { filestate, imageBlobState, uploadDataState } from 'recoil/upload';
+import { filestate, uploadDataState } from 'recoil/upload';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-
-interface SideNavItemProps {
-  iconInfo: IconPathTypes;
-  label: string;
-  isEdit?: boolean;
-  id?: string;
-}
-type NavComponent = Record<string, JSX.Element>;
+import { previewAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
-  const [images, setImages] = useRecoilState<BlobImages[]>(imageBlobState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  console.log('데이터, 파일, 이미지');
 
-  console.log('======================================');
-  console.log(uploadData);
-  console.log(files);
-  console.log(images);
-  console.log('======================================');
+  const koreanDate = new Date();
+  koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 
-  const previewPF = {
+  const fileNames = files.map((file) => file.id);
+
+  const startPreview = () => {
+    openModal();
+    if (label === '미리보기') {
+      previewAlert();
+    }
+  };
+
+  const previewPF: PortfolioDetails = {
     ...PORTFOLIO_PREVIEW,
+    contents: uploadData.content || '',
+    createdAt: String(koreanDate),
+    thumbnail: uploadData.thumbnail || '',
+    files: fileNames,
   };
 
   const navComponent: NavComponent = {
     미리보기: (
-      <PreviewContainer user={USER_PREVIEW} portfolio={PORTFOLIO_PREVIEW} />
+      <PreviewContainer
+        user={USER_PREVIEW}
+        portfolio={previewPF}
+        closeModal={closeModal}
+      />
     ),
     업로드: <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />,
     '팀원 추가': <SearchTeam closeModal={closeModal} />,
@@ -43,8 +48,8 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
 
   return (
     <div
-      onClick={openModal}
       className="flex items-center flex-col gap-y-[10px] cursor-pointer"
+      onClick={startPreview}
     >
       <div className="flex justify-center items-center w-[76px] h-[76px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-[56px]">
         <Icons name={iconInfo} />
