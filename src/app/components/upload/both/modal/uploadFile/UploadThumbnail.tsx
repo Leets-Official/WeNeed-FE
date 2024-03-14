@@ -83,6 +83,7 @@ const UploadThumbnail = ({ uploadInfo, closeModal }: UploadThumbnailProps) => {
             <ConfirmButton
               btnClick={() => handleConfirm(fileType)}
               btnText={fileInfo.name}
+              isWritten={fileInfo.name === ''}
             />
           </div>
         </div>

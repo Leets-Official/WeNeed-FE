@@ -6,6 +6,9 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import PortfolioItem from 'components/main/portfolio/PortfolioItem';
 import Link from 'next/link';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 interface PortfolioWorkListContainerProps {
   writer: WriterProfile;
@@ -16,6 +19,16 @@ const PortfolioWorkListContainer = ({
   writer,
   workList,
 }: PortfolioWorkListContainerProps) => {
+  const settings = {
+    infinite: true,
+    slidesToScroll: 1,
+    variableWidth: true,
+    arrows: false,
+    autoplay: true,
+    autoplaySpeed: 1200,
+    prevArrow: <></>,
+  };
+
   return (
     <div className="flex justify-center items-center w-full bg-black text-white">
       <div className="max-w-[1290px] w-full mt-[60px] mb-[60px]">
@@ -30,26 +43,15 @@ const PortfolioWorkListContainer = ({
         </div>
 
         <div className="w-full h-[310px]">
-          <Swiper
-            modules={[Autoplay]}
-            loop={true}
-            slidesPerView={4.25}
-            spaceBetween={30}
-            grabCursor={true}
-            autoplay={{
-              delay: 2000,
-            }}
-          >
-            {workList.map((work) => {
-              return (
-                <SwiperSlide key={work.articleId}>
-                  <Link href={`/portfolio/${work.articleId}`}>
-                    <PortfolioItem article={work} onRecommend />
-                  </Link>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+          <Slider {...settings} className="w-full h-[310px] mt-[38px]">
+            {workList?.map((work) => (
+              <Link key={work.articleId} href={`/portfolio/${work.articleId}`}>
+                <div className="mr-[32px]">
+                  <PortfolioItem article={work} onRecommend />
+                </div>
+              </Link>
+            ))}
+          </Slider>
         </div>
       </div>
     </div>

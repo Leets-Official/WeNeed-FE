@@ -14,14 +14,25 @@ import {
 interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
+  page?: string;
+  recruiting?: boolean;
 }
 
-const RecruitingItemMenuBar = ({ article, user }: RecruitingItemInfoProps) => {
+const RecruitingItemMenuBar = ({
+  article,
+  user,
+  page,
+}: RecruitingItemInfoProps) => {
   const {
     detailMenuHandlers,
     heartCount: heart,
     bookmarkCount: bookmark,
-  } = useMenuHandlers(user.userId, String(article.articleId));
+  } = useMenuHandlers(
+    user.userId,
+    String(article.articleId),
+    page,
+    article.recruiting,
+  );
 
   const menuItems = [
     { menu: '프로필', icon: goToProfileGray },
@@ -33,7 +44,7 @@ const RecruitingItemMenuBar = ({ article, user }: RecruitingItemInfoProps) => {
   ];
 
   return (
-    <div className="w-full flex justify-between border-t border-black items-center text-[#3A3A3A]  font-bold text-[18px] bg-white h-[86px] ">
+    <div className="w-full flex justify-between border-t border-black items-center text-[#3A3A3A] font-bold text-[18px] bg-white h-[86px] roun ">
       {menuItems.map(({ menu, icon, count }) => (
         <div
           key={menu}

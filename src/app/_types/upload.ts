@@ -50,22 +50,47 @@ interface UploadPFTypes {
   skills: string[];
   tags: string[];
   teamMembersId: number[];
+  sharedText?: string;
 }
-interface UploadRecruitTypes {
-  articleType: string;
-  title: string;
-  content: ContentTypes[];
-  skills: string[];
-  tags: string[];
-}
+// interface UploadRecruitTypes {
+//   articleType: string;
+//   title: string;
+//   content: ContentTypes[];
+//   skills: string[];
+//   tags: string[];
+//   sharedText?: string;
+// }
 
 interface RecruitmentComplete {
   deadline: string;
   description: string;
-  task_need: string;
-  member_count: string;
+  taskNeed: string;
+  memberCount: string;
   phone: string;
-  crew_questions: string;
+  crewQuestions: string;
   content: string;
   keywords: string;
+}
+
+interface ApplicationComplete {
+  name: (arg: string) => string;
+  major: (arg: string) => string;
+  grade: (arg: string) => string;
+  status: (arg: string) => string;
+  phone: (arg: string) => string;
+  aboutMe: (arg: string) => string;
+  content: (arg: string) => string;
+  keywords: (arg: string) => string;
+}
+
+interface BlobImages {
+  id: string;
+  blob: Blob;
+  filename: string;
+}
+
+interface BlobFiles {
+  id: string;
+  file: File;
+  filename: string;
 }

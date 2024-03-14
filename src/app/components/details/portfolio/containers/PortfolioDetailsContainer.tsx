@@ -1,6 +1,5 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
-import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../../common/Profile';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
@@ -8,6 +7,8 @@ import WriterOptions from '../WriterOptions';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import GradientProfile from 'ui/gradient/GradientProfile';
+import { bigWeneed } from 'ui/IconsPath';
+import Counts from 'components/details/common/Counts';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -31,10 +32,10 @@ const PortfolioDetailsContainer = ({
     title,
     contents,
     teamMembers,
-    links,
     files,
     skills,
   } = portfolio;
+  console.log(files);
   const { bookmarked, hearted } = user;
   return (
     <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
@@ -89,7 +90,7 @@ const PortfolioDetailsContainer = ({
             <Profile
               writer={writer}
               date={createdAt}
-              count={[viewCount, heartCount, bookmarkCount]}
+              // count={[viewCount, heartCount, bookmarkCount]}
               user={{ bookmarked, hearted }}
               size="large"
             />
@@ -99,16 +100,26 @@ const PortfolioDetailsContainer = ({
         <DetailContents
           title={title}
           contents={contents}
-          links={links}
           files={files}
           skills={skills}
         />
+        <div className="w-full flex justify-center mt-[100px]">
+          <Counts count={[viewCount, heartCount, bookmarkCount]} gradient />
+        </div>
         <DetailMenuBar
           userId={writer.userId || -1}
           user={user}
           articleId={articleId}
+          page="portfolio"
+          recruiting={false}
         />
-        {user.sameUser && <WriterOptions />}
+        {user.sameUser && (
+          <WriterOptions
+            articleId={articleId}
+            userId={writer.userId || -1}
+            nickname={writer.writerNickname || ''}
+          />
+        )}
       </div>
     </div>
   );

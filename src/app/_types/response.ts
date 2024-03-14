@@ -41,27 +41,17 @@ interface ResponseUploadSearch {
 }
 
 interface ResponseCrewRecruiter {
-  deadline: string;
-  description: string;
-  task_need: string;
-  member_count: number;
-  phone: string;
-  crew_questions: string[];
-  content: string;
-  keywords: string[];
+  recruitUser: WriterProfile;
+  article: RecruitFormArticle;
+  recruitForm: RecruitFormFromServer;
+  nickname: string;
+  sameUser: boolean;
+  userId: string;
 }
 
 interface ResponseCrewApplicant {
-  name: string;
-  major: string;
-  doubleMajor?: string;
-  international: boolean;
-  grade: string;
-  status: string;
-  phone: string;
-  available_time: string;
-  about_me: string;
-  appeal: string[];
-  content: string;
-  keywords: string[];
+  user: WriterProfile;
+  applicationForm: ApplicationFormResponse;
+  sameUser: boolean;
+  nickname: string;
 }

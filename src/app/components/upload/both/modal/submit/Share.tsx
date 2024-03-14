@@ -1,9 +1,14 @@
 'use client';
 import Button from 'components/common/Button';
 import Icons from 'components/common/Icons';
+import { useRouter } from 'next/navigation';
 import { closeIcon } from 'ui/IconsPath';
 
 const Share = () => {
+  const router = useRouter();
+  const goMain = () => {
+    router.push('/');
+  };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className=" relative w-[922px] h-[211px] bg-white rounded-[9px]">
@@ -25,7 +30,7 @@ const Share = () => {
           buttonText={'홈으로'}
           type={'upload'}
           isDisabled={false}
-          onClickHandler={() => console.log('링크가 복사되었습니다.')}
+          onClickHandler={goMain}
           className="absolute left-[40px] bottom-[20px] text-sm text-white bg-[#000] opacity-[0.5] hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100"
         />
       </div>

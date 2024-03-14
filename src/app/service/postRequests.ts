@@ -6,13 +6,16 @@ const commonHeaders = {
 const postRequest = async (
   url: string,
   accessToken: string,
-  body?: unknown,
+  body: any = null,
+  isFormData: boolean = false,
 ) => {
   try {
-    const response = await await fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
-      headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
-      body: JSON.stringify(body),
+      headers: isFormData
+        ? { Authorization: 'Bearer ' + accessToken }
+        : { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
+      body: isFormData ? body : JSON.stringify(body),
     }).then((res) => res.json());
     return response;
   } catch (error) {
@@ -41,4 +44,24 @@ export const postComment = async (
     ...comment,
     parentId: parentId,
   });
+};
+
+export const postRecruiter = async (
+  articleId: string,
+  bodyData: RecruitForm,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/recruitForms/${articleId}`;
+  return await postRequest(url, accessToken, bodyData);
+};
+
+export const postApplicant = async (
+  articleId: string,
+  bodyData: FormData,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/${articleId}`;
+  const res = await postRequest(url, accessToken, bodyData, true);
+  console.log(res);
+  return res;
 };

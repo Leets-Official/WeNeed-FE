@@ -67,15 +67,16 @@ interface UserProfile extends SimpleUser {
 
 interface WriterProfile {
   userId: number | null;
-  writerNickname: string;
+  writerNickname?: string;
+  nickname?: string;
   major: string;
   profile: string | null;
   grade: number;
 }
 
 interface Content {
-  id: number;
-  type: 'text' | 'image' | 'links' | 'audio';
+  id: string;
+  type: 'text' | 'image' | 'link' | 'sound';
   data: string;
 }
 
@@ -83,6 +84,11 @@ interface TeamMember {
   userId: number;
   nickname: string;
   profile: string;
+}
+
+interface FileDetail {
+  fileName: string;
+  fileUrl: string;
 }
 
 interface PortfolioDetails {
@@ -93,12 +99,12 @@ interface PortfolioDetails {
   viewCount: number;
   bookmarkCount: number;
   tags: string[];
-  links: string[];
-  files: string[];
+  files: FileDetail[];
   skills: string[];
   writer: WriterProfile;
   contents: Array<Content>;
   teamMembers: teamMember[];
+  recruiting: boolean;
 }
 
 interface teamMember {

@@ -4,7 +4,9 @@ import { INPUT_STYLE } from 'constants/styles';
 
 interface InputProps {
   type: 'search' | 'upload' | 'comment' | 'default' | 'upload_recruiter';
-  textValue: string;
+  textValue?: string;
+  inputType?: string;
+  name?: string;
   placeholder?: string;
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,9 +17,11 @@ interface InputProps {
 
 const Input = ({
   type,
+  name,
   textValue,
   placeholder,
   className,
+  inputType,
   onFocus,
   onBlur,
   onEnterPress,
@@ -27,8 +31,10 @@ const Input = ({
 
   return (
     <input
+      type={inputType}
       value={textValue}
       placeholder={placeholder}
+      name={name}
       onFocus={onFocus}
       onBlur={onBlur}
       onKeyPress={(e) => e.key === 'Enter' && onEnterPress && onEnterPress()}

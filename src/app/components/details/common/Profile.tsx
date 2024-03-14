@@ -11,6 +11,7 @@ interface ProfileProps {
   date?: string;
   onComment?: boolean;
   count?: number[];
+  gradient?: boolean;
   user?: {
     bookmarked: boolean;
     hearted: boolean;
@@ -18,7 +19,14 @@ interface ProfileProps {
   };
 }
 
-const Profile = ({ writer, date, count, onComment, size }: ProfileProps) => {
+const Profile = ({
+  writer,
+  date,
+  count,
+  onComment,
+  gradient,
+  size,
+}: ProfileProps) => {
   const { writerNickname, major, profile, grade } = writer;
   const profileStyles = PROFILE_STYLE[size || '']();
   return (
@@ -44,7 +52,7 @@ const Profile = ({ writer, date, count, onComment, size }: ProfileProps) => {
         <div
           className={`flex ${onComment ? 'items-center' : 'flex-col'} gap-3`}
         >
-          <p className="text-lg">{writerNickname}</p>
+          <p className="text-lg">{writerNickname || writer.nickname}</p>
           <div className="font-normal flex gap-1.5 text-sm">
             <p>{major} </p>
             <p>| {grade}학년 </p>
@@ -52,7 +60,7 @@ const Profile = ({ writer, date, count, onComment, size }: ProfileProps) => {
           </div>
         </div>
       </div>
-      {count && <Counts count={count} />}
+      {count && <Counts count={count} gradient />}
     </div>
   );
 };

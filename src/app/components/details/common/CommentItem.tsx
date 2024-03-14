@@ -75,7 +75,7 @@ const CommentItem = ({
           onComment={true}
           size="medium"
         />
-        <div className="w-[90%] relative bg-[#8C8C8C] h-[50px] ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
+        <div className="w-fit relative bg-[#8C8C8C] h-[50px] ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
           {content}
           {!hasChildren && (
             <div
@@ -87,7 +87,7 @@ const CommentItem = ({
           )}
         </div>
       </div>
-      {children && children?.length > 0 && (
+      {children && children.length > 0 && (
         <div
           className="w-[98px] h-[20px] rounded-[10px] bg-gradient-to-r from-[#00E0EE] to-[#517EF3]
                       text-[12px] text-center font-normal flex justify-center items-center ml-[86px] mt-[13px] gap-1 
@@ -110,7 +110,7 @@ const CommentItem = ({
         {openChildren &&
           children?.map((recomment) => {
             return (
-              <div key={recomment.commentId} className="ml-[75px] w-[86.5%]">
+              <div key={recomment.commentId} className="ml-[75px] w-full">
                 <CommentItem
                   comment={recomment}
                   articleId={articleId}
@@ -123,7 +123,7 @@ const CommentItem = ({
           })}
       </div>
       {openInput && (
-        <div className=" mt-[20px] flex gap-4 items-center w-full">
+        <div className=" mt-[20px] flex gap-4 items-center  ml-[75px] w-[86.5%]">
           <div
             className={`rounded-full overflow-hidden ${profileStyles} z-20 `}
           >
