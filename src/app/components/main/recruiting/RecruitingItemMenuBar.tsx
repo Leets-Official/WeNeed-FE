@@ -15,6 +15,7 @@ interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
   page?: string;
+  recruiting?: boolean;
 }
 
 const RecruitingItemMenuBar = ({
@@ -26,7 +27,12 @@ const RecruitingItemMenuBar = ({
     detailMenuHandlers,
     heartCount: heart,
     bookmarkCount: bookmark,
-  } = useMenuHandlers(user.userId, String(article.articleId), page);
+  } = useMenuHandlers(
+    user.userId,
+    String(article.articleId),
+    page,
+    article.recruiting,
+  );
 
   const menuItems = [
     { menu: '프로필', icon: goToProfileGray },

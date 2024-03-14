@@ -104,6 +104,7 @@ interface PortfolioDetails {
   writer: WriterProfile;
   contents: Array<Content>;
   teamMembers: teamMember[];
+  recruiting: boolean;
 }
 
 interface teamMember {

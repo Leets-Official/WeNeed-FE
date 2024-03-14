@@ -11,6 +11,7 @@ import { useRecoilState } from 'recoil';
 import DetailCategories from '../common/DetailCategories';
 
 interface DetailCategoriesContainerProps {
+  selected?: boolean;
   onCrew?: boolean;
   onSelectKeyword?: (name: string, keyword: string) => void;
 }
@@ -58,11 +59,11 @@ const DetailCategoriesContainer = ({
                 }
                 className="flex "
               >
-                <DetailCategories key={category} category={category} />
+                <DetailCategories key={category} category={category} selected />
               </div>
             ))
           : selectedCategoriesValue.map((category) => (
-              <DetailCategories key={category} category={category} />
+              <DetailCategories key={category} category={category} selected />
             ))}
       </Slider>
     </div>

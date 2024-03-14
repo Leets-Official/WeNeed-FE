@@ -30,3 +30,7 @@ body {
   color: gray;
   cursor: not-allowed;
 }
+
+.icon-wrapper:hover svg {
+  fill: black;
+}

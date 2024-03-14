@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import DropDown from 'components/mypage/profile/DropDown';
 import { GRADES, STUDENT_STATUS } from 'constants/recruit';
 import useInputChange from 'hooks/upload/useInputChange';
+import { REQUIREMENT } from '../recruiter/ProjectInfoQ';
 
 interface MyInfoContainerProps {
   user: WriterProfile;
@@ -90,7 +91,10 @@ const MyInfoContainer = ({ user }: MyInfoContainerProps) => {
           )}
         </div>
         <div className="w-[30%] relative">
-          <div className="pb-1.5  ">{APPLICANT_QUESTIONS.grade[0]}</div>
+          <div className="pb-1.5 flex gap-1">
+            {REQUIREMENT}
+            {APPLICANT_QUESTIONS.grade[0]}
+          </div>
           <DropDown
             sortedItemList={[...GRADES]}
             selectedItem={applicantData.grade ? applicantData.grade : GRADES[0]}
@@ -104,7 +108,10 @@ const MyInfoContainer = ({ user }: MyInfoContainerProps) => {
           />
         </div>
         <div className="w-[30%] relative mt-[63px]">
-          <div className="pb-1.5  ">{APPLICANT_QUESTIONS.status[0]}</div>
+          <div className="pb-1.5  flex gap-1">
+            {REQUIREMENT}
+            {APPLICANT_QUESTIONS.status[0]}
+          </div>
           <DropDown
             sortedItemList={[...STUDENT_STATUS]}
             onItemSelect={handleItemSelect('status')}

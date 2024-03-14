@@ -12,6 +12,7 @@ const useMenuHandlers = (
   userId: number,
   articleId: string,
   page: string = '',
+  recruiting: boolean,
   user?: UserProfile,
 ) => {
   const router = useRouter();
@@ -70,7 +71,7 @@ const useMenuHandlers = (
   const detailMenuHandlers: Record<string, () => void> = {
     프로필: () => goToPage('mypage'),
     크루제안: () => {
-      if (page !== 'portfolio') goToPage('crew/recruitment');
+      if (page !== 'portfolio' || !recruiting) goToPage('crew/recruitment');
       else alert('해당 게시물은 크루를 모집하고 있지 않습니다.');
     },
     좋아요: () => {
@@ -82,7 +83,9 @@ const useMenuHandlers = (
     댓글: () => {
       scrollToComments();
     },
-    공유: () => {},
+    공유: () => {
+      alert('준비중인 서비스입니다 :)');
+    },
   };
   return {
     detailMenuHandlers,
