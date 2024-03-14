@@ -34,6 +34,7 @@ const PortfolioDetailsContainer = ({
     files,
     skills,
   } = portfolio;
+  console.log(files);
   const { bookmarked, hearted } = user;
   return (
     <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
