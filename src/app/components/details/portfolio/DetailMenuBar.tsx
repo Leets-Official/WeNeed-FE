@@ -16,7 +16,9 @@ import {
 interface DetailMenuBarProps {
   userId: number;
   user: UserProfile;
+  page: string;
   articleId: string;
+  recruiting: boolean;
   onRecruit?: boolean;
 }
 
@@ -25,11 +27,14 @@ const DetailMenuBar = ({
   user,
   articleId,
   onRecruit,
+  recruiting,
+  page,
 }: DetailMenuBarProps) => {
   const { detailMenuHandlers, hearted, bookmarked } = useMenuHandlers(
     userId,
     articleId,
-    'portfolio',
+    page,
+    recruiting,
     user,
   );
 
@@ -38,17 +43,17 @@ const DetailMenuBar = ({
       className={`flex ${
         onRecruit
           ? 'flex-col w-[80px] gap-[20px] '
-          : 'w-full mt-[200px] gap-[40px] mb-[80px]'
+          : 'w-full mt-[80px] gap-[40px] mb-[80px]'
       }  justify-center items-center`}
     >
       {Object.entries(DETAIL_MENU_RENDER).map(([menu, icon]) => {
         return (
           <div
             key={menu}
-            className="flex flex-col justify-center items-center gap-[10px] font-semibold"
+            className="flex flex-col justify-center items-center gap-[10px] font-semibold "
           >
             <div
-              className="flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white"
+              className="icon-wrapper flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white"
               onClick={detailMenuHandlers[menu]}
             >
               {icon(hearted, bookmarked)}
@@ -67,24 +72,14 @@ const DETAIL_MENU_RENDER: Record<
   string,
   (filledheart: boolean, filledBookmark: boolean) => React.ReactNode
 > = {
-  프로필: () => (
-    <Icons name={goToprofile} className="hover:fill-black w-full" />
-  ),
-  크루제안: () => (
-    <Icons name={crewPlus} className="hover:fill-black w-full " />
-  ),
+  프로필: () => <Icons name={goToprofile} />,
+  크루제안: () => <Icons name={crewPlus} />,
   좋아요: (filledheart) => (
-    <Icons
-      name={filledheart ? whiteFilledHeart : noneFilledHeart}
-      className="hover:fill-black w-full"
-    />
+    <Icons name={filledheart ? whiteFilledHeart : noneFilledHeart} />
   ),
   북마크: (_, filledBookmark) => (
-    <Icons
-      name={filledBookmark ? whiteFilledBookmark : noneFilledBookmark}
-      className="hover:fill-black w-full"
-    />
+    <Icons name={filledBookmark ? whiteFilledBookmark : noneFilledBookmark} />
   ),
-  댓글: () => <Icons name={comment} className="hover:fill-black w-full" />,
-  공유: () => <Icons name={share} className="hover:fill-black w-full" />,
+  댓글: () => <Icons name={comment} />,
+  공유: () => <Icons name={share} />,
 } as const;

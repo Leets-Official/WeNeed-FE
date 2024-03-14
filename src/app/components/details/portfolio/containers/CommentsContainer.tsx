@@ -39,6 +39,10 @@ const CommentsContainer = ({
   }, [comments]);
 
   const onSubmitHandler = async () => {
+    if (!commentValue) {
+      alert('내용을 입력해주세요!');
+      return;
+    }
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/comments?articleId=${articleId}&parentId=0`,
@@ -64,7 +68,7 @@ const CommentsContainer = ({
           onRecruit ? ' w-full' : ' w-[79%]'
         }`}
       >
-        댓글{totalComments}개
+        댓글 {totalComments}개
       </p>
       <div
         className={`flex items-center relative max-w-[1290px] ${

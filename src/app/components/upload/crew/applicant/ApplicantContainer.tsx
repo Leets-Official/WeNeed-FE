@@ -17,19 +17,19 @@ const ApplicantContainer = ({ articleId }: ApplicantContainerProps) => {
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/crew/recruitment?articleId=${articleId}`,
       );
       const responseData = await response.json();
-      setData((prev) => responseData);
+      setData(() => responseData);
     };
 
     fetchData();
   }, [articleId]);
 
   if (data) {
-    const { recruitForm, user } = data;
+    const { recruitForm, recruitUser } = data;
     return (
       <div className="flex flex-col justify-center items-center w-full gap-[20px]">
-        <MyInfoContainer user={user} />
+        <MyInfoContainer user={recruitUser} />
         <MyAnswerContainer
-          user={user}
+          user={recruitUser}
           crewQuestions={recruitForm.crewQuestions}
         />
       </div>

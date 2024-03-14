@@ -7,7 +7,7 @@ interface IconsProps {
   onClick?: () => void;
 }
 
-const Icons = ({ name, className, onClick, hoverFill }: IconsProps) => {
+const Icons = ({ name, className, hoverFill, onClick }: IconsProps) => {
   const { width, height, fill, path, options } = name;
   return (
     <svg
