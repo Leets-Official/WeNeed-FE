@@ -3,7 +3,7 @@ import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
-import PreviewContainer from './containers/PreviewContainer';
+import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
 import { filestate, uploadDataState } from 'recoil/upload';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
@@ -36,7 +36,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
 
   const navComponent: NavComponent = {
     미리보기: (
-      <PreviewContainer
+      <PortfolioPreview
         user={USER_PREVIEW}
         portfolio={previewPF}
         closeModal={closeModal}

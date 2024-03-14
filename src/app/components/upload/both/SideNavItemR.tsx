@@ -2,6 +2,11 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
+import { filestate, uploadDataState } from 'recoil/upload';
+import { useRecoilState } from 'recoil';
+import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
+import PortfolioPreview from './containers/PortfolioPreview';
+import { previewAlert } from './showToast';
 
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
@@ -13,17 +18,42 @@ interface SideNavItemProps {
 type NavComponent = Record<string, JSX.Element>;
 
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
 
+  const koreanDate = new Date();
+  koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
+
+  const startPreview = () => {
+    openModal();
+    if (label === '미리보기') {
+      previewAlert();
+    }
+  };
+
+  const previewRecruit: PortfolioDetails = {
+    ...PORTFOLIO_PREVIEW,
+    contents: uploadData.content || '',
+    createdAt: String(koreanDate),
+    thumbnail: uploadData.thumbnail || '',
+  };
+
   const navComponent: NavComponent = {
-    미리보기: <SelectDetailR closeModal={closeModal} />,
+    미리보기: (
+      <PortfolioPreview
+        user={USER_PREVIEW}
+        portfolio={previewRecruit}
+        closeModal={closeModal}
+      />
+    ),
     업로드: <SelectDetailR closeModal={closeModal} isEdit={isEdit} id={id} />,
   };
 
   return (
     <div
-      onClick={openModal}
       className="flex items-center flex-col gap-y-[10px] cursor-pointer"
+      onClick={startPreview}
     >
       <div className="flex justify-center items-center w-[76px] h-[76px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-[56px]">
         <Icons name={iconInfo} />
