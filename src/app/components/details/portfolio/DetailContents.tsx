@@ -5,7 +5,7 @@ import { fileMini, skillsList } from 'ui/IconsPath';
 interface DetailContentsProps {
   title: string;
   contents: Array<Content>;
-  files: string[];
+  files: FileDetail[];
   skills: string[];
 }
 
@@ -77,17 +77,17 @@ const DetailContents = ({
             {files &&
               files.map((file) => (
                 <div
-                  key={file}
+                  key={file.fileUrl}
                   className="flex gap-3 items-center w-full truncate"
                 >
                   <Icons name={fileMini} />
                   <a
-                    href={file}
+                    href={file.fileUrl}
                     download={file}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {file}
+                    {file.fileName}
                   </a>
                 </div>
               ))}

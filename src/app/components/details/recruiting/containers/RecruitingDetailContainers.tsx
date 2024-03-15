@@ -13,8 +13,16 @@ const RecruitingDetailContainers = ({
   user,
   articleId,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents, files, skills, sharedText } =
-    recruit;
+  const {
+    createdAt,
+    tags,
+    title,
+    contents,
+    files,
+    skills,
+    sharedText,
+    recruiting,
+  } = recruit;
   const { nickname, userId } = user;
 
   return (
@@ -37,6 +45,7 @@ const RecruitingDetailContainers = ({
                 nickname={nickname}
                 userId={userId}
                 onRecruit
+                recruiting={recruiting}
                 articleId={articleId}
               />
             )}

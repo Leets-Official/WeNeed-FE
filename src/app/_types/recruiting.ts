@@ -13,6 +13,7 @@ interface RecruitListItem {
   heartCount: number;
   bookmarkCount: number;
   sharedText: string;
+  recruiting: boolean;
 }
 
 interface RecruitDetailItem extends PortfolioDetails {

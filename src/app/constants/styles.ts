@@ -19,7 +19,7 @@ export const INPUT_STYLE = {
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
   upload_recruiter: (className: string) =>
-    `w-full h-12 rounded-lg border-1.5 border-black text-neutral-500 text-sm font-normal px-[31px] mt-[10px] mb-[5px] ${className}`,
+    `w-full h-12 rounded-lg border-1.5 border-black text-neutral-500 text-sm font-normal px-[31px] mb-[5px] ${className}`,
 } as const;
 
 export const PROFILE_STYLE = {
@@ -32,7 +32,7 @@ export const QUESTIONS_BOX_STYLE = {
   categories: () =>
     'flex flex-col gap-[10px] justify-start items-start w-full bg-white px-[32px] py-[30px] rounded-lg ',
   mini: () =>
-    'flex flex-col gap-[10px] justify-start items-start w-full h-[169px] bg-white px-[32px] py-[30px] rounded-lg',
+    'flex flex-col gap-[20px] justify-start items-start w-full h-[169px] bg-white px-[32px] py-[30px] rounded-lg',
   requirement: () => 'text-red-400 text-sm font-normal',
   guide: () => 'text-neutral-500 text-xs font-light ',
 } as const;

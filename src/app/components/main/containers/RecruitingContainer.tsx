@@ -58,7 +58,11 @@ const RecruitingContainer = ({
                   >
                     <RecruitingItem article={article} />
                   </div>
-                  <RecruitingItemMenuBar article={article} user={user} />
+                  <RecruitingItemMenuBar
+                    page="recruiting"
+                    article={article}
+                    user={user}
+                  />
                 </div>
               </div>
             </div>
