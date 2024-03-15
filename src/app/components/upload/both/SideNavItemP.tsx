@@ -17,7 +17,12 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 
-  const fileNames = files.map((file) => file.id);
+  const fileNames: FileDetail[] = files.map((file) => {
+    return {
+      fileName: file.id,
+      fileUrl: file.id,
+    };
+  });
 
   const startPreview = () => {
     openModal();
@@ -32,6 +37,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     createdAt: String(koreanDate),
     thumbnail: uploadData.thumbnail || '',
     files: fileNames,
+    recruiting: false,
   };
 
   const navComponent: NavComponent = {

@@ -2,11 +2,11 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
-import { filestate, uploadDataState } from 'recoil/upload';
+import { uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-import PortfolioPreview from './containers/PortfolioPreview';
 import { previewAlert } from './showToast';
+import RecruitPreview from './containers/RecruitPreview';
 
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
@@ -19,7 +19,6 @@ type NavComponent = Record<string, JSX.Element>;
 
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
 
   const koreanDate = new Date();
@@ -32,18 +31,21 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     }
   };
 
-  const previewRecruit: PortfolioDetails = {
+  const previewRecruit: RecruitDetailItem = {
     ...PORTFOLIO_PREVIEW,
     contents: uploadData.content || '',
     createdAt: String(koreanDate),
     thumbnail: uploadData.thumbnail || '',
+    recruiting: true,
+    commentCount: 0,
+    sharedText: uploadData.sharedText || '',
   };
 
   const navComponent: NavComponent = {
     미리보기: (
-      <PortfolioPreview
+      <RecruitPreview
         user={USER_PREVIEW}
-        portfolio={previewRecruit}
+        recruiting={previewRecruit}
         closeModal={closeModal}
       />
     ),
