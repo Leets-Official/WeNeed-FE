@@ -62,7 +62,7 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       case 'keywords':
         return (
-          <div className="flex ">
+          <div className="flex">
             {keywords.map((keyword) => (
               <DetailCategories key={keyword} category={keyword} noBg />
             ))}

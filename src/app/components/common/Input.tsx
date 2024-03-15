@@ -4,7 +4,8 @@ import { INPUT_STYLE } from 'constants/styles';
 
 interface InputProps {
   type: 'search' | 'upload' | 'comment' | 'default' | 'upload_recruiter';
-  textValue: string;
+  textValue?: string;
+  inputType?: string;
   name?: string;
   placeholder?: string;
   className?: string;
@@ -20,6 +21,7 @@ const Input = ({
   textValue,
   placeholder,
   className,
+  inputType,
   onFocus,
   onBlur,
   onEnterPress,
@@ -29,6 +31,7 @@ const Input = ({
 
   return (
     <input
+      type={inputType}
       value={textValue}
       placeholder={placeholder}
       name={name}

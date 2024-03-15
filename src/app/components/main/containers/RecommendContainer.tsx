@@ -7,12 +7,22 @@ import 'slick-carousel/slick/slick-theme.css';
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
 import Link from 'next/link';
 import PortfolioItem from '../portfolio/PortfolioItem';
+import { MouseEventHandler } from 'react';
 
 interface RecommendContainerProps {
   data: RecommendArticle[];
+  user: UserProfile;
+  onClickItem: (
+    userId: number,
+    articleId: number,
+  ) => MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const RecommendContainer = ({ data }: RecommendContainerProps) => {
+const RecommendContainer = ({
+  data,
+  user,
+  onClickItem,
+}: RecommendContainerProps) => {
   const settings = {
     infinite: true,
     slidesToScroll: 1,
@@ -37,9 +47,9 @@ const RecommendContainer = ({ data }: RecommendContainerProps) => {
       <Slider {...settings} className="w-full h-[310px] mt-[38px]">
         {data?.map((article) => (
           <div className="mx-[32px]" key={article.articleId}>
-            <Link href={`/portfolio/${article.articleId}`}>
+            <div onClick={() => onClickItem(user.userId, article.articleId)}>
               <PortfolioItem article={article} onRecommend />
-            </Link>
+            </div>
           </div>
         ))}
       </Slider>

@@ -12,6 +12,7 @@ interface RecruitListItem {
   viewCount: number;
   heartCount: number;
   bookmarkCount: number;
+  sharedText: string;
 }
 
 interface RecruitDetailItem extends PortfolioDetails {
@@ -52,12 +53,29 @@ interface RecruitFormFromServer {
   keywords: string[];
 }
 
-interface ApplicationForm {
+interface ApplicationFormResponse {
+  [key: string]: string | string[];
   name: string;
   major: string;
   doubleMajor: string;
-  international: boolean;
-  grade: number;
+  grade: string;
+  status: string;
+  phone: string;
+  aboutMe: string;
+  content: string;
+  keywords: string[];
+  detailTags: string[];
+  crewAnswers: string[];
+  crewQuestions: string[];
+}
+
+interface ApplicationForm {
+  [key: string]: string | string[];
+  name: string;
+  major: string;
+  doubleMajor: string;
+  // international: boolean;
+  grade: string;
   status: string;
   phone: string;
   aboutMe: string;

@@ -65,6 +65,17 @@ interface RecruitmentComplete {
   keywords: string;
 }
 
+interface ApplicationComplete {
+  name: (arg: string) => string;
+  major: (arg: string) => string;
+  grade: (arg: string) => string;
+  status: (arg: string) => string;
+  phone: (arg: string) => string;
+  aboutMe: (arg: string) => string;
+  content: (arg: string) => string;
+  keywords: (arg: string) => string;
+}
+
 interface BlobImages {
   id: string;
   blob: Blob;

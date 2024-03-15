@@ -33,10 +33,10 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
           writer={user}
           size="large"
           date=""
-          noBg
+          gradient={true}
           count={[viewCount, heartCount, bookmarkCount]}
         />
-        <div className="w-full flex mt-[40px] text-white">
+        <div className="w-full flex mt-[40px] text-white ">
           {recruitForm.detailTags.map((category) => (
             <DetailCategories key={category} category={category} />
           ))}
