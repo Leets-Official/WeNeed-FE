@@ -9,24 +9,22 @@ const GoogleLoginButton = () => {
   };
 
   return (
-    <div className="absolute bottom-0 mb-64">
-      <Button
-        type="userinfo"
-        buttonText="Google 계정으로 로그인"
-        className="w-[476px] h-[50px] bg-white rounded-lg text-center text-neutral-900 text-sm font-medium font-['Roboto']"
-        isDisabled={false}
-        onClickHandler={handleGoogleLogin}
-      >
-        <div className="absolute ml-[22.93px]">
-          <Image
-            width={20}
-            height={20}
-            src="/Icons/googleIcon.png"
-            alt="Google Logo"
-          />
-        </div>
-      </Button>
-    </div>
+    <Button
+      type="userinfo"
+      buttonText="Google 계정으로 로그인"
+      className="w-[476px] h-[50px] bg-white rounded-lg text-center text-neutral-900 text-sm font-medium font-['Roboto']"
+      isDisabled={false}
+      onClickHandler={handleGoogleLogin}
+    >
+      <div className="absolute ml-[22.93px]">
+        <Image
+          width={20}
+          height={20}
+          src="/Icons/googleIcon.png"
+          alt="Google Logo"
+        />
+      </div>
+    </Button>
   );
 };
 
