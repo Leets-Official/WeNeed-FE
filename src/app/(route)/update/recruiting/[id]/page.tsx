@@ -1,14 +1,11 @@
 'use client';
+
 import Header from 'components/layout/Header';
 import UploadContainerR from 'components/upload/recruiting/containers/UploadContainerR';
 import useFillData from 'hooks/update/useFillData';
 import { useEffect, useState } from 'react';
 
-export default async function PortfolioPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillRecruit } = useFillData();
   const [data, setData] = useState<ResponseRecruitingDetail | null>(null);
 
@@ -27,7 +24,7 @@ export default async function PortfolioPage({
       }
     };
     fetchData();
-  }, []);
+  }, [fillRecruit, params.id]);
 
   if (data) {
     const { user } = data;
