@@ -14,7 +14,7 @@ import {
 interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
-  page?: string;
+  page: string;
   recruiting?: boolean;
 }
 
