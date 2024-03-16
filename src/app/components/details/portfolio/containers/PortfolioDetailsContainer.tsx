@@ -37,7 +37,6 @@ const PortfolioDetailsContainer = ({
     files,
     skills,
   } = portfolio;
-  console.log(files);
   const { bookmarked, hearted } = user;
   return (
     <div

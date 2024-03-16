@@ -30,7 +30,7 @@ const MemberInfoQ = ({ articleId }: MemberInfoQProps) => {
     };
 
     fetchData();
-  }, []);
+  }, [articleId]);
 
   if (user) {
     return (

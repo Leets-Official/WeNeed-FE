@@ -14,8 +14,7 @@ import {
 interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
-  page?: string;
-  recruiting?: boolean;
+  page: string;
 }
 
 const RecruitingItemMenuBar = ({

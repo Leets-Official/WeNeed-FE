@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import Slider from 'react-slick';
@@ -74,7 +73,7 @@ const CustomNextArrow = (props: any) => {
   const { onClick } = props;
   return (
     <div
-      className="absolute z-20 top-[235px] right-[200px]  flex justify-center items-center custom-next-arrow bg-[#3A3A3A] w-8 h-8 rounded-full cursor-pointer"
+      className="absolute top-[235px] right-[200px]  flex justify-center items-center custom-next-arrow bg-[#3A3A3A] w-8 h-8 rounded-full cursor-pointer"
       onClick={onClick}
     >
       <Icons name={rightAngle} />

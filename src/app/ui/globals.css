@@ -46,5 +46,6 @@ body {
   }
 
   .icon-wrapper:hover svg {
-  fill: black;
+    fill: black;
+  }
 }

@@ -26,13 +26,6 @@ const Footer = () => {
           <div className="flex h-[156px] items-end gap-[20px] cursor-pointer ">
             <Instagram />
             <KakaoTalk />
-            <a
-              href="https://github.com/Leets-Official/WeNeed-FE"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Github />
-            </a>
           </div>
         </div>
       </div>
