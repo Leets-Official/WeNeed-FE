@@ -9,17 +9,24 @@ import { SIDENAV_ITEM_NAME } from 'constants/portfolio';
 import FirstSelectP from '../FirstSelectP';
 import { filestate, textState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+interface UploadContainerPProps {
+  isEdit: boolean;
+  id: string;
+}
 
-const UploadContainerP = () => {
+const UploadContainerP = ({ id, isEdit }: UploadContainerPProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState(filestate);
 
   return (
     <div className="relative flex flex-col w-[100%] h-auto bg-white mt-[22px] gap-y-2.5">
       <AddThumbnail thumbnailInfo={portThumbnail} />
+      <ToastContainer />
       <div>
         {items.length > 0 || files.length > 0 ? (
-          <div className="items-center w-full h-[740px] overflow-y-auto px-9 pt-[36.15px]">
+          <div className="items-center w-full h-[740px] overflow-y-auto scrollbar-hide px-9 pt-[36.15px]">
             <DndContainer articleType={'portfolio'} />
           </div>
         ) : (
@@ -29,6 +36,8 @@ const UploadContainerP = () => {
           navItemIconPath={navItemIconPath_P}
           iconNameArr={SIDENAV_ITEM_NAME}
           articleType={'portfolio'}
+          isEdit={isEdit}
+          id={id}
         />
       </div>
       <div className="flex justify-center pb-[46px]">

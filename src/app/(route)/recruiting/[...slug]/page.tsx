@@ -28,8 +28,14 @@ export default function RecruitingPage({
   }, []);
 
   if (data) {
-    const { writer, createdAt, viewCount, heartCount, bookmarkCount } =
-      data.recruit;
+    const {
+      writer,
+      createdAt,
+      viewCount,
+      heartCount,
+      bookmarkCount,
+      recruiting,
+    } = data.recruit;
     const { bookmarked, hearted } = data.user;
     return (
       <section className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
@@ -62,6 +68,8 @@ export default function RecruitingPage({
                 user={data.user}
                 userId={data.user.userId}
                 onRecruit
+                recruiting={recruiting}
+                page="recruiting"
               />
             </div>
           </div>

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { postRecruiterState } from 'recoil/crew';
 import { questions_plus } from 'ui/IconsPath';
+import { REQUIREMENT } from './ProjectInfoQ';
 
 const ContentsQ = () => {
   const setRecruiterData = useSetRecoilState(postRecruiterState);
@@ -26,7 +27,9 @@ const ContentsQ = () => {
   return (
     <div className="font-semibold w-[80%] flex flex-col bg-white rounded-lg p-[30px]">
       <div>
-        <div className="flex gap-1">{RECRUITER_QUESTIONS.crew_questions}</div>
+        <div className="flex gap-1">
+          {REQUIREMENT} {RECRUITER_QUESTIONS.crew_questions}
+        </div>
         {Array.from({ length: qCount }).map((_, index) => (
           <Input
             key={index}
@@ -45,7 +48,9 @@ const ContentsQ = () => {
         </div>
       </div>
       <div>
-        <div className="flex gap-1 ">{RECRUITER_QUESTIONS.content}</div>
+        <div className="flex gap-1 ">
+          {REQUIREMENT} {RECRUITER_QUESTIONS.content}
+        </div>
         <textarea
           name="content"
           className="h-36 w-full rounded-lg border-1.5 border-black resize-none mt-[5px] py-[16px] px-[31px] text-neutral-500 text-sm font-normal "
@@ -55,28 +60,22 @@ const ContentsQ = () => {
       </div>
       <div>
         <div className="flex gap-1 mt-[30px] mb-[5px]">
-          {RECRUITER_QUESTIONS.keywords}
+          {REQUIREMENT} {RECRUITER_QUESTIONS.keywords}
         </div>
-        <div className="flex text-white h-[130px] flex-wrap">
+        <div className="flex text-white h-[95px] flex-wrap">
           {CREW_KEYWORDS.map((keyword) => (
             <div
               key={keyword}
               onClick={() => onSelectKeyword('keywords', keyword)}
             >
-              <DetailCategories category={keyword} />
+              <DetailCategories
+                category={keyword}
+                selected={recruiterData.keywords.includes(keyword)}
+                onClick={() => onRemovekeyword(keyword)}
+              />
             </div>
           ))}
         </div>
-      </div>
-      <div className="flex items-center gap-5 text-white flex-wrap">
-        <p className="text-black">선택 :</p>
-        {recruiterData.keywords.map((tag) => (
-          <DetailCategories
-            category={tag}
-            key={tag}
-            onClick={() => onRemovekeyword(tag)}
-          />
-        ))}
       </div>
     </div>
   );

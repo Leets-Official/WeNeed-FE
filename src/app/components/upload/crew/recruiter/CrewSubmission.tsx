@@ -24,6 +24,13 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
   const router = useRouter();
 
   const onSubmitRecruiter = async () => {
+    const keys = Object.keys(recruiterValue);
+    for (const key of keys) {
+      if (!recruiterValue[key]) {
+        alert('모든 항목을 작성해주세요.');
+        return;
+      }
+    }
     const newData = {
       ...recruiterValue,
       deadline: recruiterValue.deadline.join('/'),
@@ -46,6 +53,17 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
   };
 
   const onSubmitApplicant = async () => {
+    const keys = Object.keys(postApplicantReq);
+    for (const key of keys) {
+      if (!postApplicantReq[key] && key !== 'doubleMajor') {
+        alert('모든 항목을 작성해주세요.');
+        return;
+      }
+    }
+    if (!postApplicantAppeal) {
+      alert('어필할 수 있는 파일을 올려주세요.');
+      return;
+    }
     const newData = { ...postApplicantReq, international: postApplicantBool };
     const formData = new FormData();
     formData.append(

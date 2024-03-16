@@ -3,10 +3,10 @@ import { updateRecruit } from 'service/updateRequest';
 import { getCookie } from 'utils/cookieUtils';
 
 export async function PATCH(request: Request) {
+  console.log('포폴수정 요청 데이터', request);
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('articleId') || '';
   const accessToken = getCookie(request, 'accessToken');
-  console.log('리크루팅 수정 요청 데이터', request);
   try {
     const res = await request.formData();
     console.log('실제 서버로 요청할 데이터', res);

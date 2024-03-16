@@ -10,13 +10,21 @@ import FirstSelectR from '../FirstSelectR';
 import DndContainer from 'components/upload/dnd/DndContainer';
 import { navItemIconPath_R } from 'ui/IconsPath';
 import { SIDENAV_ITEM_NAME_R } from 'constants/recruit';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const UploadContainerR = () => {
+interface UploadContainerRProps {
+  isEdit: boolean;
+  id: string;
+}
+
+const UploadContainerR = ({ id, isEdit }: UploadContainerRProps) => {
   const [items, setItems] = useRecoilState(textState);
 
   return (
     <div className="bg-black mt-5 mb-8">
       <AddThumbnail thumbnailInfo={recruitThumbnail} />
+      <ToastContainer />
       <div className="relative flex flex-col w-[100%] h-auto mt-2  bg-white">
         <div className="relative">
           {items.length > 0 ? (
@@ -30,13 +38,15 @@ const UploadContainerR = () => {
             navItemIconPath={navItemIconPath_R}
             iconNameArr={SIDENAV_ITEM_NAME_R}
             articleType={'recruit'}
+            isEdit={isEdit}
+            id={id}
           />
         </div>
-        <div className="flex justify-center pb-[46px]">
+        <div className="flex justify-center pb-[40px] pt-3">
           {items.length > 0 && <SelectFileR />}
         </div>
       </div>
-      <BigSentence />
+      <BigSentence isEdit={isEdit} />
     </div>
   );
 };

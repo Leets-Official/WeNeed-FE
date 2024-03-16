@@ -10,6 +10,7 @@ interface WriterOptionsProps {
   articleId: string;
   userId: number;
   nickname: string;
+  recruiting?: boolean;
 }
 
 const WriterOptions = ({
@@ -17,6 +18,7 @@ const WriterOptions = ({
   articleId,
   userId,
   nickname,
+  recruiting,
 }: WriterOptionsProps) => {
   const pathName = usePathname();
   const router = useRouter();
@@ -37,6 +39,14 @@ const WriterOptions = ({
       },
     );
     router.push('/');
+  };
+
+  const onClickCrewButton = () => {
+    if (recruiting) {
+      alert(' 이미 모집중입니다. 마이페이지에서 모집서를 확인해보세요!');
+    } else {
+      router.push(`/upload/crew/recruiter/${articleId}`);
+    }
   };
 
   return (
@@ -63,9 +73,7 @@ const WriterOptions = ({
         isDisabled={false}
         type="upload_recruiter"
         className=" text-white bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]"
-        onClickHandler={() =>
-          router.push(`/upload/crew/recruiter/${articleId}`)
-        }
+        onClickHandler={onClickCrewButton}
       />
     </div>
   );
