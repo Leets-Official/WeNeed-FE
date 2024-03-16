@@ -5,17 +5,20 @@ import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
 import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
-import { filestate, uploadDataState } from 'recoil/upload';
+import { filestate, uploadDataState, uploadForm } from 'recoil/upload';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-import { previewAlert } from './showToast';
+import { previewAlert, thumbnailAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [uploadFormData, setUploadFormData] =
+    useRecoilState<FormData>(uploadForm);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
 
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
+  console.log(files);
 
   const fileNames: FileDetail[] = files.map((file) => {
     return {
@@ -25,9 +28,13 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   });
 
   const startPreview = () => {
-    openModal();
     if (label === '미리보기') {
       previewAlert();
+      openModal();
+    } else if (uploadFormData.has('thumbnail')) {
+      openModal();
+    } else {
+      thumbnailAlert();
     }
   };
 
