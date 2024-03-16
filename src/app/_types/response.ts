@@ -55,3 +55,16 @@ interface ResponseCrewApplicant {
   sameUser: boolean;
   nickname: string;
 }
+
+interface ResponseMypageBasicInfo {
+  userNickname: string;
+  sameUser: boolean;
+  userInfo: MypageUserInfo;
+  myOutputList: MyOutputList[];
+  pageableDto: Pageable;
+}
+
+interface ResponseMypageOtherInfo {
+  myOutputList: MyOutputList[];
+  pageableDto: Pageable;
+}

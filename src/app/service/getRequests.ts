@@ -118,3 +118,40 @@ export const getApplicantForm = async (
   const url = `${SERVER_URL}/application-forms/${applicationId}`;
   return await getRequest(url, accessToken);
 };
+
+export const getMyPortfolio = async (
+  accessToken: string,
+  size: number,
+  page: number,
+  userId: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/basic-info/${userId}?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyCrew = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/my-crews?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyInstCrews = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/interesting-crew?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyInstPortfolio = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/interesting-portfolio?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
