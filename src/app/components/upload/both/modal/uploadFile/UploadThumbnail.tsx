@@ -81,7 +81,7 @@ const UploadThumbnail = ({ uploadInfo, closeModal }: UploadThumbnailProps) => {
           </div>
           <div className="flex flex-row-reverse mt-[14px]" onClick={closeModal}>
             <ConfirmButton
-              btnClick={() => handleConfirm(fileType)}
+              btnClick={() => handleConfirm()}
               btnText={fileInfo.name}
               isWritten={fileInfo.name === ''}
             />

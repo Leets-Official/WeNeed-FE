@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { uploadForm } from 'recoil/upload';
+import { uploadDataState, uploadForm } from 'recoil/upload';
 import { useRef, useState } from 'react';
 
 interface FileInfo {
@@ -9,9 +9,11 @@ interface FileInfo {
 }
 
 const useAddThumbnail = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploadData, setUploadData] =
+    useRecoilState<UploadPFTypes>(uploadDataState);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
     size: 0,
@@ -45,7 +47,7 @@ const useAddThumbnail = () => {
     }
   };
 
-  const handleConfirm = (fileType: string) => {
+  const handleConfirm = () => {
     const selectedFile = inputRef.current?.files?.[0];
     if (selectedFile) {
       if (uploadFormData.has('thumbnail')) {
@@ -53,6 +55,7 @@ const useAddThumbnail = () => {
       }
       const blob = new Blob([selectedFile], { type: selectedFile.type });
       uploadFormData.append('thumbnail', blob, selectedFile.name);
+      setUploadData({ ...uploadData, thumbnail: fileInfo.url });
     } else {
       console.log('선택된 파일이 없습니다.');
     }

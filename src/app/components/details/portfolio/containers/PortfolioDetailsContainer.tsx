@@ -14,12 +14,14 @@ interface PortfolioDetailsContainerProps {
   user: UserProfile;
   portfolio: PortfolioDetails;
   articleId: string;
+  isPreview?: boolean;
 }
 
 const PortfolioDetailsContainer = ({
   user,
   portfolio,
   articleId,
+  isPreview,
 }: PortfolioDetailsContainerProps) => {
   const {
     thumbnail,
@@ -38,7 +40,11 @@ const PortfolioDetailsContainer = ({
   console.log(files);
   const { bookmarked, hearted } = user;
   return (
-    <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
+    <div
+      className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
+        isPreview ? 'pointer-events-none' : ''
+      }`}
+    >
       {thumbnail ? (
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image

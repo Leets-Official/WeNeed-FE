@@ -6,11 +6,16 @@ import { search, weneed } from 'ui/IconsPath';
 interface HeaderProps {
   nickname: string;
   userId: number;
+  isPreview?: boolean;
 }
 
-const Header = ({ nickname, userId }: HeaderProps) => {
+const Header = ({ nickname, userId, isPreview }: HeaderProps) => {
   return (
-    <header className="z-20 w-full h-[60px] bg-black text-white flex justify-between items-center min-w-[800px]">
+    <header
+      className={`z-20 w-full h-[60px] bg-black text-white flex justify-between items-center min-w-[800px] ${
+        isPreview ? 'pointer-events-none' : ''
+      }`}
+    >
       <div className="h-full flex items-center gap-[78px]">
         <Link href={'/main/portfolio'}>
           <Icons name={weneed} />
