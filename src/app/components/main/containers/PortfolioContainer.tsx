@@ -1,11 +1,11 @@
 'use client';
 
+import PortfolioItemNav from '../portfolio/PortfolioItemNav';
+import PortfolioItem from '../portfolio/PortfolioItem';
 import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
 import { MouseEventHandler, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { selectedSortType } from 'recoil/main';
-import PortfolioItemNav from '../portfolio/PortfolioItemNav';
-import PortfolioItem from '../portfolio/PortfolioItem';
 
 interface PortfolioContainerProps {
   data: PortfolioArticle[];

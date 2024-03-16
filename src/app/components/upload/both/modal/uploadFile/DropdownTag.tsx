@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
 import TagItem from './TagItem';
+import { useRecoilState } from 'recoil';
+import { uploadDataState } from 'recoil/upload';
 
 interface DropdownTagProps {
   options: readonly string[];
@@ -18,6 +20,7 @@ const DropdownTag = ({
   onSelect,
 }: DropdownTagProps) => {
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
@@ -33,8 +36,12 @@ const DropdownTag = ({
   };
 
   useEffect(() => {
+    setSelectedOption(uploadData.tags);
+  }, []);
+
+  useEffect(() => {
     onSelect(selectedOption);
-  }, [selectedOption, onSelect]);
+  }, [selectedOption]);
 
   return (
     <div className="flex flex-col">

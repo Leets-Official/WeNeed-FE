@@ -7,6 +7,7 @@ import {
 } from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
+import { deleteAlert, editAlert } from 'components/upload/both/showToast';
 
 interface FileInfo {
   name: string;
@@ -108,6 +109,7 @@ const useAddFile = () => {
           ),
         );
       }
+      editAlert();
     }
   };
 
@@ -169,11 +171,13 @@ const useAddFile = () => {
       );
     }
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    deleteAlert();
   };
 
   const removeAllFile = () => {
     setFiles([]);
     setBlobFiles([]);
+    deleteAlert();
   };
 
   return {

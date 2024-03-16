@@ -1,3 +1,4 @@
+import { editAlert } from 'components/upload/both/showToast';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { textState, uploadDataState, orderState } from 'recoil/upload';
@@ -20,9 +21,10 @@ const useAddText = () => {
       ),
     );
     setUploadData({ ...uploadData, content: items });
+    editAlert();
   };
 
-  const addText = (type: string) => {
+  const addText = (type: 'text' | 'image' | 'link' | 'sound') => {
     const updatedItems = [
       ...items,
       {
@@ -34,7 +36,6 @@ const useAddText = () => {
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
     setOrderId(orderId + 1);
-    console.log('데이터 추가');
   };
 
   const addShare = () => {

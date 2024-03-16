@@ -50,9 +50,9 @@ const SearchItem = ({ article, user }: SearchItemProps) => {
           <div className="absolute top-0 w-full h-10 bg-gradient-to-t from-transparent to-neutral-900 rounded-lg"></div>
         )}
       </div>
-      <div className="h-full ml-[30px] flex flex-col justify-center ">
+      <div className="h-full ml-[30px] flex flex-col justify-center items-start ">
         <h3 className="text-[30px] font-bold w-full truncate">{title}</h3>
-        <div className="flex gap-3 mt-[25px] mb-2">
+        <div className="flex gap-3 mt-[25px] mb-5">
           {detailTags.map((tag) => (
             <p className="font-semibold" key={tag}>
               #{tag}
@@ -76,7 +76,7 @@ const SearchItem = ({ article, user }: SearchItemProps) => {
             {major} | {grade} 학년
           </p>
         </div>
-        <div className="ml-[10px] ">
+        <div className="ml-[88px]">
           <Counts count={[viewCount, heartCount, bookmarkCount]} />
         </div>
       </div>

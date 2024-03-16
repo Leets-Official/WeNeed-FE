@@ -75,7 +75,7 @@ const ModalSelector = ({
           uploadInfo={share}
           closeModal={closeModal}
           isEdit={isEdit}
-          id={id}
+          id={'share'}
         />
       );
     case '비디오':

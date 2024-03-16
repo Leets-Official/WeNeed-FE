@@ -44,4 +44,8 @@ body {
       scrollbar-width: none; /* Firefox */
     }
   }
+
+  .icon-wrapper:hover svg {
+    fill: black;
+  }
 }

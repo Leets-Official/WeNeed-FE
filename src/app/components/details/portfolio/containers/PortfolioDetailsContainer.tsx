@@ -1,6 +1,5 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
-import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../../common/Profile';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
@@ -8,17 +7,21 @@ import WriterOptions from '../WriterOptions';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import GradientProfile from 'ui/gradient/GradientProfile';
+import { bigWeneed } from 'ui/IconsPath';
+import Counts from 'components/details/common/Counts';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
   portfolio: PortfolioDetails;
   articleId: string;
+  isPreview?: boolean;
 }
 
 const PortfolioDetailsContainer = ({
   user,
   portfolio,
   articleId,
+  isPreview,
 }: PortfolioDetailsContainerProps) => {
   const {
     thumbnail,
@@ -36,7 +39,11 @@ const PortfolioDetailsContainer = ({
   } = portfolio;
   const { bookmarked, hearted } = user;
   return (
-    <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
+    <div
+      className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
+        isPreview ? 'pointer-events-none' : ''
+      }`}
+    >
       {thumbnail ? (
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
@@ -88,7 +95,7 @@ const PortfolioDetailsContainer = ({
             <Profile
               writer={writer}
               date={createdAt}
-              count={[viewCount, heartCount, bookmarkCount]}
+              // count={[viewCount, heartCount, bookmarkCount]}
               user={{ bookmarked, hearted }}
               size="large"
             />
@@ -101,10 +108,15 @@ const PortfolioDetailsContainer = ({
           files={files}
           skills={skills}
         />
+        <div className="w-full flex justify-center mt-[100px]">
+          <Counts count={[viewCount, heartCount, bookmarkCount]} gradient />
+        </div>
         <DetailMenuBar
           userId={writer.userId || -1}
           user={user}
           articleId={articleId}
+          page="portfolio"
+          recruiting={false}
         />
         {user.sameUser && (
           <WriterOptions

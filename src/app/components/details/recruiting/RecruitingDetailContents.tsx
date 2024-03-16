@@ -4,7 +4,7 @@ import { fileMini, skillsList } from 'ui/IconsPath';
 
 interface RecruitingDetailContentsProps {
   contents: Content[];
-  files: string[];
+  files: FileDetail[];
   skills: string[];
   sharedText: string;
 }
@@ -47,7 +47,6 @@ const RecruitingDetailContents = ({
               </div>
             );
           default:
-            break;
         }
       })}
       <div className="flex flex-col items-start justify-center w-full gap-[40px] text-[#00E0EE] font-semibold mt-[39px] ">
@@ -63,17 +62,17 @@ const RecruitingDetailContents = ({
             {files &&
               files.map((file) => (
                 <div
-                  key={file}
+                  key={file.fileUrl}
                   className="flex gap-3 items-center w-full truncate bg-[#3A3A3A] h-[36px] px-3 rounded-[10px]"
                 >
                   <Icons name={fileMini} />
                   <a
-                    href={file}
+                    href={file.fileUrl}
                     download={file}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {file}
+                    {file.fileName}
                   </a>
                 </div>
               ))}

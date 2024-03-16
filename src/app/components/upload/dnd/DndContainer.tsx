@@ -6,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { imageBlobState, textState, uploadDataState } from 'recoil/upload';
+import { textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from './DndText';
 import DndLink from './DndLink';
@@ -17,6 +17,7 @@ import EditText from 'components/update/EditText';
 import EditFile from 'components/update/EditFile';
 import DeleteDocsVideos from 'components/update/modal/DeleteDocsVideos';
 import CheckDelete from 'components/update/modal/CheckDelete';
+import { deleteAlert } from '../both/showToast';
 
 interface DndContainerProps {
   articleType: string;
@@ -39,7 +40,6 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       ...item,
       id: String(index),
     }));
-
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
   };
@@ -48,6 +48,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
     const updatedItems = items.filter((item) => item.id !== itemId);
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
+    deleteAlert();
   };
 
   const startEdit = (item: DndTextTypes) => {
@@ -57,6 +58,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   useEffect(() => {
     console.log('items현황:', items);
     console.log('uploadData현황: ', uploadData);
+    setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
     setEditItemId(null);
     setIsEditFile(false);
@@ -64,7 +66,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       cancelAnimationFrame(animation);
       setEnabled(false);
     };
-  }, [items, uploadData]);
+  }, [items]);
 
   if (!enabled) {
     return null;

@@ -148,7 +148,7 @@ export const whiteFilledBookmark = {
 
 export const noneFilledBookmark = {
   path: 'M24 1H1V32.5L12.5 25L24 32.5V1Z',
-  width: 23,
+  width: 24,
   height: 31.5,
   fill: ' none',
   options: {

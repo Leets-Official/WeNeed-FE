@@ -6,20 +6,34 @@ interface RecruitingDetailContainersProps {
   recruit: RecruitDetailItem;
   user: UserProfile;
   articleId: string;
+  isPreview?: boolean;
 }
 
 const RecruitingDetailContainers = ({
   recruit,
   user,
   articleId,
+  isPreview,
 }: RecruitingDetailContainersProps) => {
-  const { createdAt, tags, title, contents, files, skills, sharedText } =
-    recruit;
+  const {
+    createdAt,
+    tags,
+    title,
+    contents,
+    files,
+    skills,
+    sharedText,
+    recruiting,
+  } = recruit;
   const { nickname, userId } = user;
 
   return (
     <>
-      <div className="flex flex-col items-center w-full mt-[40px] min-h-[400px] ">
+      <div
+        className={`flex flex-col items-center w-full mt-[40px] min-h-[400px]  ${
+          isPreview ? 'pointer-events-none' : ''
+        }`}
+      >
         <DetailContentsInfo tags={tags} createdAt={createdAt} recruit />
         <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
           {title}
@@ -37,6 +51,7 @@ const RecruitingDetailContainers = ({
                 nickname={nickname}
                 userId={userId}
                 onRecruit
+                recruiting={recruiting}
                 articleId={articleId}
               />
             )}

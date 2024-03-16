@@ -8,7 +8,7 @@ interface DndLinkProps {
 const DndLink = (LinksInfo: DndLinkProps) => {
   const { link } = LinksInfo;
   return (
-    <div className="flex items-center w-[1206px] h-auto px-[20px] py-[9.5px] bg-zinc-100">
+    <div className="flex items-center w-[1206px] h-auto px-[20px] py-[9.5px] bg-[#EEE]">
       <div className="flex px-[24px] py-[6px] rounded-[10px] gap-x-[17.5px] bg-black">
         <Icons name={dndLinkIcon} />
         <div className="text-[#00E0EE]">{link}</div>

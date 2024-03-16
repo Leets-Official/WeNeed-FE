@@ -41,14 +41,17 @@ interface ResponseUploadSearch {
 }
 
 interface ResponseCrewRecruiter {
-  user: WriterProfile;
+  recruitUser: WriterProfile;
   article: RecruitFormArticle;
   recruitForm: RecruitFormFromServer;
+  nickname: string;
+  sameUser: boolean;
+  userId: string;
 }
 
 interface ResponseCrewApplicant {
   user: WriterProfile;
-  applicationForm: ApplicationFormBeforeSubmit;
+  applicationForm: ApplicationFormResponse;
   sameUser: boolean;
   nickname: string;
 }
