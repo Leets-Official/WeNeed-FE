@@ -64,6 +64,16 @@ interface ResponseMypageBasicInfo {
   pageableDto: Pageable;
 }
 
+interface ResponseMypageMycrew {
+  recruitData: ResponseMypageOtherInfo;
+  appliedData: ResponseMyApplicationCrew;
+}
+
+interface ResponseMyApplicationCrew {
+  applicationInfoResponses: MyOutputList[];
+  pageableDto: Pageable;
+}
+
 interface ResponseMypageOtherInfo {
   myOutputList: MyOutputList[];
   pageableDto: Pageable;

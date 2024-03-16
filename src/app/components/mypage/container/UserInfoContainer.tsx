@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import GradientProfileSM from 'ui/gradient/GradientProfileSM';
+import GradientProfileMD from 'ui/gradient/GradientProfileMD';
 
 interface UserInfoContainerProps {
   profile: string;
@@ -19,7 +19,7 @@ export const UserInfoContainer = ({
       {profile ? (
         <Image src={profile} alt="profile" width={80} height={80} />
       ) : (
-        <GradientProfileSM />
+        <GradientProfileMD />
       )}
       <div className="flex flex-col justify-center items-center">
         <div className="text-white text-xl font-bold">{nickname}</div>

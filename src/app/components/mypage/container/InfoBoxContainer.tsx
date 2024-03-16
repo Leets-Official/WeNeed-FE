@@ -35,7 +35,7 @@ export const InfoBoxContainer = ({
           content={itemList[index]}
         />
       ))}
-      {!sameUser && (
+      {sameUser && (
         <Button
           buttonText={MY_PAGE.MODIFY_PROFILE}
           type="userinfo"
