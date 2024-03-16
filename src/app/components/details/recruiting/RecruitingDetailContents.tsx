@@ -28,11 +28,24 @@ const RecruitingDetailContents = ({
                 {content.data || ''}
               </div>
             );
+          case 'link':
+          case 'sound':
+            return (
+              <div
+                key={content.id}
+                className="bg-black rounded-[10px] flex gap-3 w-full h-auto text-[#00E0EE] font-semibold"
+              >
+                <Icons name={fileMini} />
+                <a href={content.data} target="_blank" rel="noreferrer">
+                  {content.data}
+                </a>
+              </div>
+            );
           case 'image':
             return (
               <div
                 key={content.id}
-                className="relative flex justify-center items-center w-[1186px] rounded-[15px] h-[528px] overflow-hidden"
+                className="relative flex justify-center items-center max-w-[1186px] rounded-[15px] max-h-[528px] overflow-hidden"
               >
                 {content.data && (
                   <Image
