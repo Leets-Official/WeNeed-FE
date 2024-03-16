@@ -67,7 +67,7 @@ const FeedItemsContainer = ({
           <div className="flex gap-[32px] mb-4 flex-wrap">
             {article1.map((article) => (
               <Link
-                href={`/mypage/application/${article.articleId}`}
+                href={`/mypage/apprecruit/${article.articleId}`}
                 key={article.articleId}
               >
                 <FeedItems article={article} />
@@ -114,7 +114,7 @@ const FeedItemsContainer = ({
           <div className="flex gap-[32px] mb-4 flex-wrap">
             {article2?.map((article) => (
               <Link
-                href={`/mypage/application/${article.articleId}`}
+                href={`/mypage/apprecruit/${article.articleId}`}
                 key={article.articleId}
               >
                 <FeedItems article={article} />
