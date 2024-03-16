@@ -68,13 +68,15 @@ const WriterOptions = ({
           <p>수정하기</p>
         </div>
       </div>
-      <Button
-        buttonText="크루 모집하러가기"
-        isDisabled={false}
-        type="upload_recruiter"
-        className=" text-white bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]"
-        onClickHandler={onClickCrewButton}
-      />
+      {onRecruit && (
+        <Button
+          buttonText="크루 모집하러가기"
+          isDisabled={false}
+          type="upload_recruiter"
+          className=" text-white bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]"
+          onClickHandler={onClickCrewButton}
+        />
+      )}
     </div>
   );
 };
