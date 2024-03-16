@@ -29,7 +29,6 @@ const useFillData = () => {
   const fillPF = ({ portfolio }: useFillDataProps) => {
     setItems([]);
     setFiles([]);
-    const myFiles = portfolio.files;
     const newArray = portfolio.files.map((item) => {
       let contentType = '';
       if (item.fileName.endsWith('pdf')) {

@@ -4,7 +4,7 @@ import { fileMini, skillsList } from 'ui/IconsPath';
 
 interface ArticleContentsProps {
   contents: Content[];
-  files: string[];
+  files: FileDetail[];
   skills: string[];
   sharedText: string;
 }
@@ -67,17 +67,17 @@ const ArticleContents = ({
             {files &&
               files.map((file) => (
                 <div
-                  key={file}
+                  key={file.fileUrl}
                   className="flex gap-3 items-center w-full truncate bg-[#3A3A3A] h-[36px] px-3 rounded-[10px]"
                 >
                   <Icons name={fileMini} />
                   <a
-                    href={file}
+                    href={file.fileUrl}
                     download={file}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    {file}
+                    {file.fileName}
                   </a>
                 </div>
               ))}
