@@ -48,6 +48,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
 
   const handleConfirm = async () => {
     uploadFormData.delete('request');
+    uploadFormData.delete('files');
+    uploadFormData.delete('images');
     setLoading(true);
     images.forEach((image) => {
       uploadFormData.append('images', image.blob, image.filename);

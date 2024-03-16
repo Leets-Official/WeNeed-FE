@@ -50,3 +50,13 @@ export const previewAlert = () => {
     position: 'top-center',
   });
 };
+
+export const thumbnailAlert = () => {
+  toast.warning('썸네일을 입력해주세요', {
+    icon: () => '🖼️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 3000,
+    position: 'top-center',
+  });
+};
