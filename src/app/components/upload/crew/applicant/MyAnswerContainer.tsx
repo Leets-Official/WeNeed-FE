@@ -94,18 +94,12 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
               key={keyword}
               onClick={() => onSelectKeyword('keywords', keyword)}
             >
-              <DetailCategories category={keyword} />
+              <DetailCategories
+                category={keyword}
+                selected={applicantData.keywords.includes(keyword)}
+                onClick={() => onRemoveCategory(keyword)}
+              />
             </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-5 text-white flex-wrap mt-[50px]">
-          <p className="text-black">선택 :</p>
-          {applicantData.keywords.map((tag) => (
-            <DetailCategories
-              category={tag}
-              key={tag}
-              onClick={() => onRemoveCategory(tag)}
-            />
           ))}
         </div>
       </div>
