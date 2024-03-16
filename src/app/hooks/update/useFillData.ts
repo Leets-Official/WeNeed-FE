@@ -1,5 +1,5 @@
 import { useRecoilState } from 'recoil';
-import { orderState } from 'recoil/upload';
+import { fileBlobState, orderState } from 'recoil/upload';
 import {
   filestate,
   textState,
@@ -21,6 +21,7 @@ const useFillData = () => {
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState(filestate);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [fileBlob, setFileBlob] = useRecoilState(fileBlobState);
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
@@ -28,7 +29,22 @@ const useFillData = () => {
   const fillPF = ({ portfolio }: useFillDataProps) => {
     setItems([]);
     setFiles([]);
-    console.log(portfolio);
+    const myFiles = portfolio.files;
+    const newArray = portfolio.files.map((item) => {
+      let contentType = '';
+      if (item.fileName.endsWith('pdf')) {
+        contentType = 'docs';
+      } else if (item.fileName.endsWith('mp4')) {
+        contentType = 'video';
+      }
+      return {
+        id: item.fileName,
+        type: contentType,
+        data: item.fileName,
+        url: item.fileUrl,
+      };
+    });
+
     setUploadData({
       ...uploadData,
       title: portfolio.title,
@@ -37,19 +53,33 @@ const useFillData = () => {
       content: [...portfolio.contents],
     });
     setItems([...portfolio.contents]);
-
+    setFiles([...newArray]);
     portfolio.files.forEach((fileURL) => {
-      console.log(fileURL, '로 요청중');
-      fetch(fileURL)
+      fetch(fileURL.fileUrl)
         .then((response) => response.blob())
         .then((blob) => {
-          console.log(blob, '을 성민이가 보내줌');
-          const file = new File([blob], 'filename.jpg'); // 파일 이름은 변경 가능
-          console.log(file, '을 성민이가 보내줌');
-          uploadFormData.append('files', file);
+          const file = new File([blob], fileURL.fileName);
+          setFileBlob((prevFiles) => [
+            ...prevFiles,
+            {
+              id: file.name,
+              file: file,
+              filename: file.name,
+            },
+          ]);
         })
         .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
     });
+    if (uploadFormData.has('thumbnail')) {
+      uploadFormData.delete('thumbnail');
+    }
+    fetch(portfolio.thumbnail)
+      .then((response) => response.blob())
+      .then((blob) => {
+        uploadFormData.append('thumbnail', blob, portfolio.thumbnail);
+        setUploadData({ ...uploadData, thumbnail: portfolio.thumbnail });
+      })
+      .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
   };
 
   const fillRecruit = ({ user, recruit }: useFillRecruitProps) => {
