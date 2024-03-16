@@ -15,7 +15,6 @@ interface RecruitingItemInfoProps {
   article: RecruitListItem;
   user: SimpleUser;
   page: string;
-  recruiting?: boolean;
 }
 
 const RecruitingItemMenuBar = ({
