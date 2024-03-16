@@ -80,6 +80,7 @@ const useFillData = () => {
         setUploadData({ ...uploadData, thumbnail: portfolio.thumbnail });
       })
       .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
+    console.log(fileBlob, 'blob 현황');
   };
 
   const fillRecruit = ({ user, recruit }: useFillRecruitProps) => {
@@ -95,6 +96,17 @@ const useFillData = () => {
     });
     setItems([...recruit.contents]);
     setOrderId(recruit.contents.length + 1);
+
+    if (uploadFormData.has('thumbnail')) {
+      uploadFormData.delete('thumbnail');
+    }
+    fetch(recruit.thumbnail)
+      .then((response) => response.blob())
+      .then((blob) => {
+        uploadFormData.append('thumbnail', blob, recruit.thumbnail);
+        setUploadData({ ...uploadData, thumbnail: recruit.thumbnail });
+      })
+      .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
   };
   return { fillPF, fillRecruit };
 };

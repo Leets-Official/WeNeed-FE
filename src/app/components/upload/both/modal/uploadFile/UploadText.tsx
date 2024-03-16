@@ -23,7 +23,8 @@ const UploadText = ({
   const { fileType, announcement, rule } = uploadInfo;
   const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
     useAddText();
-
+  const isShare = fileType === '나누고 싶은 큰 문장';
+  console.log(isShare);
   useEffect(() => {
     if (id) {
       if (id === 'share') {
@@ -76,7 +77,14 @@ const UploadText = ({
               btnClick={
                 !isEdit
                   ? () => handleConfirm(fileType)
-                  : () => updateText(id || '', text)
+                  : () => {
+                      if (isShare) {
+                        console.log(text, '나누고싶은 문장 변경');
+                        setUploadData({ ...uploadData, sharedText: text });
+                      } else {
+                        updateText(id || '', text);
+                      }
+                    }
               }
               btnText={text}
               isWritten={text.trim() === ''}

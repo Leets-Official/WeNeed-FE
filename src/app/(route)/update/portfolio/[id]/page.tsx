@@ -30,7 +30,7 @@ export default async function PortfolioPage({
   }, []);
 
   if (data) {
-    const { user, portfolio } = data;
+    const { user } = data;
     return (
       <section className="flex flex-col items-center min-h-screen bg-black">
         <div className=" w-[1280px] mx-auto ">

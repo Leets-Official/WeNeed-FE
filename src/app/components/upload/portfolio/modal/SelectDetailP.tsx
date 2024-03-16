@@ -70,6 +70,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       skills: skill,
       tags: selectedTags,
     };
+
     uploadFormData.append(
       'request',
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
