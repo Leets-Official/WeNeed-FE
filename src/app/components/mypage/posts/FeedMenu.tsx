@@ -23,7 +23,7 @@ const FeedMenu = ({ sameUser }: FeedMenuProps) => {
     <div className="w-full h-full">
       <div className="w-full border-b relative pl-3 ">
         <div className="w-full flex gap-10 my-4">
-          {sameUser ? (
+          {!sameUser ? (
             <div className="w-[101.64px] h-[23px]">
               <div
                 className={`w-[101.64px] h-[23px] flex justify-center text-base font-semibold text-black cursor-default`}
@@ -38,7 +38,7 @@ const FeedMenu = ({ sameUser }: FeedMenuProps) => {
                 <div
                   className={`w-[101.64px] h-[23px] flex justify-center text-base font-semibold ${
                     menuItem === menu
-                      ? 'text-black cursor-default'
+                      ? 'text-black cursor-pointer transition-all duration-300'
                       : 'text-neutral-400 cursor-pointer hover:text-black transition-all duration-300'
                   }`}
                   onClick={() => handleMenuClick(menuItem)}
