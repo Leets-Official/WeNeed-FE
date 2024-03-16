@@ -1,3 +1,10 @@
+export const INFOBOX_STYLE = {
+  infobox: (type: string) =>
+    type === 'explanation' ? 'py-4 gap-4 flex-col' : 'flex-row h-[40px]',
+  title: (type: string) => (type === 'explanation' ? 'w-full relative' : ''),
+  content: (type: string) => (type === 'explanation' ? 'w-full' : 'text-right'),
+} as const;
+
 export const BUTTON_STYLE = {
   small: (className: string) => `px-2 py-2 ${className}`,
   medium: (className: string) => `px-10 py-10 ${className}`,
