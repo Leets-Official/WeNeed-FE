@@ -18,6 +18,7 @@ const SearchTeam = ({ closeModal }: SearchTeamProps) => {
       ...uploadData,
       teamMembersId: userIds,
     });
+    closeModal && closeModal();
   };
 
   return (

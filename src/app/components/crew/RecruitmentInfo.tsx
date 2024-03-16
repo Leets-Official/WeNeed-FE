@@ -62,7 +62,7 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       case 'keywords':
         return (
-          <div className="flex">
+          <div className="flex text-white">
             {keywords.map((keyword) => (
               <DetailCategories key={keyword} category={keyword} noBg />
             ))}
@@ -70,7 +70,7 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       default:
         return (
-          <div className="flex border-b border-black px-[30px]">
+          <div className="flex border-b border-black px-[30px] ">
             {recruitForm[questionKey as keyof typeof recruitForm]}
           </div>
         );
@@ -82,7 +82,7 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
       {Object.keys(RECRUITMENT_COMPLETE).map((key) => {
         const questionKey = key as keyof RecruitmentComplete;
         return (
-          <div className="flex flex-col gap-[28px] " key={questionKey}>
+          <div className="flex flex-col gap-[28px] w-fit " key={questionKey}>
             <p className="font-semibold">{RECRUITMENT_COMPLETE[questionKey]}</p>
             {renderContent(questionKey)}
           </div>

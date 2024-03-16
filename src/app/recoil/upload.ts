@@ -35,6 +35,7 @@ export const uploadDataState = atom<UploadPFTypes>({
     tags: [],
     teamMembersId: [],
     sharedText: '',
+    thumbnail: '',
   },
 });
 
