@@ -164,3 +164,11 @@ export const getMyInstPortfolio = async (
   const url = `${SERVER_URL}/user/myPage/interesting-portfolios?size=${size}&page=${page}`;
   return await getRequest(url, accessToken);
 };
+
+export const getApplicationsList = async (
+  articleId: string,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/applications/${articleId}`;
+  return await getRequest(url, accessToken);
+};

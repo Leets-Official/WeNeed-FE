@@ -7,7 +7,6 @@ import { appMenuState } from 'recoil/apprecruit';
 const MenuBar = () => {
   const [appMenu, setAppMenuState] = useRecoilState(appMenuState);
   const menuItems = [MENU.ARTICLE, MENU.APPLICATIONS_LIST];
-  console.log('appMenu', appMenu);
   const handleMenuClick = (item: string) => {
     setAppMenuState(item);
   };

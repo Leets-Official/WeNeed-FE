@@ -57,7 +57,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     if (data) {
-      console.log('This is rendering if' + data);
       if ('userNickname' in data) {
         const { userNickname, sameUser, userInfo } =
           data as ResponseMypageBasicInfo;
