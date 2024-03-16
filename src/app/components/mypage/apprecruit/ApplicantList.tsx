@@ -18,6 +18,7 @@ import {
 } from 'recoil/apprecruit';
 import { APPLICANTIONS } from 'constants/apprecruit';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ApplicantListProps {
   applicantsData: ExtendedApplicant[][];
@@ -55,7 +56,8 @@ const ApplicantList = ({ applicantsData, type }: ApplicantListProps) => {
       {applicants.map((applicantRow, index) => (
         <div key={index} className="w-full">
           {applicantRow.map((applicant, i) => (
-            <div
+            <Link
+              href={`/crew/application/${applicant.applicationId}`}
               key={applicant.applicationId}
               className={`flex relative border-black items-center w-full h-[140px] border ${
                 applicant.selected ? ' bg-black' : 'bg-white'
@@ -119,7 +121,7 @@ const ApplicantList = ({ applicantsData, type }: ApplicantListProps) => {
                 />
                 공유하기
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ))}
