@@ -20,6 +20,7 @@ interface DetailMenuBarProps {
   articleId: string;
   recruiting: boolean;
   onRecruit?: boolean;
+  scrollToComments: () => void;
 }
 
 const DetailMenuBar = ({
@@ -29,12 +30,14 @@ const DetailMenuBar = ({
   onRecruit,
   recruiting,
   page,
+  scrollToComments,
 }: DetailMenuBarProps) => {
   const { detailMenuHandlers, hearted, bookmarked } = useMenuHandlers(
     userId,
     articleId,
     page,
     recruiting,
+    scrollToComments,
     user,
   );
 
@@ -42,7 +45,7 @@ const DetailMenuBar = ({
     <div
       className={`flex ${
         onRecruit
-          ? 'flex-col w-[80px] gap-[20px] '
+          ? 'flex-col w-[80px] gap-[10px] '
           : 'w-full mt-[80px] gap-[40px] mb-[80px]'
       }  justify-center items-center`}
     >
@@ -50,10 +53,14 @@ const DetailMenuBar = ({
         return (
           <div
             key={menu}
-            className="flex flex-col justify-center items-center gap-[10px] font-semibold "
+            className={`flex flex-col justify-center items-center gap-[12px] ${
+              onRecruit ? 'text-xs' : 'font-semibold'
+            } `}
           >
             <div
-              className="icon-wrapper flex justify-center items-center w-20 h-20 bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white"
+              className={`icon-wrapper flex justify-center items-center ${
+                onRecruit ? 'w-16 h-16' : 'w-20 h-20'
+              } bg-gradient-to-r from-[#00E0EE] to-[#517EF3] rounded-full cursor-pointer hover:from-white hover:to-white`}
               onClick={detailMenuHandlers[menu]}
             >
               {icon(hearted, bookmarked)}

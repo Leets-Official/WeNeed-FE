@@ -16,7 +16,7 @@ const RecruitingDetailContents = ({
   sharedText,
 }: RecruitingDetailContentsProps) => {
   return (
-    <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden">
+    <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden ">
       {contents.map((content) => {
         switch (content.type) {
           case 'text':
@@ -31,14 +31,13 @@ const RecruitingDetailContents = ({
           case 'link':
           case 'sound':
             return (
-              <div
-                key={content.id}
-                className="bg-black rounded-[10px] flex gap-3 w-full h-auto text-[#00E0EE] font-semibold"
-              >
-                <Icons name={fileMini} />
-                <a href={content.data} target="_blank" rel="noreferrer">
-                  {content.data}
-                </a>
+              <div key={content.id} className="w-full flex justify-start">
+                <div className="bg-black h-[36px] items-center px-[24px] rounded-[10px] flex gap-3 text-[#00E0EE] font-semibold">
+                  <Icons name={fileMini} />
+                  <a href={content.data} target="_blank" rel="noreferrer">
+                    {content.data}
+                  </a>
+                </div>
               </div>
             );
           case 'image':
@@ -63,7 +62,7 @@ const RecruitingDetailContents = ({
         }
       })}
       <div className="flex flex-col items-start justify-center w-full gap-[40px] text-[#00E0EE] font-semibold mt-[39px] ">
-        <div className="flex gap-3 bg-[#3A3A3A] h-[36px] items-center px-3 rounded-[10px]">
+        <div className="flex gap-3 bg-black h-[36px] items-center px-[24px] rounded-[10px]">
           {skills && <Icons name={skillsList} />}
           스킬 -
           {skills.map((skill) => (

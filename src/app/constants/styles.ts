@@ -26,7 +26,7 @@ export const INPUT_STYLE = {
   upload: (className: string) =>
     `w-[40%] h-[30px] text-base text-black outline-none ${className}`,
   upload_recruiter: (className: string) =>
-    `w-full h-12 rounded-lg border-1.5 border-black text-neutral-500 text-sm font-normal px-[31px] mb-[5px] ${className}`,
+    `w-full h-12 rounded-lg border-1.5 border-black text-neutral-500 text-sm font-normal px-[18px] mb-[5px] ${className}`,
 } as const;
 
 export const PROFILE_STYLE = {

@@ -35,7 +35,7 @@ const MemberInfoQ = ({ articleId }: MemberInfoQProps) => {
   if (user) {
     return (
       <div className="font-semibold w-[80%] flex flex-col gap-[20px] bg-white my-[20px] rounded-lg p-[30px]">
-        <h5 className="flex gap-1 mb-[50px] font-semibold">
+        <h5 className="flex gap-1 mb-[18px] font-semibold">
           {REQUIREMENT} 인적사항
         </h5>
         <div className="mb-[20px]">
