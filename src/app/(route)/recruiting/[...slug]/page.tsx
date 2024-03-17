@@ -74,7 +74,7 @@ export default function RecruitingPage({
                 user={data.user}
               />
             </div>
-            <div className="fixed top-[88px] right-[2%] ">
+            <div className="fixed top-[88px] right-[0.6%] ">
               <DetailMenuBar
                 scrollToComments={scrollToComments}
                 articleId={params.slug}

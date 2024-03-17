@@ -30,14 +30,22 @@ const RecruitingContainer = ({
     <>
       <div className="mt-[75px] flex flex-col gap-[50px] w-full text-white">
         {data?.map((article) => {
-          const { nickname, major, grade, createdAt, profile, articleId } =
-            article;
+          const {
+            nickname,
+            major,
+            grade,
+            createdAt,
+            profile,
+            articleId,
+            userId,
+          } = article;
+          console.log(userId);
           return (
             <div className="flex flex-col " key={article.articleId}>
               <div className="cursor-pointer">
                 <div
                   className="mb-[11px]"
-                  onClick={() => router.push(`/mypage/${user.userId}`)}
+                  onClick={() => router.push(`/mypage/${userId}`)}
                 >
                   <Profile
                     writer={{
