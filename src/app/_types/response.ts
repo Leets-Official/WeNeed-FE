@@ -46,7 +46,7 @@ interface ResponseCrewRecruiter {
   recruitForm: RecruitFormFromServer;
   nickname: string;
   sameUser: boolean;
-  userId: string;
+  userId: number;
 }
 
 interface ResponseCrewApplicant {
