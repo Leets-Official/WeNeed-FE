@@ -32,8 +32,8 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
   };
 
   return (
-    <div className="flex flex-col w-[80%] h-[901px] bg-white rounded-lg p-[30px] gap-[20px]">
-      <h5 className="flex gap-1 mb-[50px] font-semibold">{`${user.nickname}님이 궁금한 질문`}</h5>
+    <div className="flex flex-col w-[80%] h-fit bg-white rounded-lg p-[30px] gap-[20px]">
+      <h5 className="flex gap-1 mb-[18px] font-semibold">{`${user.nickname}님이 궁금한 질문`}</h5>
       {crewQuestions.map((question, i) => (
         <div className="w-full" key={question}>
           <div className="flex gap-1">
@@ -63,14 +63,19 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
           className="flex pt-2.5"
         />
       </div>
-      {renderInputField(
-        'aboutMe',
-        APPLICANT_QUESTIONS.aboutMe,
-        '입력해주세요.',
-        applicantData,
-        onChangeInput,
-      )}
-
+      <div className="w-full">
+        <div className={`flex gap-1`}>
+          {REQUIREMENT}
+          {APPLICANT_QUESTIONS.aboutMe}
+        </div>
+        <Input
+          name="aboutMe"
+          type="upload_recruiter"
+          onChange={(e) => onChangeInput(e)}
+          textValue={applicantData.aboutMe}
+          placeholder="입력해주세요."
+        />
+      </div>
       <div>
         <div className="flex gap-1 ">
           {REQUIREMENT}

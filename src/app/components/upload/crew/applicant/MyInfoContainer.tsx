@@ -39,7 +39,6 @@ const MyInfoContainer = ({ user }: MyInfoContainerProps) => {
         }));
         break;
       default:
-        break;
     }
   };
 
@@ -60,8 +59,8 @@ const MyInfoContainer = ({ user }: MyInfoContainerProps) => {
 
   if (user)
     return (
-      <div className="flex flex-col w-[80%] h-[896px] bg-white rounded-lg p-[30px] gap-[20px]">
-        <h5 className="flex gap-1 mb-[50px] font-semibold">인적사항</h5>
+      <div className="flex flex-col w-[80%] h-fit bg-white rounded-lg p-[30px] gap-[20px]">
+        <h5 className="flex gap-1 mb-[18px] font-semibold">인적사항</h5>
         <div className="mb-[20px]">
           <p className="mb-[15px]">작성자</p>
           <Profile writer={user} size="large" date="" />

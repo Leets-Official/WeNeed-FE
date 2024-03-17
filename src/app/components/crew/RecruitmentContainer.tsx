@@ -33,7 +33,7 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
         <div className="absolute top-0 w-full max-w-[1280px]">
           <Header nickname={nickname || ''} userId={Number(userId) || -1} />
         </div>
-        <div className="w-[80%] h-[1274px] bg-white rounded-lg px-[39px] py-[43px]">
+        <div className="w-[80%] h-fit bg-white rounded-lg px-[39px] py-[43px]">
           <Profile
             writer={recruitUser}
             size="large"
