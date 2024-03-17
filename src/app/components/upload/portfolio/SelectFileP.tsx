@@ -15,8 +15,8 @@ const SelectFileP = () => {
         className="flex items-center justify-center w-[1206px] h-[66px] gap-x-[10px] cursor-pointer border border-dashed border-neutral-400"
       >
         <Icons name={selectFileIcon} />
+        <p className="text-lg font-bold text-black mt-0.5">미디어 추가하기</p>
         <div onClick={handleModalClick}>
-          <p className="text-lg font-bold text-black">미디어 추가하기</p>
           {isOpen && (
             <MiniFileTypeContainer
               fileTypeList={FILE_TYPE_LIST}
