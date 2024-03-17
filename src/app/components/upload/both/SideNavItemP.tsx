@@ -18,7 +18,6 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
 
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
-  console.log(files);
 
   const fileNames: FileDetail[] = files.map((file) => {
     return {
@@ -30,6 +29,8 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const startPreview = () => {
     if (label === '미리보기') {
       previewAlert();
+      openModal();
+    } else if (label === '팀원 추가') {
       openModal();
     } else if (uploadFormData.has('thumbnail')) {
       openModal();

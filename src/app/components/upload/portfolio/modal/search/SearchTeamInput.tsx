@@ -58,14 +58,14 @@ const SearchTeamInput = () => {
     <div>
       <ToastContainer />
       <div className="flex w-[842px] h-[64.5px] rounded-[9px] border border-zinc-300 items-center overflow-y-auto">
-        <div className="flex items-center gap-x-[15px] flex-wrap w-[680px] ml-[110px]">
+        <div className="flex items-center gap-x-[15px] flex-wrap w-[740px] ml-10">
           <SelectedNames
             selectedUsers={selectedUsers}
             setSelectedUsers={setSelectedUsers}
           />
           <Input
             type={'upload'}
-            className=""
+            className="w-[auto]"
             placeholder="함께한 팀원의 이름을 검색해보세요."
             textValue={searchText}
             onChange={handleChange}

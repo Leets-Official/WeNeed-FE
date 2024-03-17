@@ -30,7 +30,7 @@ const SearchTeam = ({ closeModal }: SearchTeamProps) => {
         >
           <Icons name={closeIcon} className="cursor-pointer" />
         </div>
-        <div className="flex flex-col gap-y-[26px] text-lg font-semibold ml-[40px]">
+        <div className="flex flex-col gap-y-[26px] text-lg font-semibold ml-8">
           <p>팀원 추가하기</p>
           <SearchTeamInput />
         </div>
