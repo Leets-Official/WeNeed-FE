@@ -6,7 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { textState, uploadDataState } from 'recoil/upload';
+import { filestate, textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from './DndText';
 import DndLink from './DndLink';
@@ -26,10 +26,12 @@ interface DndContainerProps {
 const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [files, setFiles] = useRecoilState(filestate);
   const [enabled, setEnabled] = useState(false);
   const [isEditFile, setIsEditFile] = useState(false);
   const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
+  console.log(files);
 
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
@@ -135,7 +137,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
         className=" relative cursor-pointer"
       >
         <div className={isEditFile ? 'blur-[2px] brightness-30' : ''}>
-          {articleType === 'portfolio' && <Attatched />}
+          {files.length !== 0 && <Attatched />}
         </div>
         {isEditFile && (
           <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 ">
