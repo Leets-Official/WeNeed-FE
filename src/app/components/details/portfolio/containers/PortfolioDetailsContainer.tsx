@@ -38,6 +38,7 @@ const PortfolioDetailsContainer = ({
     skills,
   } = portfolio;
   const { bookmarked, hearted } = user;
+  console.log(teamMembers);
   return (
     <div
       className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
@@ -47,6 +48,7 @@ const PortfolioDetailsContainer = ({
       {thumbnail ? (
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
+            priority
             src={thumbnail}
             fill={true}
             alt="thumbnail"

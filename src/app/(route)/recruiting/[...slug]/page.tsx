@@ -36,11 +36,11 @@ export default function RecruitingPage({
       bookmarkCount,
       recruiting,
     } = data.recruit;
-    const { bookmarked, hearted } = data.user;
+    const { bookmarked, hearted, nickname, userId } = data.user;
     return (
       <section className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
         <div className="  w-[80%]  max-w-[1290px] ">
-          <Header nickname={data.user.nickname} userId={data.user.userId} />
+          <Header nickname={nickname} userId={userId} />
           <div className="my-[40px]">
             <Profile
               writer={writer}
@@ -66,7 +66,7 @@ export default function RecruitingPage({
               <DetailMenuBar
                 articleId={params.slug}
                 user={data.user}
-                userId={data.user.userId}
+                userId={userId}
                 onRecruit
                 recruiting={recruiting}
                 page="recruiting"

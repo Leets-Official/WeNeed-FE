@@ -25,6 +25,7 @@ const RecruitingContainer = ({
 }: RecruitingContainerProps) => {
   const { setTarget } = useIntersection({ onIntersect });
   const router = useRouter();
+  console.log(user);
 
   return (
     <>
@@ -37,7 +38,7 @@ const RecruitingContainer = ({
               <div className="cursor-pointer">
                 <div
                   className="mb-[11px]"
-                  onClick={() => router.push(`mypage/${user.userId}`)}
+                  onClick={() => router.push(`/mypage/${user.userId}`)}
                 >
                   <Profile
                     writer={{
