@@ -51,6 +51,12 @@ export const imgAndVideo = {
   className: 'w-[118px] h-[118px] object-cover rounded-[9px]',
 };
 
+export const thumbnail = {
+  width: 450,
+  height: 100,
+  className: 'w-[450px] h-[100px] object-cover rounded-[9px]',
+};
+
 interface TransType {
   [key: string]: string;
 }
