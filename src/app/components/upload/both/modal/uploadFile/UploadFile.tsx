@@ -33,11 +33,10 @@ const UploadFile = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
-        <div
-          onClick={closeModal}
-          className="flex flex-row-reverse mt-[15px] mr-[15px]"
-        >
-          <Icons name={closeIcon} className="cursor-pointer" />
+        <div className="flex flex-row-reverse mt-[15px] mr-[15px]">
+          <div onClick={closeModal}>
+            <Icons name={closeIcon} className="cursor-pointer" />
+          </div>
         </div>
         <div className="px-[40px]">
           <div className="text-black text-lg font-bold">{fileType}</div>
@@ -97,16 +96,18 @@ const UploadFile = ({
               accept={accept}
             />
           </div>
-          <div onClick={closeModal} className="flex flex-row-reverse mt-[14px]">
-            <ConfirmButton
-              isWritten={fileInfo.name === ''}
-              btnClick={
-                !isEdit
-                  ? () => handleConfirm(fileType)
-                  : () => updateFile(id || '', fileType)
-              }
-              btnText={fileInfo.name}
-            />
+          <div className="flex flex-row-reverse mt-[14px]">
+            <div onClick={closeModal}>
+              <ConfirmButton
+                isWritten={fileInfo.name === ''}
+                btnClick={
+                  !isEdit
+                    ? () => handleConfirm(fileType)
+                    : () => updateFile(id || '', fileType)
+                }
+                btnText={fileInfo.name}
+              />
+            </div>
           </div>
         </div>
       </div>
