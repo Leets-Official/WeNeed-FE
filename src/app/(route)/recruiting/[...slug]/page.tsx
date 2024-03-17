@@ -5,7 +5,7 @@ import DetailMenuBar from 'components/details/portfolio/DetailMenuBar';
 import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function RecruitingPage({
   params,
@@ -13,6 +13,7 @@ export default function RecruitingPage({
   params: { slug: string };
 }) {
   const [data, setData] = useState<ResponseRecruitingDetail | null>(null);
+  const commentsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +27,15 @@ export default function RecruitingPage({
 
     fetchData();
   }, []);
+
+  const scrollToComments = () => {
+    if (commentsRef.current) {
+      commentsRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
 
   if (data) {
     const {
@@ -56,14 +66,17 @@ export default function RecruitingPage({
               user={data.user}
               articleId={params.slug}
             />
-            <CommentsContainer
-              comments={data.comments}
-              onRecruit
-              articleId={params.slug}
-              user={data.user}
-            />
-            <div className="fixed top-[105px] right-[2%] ">
+            <div ref={commentsRef} className="w-full">
+              <CommentsContainer
+                comments={data.comments}
+                onRecruit
+                articleId={params.slug}
+                user={data.user}
+              />
+            </div>
+            <div className="fixed top-[88px] right-[2%] ">
               <DetailMenuBar
+                scrollToComments={scrollToComments}
                 articleId={params.slug}
                 user={data.user}
                 userId={userId}

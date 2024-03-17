@@ -25,12 +25,11 @@ const RecruitingContainer = ({
 }: RecruitingContainerProps) => {
   const { setTarget } = useIntersection({ onIntersect });
   const router = useRouter();
-  console.log(user);
 
   return (
     <>
       <div className="mt-[75px] flex flex-col gap-[50px] w-full text-white">
-        {data.map((article) => {
+        {data?.map((article) => {
           const { nickname, major, grade, createdAt, profile, articleId } =
             article;
           return (
