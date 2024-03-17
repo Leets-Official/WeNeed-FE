@@ -5,6 +5,7 @@ import DetailCategories from 'components/main/common/DetailCategories';
 import RecruitmentInfo from './RecruitmentInfo';
 import { useEffect, useState } from 'react';
 import Header from 'components/layout/Header';
+import CrewSubmission from 'components/upload/crew/recruiter/CrewSubmission';
 
 interface RecruitmentContainerProps {
   articleId: string;
@@ -26,15 +27,15 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
   }, [articleId]);
 
   if (data) {
-    const { recruitUser, article, recruitForm } = data;
+    const { recruitUser, article, recruitForm, sameUser } = data;
     const { nickname, userId } = data.loggedInUser;
     const { viewCount, heartCount, bookmarkCount } = article;
     return (
       <>
-        <div className="absolute top-0 w-full max-w-[1280px]">
+        <div className="absolute top-0 w-full max-w-[1280px] ">
           <Header nickname={nickname || ''} userId={Number(userId) || -1} />
         </div>
-        <div className="w-[80%] h-fit bg-white rounded-lg px-[39px] py-[43px]">
+        <div className="w-[80%] h-fit bg-white rounded-lg px-[39px] py-[43px] mb-[150px]">
           <Profile
             writer={recruitUser}
             size="large"
@@ -48,6 +49,13 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
             ))}
           </div>
           <RecruitmentInfo recruitForm={recruitForm} />
+          {!sameUser && (
+            <CrewSubmission
+              articleId={articleId}
+              text="지원서 작성하러 가기"
+              type="routerApplicant"
+            />
+          )}
         </div>
       </>
     );
