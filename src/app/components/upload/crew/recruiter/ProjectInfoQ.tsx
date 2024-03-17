@@ -2,28 +2,16 @@
 
 import Input from 'components/common/Input';
 import useInputChange from 'hooks/upload/useInputChange';
-import DetailCategories from 'components/main/common/DetailCategories';
-import { DetailCategoriesContainer } from 'components/main/containers';
 import { RECRUITER_QUESTIONS } from 'constants/crew';
 import { QUESTIONS_BOX_STYLE } from 'constants/styles';
-import { useSetRecoilState } from 'recoil';
-import { postRecruiterState } from 'recoil/crew';
 
 export const REQUIREMENT = (
   <div className={QUESTIONS_BOX_STYLE.requirement()}>*</div>
 );
 
 const ProjectInfoQ = () => {
-  const setRecruiterData = useSetRecoilState(postRecruiterState);
-  const { onChangeDate, onChangeInput, onSelectKeyword, recruiterData } =
+  const { onChangeDate, onChangeInput, recruiterData } =
     useInputChange('recruiter');
-
-  const onRemoveCategory = (tag: string) => {
-    setRecruiterData((prev) => ({
-      ...prev,
-      detailTags: recruiterData.detailTags.filter((cat) => cat !== tag),
-    }));
-  };
 
   return (
     <div className="font-semibold w-[80%] flex flex-col gap-[20px]">

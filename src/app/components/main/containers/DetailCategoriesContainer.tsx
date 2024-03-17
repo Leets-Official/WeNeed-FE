@@ -3,12 +3,12 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { bigLeftAngle } from 'ui/IconsPath';
 import Icons from 'components/common/Icons';
+import DetailCategories from '../common/DetailCategories';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import { selectedCategories } from 'recoil/main';
 import { useRecoilState } from 'recoil';
-import DetailCategories from '../common/DetailCategories';
+import { bigLeftAngle } from 'ui/IconsPath';
 
 interface DetailCategoriesContainerProps {
   selected?: boolean;
@@ -25,6 +25,12 @@ const DetailCategoriesContainer = ({
 
   const onRemoveAllCategories = () => {
     setSelectedCategories([]);
+  };
+
+  const onRemoveSelectedCategories = (cat: string) => {
+    setSelectedCategories((prev) =>
+      prev.filter((selected) => cat !== selected),
+    );
   };
 
   const settings = {
@@ -63,7 +69,12 @@ const DetailCategoriesContainer = ({
               </div>
             ))
           : selectedCategoriesValue.map((category) => (
-              <DetailCategories key={category} category={category} selected />
+              <DetailCategories
+                key={category}
+                category={category}
+                selected
+                onClick={() => onRemoveSelectedCategories(category)}
+              />
             ))}
       </Slider>
     </div>
