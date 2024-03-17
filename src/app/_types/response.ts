@@ -44,9 +44,8 @@ interface ResponseCrewRecruiter {
   recruitUser: WriterProfile;
   article: RecruitFormArticle;
   recruitForm: RecruitFormFromServer;
-  nickname: string;
+  loggedInUser: WriterProfile;
   sameUser: boolean;
-  userId: string;
 }
 
 interface ResponseCrewApplicant {

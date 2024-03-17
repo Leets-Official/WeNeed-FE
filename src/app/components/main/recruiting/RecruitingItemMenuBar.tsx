@@ -2,6 +2,7 @@
 
 import Icons from 'components/common/Icons';
 import useMenuHandlers from 'hooks/details/useMenuHandlers';
+import { useRouter } from 'next/navigation';
 import {
   bookmarkGray,
   commentGray,
@@ -22,6 +23,10 @@ const RecruitingItemMenuBar = ({
   user,
   page,
 }: RecruitingItemInfoProps) => {
+  const router = useRouter();
+  const scrollToComments = () => {
+    router.push(`/recruiting/${article.articleId}`);
+  };
   const {
     detailMenuHandlers,
     heartCount: heart,
@@ -31,6 +36,7 @@ const RecruitingItemMenuBar = ({
     String(article.articleId),
     page,
     article.recruiting,
+    scrollToComments,
   );
 
   const menuItems = [

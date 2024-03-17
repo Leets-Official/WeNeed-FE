@@ -54,7 +54,6 @@ export default function MainRecruitingPage() {
       setPage((prevPage) => prevPage + 1);
     }
   };
-  console.log(data);
 
   const onClickItem = (userId: number, articleId: number) => {
     if (userId == -1) {
