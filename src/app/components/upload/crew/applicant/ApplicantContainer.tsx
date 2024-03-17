@@ -24,10 +24,10 @@ const ApplicantContainer = ({ articleId }: ApplicantContainerProps) => {
   }, [articleId]);
 
   if (data) {
-    const { recruitForm, recruitUser } = data;
+    const { recruitForm, recruitUser, loggedInUser } = data;
     return (
       <div className="flex flex-col justify-center items-center w-full gap-[20px]">
-        <MyInfoContainer user={recruitUser} />
+        <MyInfoContainer user={loggedInUser} />
         <MyAnswerContainer
           user={recruitUser}
           crewQuestions={recruitForm.crewQuestions}

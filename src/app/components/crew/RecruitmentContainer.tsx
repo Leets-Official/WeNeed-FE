@@ -26,7 +26,8 @@ const RecruitmentContainer = ({ articleId }: RecruitmentContainerProps) => {
   }, [articleId]);
 
   if (data) {
-    const { recruitUser, article, recruitForm, nickname, userId } = data;
+    const { recruitUser, article, recruitForm } = data;
+    const { nickname, userId } = data.loggedInUser;
     const { viewCount, heartCount, bookmarkCount } = article;
     return (
       <>
