@@ -28,9 +28,7 @@ const SearchTeamInput = () => {
         { cache: 'no-store' },
       );
       const data = await res.json();
-      if (data.length > 0) {
-        setRelatedUsers(data);
-      }
+      setRelatedUsers(data);
     }
   };
 
@@ -76,7 +74,7 @@ const SearchTeamInput = () => {
               <div
                 key={user.userId}
                 className="flex items-center w-[840px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
-                onClick={() => handleSelect(user)}
+                onMouseLeave={() => handleSelect(user)}
               >
                 {user.profileImage ? (
                   <Image
