@@ -32,7 +32,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
-  console.log(isEdit, 'isEdit값');
 
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
@@ -44,7 +43,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
-  console.log(reqPath);
 
   const handleConfirm = async () => {
     uploadFormData.delete('request');
@@ -56,7 +54,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     });
 
     blobFiles.forEach((file) => {
-      console.log('다음 파일 업로드', file);
       uploadFormData.append('files', file.file, file.filename);
     });
     setUploadData({
@@ -134,7 +131,10 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
             onSelect={(tags) => setSelectedTags(tags)}
           />
           <div className="w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 flex items-center place-content-between">
-            <p>스킬</p>
+            <div className="flex gap-x-[2px]">
+              <p>스킬</p>
+              <p className="text-red-400">*</p>
+            </div>
             <div className="flex flex-reverse-row w-auto items-center">
               <input
                 className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none"
