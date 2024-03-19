@@ -5,14 +5,14 @@ import GoogleLoginButton from 'components/login/GoogleLoginButton';
 
 const NeedLoginModal = () => {
   return (
-    <div className="flex flex-col bg-white rounded-2xl w-[922px] h-[370px] mb-[30px] justify-center items-center">
-      <div className="flex justify-center w-full text-center">
+    <div className="z-50 flex flex-col bg-white rounded-2xl w-[922px] h-[370px] gap-[20px] items-center py-[80px]">
+      <div className="flex justify-center ">
         <Icons name={weneedLarge} />
-        <div className="py-2 ml-2 font-bold text-[30px]">
+        <div className="py-2 ml-2 font-bold text-[30px] ">
           {NEED_LOGIN_MODAL.title}
         </div>
       </div>
-      <div className="font-bold text-lg mb-[66px]">
+      <div className="font-bold text-lg mb-[50px]">
         {NEED_LOGIN_MODAL.sub_title}
       </div>
       <GoogleLoginButton />

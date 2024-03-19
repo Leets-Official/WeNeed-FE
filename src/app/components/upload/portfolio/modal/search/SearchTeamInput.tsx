@@ -1,12 +1,16 @@
 'use client';
 import { useState } from 'react';
 import { searchTeamIcon } from 'ui/IconsPath';
+import GradientProfileSM from 'ui/gradient/GradientProfileSM';
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
 import Input from 'components/common/Input';
 import SelectedNames from './SelectedNames';
 import { useRecoilState } from 'recoil';
 import { userId } from 'recoil/upload';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { exceedAlert, overlapAlert } from 'components/upload/both/showToast';
 
 const SearchTeamInput = () => {
   const [searchText, setSearchText] = useState('');
@@ -24,20 +28,35 @@ const SearchTeamInput = () => {
   };
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(() => event.target.value);
-    const relatedUsers = await searchUser(searchText);
-    if (relatedUsers) {
-      setRelatedUsers(relatedUsers);
+    const searchText = event.target.value;
+    setSearchText(searchText);
+    if (searchText !== '') {
+      const relatedUsers = await searchUser(searchText);
+      if (relatedUsers) {
+        setRelatedUsers(relatedUsers);
+      }
     }
   };
 
   const handleSelect = (user: UserInfo) => {
-    setSelectedUsers((prevUsers) => [...prevUsers, user]);
-    setUserIds((prevUserId) => [...prevUserId, user.userId]);
+    const isAlreadySelected = selectedUsers.some(
+      (selectedUser) => selectedUser.userId === user.userId,
+    );
+    if (selectedUsers.length >= 2) {
+      exceedAlert();
+    } else if (isAlreadySelected) {
+      overlapAlert();
+    } else {
+      setSelectedUsers((prevUsers) => [...prevUsers, user]);
+      setUserIds((prevUserId) => [...prevUserId, user.userId]);
+    }
+    setSearchText('');
+    setRelatedUsers([]);
   };
 
   return (
     <div>
+      <ToastContainer />
       <div className="flex w-[842px] h-[64.5px] rounded-[9px] border border-zinc-300 items-center overflow-y-auto">
         <div className="flex items-center gap-x-[15px] flex-wrap w-[680px] ml-[110px]">
           <SelectedNames
@@ -63,13 +82,18 @@ const SearchTeamInput = () => {
                 className="flex items-center w-[797px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
                 onClick={() => handleSelect(user)}
               >
-                <Image
-                  src={user.profileImage}
-                  alt="프로필사진"
-                  width="24"
-                  height="24"
-                  className="rounded-full"
-                />
+                {user.profileImage ? (
+                  <Image
+                    src={user.profileImage}
+                    alt="프로필사진"
+                    width="24"
+                    height="24"
+                    className="rounded-full"
+                  />
+                ) : (
+                  <GradientProfileSM />
+                )}
+
                 <div className="text-base font-semibold">{user.nickname}</div>
               </div>
             ))}

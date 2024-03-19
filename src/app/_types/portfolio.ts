@@ -75,7 +75,7 @@ interface WriterProfile {
 }
 
 interface Content {
-  id: number;
+  id: string;
   type: 'text' | 'image' | 'link' | 'sound';
   data: string;
 }
@@ -86,6 +86,11 @@ interface TeamMember {
   profile: string;
 }
 
+interface FileDetail {
+  fileName: string;
+  fileUrl: string;
+}
+
 interface PortfolioDetails {
   thumbnail: string;
   title: string;
@@ -94,12 +99,12 @@ interface PortfolioDetails {
   viewCount: number;
   bookmarkCount: number;
   tags: string[];
-  links: string[];
-  files: string[];
+  files: FileDetail[];
   skills: string[];
   writer: WriterProfile;
   contents: Array<Content>;
   teamMembers: teamMember[];
+  recruiting: boolean;
 }
 
 interface teamMember {
@@ -120,7 +125,6 @@ interface CommentList extends WriterProfile {
   content: string;
   createdAt: string;
   children?: CommentList[];
-  nickname?: string;
 }
 
 interface RecommentList extends CommentList {

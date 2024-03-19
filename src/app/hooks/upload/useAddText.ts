@@ -1,3 +1,4 @@
+import { editAlert } from 'components/upload/both/showToast';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { textState, uploadDataState, orderState } from 'recoil/upload';
@@ -13,17 +14,32 @@ const useAddText = () => {
     setIsEditing(true);
   };
 
-  const addText = (type: string) => {
-    setItems((prevData) => [
-      ...prevData,
+  const updateText = (id: string, content: string) => {
+    setItems((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, data: content } : item,
+      ),
+    );
+    setUploadData({ ...uploadData, content: items });
+    editAlert();
+  };
+
+  const addText = (type: 'text' | 'image' | 'link' | 'sound') => {
+    const updatedItems = [
+      ...items,
       {
         id: String(orderId),
         type: type,
         data: text,
       },
-    ]);
+    ];
+    setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
     setOrderId(orderId + 1);
-    setUploadData({ ...uploadData, content: items });
+  };
+
+  const addShare = () => {
+    setUploadData({ ...uploadData, sharedText: text });
   };
 
   const handleConfirm = (fileType: string) => {
@@ -34,11 +50,20 @@ const useAddText = () => {
     } else if (fileType === '음성') {
       addText('sound');
     } else {
-      console.log('기타 파일을 처리합니다.');
+      addShare();
+      console.log('나누고 싶은 문장 추가', text);
     }
   };
 
-  return { text, setText, addText, handleConfirm, isEditing, startEdit };
+  return {
+    text,
+    setText,
+    addText,
+    handleConfirm,
+    isEditing,
+    startEdit,
+    updateText,
+  };
 };
 
 export default useAddText;

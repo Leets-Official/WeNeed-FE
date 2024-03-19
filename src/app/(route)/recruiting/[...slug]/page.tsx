@@ -5,7 +5,7 @@ import DetailMenuBar from 'components/details/portfolio/DetailMenuBar';
 import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function RecruitingPage({
   params,
@@ -13,6 +13,7 @@ export default function RecruitingPage({
   params: { slug: string };
 }) {
   const [data, setData] = useState<ResponseRecruitingDetail | null>(null);
+  const commentsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,14 +28,29 @@ export default function RecruitingPage({
     fetchData();
   }, []);
 
+  const scrollToComments = () => {
+    if (commentsRef.current) {
+      commentsRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   if (data) {
-    const { writer, createdAt, viewCount, heartCount, bookmarkCount } =
-      data.recruit;
-    const { bookmarked, hearted } = data.user;
+    const {
+      writer,
+      createdAt,
+      viewCount,
+      heartCount,
+      bookmarkCount,
+      recruiting,
+    } = data.recruit;
+    const { bookmarked, hearted, nickname, userId } = data.user;
     return (
       <section className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
         <div className="  w-[80%]  max-w-[1290px] ">
-          <Header nickname={data.user.nickname} userId={data.user.userId} />
+          <Header nickname={nickname} userId={userId} />
           <div className="my-[40px]">
             <Profile
               writer={writer}
@@ -50,18 +66,23 @@ export default function RecruitingPage({
               user={data.user}
               articleId={params.slug}
             />
-            <CommentsContainer
-              comments={data.comments}
-              onRecruit
-              articleId={params.slug}
-              user={data.user}
-            />
-            <div className="fixed top-[105px] right-[2%] ">
-              <DetailMenuBar
+            <div ref={commentsRef} className="w-full">
+              <CommentsContainer
+                comments={data.comments}
+                onRecruit
                 articleId={params.slug}
                 user={data.user}
-                userId={data.user.userId}
+              />
+            </div>
+            <div className="fixed top-[88px] right-[0.6%] ">
+              <DetailMenuBar
+                scrollToComments={scrollToComments}
+                articleId={params.slug}
+                user={data.user}
+                userId={userId}
                 onRecruit
+                recruiting={recruiting}
+                page="recruiting"
               />
             </div>
           </div>

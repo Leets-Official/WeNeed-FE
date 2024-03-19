@@ -41,22 +41,39 @@ interface ResponseUploadSearch {
 }
 
 interface ResponseCrewRecruiter {
-  user: WriterProfile;
+  recruitUser: WriterProfile;
   article: RecruitFormArticle;
   recruitForm: RecruitFormFromServer;
+  loggedInUser: WriterProfile;
+  sameUser: boolean;
 }
 
 interface ResponseCrewApplicant {
-  name: string;
-  major: string;
-  doubleMajor?: string;
-  international: boolean;
-  grade: string;
-  status: string;
-  phone: string;
-  available_time: string;
-  about_me: string;
-  appeal: string[];
-  content: string;
-  keywords: string[];
+  user: WriterProfile;
+  applicationForm: ApplicationFormResponse;
+  sameUser: boolean;
+  nickname: string;
+}
+
+interface ResponseMypageBasicInfo {
+  userNickname: string;
+  sameUser: boolean;
+  userInfo: MypageUserInfo;
+  myOutputList: MyOutputList[];
+  pageableDto: Pageable;
+}
+
+interface ResponseMypageMycrew {
+  recruitData: ResponseMypageOtherInfo;
+  appliedData: ResponseMyApplicationCrew;
+}
+
+interface ResponseMyApplicationCrew {
+  applicationInfoResponses: MyOutputList[];
+  pageableDto: Pageable;
+}
+
+interface ResponseMypageOtherInfo {
+  myOutputList: MyOutputList[];
+  pageableDto: Pageable;
 }

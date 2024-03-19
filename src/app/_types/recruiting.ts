@@ -1,5 +1,6 @@
 interface RecruitListItem {
   articleId: number;
+  userId: number;
   profile: string;
   nickname: string;
   major: string;
@@ -12,10 +13,13 @@ interface RecruitListItem {
   viewCount: number;
   heartCount: number;
   bookmarkCount: number;
+  sharedText: string;
+  recruiting: boolean;
 }
 
 interface RecruitDetailItem extends PortfolioDetails {
   commentCount: number;
+  sharedText: string;
   teamMembers: TeamMember[];
 }
 
@@ -51,12 +55,29 @@ interface RecruitFormFromServer {
   keywords: string[];
 }
 
-interface ApplicationForm {
+interface ApplicationFormResponse {
+  [key: string]: string | string[];
   name: string;
   major: string;
   doubleMajor: string;
-  international: boolean;
-  grade: number;
+  grade: string;
+  status: string;
+  phone: string;
+  aboutMe: string;
+  content: string;
+  keywords: string[];
+  detailTags: string[];
+  crewAnswers: string[];
+  crewQuestions: string[];
+}
+
+interface ApplicationForm {
+  [key: string]: string | string[];
+  name: string;
+  major: string;
+  doubleMajor: string;
+  // international: boolean;
+  grade: string;
   status: string;
   phone: string;
   aboutMe: string;

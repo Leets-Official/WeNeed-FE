@@ -18,7 +18,7 @@ interface ThumbnailTypes {
 }
 
 interface DndTextTypes {
-  type: string;
+  type: 'text' | 'image' | 'link' | 'sound';
   data: string;
   id: string;
   url?: string;
@@ -46,17 +46,12 @@ interface ContentTypes {
 interface UploadPFTypes {
   articleType: string;
   title: string;
-  content: ContentTypes[];
+  content: Content[];
   skills: string[];
   tags: string[];
   teamMembersId: number[];
-}
-interface UploadRecruitTypes {
-  articleType: string;
-  title: string;
-  content: ContentTypes[];
-  skills: string[];
-  tags: string[];
+  sharedText?: string;
+  thumbnail?: string;
 }
 
 interface RecruitmentComplete {
@@ -69,3 +64,34 @@ interface RecruitmentComplete {
   content: string;
   keywords: string;
 }
+
+interface ApplicationComplete {
+  name: (arg: string) => string;
+  major: (arg: string) => string;
+  grade: (arg: string) => string;
+  status: (arg: string) => string;
+  phone: (arg: string) => string;
+  aboutMe: (arg: string) => string;
+  content: (arg: string) => string;
+  keywords: (arg: string) => string;
+}
+
+interface BlobImages {
+  id: string;
+  blob: Blob;
+  filename: string;
+}
+
+interface BlobFiles {
+  id: string;
+  file: File;
+  filename: string;
+}
+
+interface SideNavItemProps {
+  iconInfo: IconPathTypes;
+  label: string;
+  isEdit?: boolean;
+  id?: string;
+}
+type NavComponent = Record<string, JSX.Element>;

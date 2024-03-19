@@ -11,7 +11,7 @@ interface ProfileProps {
   date?: string;
   onComment?: boolean;
   count?: number[];
-  noBg?: boolean;
+  gradient?: boolean;
   user?: {
     bookmarked: boolean;
     hearted: boolean;
@@ -24,7 +24,7 @@ const Profile = ({
   date,
   count,
   onComment,
-  noBg,
+  gradient,
   size,
 }: ProfileProps) => {
   const { writerNickname, major, profile, grade } = writer;
@@ -60,7 +60,7 @@ const Profile = ({
           </div>
         </div>
       </div>
-      {count && <Counts count={count} noBg />}
+      {count && <Counts count={count} gradient />}
     </div>
   );
 };

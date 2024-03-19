@@ -1,18 +1,26 @@
 'use client';
 
-import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import { useState } from 'react';
-import { useRecoilState } from 'recoil';
-import { selectedSortType } from 'recoil/main';
 import PortfolioItemNav from '../portfolio/PortfolioItemNav';
 import PortfolioItem from '../portfolio/PortfolioItem';
-import Link from 'next/link';
+import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
+import { MouseEventHandler, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { selectedSortType } from 'recoil/main';
 
 interface PortfolioContainerProps {
   data: PortfolioArticle[];
+  user: UserProfile;
+  onClickItem: (
+    userId: number,
+    articleId: number,
+  ) => MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const PortfolioContainer = ({ data }: PortfolioContainerProps) => {
+const PortfolioContainer = ({
+  data,
+  user,
+  onClickItem,
+}: PortfolioContainerProps) => {
   const [openSortModal, setOpenSortModal] = useState<boolean>(false);
   const [selectedSortTypeValue, setSelectedSortType] =
     useRecoilState(selectedSortType);
@@ -36,12 +44,12 @@ const PortfolioContainer = ({ data }: PortfolioContainerProps) => {
         />
         <div className="flex gap-[32px] flex-wrap">
           {data.map((article) => (
-            <Link
-              href={`/portfolio/${article.articleId}`}
+            <div
               key={article.articleId}
+              onClick={() => onClickItem(user.userId, article.articleId)}
             >
               <PortfolioItem article={article} />
-            </Link>
+            </div>
           ))}
         </div>
       </div>

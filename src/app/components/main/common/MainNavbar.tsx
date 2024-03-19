@@ -7,7 +7,12 @@ import { useState } from 'react';
 import { hamburger, write } from 'ui/IconsPath';
 import { usePathname, useRouter } from 'next/navigation';
 
-const MainNavbar = () => {
+interface MainNavbarProps {
+  nickname?: string;
+  userId?: number;
+}
+
+const MainNavbar = ({ nickname, userId }: MainNavbarProps) => {
   const [openCategoriesBox, setOpenCategoriesBox] = useState<boolean>(false);
   const pathName = usePathname();
   const router = useRouter();
@@ -17,7 +22,15 @@ const MainNavbar = () => {
   };
 
   const onLinkHandler = () => {
-    router.push(`/upload/${pathName.split('/')[2]}`);
+    if (Number(userId) === -1) {
+      router.push('/login');
+    } else {
+      router.push(
+        `/upload/${
+          pathName.split('/')[2]
+        }?nickname=${nickname}&userId=${userId}`,
+      );
+    }
   };
   return (
     <div className="relative w-full max-w-[1162px]">

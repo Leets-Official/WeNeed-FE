@@ -4,29 +4,61 @@ import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { uploadDataState, uploadForm } from 'recoil/upload';
+import {
+  fileBlobState,
+  imageBlobState,
+  uploadDataState,
+  uploadForm,
+} from 'recoil/upload';
+import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
+import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
 
 interface SelectDetailProps {
   closeModal?: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
+const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [title, setTitle] = useState('');
   const [skill, setSkill] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
+  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
+  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  console.log(isEdit, 'isEdit값');
+
+  const reqPath = isEdit
+    ? `api/update/portfolio?articleId=${id}`
+    : 'api/upload/portfolio';
+  const apiMode = isEdit ? 'PATCH' : 'POST';
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
+  console.log(reqPath);
 
   const handleConfirm = async () => {
+    uploadFormData.delete('request');
+    uploadFormData.delete('files');
+    uploadFormData.delete('images');
+    setLoading(true);
+    images.forEach((image) => {
+      uploadFormData.append('images', image.blob, image.filename);
+    });
+
+    blobFiles.forEach((file) => {
+      console.log('다음 파일 업로드', file);
+      uploadFormData.append('files', file.file, file.filename);
+    });
     setUploadData({
       ...uploadData,
       title: title,
@@ -46,29 +78,30 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
       new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
     );
 
-    for (const key of uploadFormData.keys()) {
-      console.log(
-        'api보내기 전 폼데이터 현황',
-        key,
-        ':',
-        uploadFormData.get(key),
-      );
-    }
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio`,
-        {
-          method: 'POST',
-          body: uploadFormData,
-        },
-      );
-    } catch (e) {
-      console.log('넥스트 서버 보내기 전 오류발생', e);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
+      {
+        method: apiMode,
+        body: uploadFormData,
+      },
+    );
+    if (true) {
+      setTimeout(() => {
+        setLoading(false);
+        setCompleted(true);
+      }, 2000);
     }
   };
 
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSkill(uploadData.skills);
+  }, []);
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      {loading && <SubmitLoading />}
+      {completed && <SubmitCompleted />}
       <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
         <div
           onClick={closeModal}
@@ -116,7 +149,15 @@ const SelectDetailP = ({ closeModal }: SelectDetailProps) => {
             </div>
           )}
           <div className="flex flex-row-reverse">
-            <ConfirmButton btnClick={handleConfirm} btnText={title} />
+            <ConfirmButton
+              btnClick={handleConfirm}
+              btnText={title}
+              isWritten={
+                skill.join(',').length === 0 ||
+                selectedTags.length === 0 ||
+                title.trim() === ''
+              }
+            />
           </div>
         </div>
       </div>

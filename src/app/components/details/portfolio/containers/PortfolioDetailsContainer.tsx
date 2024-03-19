@@ -1,6 +1,5 @@
 import Icons from 'components/common/Icons';
 import Image from 'next/image';
-import { bigWeneed } from 'ui/IconsPath';
 import Profile from '../../common/Profile';
 import DetailContents from '../DetailContents';
 import DetailMenuBar from '../DetailMenuBar';
@@ -8,17 +7,22 @@ import WriterOptions from '../WriterOptions';
 import Link from 'next/link';
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import GradientProfile from 'ui/gradient/GradientProfile';
+import { bigWeneed } from 'ui/IconsPath';
+import Counts from 'components/details/common/Counts';
+import { useRef } from 'react';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
   portfolio: PortfolioDetails;
   articleId: string;
+  isPreview?: boolean;
 }
 
 const PortfolioDetailsContainer = ({
   user,
   portfolio,
   articleId,
+  isPreview,
 }: PortfolioDetailsContainerProps) => {
   const {
     thumbnail,
@@ -34,13 +38,28 @@ const PortfolioDetailsContainer = ({
     files,
     skills,
   } = portfolio;
-  console.log('ss', portfolio);
   const { bookmarked, hearted } = user;
+  const commentsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToComments = () => {
+    if (commentsRef.current) {
+      commentsRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center bg-black text-white min-h-screen w-full">
+    <div
+      className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
+        isPreview ? 'pointer-events-none' : ''
+      }`}
+    >
       {thumbnail ? (
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
+            priority
             src={thumbnail}
             fill={true}
             alt="thumbnail"
@@ -89,7 +108,6 @@ const PortfolioDetailsContainer = ({
             <Profile
               writer={writer}
               date={createdAt}
-              count={[viewCount, heartCount, bookmarkCount]}
               user={{ bookmarked, hearted }}
               size="large"
             />
@@ -102,13 +120,26 @@ const PortfolioDetailsContainer = ({
           files={files}
           skills={skills}
         />
+        <div className="w-full flex justify-center mt-[100px]">
+          <Counts count={[viewCount, heartCount, bookmarkCount]} gradient />
+        </div>
         <DetailMenuBar
           userId={writer.userId || -1}
           user={user}
           articleId={articleId}
+          page="portfolio"
+          recruiting={false}
+          scrollToComments={scrollToComments}
         />
-        {user.sameUser && <WriterOptions articleId={articleId} />}
+        {user.sameUser && (
+          <WriterOptions
+            articleId={articleId}
+            userId={writer.userId || -1}
+            nickname={writer.writerNickname || ''}
+          />
+        )}
       </div>
+      <div ref={commentsRef}></div>
     </div>
   );
 };

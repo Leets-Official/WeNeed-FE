@@ -8,7 +8,7 @@ interface DndImageProps {
 const DndImage = ({ fileName, url }: DndImageProps) => {
   return (
     <div>
-      {url && <Image src={url} alt={fileName} width={400} height={200} />}
+      {url && <Image src={url} alt={fileName} width={450} height={250} />}
     </div>
   );
 };

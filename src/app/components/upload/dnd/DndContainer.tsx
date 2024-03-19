@@ -13,6 +13,11 @@ import DndLink from './DndLink';
 import DndSound from './DndSound';
 import DndImage from './DndImage';
 import Attatched from './Attatched';
+import EditText from 'components/update/EditText';
+import EditFile from 'components/update/EditFile';
+import DeleteDocsVideos from 'components/update/modal/DeleteDocsVideos';
+import CheckDelete from 'components/update/modal/CheckDelete';
+import { deleteAlert } from '../both/showToast';
 
 interface DndContainerProps {
   articleType: string;
@@ -22,6 +27,8 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [enabled, setEnabled] = useState(false);
+  const [isEditFile, setIsEditFile] = useState(false);
+  const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
 
   const onDragEnd = ({ source, destination }: DropResult) => {
@@ -33,35 +40,33 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
       ...item,
       id: String(index),
     }));
-
     setItems(updatedItems);
     setUploadData({ ...uploadData, content: updatedItems });
   };
 
-  const componenetByType = (item: DndTextTypes) => {
-    switch (item.type) {
-      case 'text':
-        return <DndText text={item.data} />;
-      case 'link':
-        return <DndLink link={item.data} />;
-      case 'sound':
-        return <DndSound link={item.data} />;
-      case 'image':
-        return <DndImage fileName={item.data} url={item.data} />;
-      default:
-        return null;
-    }
+  const deleteItem = (itemId: string) => {
+    const updatedItems = items.filter((item) => item.id !== itemId);
+    setItems(updatedItems);
+    setUploadData({ ...uploadData, content: updatedItems });
+    deleteAlert();
+  };
+
+  const startEdit = (item: DndTextTypes) => {
+    setEditItemId(item.id === editItemId ? editItemId : item.id);
   };
 
   useEffect(() => {
-    console.log('items현황: ', items);
+    console.log('items현황:', items);
     console.log('uploadData현황: ', uploadData);
+    setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
+    setEditItemId(null);
+    setIsEditFile(false);
     return () => {
       cancelAnimationFrame(animation);
       setEnabled(false);
     };
-  }, [items, uploadData]);
+  }, [items]);
 
   if (!enabled) {
     return null;
@@ -80,25 +85,85 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
               className="flex flex-col gap-y-[17px]"
             >
               {items.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
+                <div key={item.id}>
+                  <div
+                    onClick={() => startEdit(item)}
+                    className="relative flex justify-center items-center"
+                  >
+                    {editItemId === item.id && (
+                      <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9">
+                        <CheckDelete deleteText={() => deleteItem(item.id)} />
+                        <div>
+                          <EditText
+                            type={item.type}
+                            id={item.id}
+                            isEdit={true}
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
                     >
-                      {componenetByType(item)}
-                    </div>
-                  )}
-                </Draggable>
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className={
+                            editItemId === item.id
+                              ? 'blur-sm brightness-50'
+                              : ''
+                          }
+                        >
+                          {componenetByType(item)}
+                        </div>
+                      )}
+                    </Draggable>
+                  </div>
+                </div>
               ))}
               {provided.placeholder}
             </div>
           )}
         </Droppable>
       </DragDropContext>
-      {articleType === 'portfolio' && <Attatched />}
+      <div
+        onClick={() => setIsEditFile(true)}
+        className=" relative cursor-pointer"
+      >
+        <div className={isEditFile ? 'blur-[2px] brightness-30' : ''}>
+          {articleType === 'portfolio' && <Attatched />}
+        </div>
+        {isEditFile && (
+          <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 ">
+            <div>
+              <DeleteDocsVideos />
+            </div>
+            <div>
+              <EditFile />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 export default DndContainer;
+
+const componenetByType = (item: DndTextTypes) => {
+  switch (item.type) {
+    case 'text':
+      return <DndText text={item.data} />;
+    case 'link':
+      return <DndLink link={item.data} />;
+    case 'sound':
+      return <DndSound link={item.data} />;
+    case 'image':
+      return <DndImage fileName={item.data} url={item.data} />;
+    default:
+      return null;
+  }
+};

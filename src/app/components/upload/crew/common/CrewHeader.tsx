@@ -8,7 +8,7 @@ interface CrewHeaderProps {
 
 const CrewHeader = ({ header }: CrewHeaderProps) => {
   return (
-    <div className="w-screen pt-[47px] pb-[42px] bg-white flex flex-col items-center mb-[57px]">
+    <div className="w-screen pt-[30px] pb-[30px] bg-white flex flex-col items-center mb-[57px]">
       {header.type && <h2 className="mb-[52px]">{header.type}</h2>}
       <h1 className="font-bold text-3xl mb-[20px]">{header.title}</h1>
       {header.subtitle && (

@@ -107,5 +107,68 @@ export const getRecruitForm = async (
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruitmentForms/${articleId}`;
+  const res = await getRequest(url, accessToken);
+  return res;
+};
+
+export const getApplicantForm = async (
+  applicationId: string,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/${applicationId}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyPortfolio = async (
+  accessToken: string,
+  size: number,
+  page: number,
+  userId: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/basic-info/${userId}?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyAppliedCrew = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/my-applied-crews?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyRecruitingCrew = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/my-recruiting-crews?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyInstCrews = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/interesting-crews?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getMyInstPortfolio = async (
+  accessToken: string,
+  size: number,
+  page: number,
+) => {
+  const url = `${SERVER_URL}/user/myPage/interesting-portfolios?size=${size}&page=${page}`;
+  return await getRequest(url, accessToken);
+};
+
+export const getApplicationsList = async (
+  articleId: string,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/application-forms/applications/${articleId}`;
   return await getRequest(url, accessToken);
 };

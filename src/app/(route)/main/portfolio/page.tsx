@@ -1,35 +1,43 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Footer from 'components/layout/Footer';
 import MainNavbar from 'components/main/common/MainNavbar';
+import ReactPaginate from 'react-paginate';
+import Header from 'components/layout/Header';
+import Icons from 'components/common/Icons';
+import useLoginModal from 'hooks/upload/useLoginModal';
+import ModalPortal from 'components/common/modal/ModalPortal';
+import ModalOutside from 'components/common/modal/ModalOutside';
+import NeedLoginModal from 'components/common/modal/NeedLoginModal';
 import {
   DetailCategoriesContainer,
   HotItemsContainer,
   PortfolioContainer,
   RecommendContainer,
 } from 'components/main/containers';
+import { useEffect, useState } from 'react';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
 import { useRecoilValue } from 'recoil';
 import { selectedCategories, selectedSortType } from 'recoil/main';
-import ReactPaginate from 'react-paginate';
-import Header from 'components/layout/Header';
-import Icons from 'components/common/Icons';
 import { leftAngle, rightAngle } from 'ui/IconsPath';
+import { useRouter } from 'next/navigation';
 
 export default function MainPortfolioPage() {
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [data, setData] = useState<ResponsePortfolioMain | null>(null);
+  const [loginModal, setLoginModal] = useState<boolean>(false);
   const selectedCategoriesValue = useRecoilValue(selectedCategories);
   const selectedSortTypeValue = useRecoilValue(selectedSortType);
+  const loginModalState = useLoginModal(loginModal);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
         `${
           process.env.NEXT_PUBLIC_NEXT_SERVER
-        }/api/main/portfolio?size=${MAIN_SIZE}&page=${pageNumber}&sort=${selectedSortTypeValue}&detailTags=${
-          selectedCategoriesValue || '전체'
+        }/api/main/portfolio?size=${MAIN_SIZE}&page=${page}&sort=${selectedSortTypeValue}&detailTags=${
+          selectedCategoriesValue || ''
         }`,
       );
       const responseData = await response.json();
@@ -37,10 +45,23 @@ export default function MainPortfolioPage() {
     };
 
     fetchData();
-  }, [selectedCategoriesValue, pageNumber, selectedSortTypeValue]);
+  }, [selectedCategoriesValue, page, selectedSortTypeValue]);
 
   const handlePageChange = ({ selected }: { selected: number }) => {
-    setPageNumber(() => selected + 1);
+    setPage(() => selected + 1);
+  };
+
+  const onClickItem = (userId: number, articleId: number) => {
+    if (userId == -1) {
+      setLoginModal(() => true);
+    } else {
+      router.push(`/portfolio/${articleId}`);
+    }
+    return undefined;
+  };
+
+  const onClose = () => {
+    setLoginModal(false);
   };
 
   if (data) {
@@ -55,14 +76,22 @@ export default function MainPortfolioPage() {
     return (
       <section>
         <Header nickname={user.nickname} userId={user.userId} />
-        <div className="flex flex-col items-center justify-center w-full  text-white ">
-          <MainNavbar />
+        <div className="flex flex-col items-center justify-center w-full text-white ">
+          <MainNavbar nickname={user.nickname} userId={user.userId} />
           <h1 className="w-full mt-[65px] mb-[48px] text-3xl font-semibold">
             {LOGGEDIN_SECTION_HEADINGS.hot}
           </h1>
           <DetailCategoriesContainer />
-          <HotItemsContainer data={hotArticleList} />
-          <PortfolioContainer data={articleList} />
+          <HotItemsContainer
+            data={hotArticleList}
+            user={user}
+            onClickItem={onClickItem}
+          />
+          <PortfolioContainer
+            data={articleList}
+            user={user}
+            onClickItem={onClickItem}
+          />
           <ReactPaginate
             className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
             previousLabel={
@@ -75,15 +104,28 @@ export default function MainPortfolioPage() {
                 <Icons name={rightAngle} />
               </div>
             }
-            breakLabel={'...'}
             pageCount={pageable.totalPages}
             onPageChange={handlePageChange}
             activeClassName={'active text-white'}
             disabledClassName={'pagination-disabled'}
           />
-          <RecommendContainer data={recommendArticleList} />
+          <RecommendContainer
+            data={recommendArticleList}
+            user={user}
+            onClickItem={onClickItem}
+          />
         </div>
         <Footer />
+        {loginModalState && (
+          <ModalPortal nodeName="needLoginPortal">
+            <ModalOutside
+              onClose={onClose}
+              className="absolute left-0 w-full h-full flex justify-center items-center"
+            >
+              <NeedLoginModal />
+            </ModalOutside>
+          </ModalPortal>
+        )}
       </section>
     );
   }

@@ -3,15 +3,42 @@ import Icons from 'components/common/Icons';
 import { closeIcon } from 'ui/IconsPath';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import useAddText from 'hooks/upload/useAddText';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { uploadDataState } from 'recoil/upload';
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
   closeModal?: () => void;
+  isEdit?: boolean;
+  id?: string;
 }
 
-const UploadText = ({ uploadInfo, closeModal }: UploadTextProps) => {
+const UploadText = ({
+  uploadInfo,
+  closeModal,
+  isEdit,
+  id,
+}: UploadTextProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const { fileType, announcement, rule } = uploadInfo;
-  const { text, setText, handleConfirm, isEditing, startEdit } = useAddText();
-
+  const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
+    useAddText();
+  const isShare = fileType === '나누고 싶은 큰 문장';
+  console.log(isShare);
+  useEffect(() => {
+    if (id) {
+      if (id === 'share') {
+        setText(uploadData.sharedText || '');
+      } else {
+        const content = uploadData.content.find((item) => item.id === id);
+        if (content) {
+          if (content.type === 'text' || 'link' || 'audio') {
+            setText(content.data);
+          }
+        }
+      }
+    }
+  }, []);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
@@ -47,8 +74,20 @@ const UploadText = ({ uploadInfo, closeModal }: UploadTextProps) => {
           </div>
           <div onClick={closeModal} className="flex flex-row-reverse mt-[24px]">
             <ConfirmButton
-              btnClick={() => handleConfirm(fileType)}
+              btnClick={
+                !isEdit
+                  ? () => handleConfirm(fileType)
+                  : () => {
+                      if (isShare) {
+                        console.log(text, '나누고싶은 문장 변경');
+                        setUploadData({ ...uploadData, sharedText: text });
+                      } else {
+                        updateText(id || '', text);
+                      }
+                    }
+              }
               btnText={text}
+              isWritten={text.trim() === ''}
             />
           </div>
         </div>
