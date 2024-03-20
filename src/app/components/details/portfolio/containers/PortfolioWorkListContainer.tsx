@@ -1,9 +1,6 @@
 'use client';
 
 import ProfileCol from '../ProfileCol';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
 import PortfolioItem from 'components/main/portfolio/PortfolioItem';
 import Link from 'next/link';
 import Slider from 'react-slick';

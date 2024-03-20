@@ -87,8 +87,13 @@ export default function MainRecruitingPage() {
         />
         {loginModalState && (
           <ModalPortal nodeName="needLoginPortal">
-            <ModalOutside onClose={onClose} className=" w-[922px] h-[370px]">
-              <NeedLoginModal />
+            <ModalOutside
+              onClose={onClose}
+              className="absolute left-0 w-full h-full flex justify-center items-center"
+            >
+              <div className="z-50">
+                <NeedLoginModal />
+              </div>
             </ModalOutside>
           </ModalPortal>
         )}
