@@ -100,7 +100,7 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
         onSubmitApplicant();
         break;
       case 'onCloseApplication':
-        router.back(); // 로직 수정 필요
+        router.back();
         break;
       default:
         break;
@@ -108,7 +108,7 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
   };
 
   return (
-    <div className="w-[80%] flex justify-end mt-[37px] mb-[100px]">
+    <div className="w-[81%] flex justify-end mt-[37px] mb-[100px]">
       <Button
         buttonText={text}
         isDisabled={false}

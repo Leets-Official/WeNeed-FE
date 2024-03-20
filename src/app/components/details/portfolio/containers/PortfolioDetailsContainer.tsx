@@ -9,6 +9,7 @@ import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import GradientProfile from 'ui/gradient/GradientProfile';
 import { bigWeneed } from 'ui/IconsPath';
 import Counts from 'components/details/common/Counts';
+import { useRef } from 'react';
 
 interface PortfolioDetailsContainerProps {
   user: UserProfile;
@@ -38,6 +39,17 @@ const PortfolioDetailsContainer = ({
     skills,
   } = portfolio;
   const { bookmarked, hearted } = user;
+  const commentsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToComments = () => {
+    if (commentsRef.current) {
+      commentsRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <div
       className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
@@ -47,6 +59,7 @@ const PortfolioDetailsContainer = ({
       {thumbnail ? (
         <div className="relative flex justify-center items-center w-screen h-[380px] overflow-hidden min-w-[1000px]">
           <Image
+            priority
             src={thumbnail}
             fill={true}
             alt="thumbnail"
@@ -95,7 +108,6 @@ const PortfolioDetailsContainer = ({
             <Profile
               writer={writer}
               date={createdAt}
-              // count={[viewCount, heartCount, bookmarkCount]}
               user={{ bookmarked, hearted }}
               size="large"
             />
@@ -117,6 +129,7 @@ const PortfolioDetailsContainer = ({
           articleId={articleId}
           page="portfolio"
           recruiting={false}
+          scrollToComments={scrollToComments}
         />
         {user.sameUser && (
           <WriterOptions
@@ -126,6 +139,7 @@ const PortfolioDetailsContainer = ({
           />
         )}
       </div>
+      <div ref={commentsRef}></div>
     </div>
   );
 };

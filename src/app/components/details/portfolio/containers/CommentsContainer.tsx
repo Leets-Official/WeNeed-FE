@@ -6,7 +6,7 @@ import CommentItem from 'components/details/common/CommentItem';
 import { NO_COMMENTS } from 'constants/common';
 import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { inputDrop } from 'ui/IconsPath';
 import GradientProfileSM from 'ui/gradient/GradientProfileMD';
 

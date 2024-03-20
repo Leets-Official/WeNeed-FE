@@ -13,6 +13,7 @@ const useMenuHandlers = (
   articleId: string,
   page: string,
   recruiting: boolean,
+  scrollToComments: () => void,
   user?: UserProfile,
 ) => {
   const router = useRouter();
@@ -28,7 +29,7 @@ const useMenuHandlers = (
     }
   }, []);
 
-  const scrollToComments = () => {
+  const scrollToCommentsInDetail = () => {
     if (page !== 'recruiting')
       window.scrollTo({
         top: window.scrollY + 400,

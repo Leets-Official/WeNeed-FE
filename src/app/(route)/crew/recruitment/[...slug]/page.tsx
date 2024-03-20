@@ -14,11 +14,6 @@ export default async function CrewRecruitmentPage({
         <CrewHeader header={HEADER_COMPLETE} />
       </div>
       <RecruitmentContainer articleId={params.slug} />
-      <CrewSubmission
-        articleId={params.slug}
-        text="지원서 작성하러 가기"
-        type="routerApplicant"
-      />
     </section>
   );
 }

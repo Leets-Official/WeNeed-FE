@@ -24,22 +24,45 @@ const ContentsQ = () => {
     }));
   };
 
+  const onRemoveQuestion = (qIndex: number) => {
+    if (qIndex !== 0) {
+      const newQuestions = [...recruiterData.crewQuestions];
+      newQuestions.splice(qIndex, 1);
+      setRecruiterData((prev) => ({
+        ...prev,
+        crewQuestions: newQuestions,
+      }));
+      setQCount((prev) => prev - 1);
+    }
+  };
+
   return (
-    <div className="font-semibold w-[80%] flex flex-col bg-white rounded-lg p-[30px]">
+    <div className="w-[80%] flex flex-col bg-white rounded-lg p-[30px] font-semibold">
       <div>
         <div className="flex gap-1">
           {REQUIREMENT} {RECRUITER_QUESTIONS.crew_questions}
         </div>
-        {Array.from({ length: qCount }).map((_, index) => (
-          <Input
-            key={index}
-            type="upload_recruiter"
-            name="crewQuestions"
-            onChange={(e) => onChangeInputArray(e, index - 1)}
-            textValue={recruiterData.crewQuestions[qCount - 1]}
-            placeholder="입력해주세요."
-          />
-        ))}
+        {Array.from({ length: qCount }).map((_, index) => {
+          return (
+            <div className="relative" key={index}>
+              <Input
+                type="upload_recruiter"
+                name="crewQuestions"
+                onChange={(e) => onChangeInputArray(e, index - 1)}
+                textValue={recruiterData.crewQuestions[qCount - 1]}
+                placeholder="입력해주세요."
+              />
+              {index !== 0 && (
+                <div
+                  className="absolute right-4 top-4 text-xs text-neutral-500 border-b border-neutral-500 cursor-pointer px-1.5"
+                  onClick={() => onRemoveQuestion(index)}
+                >
+                  삭제
+                </div>
+              )}
+            </div>
+          );
+        })}
         <div className="w-full flex justify-center mt-[30px] mb-[50px] cursor-pointer">
           <Icons
             name={questions_plus}
@@ -53,7 +76,7 @@ const ContentsQ = () => {
         </div>
         <textarea
           name="content"
-          className="h-36 w-full rounded-lg border-1.5 border-black resize-none mt-[5px] py-[16px] px-[31px] text-neutral-500 text-sm font-normal "
+          className="h-36 w-full rounded-lg border-1.5 border-black resize-none mt-[5px] py-[16px] px-[18px] text-neutral-500 text-sm font-normal "
           placeholder="입력해주세요"
           onChange={(e) => onChangeInput(e)}
         />

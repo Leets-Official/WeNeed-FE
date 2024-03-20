@@ -1,6 +1,7 @@
 import DetailContentsInfo from 'components/details/common/DetailContentsInfo';
 import RecruitingDetailContents from '../RecruitingDetailContents';
 import WriterOptions from 'components/details/portfolio/WriterOptions';
+import Image from 'next/image';
 
 interface RecruitingDetailContainersProps {
   recruit: RecruitDetailItem;
@@ -16,6 +17,7 @@ const RecruitingDetailContainers = ({
   isPreview,
 }: RecruitingDetailContainersProps) => {
   const {
+    thumbnail,
     createdAt,
     tags,
     title,
@@ -38,6 +40,16 @@ const RecruitingDetailContainers = ({
         <h3 className="flex flex-wrap text-[30px] w-full h-[87px] mt-[49px] font-bold clamp-2 text-black">
           {title}
         </h3>
+        <div className="relative w-full h-[388px] overflow-hidden rounded-[15px] mt-[15px] mb-[32px]">
+          {thumbnail && (
+            <Image
+              src={thumbnail}
+              fill={true}
+              style={{ objectFit: 'contain' }}
+              alt="recruitItem"
+            />
+          )}
+        </div>
         <RecruitingDetailContents
           contents={contents}
           files={files}
