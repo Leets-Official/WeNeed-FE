@@ -168,7 +168,9 @@ const UserInfo = ({ token }: UserInfoProps) => {
           onOpen={() => handleIsOpen('grade')}
           isOpen={isGradeOpen}
           className={`absolute top-52 mt-4 w-[320px] max-h-[300px]`}
-          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 text-neutral-400 text-xs font-semibold text-left flex justify-between items-center px-4`}
+          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 ${
+            userInfo.userGrade !== 0 ? 'text-[#3A3A3A]' : 'text-neutral-400'
+          } text-xs font-semibold text-left flex justify-between items-center px-4`}
           dropDownClassName={`z-40 relative w-[320px] max-h-[210px] border rounded-[9px] bg-gray-200 overflow-y-scroll scrollbar-hide`}
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
@@ -181,7 +183,9 @@ const UserInfo = ({ token }: UserInfoProps) => {
           onOpen={() => handleIsOpen('major')}
           isOpen={isMajorOpen}
           className={`absolute top-64 mt-4 w-[320px] max-h-[300px]`}
-          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 text-neutral-400 text-xs font-semibold text-left flex justify-between items-center px-4`}
+          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 ${
+            userInfo.major !== '' ? 'text-[#3A3A3A]' : 'text-neutral-400'
+          } text-xs font-semibold text-left flex justify-between items-center px-4`}
           dropDownClassName={`z-30 relative w-[320px] max-h-[210px] border rounded-[9px] bg-gray-200 overflow-y-scroll scrollbar-hide`}
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
@@ -196,7 +200,9 @@ const UserInfo = ({ token }: UserInfoProps) => {
           onOpen={() => handleIsOpen('doubleMajor')}
           isOpen={isDoubleMajorOpen}
           className={`absolute top-[304px] mt-4 w-[320px] max-h-[300px]`}
-          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 text-neutral-400 text-xs font-semibold text-left flex justify-between items-center px-4`}
+          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 ${
+            userInfo.doubleMajor !== '' ? 'text-[#3A3A3A]' : 'text-neutral-400'
+          } text-xs font-semibold text-left flex justify-between items-center px-4`}
           dropDownClassName={`z-30 relative w-[320px] max-h-[210px] border rounded-[9px] bg-gray-200 overflow-y-scroll scrollbar-hide`}
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
@@ -211,7 +217,11 @@ const UserInfo = ({ token }: UserInfoProps) => {
           onOpen={() => handleIsOpen('interestField')}
           isOpen={isInterestFieldOpen}
           className={`absolute top-[352px] mt-4 w-[320px] max-h-[300px]`}
-          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 text-neutral-400 text-xs font-semibold text-left flex justify-between items-center px-4`}
+          buttonClassName={`relative w-[320px] h-[38px] rounded-[8px] border border-zinc-300 ${
+            userInfo.interestField !== ''
+              ? 'text-[#3A3A3A]'
+              : 'text-neutral-400'
+          } text-xs font-semibold text-left flex justify-between items-center px-4`}
           dropDownClassName={`z-30 relative w-[320px] max-h-[210px] border rounded-[9px] bg-gray-200 overflow-y-scroll scrollbar-hide`}
           itemClassName={`w-[300px] h-[30px] py-2 pl-2 text-xs font-normal hover:text-black`}
         />
