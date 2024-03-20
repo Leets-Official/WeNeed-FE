@@ -2,7 +2,7 @@ import Button from 'components/common/Button';
 
 interface ConfirmButtonProps {
   btnClick: () => void;
-  btnText: string | undefined;
+  btnText: string | undefined | boolean;
   isWritten: boolean;
 }
 

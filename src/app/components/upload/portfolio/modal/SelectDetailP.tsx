@@ -32,6 +32,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  const isFilled = selectedTags.length === 0 || title.trim() === '';
 
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
@@ -131,10 +132,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
             onSelect={(tags) => setSelectedTags(tags)}
           />
           <div className="w-auto h-[49.96px] pl-[30px] pr-[27px] rounded-[10px] border border-zinc-300 flex items-center place-content-between">
-            <div className="flex gap-x-[2px]">
-              <p>스킬</p>
-              <p className="text-red-400">*</p>
-            </div>
+            <p>스킬</p>
             <div className="flex flex-reverse-row w-auto items-center">
               <input
                 className="w-[500px] text-right mr-[21px] focus:outline-none focus:border-none"
@@ -151,12 +149,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
           <div className="flex flex-row-reverse">
             <ConfirmButton
               btnClick={handleConfirm}
-              btnText={title}
-              isWritten={
-                skill.join(',').length === 0 ||
-                selectedTags.length === 0 ||
-                title.trim() === ''
-              }
+              btnText={!isFilled}
+              isWritten={isFilled}
             />
           </div>
         </div>

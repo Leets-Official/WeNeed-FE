@@ -25,7 +25,7 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
-
+  const isFilled = selectedTags.length === 0 || title.trim() === '';
   const reqPath = isEdit
     ? `api/update/recruiting?articleId=${id}`
     : 'api/upload/recruit';
@@ -139,12 +139,8 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
           <div className="flex flex-row-reverse">
             <ConfirmButton
               btnClick={handleConfirm}
-              btnText={title}
-              isWritten={
-                skill.join(',').length === 0 ||
-                selectedTags.length === 0 ||
-                title.trim() === ''
-              }
+              btnText={!isFilled}
+              isWritten={isFilled}
             />
           </div>
         </div>

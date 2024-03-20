@@ -24,7 +24,6 @@ const UploadText = ({
   const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
     useAddText();
   const isShare = fileType === '나누고 싶은 큰 문장';
-  console.log(isShare);
   useEffect(() => {
     if (id) {
       if (id === 'share') {
