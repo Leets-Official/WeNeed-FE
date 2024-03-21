@@ -13,6 +13,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { setTokens } from 'utils/cookieUtils';
 
 export default function MainRecruitingPage() {
   const [page, setPage] = useState<number>(1);
@@ -34,6 +35,12 @@ export default function MainRecruitingPage() {
         }`,
       );
       const responseData = await response.json();
+      if (responseData.tokens) {
+        setTokens(
+          responseData.tokens.accessToken,
+          responseData.tokens.refreshToken,
+        );
+      }
       setData((prevData: ResponseRecruitingMain | null | undefined) => ({
         ...prevData!,
         pageable: responseData.pageable,
