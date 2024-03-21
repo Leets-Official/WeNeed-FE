@@ -28,6 +28,7 @@ interface ResponseRecruitingDetail {
 interface ResponseGoogleLogin {
   accessToken: string;
   refreshToken: string;
+  hasRegistered: boolean;
 }
 
 interface ResponseSearch {

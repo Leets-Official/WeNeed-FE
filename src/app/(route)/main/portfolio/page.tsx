@@ -21,6 +21,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedCategories, selectedSortType } from 'recoil/main';
 import { leftAngle, rightAngle } from 'ui/IconsPath';
 import { useRouter } from 'next/navigation';
+import { setTokens } from 'utils/cookieUtils';
 
 export default function MainPortfolioPage() {
   const [page, setPage] = useState<number>(1);
@@ -41,6 +42,12 @@ export default function MainPortfolioPage() {
         }`,
       );
       const responseData = await response.json();
+      if (responseData.tokens) {
+        setTokens(
+          responseData.tokens.accessToken,
+          responseData.tokens.refreshToken,
+        );
+      }
       setData((prev) => responseData);
     };
 
