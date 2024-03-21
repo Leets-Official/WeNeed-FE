@@ -40,7 +40,7 @@ const FeedItemsContainer = ({
   });
 
   return selectedMenu === 'MY CREW' ? (
-    <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[60%]">
+    <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[100%]">
       {(crewType === 'recruit' || crewType.length === 0) && (
         <>
           <div
@@ -67,7 +67,7 @@ const FeedItemsContainer = ({
           </div>
           {crewType === 'recruit' && (
             <ReactPaginate
-              className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-gray font-semibold"
+              className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
               previousLabel={
                 <div className="pt-0.5">
                   <Icons name={myLeftAngle} />
@@ -114,7 +114,7 @@ const FeedItemsContainer = ({
           </div>
           {crewType === 'applicant' && (
             <ReactPaginate
-              className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-gray font-semibold"
+              className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
               previousLabel={
                 <div className="pt-0.5">
                   <Icons name={myLeftAngle} />
@@ -135,7 +135,7 @@ const FeedItemsContainer = ({
       )}
     </div>
   ) : (
-    <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[60%]">
+    <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[100%]">
       <div className="w-full mb-4 h-5 text-black text-base font-semibold">
         총 {article1.length}개
       </div>
@@ -150,7 +150,7 @@ const FeedItemsContainer = ({
         ))}
       </div>
       <ReactPaginate
-        className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-gray font-semibold"
+        className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
         previousLabel={
           <div className="pt-0.5">
             <Icons name={myLeftAngle} />

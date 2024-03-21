@@ -87,7 +87,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-    console.log(userInfoRecoil);
 
     return (
       <section className="w-full flex items-center flex-col">
@@ -104,8 +103,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
               sameUser={userInfoRecoil.sameUser}
               myOutputList1={mycrewPost.recruitData.myOutputList}
               myOutputList2={mycrewPost.appliedData.applicationInfoResponses}
-              pageableDto1={mycrewPost.appliedData.pageableDto}
-              pageableDto2={mycrewPost.recruitData.pageableDto}
+              pageableDto1={mycrewPost.recruitData.pageableDto}
+              pageableDto2={mycrewPost.appliedData.pageableDto}
               handlePageChange={handlePageChange}
             />
           ) : (

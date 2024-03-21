@@ -50,7 +50,7 @@ const FeedItems = ({ article }: FeedItemsProps) => {
         )}
       </div>
       <div className="flex justify-between items-center w-full">
-        <div className="text-black items-center text-xs font-normal">
+        <div className="text-black w-[100px] overflow-x-hidden overflow-ellipsis wh text-nowrap items-center text-xs font-normal">
           {article.title}
         </div>
         <div className="flex gap-[8px] w-[40%] h-[30%] justify-center items-center">
