@@ -29,7 +29,7 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     if (label === '미리보기') {
       previewAlert();
       openModal();
-    } else if (uploadFormData.has('thumbnail')) {
+    } else if (uploadData.thumbnail !== '') {
       openModal();
     } else {
       thumbnailAlert();

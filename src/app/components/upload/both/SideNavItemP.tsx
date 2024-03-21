@@ -32,7 +32,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       openModal();
     } else if (label === '팀원 추가') {
       openModal();
-    } else if (uploadFormData.has('thumbnail')) {
+    } else if (uploadData.thumbnail !== '') {
       openModal();
     } else {
       thumbnailAlert();
