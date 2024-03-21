@@ -74,7 +74,11 @@ const SearchTeamInput = () => {
               <div
                 key={user.userId}
                 className="flex items-center w-[840px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
-                onMouseLeave={() => handleSelect(user)}
+                onClick={() =>
+                  setTimeout(() => {
+                    handleSelect(user);
+                  }, 300)
+                }
               >
                 {user.profileImage ? (
                   <Image
