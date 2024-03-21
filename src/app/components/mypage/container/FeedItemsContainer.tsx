@@ -52,7 +52,7 @@ const FeedItemsContainer = ({
           </div>
           {crewType === 'recruit' && (
             <div className="w-full mb-4 h-5 text-black text-base font-normal">
-              총 {article1.length}개
+              총 {pageableDto1.totalElements}개
             </div>
           )}
           <div className="flex gap-[32px] mb-4 flex-wrap">
@@ -99,7 +99,7 @@ const FeedItemsContainer = ({
           </div>
           {crewType === 'applicant' && (
             <div className="w-full mb-4 h-5 text-black text-base font-normal">
-              총 {article2?.length}개
+              총 {pageableDto2?.totalElements || article2?.length}개
             </div>
           )}
           <div className="flex gap-[32px] mb-4 flex-wrap">
@@ -137,7 +137,7 @@ const FeedItemsContainer = ({
   ) : (
     <div className="w-full overflow-scroll no-scrollbar mt-6 p-4 h-[100%]">
       <div className="w-full mb-4 h-5 text-black text-base font-semibold">
-        총 {article1.length}개
+        총 {pageableDto1.totalElements}개
       </div>
       <div className="flex gap-[32px] flex-wrap">
         {article1.map((article) => (

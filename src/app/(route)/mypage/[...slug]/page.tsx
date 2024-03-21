@@ -9,7 +9,7 @@ import { crewTypeState, menuState, userProfileInfoSatate } from 'recoil/mypage';
 import useMypageURL from 'hooks/mypage/useMypageURL';
 
 export default function MyPage({ params }: { params: { slug: string } }) {
-  const selectedMenu = useRecoilValue(menuState);
+  const [selectedMenu, setSelectedMenu] = useRecoilState(menuState);
   const [userInfoRecoil, setUserInfoRecoil] = useRecoilState(
     userProfileInfoSatate,
   );
@@ -37,6 +37,10 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   const handlePageChange = ({ selected }: { selected: number }) => {
     setPage(() => selected + 1);
   };
+
+  useEffect(() => {
+    setSelectedMenu('MY OUTPUT');
+  }, []);
 
   useEffect(() => {
     const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
