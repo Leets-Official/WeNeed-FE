@@ -24,13 +24,14 @@ const SearchTeam = ({ closeModal }: SearchTeamProps) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="flex flex-col w-[922px] h-[244px] rounded-[9px] bg-white">
-        <div
-          onClick={closeModal}
-          className="flex flex-row-reverse mt-[15px] mr-[15px]"
-        >
-          <Icons name={closeIcon} className="cursor-pointer" />
+        <div className="flex flex-row-reverse mt-[15px] mr-[15px]">
+          <Icons
+            onClick={closeModal}
+            name={closeIcon}
+            className="cursor-pointer"
+          />
         </div>
-        <div className="flex flex-col gap-y-[26px] text-lg font-semibold ml-[40px]">
+        <div className="flex flex-col gap-y-[26px] text-lg font-semibold ml-8">
           <p>팀원 추가하기</p>
           <SearchTeamInput />
         </div>

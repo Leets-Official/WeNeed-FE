@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Icons from 'components/common/Icons';
 import { toggleIcon } from 'ui/IconsPath';
 import TagItem from './TagItem';
@@ -22,6 +22,23 @@ const DropdownTag = ({
   const [selectedOption, setSelectedOption] = useState<string[]>([]);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
 
   const handleOptionClick = (option: string) => {
     if (selectedOption.includes(option)) {
@@ -56,7 +73,10 @@ const DropdownTag = ({
         </div>
         <div className="flex w-auto items-center overflow-auto-y">
           {selectedOption ? (
-            <div className="flex gap-x-[10px] text-black mr-[21px]">
+            <div
+              className="flex gap-x-[10px] text-black mr-[21px]"
+              onClick={(event) => event.stopPropagation()}
+            >
               {selectedOption.map((option) => (
                 <div key={option} className="flex items-center h-[36px]">
                   <TagItem
@@ -72,9 +92,12 @@ const DropdownTag = ({
           <Icons name={toggleIcon} />
         </div>
       </div>
-      <div className="relative">
+      <div className="relative" onClick={() => setIsOpen(!isOpen)}>
         {isOpen && (
-          <div className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-auto">
+          <div
+            className="absolute top-full left-0 w-full h-[192px] py-[3px] bg-[#D9D9D9] rounded-[9px] overflow-auto"
+            ref={dropdownRef}
+          >
             {options.map((option, index) => (
               <div
                 key={option}
@@ -82,7 +105,9 @@ const DropdownTag = ({
                   index === 0 ? 'border-t-0' : ''
                 }
                 `}
-                onClick={() => handleOptionClick(option)}
+                onClick={() => {
+                  handleOptionClick(option);
+                }}
               >
                 <span>{option}</span>
               </div>

@@ -32,7 +32,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
-  console.log(isEdit, 'isEdit값');
+  const isFilled = selectedTags.length === 0 || title.trim() === '';
 
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
@@ -44,7 +44,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
-  console.log(reqPath);
 
   const handleConfirm = async () => {
     uploadFormData.delete('request');
@@ -56,7 +55,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     });
 
     blobFiles.forEach((file) => {
-      console.log('다음 파일 업로드', file);
       uploadFormData.append('files', file.file, file.filename);
     });
     setUploadData({
@@ -151,12 +149,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
           <div className="flex flex-row-reverse">
             <ConfirmButton
               btnClick={handleConfirm}
-              btnText={title}
-              isWritten={
-                skill.join(',').length === 0 ||
-                selectedTags.length === 0 ||
-                title.trim() === ''
-              }
+              btnText={!isFilled}
+              isWritten={isFilled}
             />
           </div>
         </div>

@@ -24,7 +24,6 @@ const UploadText = ({
   const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
     useAddText();
   const isShare = fileType === '나누고 싶은 큰 문장';
-  console.log(isShare);
   useEffect(() => {
     if (id) {
       if (id === 'share') {
@@ -42,15 +41,17 @@ const UploadText = ({
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="flex flex-col w-[922px] h-[360px] bg-white rounded-[9px]">
-        <div
-          onClick={closeModal}
-          className="flex flex-row-reverse mt-[15px] mr-[15px]"
-        >
-          <Icons name={closeIcon} className="cursor-pointer" />
+        <div className="flex flex-row-reverse mt-[15px] mr-[15px]">
+          <div onClick={closeModal}>
+            <Icons name={closeIcon} className="cursor-pointer" />
+          </div>
         </div>
         <div className="px-[40px]">
           <div className="text-black text-lg font-bold">{fileType}</div>
-          <div className="w-[843px] h-[184px] flex flex-col items-center justify-center rounded-[9px] border-2 border-dashed border-neutral-700 mt-[26px]  text-[#D9D9D9]">
+          <div
+            className="w-[843px] h-[184px] flex flex-col items-center justify-center rounded-[9px] border-2 border-dashed border-neutral-700 mt-[26px]  text-[#D9D9D9]"
+            onClick={startEdit}
+          >
             {isEditing ? (
               <div className="flex text-sm font-normal overflow-y-auto">
                 <textarea
@@ -63,32 +64,31 @@ const UploadText = ({
                 ></textarea>
               </div>
             ) : (
-              <div
-                className="flex flex-col items-center gap-y-[6px] text-[#D9D9D9] font-semibold"
-                onClick={startEdit}
-              >
+              <div className="flex flex-col items-center gap-y-[6px] text-[#D9D9D9] font-semibold">
                 <span className="text-base">{announcement}</span>
                 <span className="text-xs">{rule}</span>
               </div>
             )}
           </div>
-          <div onClick={closeModal} className="flex flex-row-reverse mt-[24px]">
-            <ConfirmButton
-              btnClick={
-                !isEdit
-                  ? () => handleConfirm(fileType)
-                  : () => {
-                      if (isShare) {
-                        console.log(text, '나누고싶은 문장 변경');
-                        setUploadData({ ...uploadData, sharedText: text });
-                      } else {
-                        updateText(id || '', text);
+          <div className="flex flex-row-reverse mt-[24px]">
+            <div onClick={closeModal}>
+              <ConfirmButton
+                btnClick={
+                  !isEdit
+                    ? () => handleConfirm(fileType)
+                    : () => {
+                        if (isShare) {
+                          console.log(text, '나누고싶은 문장 변경');
+                          setUploadData({ ...uploadData, sharedText: text });
+                        } else {
+                          updateText(id || '', text);
+                        }
                       }
-                    }
-              }
-              btnText={text}
-              isWritten={text.trim() === ''}
-            />
+                }
+                btnText={text}
+                isWritten={text.trim() === ''}
+              />
+            </div>
           </div>
         </div>
       </div>

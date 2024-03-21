@@ -88,7 +88,6 @@ const ModalSelector = ({
         />
       );
     default:
-      return null;
   }
 };
 

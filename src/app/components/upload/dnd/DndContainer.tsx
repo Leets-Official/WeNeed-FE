@@ -1,12 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   DragDropContext,
   Draggable,
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { textState, uploadDataState } from 'recoil/upload';
+import { filestate, textState, uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from './DndText';
 import DndLink from './DndLink';
@@ -26,10 +26,13 @@ interface DndContainerProps {
 const DndContainer = ({ articleType }: DndContainerProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [files, setFiles] = useRecoilState(filestate);
   const [enabled, setEnabled] = useState(false);
   const [isEditFile, setIsEditFile] = useState(false);
   const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
+  const editBarRef = useRef<HTMLDivElement>(null);
+  const editFileBarRef = useRef<HTMLDivElement>(null);
 
   const onDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
@@ -60,13 +63,39 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
     console.log('uploadData현황: ', uploadData);
     setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
-    setEditItemId(null);
     setIsEditFile(false);
     return () => {
       cancelAnimationFrame(animation);
       setEnabled(false);
     };
   }, [items]);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickFileOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickFileOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      editBarRef.current &&
+      !editBarRef.current.contains(event.target as Node)
+    ) {
+      setEditItemId('');
+    }
+  };
+
+  const handleClickFileOutside = (event: MouseEvent) => {
+    if (
+      editFileBarRef.current &&
+      !editFileBarRef.current.contains(event.target as Node)
+    ) {
+      setIsEditFile(false);
+    }
+  };
 
   if (!enabled) {
     return null;
@@ -91,7 +120,10 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
                     className="relative flex justify-center items-center"
                   >
                     {editItemId === item.id && (
-                      <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9">
+                      <div
+                        ref={editBarRef}
+                        className="absolute inset-0 flex items-center justify-center z-10 gap-x-9"
+                      >
                         <CheckDelete deleteText={() => deleteItem(item.id)} />
                         <div>
                           <EditText
@@ -135,10 +167,13 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
         className=" relative cursor-pointer"
       >
         <div className={isEditFile ? 'blur-[2px] brightness-30' : ''}>
-          {articleType === 'portfolio' && <Attatched />}
+          {files.length !== 0 && <Attatched />}
         </div>
         {isEditFile && (
-          <div className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 ">
+          <div
+            ref={editFileBarRef}
+            className="absolute inset-0 flex items-center justify-center z-10 gap-x-9 "
+          >
             <div>
               <DeleteDocsVideos />
             </div>
@@ -164,6 +199,5 @@ const componenetByType = (item: DndTextTypes) => {
     case 'image':
       return <DndImage fileName={item.data} url={item.data} />;
     default:
-      return null;
   }
 };
