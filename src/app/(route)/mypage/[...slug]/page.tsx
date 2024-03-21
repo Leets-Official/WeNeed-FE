@@ -39,24 +39,44 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   };
 
   useEffect(() => {
+    const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
     const fetchData = async () => {
       if (selectedMenu === 'MY CREW') {
         const [recruitUrl, appliedUrl] = url;
-        const [recruitResponse, appliedResponse] = await Promise.all([
-          fetch(`${recruitUrl}&page=${page}`, { cache: 'no-store' }),
-          fetch(`${appliedUrl}&page=${page}`, { cache: 'no-store' }),
-        ]);
+        const [recruitResponse, appliedResponse, userInfoResponse] =
+          await Promise.all([
+            fetch(`${recruitUrl}&page=${page}`, { cache: 'no-store' }),
+            fetch(`${appliedUrl}&page=${page}`, { cache: 'no-store' }),
+            fetch(userInfoUrl, { cache: 'no-store' }),
+          ]);
         const [recruitData, appliedData] = await Promise.all([
           recruitResponse.json(),
           appliedResponse.json(),
         ]);
+        const userInfoData = await userInfoResponse.json();
         setData({ recruitData, appliedData });
+        setUserInfoData((prev) => userInfoData.userInfo);
+        setUserInfoRecoil((prev) => ({
+          userNickname: userInfoData.userNickname,
+          sameUser: userInfoData.sameUser,
+          userInfo: userInfoData.userInfo,
+        }));
       } else {
-        const response = await fetch(`${url}&page=${page}`, {
-          cache: 'no-store',
-        });
+        const [response, userInfoResponse] = await Promise.all([
+          fetch(`${url}&page=${page}`, {
+            cache: 'no-store',
+          }),
+          fetch(userInfoUrl, { cache: 'no-store' }),
+        ]);
         const responseData = await response.json();
+        const userInfoData = await userInfoResponse.json();
         setData(responseData);
+        setUserInfoData((prev) => userInfoData.userInfo);
+        setUserInfoRecoil((prev) => ({
+          userNickname: userInfoData.userNickname,
+          sameUser: userInfoData.sameUser,
+          userInfo: userInfoData.userInfo,
+        }));
       }
     };
 
