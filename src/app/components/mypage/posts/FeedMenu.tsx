@@ -33,8 +33,8 @@ const FeedMenu = ({ sameUser }: FeedMenuProps) => {
               <div className="w-[101.64px] mt-2 h-[3px] bg-black absolute bottom-0"></div>
             </div>
           ) : (
-            menuItems.map((menuItem, index) => (
-              <div key={index} className="w-[101.64px] h-[23px]">
+            menuItems.map((menuItem) => (
+              <div key={menuItem} className="w-[101.64px] h-[23px]">
                 <div
                   className={`w-[101.64px] h-[23px] flex justify-center text-base font-semibold ${
                     menuItem === menu

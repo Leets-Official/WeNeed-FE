@@ -30,7 +30,7 @@ export const InfoBoxContainer = ({
       {MY_PAGE.ITEM_LIST.map((item: string, index: number) => (
         <InfoBox
           type={index === 4 ? 'explanation' : 'default'}
-          key={index}
+          key={item}
           title={item}
           content={itemList[index]}
         />

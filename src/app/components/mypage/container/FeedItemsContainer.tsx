@@ -5,15 +5,9 @@ import Link from 'next/link';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { menuState, crewTypeState } from 'recoil/mypage';
 import Icons from 'components/common/Icons';
-import {
-  leftAngle,
-  myLeftAngle,
-  myRightAngle,
-  nextCrewArrow,
-  rightAngle,
-} from 'ui/IconsPath';
+import { myLeftAngle, myRightAngle, nextCrewArrow } from 'ui/IconsPath';
 import { MY_PAGE } from 'constants/mypage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
 
 interface FeedItemsProps {
@@ -22,6 +16,7 @@ interface FeedItemsProps {
   sameUser: boolean;
   pageableDto1: Pageable;
   pageableDto2?: Pageable;
+  handlePageChange: ({ selected }: { selected: number }) => void;
 }
 
 const FeedItemsContainer = ({
@@ -30,17 +25,13 @@ const FeedItemsContainer = ({
   sameUser,
   pageableDto1,
   pageableDto2,
+  handlePageChange,
 }: FeedItemsProps) => {
-  const [page, setPage] = useState<number>(1);
   const selectedMenu = useRecoilValue(menuState);
   const [crewType, setCrewType] = useRecoilState(crewTypeState);
   console.log('crewType', crewType);
   const onClickCrewType = (type: string) => {
     setCrewType(type);
-  };
-
-  const handlePageChange = ({ selected }: { selected: number }) => {
-    setPage(() => selected + 1);
   };
 
   console.log('totalPages', pageableDto1.totalPages);
@@ -67,10 +58,10 @@ const FeedItemsContainer = ({
           <div className="flex gap-[32px] mb-4 flex-wrap">
             {article1.map((article) => (
               <Link
-                href={`/mypage/apprecruit/${article.articleId}`}
                 key={article.articleId}
+                href={`/mypage/apprecruit/${article.articleId}`}
               >
-                <FeedItems article={article} />
+                <FeedItems key={article.articleId} article={article} />
               </Link>
             ))}
           </div>
@@ -87,7 +78,7 @@ const FeedItemsContainer = ({
                   <Icons name={myRightAngle} />
                 </div>
               }
-              pageCount={1}
+              pageCount={pageableDto1.totalPages}
               onPageChange={handlePageChange}
               activeClassName={'active text-black'}
               disabledClassName={'pagination-disabled'}
@@ -114,10 +105,10 @@ const FeedItemsContainer = ({
           <div className="flex gap-[32px] mb-4 flex-wrap">
             {article2?.map((article) => (
               <Link
-                href={`/mypage/apprecruit/${article.articleId}`}
                 key={article.articleId}
+                href={`/mypage/apprecruit/${article.articleId}`}
               >
-                <FeedItems article={article} />
+                <FeedItems key={article.articleId} article={article} />
               </Link>
             ))}
           </div>
@@ -134,7 +125,7 @@ const FeedItemsContainer = ({
                   <Icons name={myRightAngle} />
                 </div>
               }
-              pageCount={1}
+              pageCount={pageableDto2?.totalPages || 1}
               onPageChange={handlePageChange}
               activeClassName={'active text-black'}
               disabledClassName={'pagination-disabled'}
@@ -151,10 +142,10 @@ const FeedItemsContainer = ({
       <div className="flex gap-[32px] flex-wrap">
         {article1.map((article) => (
           <Link
-            href={`/portfolio/${article.articleId}`}
             key={article.articleId}
+            href={`/portfolio/${article.articleId}`}
           >
-            <FeedItems article={article} />
+            <FeedItems key={article.articleId} article={article} />
           </Link>
         ))}
       </div>
@@ -170,7 +161,7 @@ const FeedItemsContainer = ({
             <Icons name={myRightAngle} />
           </div>
         }
-        pageCount={1}
+        pageCount={pageableDto1.totalPages}
         onPageChange={handlePageChange}
         activeClassName={'active text-black'}
         disabledClassName={'pagination-disabled'}

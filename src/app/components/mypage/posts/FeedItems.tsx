@@ -29,20 +29,21 @@ const FeedItems = ({ article }: FeedItemsProps) => {
       <div className="flex justify-center items-center gap-[10px]">
         {article.teamProfiles.length !== 0 && (
           <div className="z-10 absolute top-1 left-2 flex ml-[10px]">
-            {article.teamProfiles.map((profile: string) => (
-              <div key={profile} className="ml-[-10px]">
-                {
-                  // <Image
-                  //   width={24}
-                  //   height={24}
-                  //   alt="writer"
-                  //   src={profile}
-                  //   style={{
-                  //     objectFit: 'cover',
-                  //   }}
-                  // />
-                }
-                <GradientProfileSM />
+            {article.teamProfiles.map((profile: string, index) => (
+              <div key={profile + `${index}`} className="ml-[-10px]">
+                {profile !== null ? (
+                  <Image
+                    width={24}
+                    height={24}
+                    alt="writer"
+                    src={profile}
+                    style={{
+                      objectFit: 'cover',
+                    }}
+                  />
+                ) : (
+                  <GradientProfileSM />
+                )}
               </div>
             ))}
           </div>
