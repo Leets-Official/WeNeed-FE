@@ -2,13 +2,16 @@
 import Header from 'components/layout/Header';
 import UploadContainerP from 'components/upload/portfolio/containers/UploadContainerP';
 import useFillData from 'hooks/update/useFillData';
+import useInit from 'hooks/upload/useInit';
 import { useEffect, useState } from 'react';
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillPF } = useFillData();
   const [data, setData] = useState<ResponsePortfolioDetails | null>(null);
+  const { initPF } = useInit();
 
   useEffect(() => {
+    initPF();
     const fetchData = async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio?articleId=${params.id}`,

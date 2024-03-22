@@ -2,7 +2,7 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
-import { uploadDataState, uploadForm } from 'recoil/upload';
+import { uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
 import { previewAlert, thumbnailAlert } from './showToast';
@@ -20,8 +20,6 @@ type NavComponent = Record<string, JSX.Element>;
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 

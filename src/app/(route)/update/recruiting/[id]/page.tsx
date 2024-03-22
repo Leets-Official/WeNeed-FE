@@ -3,13 +3,16 @@
 import Header from 'components/layout/Header';
 import UploadContainerR from 'components/upload/recruiting/containers/UploadContainerR';
 import useFillData from 'hooks/update/useFillData';
+import useInit from 'hooks/upload/useInit';
 import { useEffect, useState } from 'react';
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillRecruit } = useFillData();
   const [data, setData] = useState<ResponseRecruitingDetail | null>(null);
+  const { initPF } = useInit();
 
   useEffect(() => {
+    initPF();
     const fetchData = async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${params.id}`,
@@ -19,12 +22,11 @@ export default function PortfolioPage({ params }: { params: { id: string } }) {
       setData((prev) => resData);
       if (resData) {
         const { user, recruit } = resData;
-        console.log('page에서', recruit, '가져오기');
         fillRecruit({ user, recruit });
       }
     };
     fetchData();
-  }, [fillRecruit, params.id]);
+  }, []);
 
   if (data) {
     const { user } = data;
