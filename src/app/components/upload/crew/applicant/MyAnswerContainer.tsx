@@ -50,9 +50,13 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
         </div>
       ))}
       <div className="w-full">
-        <div className="flex gap-1">
+        <div className="flex gap-1.5">
           {REQUIREMENT}
-          {APPLICANT_QUESTIONS.appeal[0]}
+          {APPLICANT_QUESTIONS.appeal[0]} (
+          <p className="text-neutral-500 text-xs font-light ">
+            pdf 파일만 등록해주세요.
+          </p>
+          )
         </div>
         <Input
           name="appeal"
