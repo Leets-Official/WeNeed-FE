@@ -54,14 +54,13 @@ export default function MypageAppRecruitPage({
     updateApplicantList();
   }, [updateApplicantList]);
 
-  const userNickname = 'userNickname';
-  const userId = parseInt(params.slug);
   if (data) {
+    const { nickname, userId } = data.user;
     const { viewCount, heartCount, bookmarkCount } = data.recruit;
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">
-          <Header nickname={userNickname} userId={userId} />
+          <Header nickname={nickname} userId={userId} />
         </div>
         <div className="w-full bg-white flex justify-center">
           <div className="w-[80%] min-h-screen flex flex-col items-center">
