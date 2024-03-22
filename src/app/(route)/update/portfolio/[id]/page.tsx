@@ -4,11 +4,7 @@ import UploadContainerP from 'components/upload/portfolio/containers/UploadConta
 import useFillData from 'hooks/update/useFillData';
 import { useEffect, useState } from 'react';
 
-export default async function PortfolioPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillPF } = useFillData();
   const [data, setData] = useState<ResponsePortfolioDetails | null>(null);
 

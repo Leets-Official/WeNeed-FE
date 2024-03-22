@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { searchTeamIcon } from 'ui/IconsPath';
 import GradientProfileSM from 'ui/gradient/GradientProfileSM';
 import Icons from 'components/common/Icons';
@@ -17,28 +17,23 @@ const SearchTeamInput = () => {
   const [relatedUsers, setRelatedUsers] = useState<UserInfo[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<UserInfo[]>([]);
   const [userIds, setUserIds] = useRecoilState(userId);
-
-  const searchUser = async (searchText: string) => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/portfolio/searchName?searchText=${searchText}`,
-      { cache: 'no-store' },
-    );
-    const data = await res.json();
-    return data;
-  };
+  const serverUrl = process.env.NEXT_PUBLIC_NEXT_SERVER;
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = event.target.value;
     setSearchText(searchText);
     if (searchText !== '') {
-      const relatedUsers = await searchUser(searchText);
-      if (relatedUsers) {
-        setRelatedUsers(relatedUsers);
-      }
+      const res = await fetch(
+        `${serverUrl}/api/upload/portfolio/searchName?searchText=${searchText}`,
+        { cache: 'no-store' },
+      );
+      const data = await res.json();
+      setRelatedUsers(data);
     }
   };
 
   const handleSelect = (user: UserInfo) => {
+    setRelatedUsers([]);
     const isAlreadySelected = selectedUsers.some(
       (selectedUser) => selectedUser.userId === user.userId,
     );
@@ -51,22 +46,21 @@ const SearchTeamInput = () => {
       setUserIds((prevUserId) => [...prevUserId, user.userId]);
     }
     setSearchText('');
-    setRelatedUsers([]);
   };
 
   return (
     <div>
       <ToastContainer />
       <div className="flex w-[842px] h-[64.5px] rounded-[9px] border border-zinc-300 items-center overflow-y-auto">
-        <div className="flex items-center gap-x-[15px] flex-wrap w-[680px] ml-[110px]">
+        <div className="flex items-center gap-x-[15px] flex-wrap w-[740px] ml-10">
           <SelectedNames
             selectedUsers={selectedUsers}
             setSelectedUsers={setSelectedUsers}
           />
           <Input
             type={'upload'}
-            className=""
-            placeholder="함께한 팀원의 이름을 검색해보세요."
+            className="flex-grow"
+            placeholder="함께한 팀원의 이름을 검색해보세요.                  "
             textValue={searchText}
             onChange={handleChange}
           />
@@ -75,12 +69,16 @@ const SearchTeamInput = () => {
       </div>
       <div className="relative">
         {relatedUsers.length >= 0 && (
-          <div className="absolute top-full left-0 w-[825px] max-h-[300px] bg-zinc-300 rounded-[9px] overflow-y-auto">
+          <div className="absolute top-full left-0 w-[842px] max-h-[300px] bg-zinc-300 rounded-[9px] overflow-y-auto">
             {relatedUsers.map((user, index) => (
               <div
                 key={user.userId}
-                className="flex items-center w-[797px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
-                onClick={() => handleSelect(user)}
+                className="flex items-center w-[840px] h-[48px] gap-x-[39px] cursor-pointer hover:bg-gray-100 border-t border-white pl-[37px]"
+                onClick={() =>
+                  setTimeout(() => {
+                    handleSelect(user);
+                  }, 300)
+                }
               >
                 {user.profileImage ? (
                   <Image

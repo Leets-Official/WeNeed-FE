@@ -2,10 +2,10 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
-import { uploadDataState } from 'recoil/upload';
+import { uploadDataState, uploadForm } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-import { previewAlert } from './showToast';
+import { previewAlert, thumbnailAlert } from './showToast';
 import RecruitPreview from './containers/RecruitPreview';
 
 interface SideNavItemProps {
@@ -20,14 +20,19 @@ type NavComponent = Record<string, JSX.Element>;
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-
+  const [uploadFormData, setUploadFormData] =
+    useRecoilState<FormData>(uploadForm);
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 
   const startPreview = () => {
-    openModal();
     if (label === '미리보기') {
       previewAlert();
+      openModal();
+    } else if (uploadData.thumbnail !== '') {
+      openModal();
+    } else {
+      thumbnailAlert();
     }
   };
 
