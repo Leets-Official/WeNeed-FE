@@ -68,8 +68,8 @@ const CategoriesContainers = () => {
             selectedCategories.length > 9 ? 'w-[90%]' : 'w-full'
           } h-full`}
         >
-          {selectedCategories.map((category, index) => (
-            <div key={index}>
+          {selectedCategories.map((category) => (
+            <div key={category}>
               <Categories
                 category={category}
                 selectedCategories={selectedCategories}
@@ -79,8 +79,8 @@ const CategoriesContainers = () => {
           ))}
           {CategoriesList.filter(
             (category) => !selectedCategories.includes(category),
-          ).map((category, index) => (
-            <div key={index}>
+          ).map((category) => (
+            <div key={category}>
               <Categories
                 category={category}
                 selectedCategories={selectedCategories}

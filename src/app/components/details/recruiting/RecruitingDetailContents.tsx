@@ -7,6 +7,7 @@ interface RecruitingDetailContentsProps {
   files: FileDetail[];
   skills: string[];
   sharedText: string;
+  isInMypage?: boolean;
 }
 
 const RecruitingDetailContents = ({
@@ -14,6 +15,7 @@ const RecruitingDetailContents = ({
   files,
   skills,
   sharedText,
+  isInMypage,
 }: RecruitingDetailContentsProps) => {
   return (
     <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden ">
@@ -23,7 +25,9 @@ const RecruitingDetailContents = ({
             return (
               <div
                 key={content.id}
-                className="w-full h-auto text-black text-start leading-[31px]"
+                className={`w-full h-auto ${
+                  isInMypage ? 'text-white' : 'text-black'
+                } text-start leading-[31px]`}
               >
                 {content.data || ''}
               </div>
@@ -92,7 +96,11 @@ const RecruitingDetailContents = ({
         )}
       </div>
       {sharedText && (
-        <div className="flex flex-col w-full text-lg mb-[40px] text-black">
+        <div
+          className={`flex flex-col w-full text-lg mb-[40px] ${
+            isInMypage ? 'text-white' : 'text-black'
+          }`}
+        >
           <p className="pb-[18px] border-b border-black mb-[20px] font-semibold">
             나누고 싶은 큰 문장
           </p>
