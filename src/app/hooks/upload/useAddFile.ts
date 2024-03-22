@@ -27,6 +27,7 @@ const useAddFile = () => {
     size: 0,
     url: '',
   });
+  console.log('blob현황', blobFiles);
 
   const divClick = () => {
     inputRef.current?.click();
@@ -76,6 +77,7 @@ const useAddFile = () => {
     if (file) {
       const blob = new Blob([file], { type: file.type });
       console.log('blob이미지 배열', images);
+      console.log('blob문서 배열', blob, fileType);
 
       if (fileType === '이미지') {
         setImages((prevImages) =>
@@ -99,8 +101,8 @@ const useAddFile = () => {
               : item,
           ),
         );
-        console.log('다음 파일로 변경', file);
 
+        console.log('다음 파일들을 변경', blobFiles);
         setBlobFiles((prevFiles) =>
           prevFiles.map((editedfile) =>
             editedfile.id === id
@@ -117,7 +119,6 @@ const useAddFile = () => {
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
       console.log('사진 추가', file);
-
       setItems((prevData) => [
         ...prevData,
         {

@@ -9,10 +9,10 @@ export default function UploadRecruitPage() {
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname') || '';
   const userId = searchParams.get('userId') || 0;
-  const { initRC } = useInit();
+  const { initPF } = useInit();
 
   useEffect(() => {
-    initRC();
+    initPF();
   }, []);
 
   return (

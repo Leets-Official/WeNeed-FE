@@ -37,10 +37,14 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     setSkill(skillsArray);
   };
 
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSkill(uploadData.skills);
+  }, []);
+
   const handleConfirm = async () => {
     uploadFormData.delete('request');
     uploadFormData.delete('images');
-
     setLoading(true);
     images.forEach((image) => {
       uploadFormData.append('images', image.blob, image.filename);
@@ -81,10 +85,6 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       }, 2000);
     }
   };
-  useEffect(() => {
-    setTitle(uploadData.title);
-    setSkill(uploadData.skills);
-  }, [uploadData.title, uploadData.skills]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
