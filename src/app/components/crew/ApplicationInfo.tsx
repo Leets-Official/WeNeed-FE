@@ -6,13 +6,11 @@ interface ApplicationInfoProps {
 }
 
 const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
-  const { name, phone, keywords, grade, crewAnswers, major, crewQuestions } =
+  const { name, phone, keywords, crewAnswers, major, crewQuestions } =
     applicationForm;
 
   const renderContent = (questionKey: string) => {
     switch (questionKey) {
-      case 'name':
-        return <div className="">{name}</div>;
       case 'major':
         return (
           <div className="flex gap-[50px] relative">
@@ -39,11 +37,9 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
             </div>
           </div>
         );
-      case 'grade':
-        return <div className="">{grade}학년</div>;
       case 'keywords':
         return (
-          <div>
+          <div className="flex text-white h-[90px] flex-wrap">
             {keywords.map((keyword) => (
               <DetailCategories key={keyword} category={keyword} noBg />
             ))}

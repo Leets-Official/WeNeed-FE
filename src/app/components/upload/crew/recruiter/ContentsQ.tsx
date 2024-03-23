@@ -48,8 +48,8 @@ const ContentsQ = () => {
               <Input
                 type="upload_recruiter"
                 name="crewQuestions"
-                onChange={(e) => onChangeInputArray(e, index - 1)}
-                textValue={recruiterData.crewQuestions[qCount - 1]}
+                onChange={(e) => onChangeInputArray(e, index)}
+                textValue={recruiterData.crewQuestions[index]}
                 placeholder="입력해주세요."
               />
               {index !== 0 && (

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import MyAnswerContainer from './MyAnswerContainer';
 import MyInfoContainer from './MyInfoContainer';
+import CrewSubmission from '../recruiter/CrewSubmission';
 
 interface ApplicantContainerProps {
   articleId: string;
@@ -32,6 +33,13 @@ const ApplicantContainer = ({ articleId }: ApplicantContainerProps) => {
           user={recruitUser}
           crewQuestions={recruitForm.crewQuestions}
         />
+        <div className="w-[80%] flex justify-end mb-[150px] ">
+          <CrewSubmission
+            articleId={articleId}
+            text="완료"
+            type="submitApplicant"
+          />
+        </div>
       </div>
     );
   }

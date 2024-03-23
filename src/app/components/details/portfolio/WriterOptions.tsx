@@ -73,7 +73,6 @@ const WriterOptions = ({
           buttonText="크루 모집하러가기"
           isDisabled={false}
           type="upload_recruiter"
-          className=" text-white bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]"
           onClickHandler={onClickCrewButton}
         />
       )}
