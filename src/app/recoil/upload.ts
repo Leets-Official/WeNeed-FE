@@ -53,3 +53,8 @@ export const fileBlobState = atom<BlobFiles[]>({
   key: 'fileBlobState',
   default: [],
 });
+
+export const fileSizeState = atom<number>({
+  key: 'fileSizeState',
+  default: 0,
+});

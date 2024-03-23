@@ -88,7 +88,7 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       {loading && <SubmitLoading />}
-      {completed && <SubmitCompleted />}
+      {completed && <SubmitCompleted isRecruit={true} />}
       <div className="flex flex-col w-[922px] h-[361px] bg-white rounded-[9px]">
         <div
           onClick={closeModal}
