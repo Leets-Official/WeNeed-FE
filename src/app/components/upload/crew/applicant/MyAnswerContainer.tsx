@@ -52,11 +52,10 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
       <div className="w-full">
         <div className="flex gap-1.5">
           {REQUIREMENT}
-          {APPLICANT_QUESTIONS.appeal[0]} (
-          <p className="text-neutral-500 text-xs font-light ">
+          {APPLICANT_QUESTIONS.appeal[0]}
+          <p className="text-neutral-500 text-xs font-light pt-0.5 ">
             pdf 파일만 등록해주세요.
           </p>
-          )
         </div>
         <Input
           name="appeal"
@@ -65,6 +64,7 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
           onChange={(e) => onChangeInputFile(e)}
           placeholder="파일"
           className="flex pt-2.5"
+          accept=".pdf"
         />
       </div>
       <div className="w-full">

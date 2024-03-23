@@ -35,6 +35,7 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       ...recruiterValue,
       deadline: recruiterValue.deadline.join('/'),
     };
+    console.log(recruiterValue.crewQuestions);
     try {
       await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/recruiter?articleId=${articleId}`,
@@ -102,20 +103,20 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       case 'onCloseApplication':
         router.back();
         break;
-      default:
+      case 'backToArticle':
+        router.push(`/recruiting/${articleId}`);
         break;
+      default:
     }
   };
 
   return (
-    <div className="w-[81%] flex justify-end mt-[37px] mb-[100px]">
-      <Button
-        buttonText={text}
-        isDisabled={false}
-        onClickHandler={() => onClickHandler(type)}
-        type="upload_recruiter"
-      />
-    </div>
+    <Button
+      buttonText={text}
+      isDisabled={false}
+      onClickHandler={() => onClickHandler(type)}
+      type="upload_recruiter"
+    />
   );
 };
 

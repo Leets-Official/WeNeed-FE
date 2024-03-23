@@ -40,7 +40,7 @@ const HotItemsContainer = ({
   return (
     <Slider
       {...settings}
-      className="relative flex justify-center items-center w-screen mt-10 "
+      className="relative flex justify-center items-center w-screen mt-10 min-w-[1280px] "
     >
       {data.map((article) => (
         <div

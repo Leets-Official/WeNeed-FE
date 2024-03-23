@@ -54,6 +54,7 @@ interface ResponseCrewApplicant {
   applicationForm: ApplicationFormResponse;
   sameUser: boolean;
   nickname: string;
+  userId: number;
 }
 
 interface ResponseMypageBasicInfo {
