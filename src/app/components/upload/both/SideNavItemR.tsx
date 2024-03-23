@@ -5,7 +5,7 @@ import SelectDetailR from '../recruiting/modal/SelectDetailR';
 import { uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { USER_PREVIEW } from 'constants/upload';
-import { previewAlert, thumbnailAlert } from './showToast';
+import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 import RecruitPreview from './containers/RecruitPreview';
 
 interface SideNavItemProps {
@@ -27,10 +27,12 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     if (label === '미리보기') {
       previewAlert();
       openModal();
-    } else if (uploadData.thumbnail !== '') {
-      openModal();
-    } else {
+    } else if (uploadData.thumbnail === '') {
       thumbnailAlert();
+    } else if (uploadData.content.length < 1) {
+      noContentsAlert();
+    } else {
+      openModal();
     }
   };
 
