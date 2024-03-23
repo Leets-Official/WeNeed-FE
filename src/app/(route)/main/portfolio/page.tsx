@@ -8,7 +8,6 @@ import Icons from 'components/common/Icons';
 import useLoginModal from 'hooks/upload/useLoginModal';
 import ModalPortal from 'components/common/modal/ModalPortal';
 import ModalOutside from 'components/common/modal/ModalOutside';
-import NeedLoginModal from 'components/common/modal/NeedLoginModal';
 import {
   DetailCategoriesContainer,
   HotItemsContainer,
@@ -22,6 +21,14 @@ import { selectedCategories, selectedSortType } from 'recoil/main';
 import { leftAngle, rightAngle } from 'ui/IconsPath';
 import { useRouter } from 'next/navigation';
 import { setTokens } from 'utils/cookieUtils';
+import dynamic from 'next/dynamic';
+
+const NeedLoginModal = dynamic(
+  () => import('components/common/modal/NeedLoginModal'),
+  {
+    suspense: true,
+  },
+);
 
 export default function MainPortfolioPage() {
   const [page, setPage] = useState<number>(1);

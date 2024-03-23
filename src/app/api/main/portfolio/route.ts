@@ -1,8 +1,7 @@
-import { get } from 'http';
 import { NextResponse } from 'next/server';
 import { getNewToken } from 'service/getNewToken';
 import { getPortfolioMain } from 'service/getRequests';
-import { getCookie, setTokens } from 'utils/cookieUtils';
+import { getCookie } from 'utils/cookieUtils';
 
 export async function GET(request: Request): Promise<NextResponse> {
   let accessToken = getCookie(request, 'accessToken');

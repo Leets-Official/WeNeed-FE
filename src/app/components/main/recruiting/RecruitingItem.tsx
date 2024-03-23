@@ -17,6 +17,7 @@ const RecruitingItem = ({ article }: RecruitingItemProps) => {
           <div className="relative w-full h-[388px] overflow-hidden rounded-[15px] mt-[15px] mb-[32px]">
             {thumbnail && (
               <Image
+                priority
                 src={thumbnail}
                 fill={true}
                 style={{ objectFit: 'cover' }}
