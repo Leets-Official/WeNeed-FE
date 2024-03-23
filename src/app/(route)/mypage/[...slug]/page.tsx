@@ -9,7 +9,7 @@ import { crewTypeState, menuState, userProfileInfoSatate } from 'recoil/mypage';
 import useMypageURL from 'hooks/mypage/useMypageURL';
 
 export default function MyPage({ params }: { params: { slug: string } }) {
-  const selectedMenu = useRecoilValue(menuState);
+  const [selectedMenu, setSelectedMenu] = useRecoilState(menuState);
   const [userInfoRecoil, setUserInfoRecoil] = useRecoilState(
     userProfileInfoSatate,
   );
@@ -20,6 +20,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     | null
   >(null);
   const [userInfoData, setUserInfoData] = useState<MypageUserInfo>();
+  const [page, setPage] = useState<number>(1);
+
   const crewType = useRecoilValue(crewTypeState);
   let crewSize = 3;
   if (crewType.length > 0) {
@@ -32,28 +34,58 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   });
   const userId = parseInt(params.slug);
 
+  const handlePageChange = ({ selected }: { selected: number }) => {
+    setPage(() => selected + 1);
+  };
+
   useEffect(() => {
+    setSelectedMenu('MY OUTPUT');
+  }, []);
+
+  useEffect(() => {
+    const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
     const fetchData = async () => {
       if (selectedMenu === 'MY CREW') {
         const [recruitUrl, appliedUrl] = url;
-        const [recruitResponse, appliedResponse] = await Promise.all([
-          fetch(`${recruitUrl}&page=1`, { cache: 'no-store' }),
-          fetch(`${appliedUrl}&page=1`, { cache: 'no-store' }),
-        ]);
+        const [recruitResponse, appliedResponse, userInfoResponse] =
+          await Promise.all([
+            fetch(`${recruitUrl}&page=${page}`, { cache: 'no-store' }),
+            fetch(`${appliedUrl}&page=${page}`, { cache: 'no-store' }),
+            fetch(userInfoUrl, { cache: 'no-store' }),
+          ]);
         const [recruitData, appliedData] = await Promise.all([
           recruitResponse.json(),
           appliedResponse.json(),
         ]);
+        const userInfoData = await userInfoResponse.json();
         setData({ recruitData, appliedData });
+        setUserInfoData((prev) => userInfoData.userInfo);
+        setUserInfoRecoil((prev) => ({
+          userNickname: userInfoData.userNickname,
+          sameUser: userInfoData.sameUser,
+          userInfo: userInfoData.userInfo,
+        }));
       } else {
-        const response = await fetch(`${url}&page=1`, { cache: 'no-store' });
+        const [response, userInfoResponse] = await Promise.all([
+          fetch(`${url}&page=${page}`, {
+            cache: 'no-store',
+          }),
+          fetch(userInfoUrl, { cache: 'no-store' }),
+        ]);
         const responseData = await response.json();
+        const userInfoData = await userInfoResponse.json();
         setData(responseData);
+        setUserInfoData((prev) => userInfoData.userInfo);
+        setUserInfoRecoil((prev) => ({
+          userNickname: userInfoData.userNickname,
+          sameUser: userInfoData.sameUser,
+          userInfo: userInfoData.userInfo,
+        }));
       }
     };
 
     fetchData();
-  }, [selectedMenu, crewSize]);
+  }, [selectedMenu, crewSize, page]);
 
   useEffect(() => {
     if (data) {
@@ -79,7 +111,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-    console.log(userInfoRecoil);
 
     return (
       <section className="w-full flex items-center flex-col">
@@ -96,14 +127,16 @@ export default function MyPage({ params }: { params: { slug: string } }) {
               sameUser={userInfoRecoil.sameUser}
               myOutputList1={mycrewPost.recruitData.myOutputList}
               myOutputList2={mycrewPost.appliedData.applicationInfoResponses}
-              pageableDto1={mycrewPost.appliedData.pageableDto}
-              pageableDto2={mycrewPost.recruitData.pageableDto}
+              pageableDto1={mycrewPost.recruitData.pageableDto}
+              pageableDto2={mycrewPost.appliedData.pageableDto}
+              handlePageChange={handlePageChange}
             />
           ) : (
             <PostContainer
               sameUser={userInfoRecoil.sameUser}
               myOutputList1={myOutputList}
               pageableDto1={pageableDto}
+              handlePageChange={handlePageChange}
             />
           )}
         </div>

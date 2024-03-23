@@ -2,7 +2,7 @@
 import Button from 'components/common/Button';
 import { UNIV_AUTH } from 'constants/userinfoset';
 import { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
   univAuthEmailState,
   univAuthCodeState,
@@ -60,7 +60,7 @@ const fetchCodeData = async (email: string, code: string) => {
 const UnivAuth = () => {
   const [univAuthEmail, setUnivAuthEmail] = useRecoilState(univAuthEmailState);
   const [univAuthCode, setUnivAuthCode] = useRecoilState(univAuthCodeState);
-  const [univAuth, setUnivAuth] = useRecoilState(univAuthState);
+  const setUnivAuth = useSetRecoilState(univAuthState);
   const [emailPost, setEmailPost] = useState(0);
   const [codePost, setCodePost] = useState(0);
 
@@ -97,7 +97,9 @@ const UnivAuth = () => {
               : emailPost === 2 || emailPost === 3
                 ? 'border-[#FF7272]'
                 : 'border-zinc-300'
-          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
+          } justify-start items-center flex ${
+            univAuthEmail.length !== 0 ? 'text-black' : 'text-neutral-400'
+          } text-xs font-semibold`}
           type="text"
           value={univAuthEmail}
           placeholder={UNIV_AUTH.EMAIL}
@@ -142,7 +144,9 @@ const UnivAuth = () => {
               : codePost === 2
                 ? 'border-[#FF7272]'
                 : 'border-zinc-300'
-          } justify-start items-center flex text-neutral-400 text-xs font-semibold`}
+          } justify-start items-center flex ${
+            univAuthCode.length !== 0 ? 'text-black' : 'text-neutral-400'
+          } text-xs font-semibold`}
           type="text"
           value={univAuthCode}
           placeholder={UNIV_AUTH.AUTH_CODE}
