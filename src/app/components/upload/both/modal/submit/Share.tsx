@@ -4,10 +4,20 @@ import Icons from 'components/common/Icons';
 import { useRouter } from 'next/navigation';
 import { closeIcon } from 'ui/IconsPath';
 
-const Share = () => {
+interface ShareProps {
+  isRecruit?: boolean;
+}
+
+const Share = ({ isRecruit }: ShareProps) => {
+  const copyURL = async () => {
+    const currentUrl = window.document.location.href;
+    await navigator.clipboard.writeText(currentUrl);
+    alert('링크가 복사되었습니다.');
+  };
   const router = useRouter();
   const goMain = () => {
-    router.push('/');
+    const route = isRecruit ? '/main/recruiting' : '/';
+    router.push(route);
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -22,7 +32,7 @@ const Share = () => {
         <Button
           buttonText={'링크복사'}
           type={'upload'}
-          isDisabled={false}
+          isDisabled={true}
           onClickHandler={() => console.log('링크가 복사되었습니다.')}
           className="absolute left-[40px] bottom-[72px] bg-zinc-300 text-sm "
         />

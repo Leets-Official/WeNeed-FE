@@ -18,7 +18,7 @@ export const WRITER_PREVIEW = {
 
 export const PORTFOLIO_PREVIEW = {
   thumbnail: '',
-  title: '게시물 제목',
+  title: '제목(예시)',
   createdAt: '',
   heartCount: 999,
   viewCount: 999,

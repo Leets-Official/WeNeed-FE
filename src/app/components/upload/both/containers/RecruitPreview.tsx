@@ -25,12 +25,15 @@ const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
 
   const previewRecruit: RecruitDetailItem = {
     ...PORTFOLIO_PREVIEW,
+    title: uploadData.title,
+    skills: uploadData.skills,
+    tags: uploadData.tags,
+    sharedText: uploadData.sharedText || '',
     contents: uploadData.content || '',
     createdAt: String(koreanDate),
     thumbnail: uploadData.thumbnail || '',
     recruiting: true,
     commentCount: 0,
-    sharedText: uploadData.sharedText || '',
   };
   console.log('previewPF', previewRecruit);
 
