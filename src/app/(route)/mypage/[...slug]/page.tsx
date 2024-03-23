@@ -121,6 +121,7 @@ export default function MyPage({ params }: { params: { slug: string } }) {
           <ProfileContainer
             sameUser={userInfoRecoil.sameUser}
             userInfoItemList={userInfoData}
+            userId={userId}
           />
           {'recruitData' in data ? (
             <PostContainer
