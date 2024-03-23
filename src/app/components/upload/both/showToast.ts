@@ -60,3 +60,13 @@ export const thumbnailAlert = () => {
     position: 'top-center',
   });
 };
+
+export const noContentsAlert = () => {
+  toast.info('본문에 최소 1개의 컨텐츠를 추가해주세요', {
+    icon: () => '✏️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 3000,
+    position: 'top-center',
+  });
+};

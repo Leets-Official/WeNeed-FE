@@ -8,7 +8,7 @@ export default function ProgressBar() {
   useEffect(() => {
     const interval = setInterval(() => {
       setValue(value + 25);
-    }, 100);
+    }, 50);
     return () => clearInterval(interval);
   }, [value]);
 
