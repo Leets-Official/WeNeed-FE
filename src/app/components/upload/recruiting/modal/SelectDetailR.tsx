@@ -64,7 +64,6 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       skills: skill,
       tags: selectedTags,
     };
-    console.log(articleRequest);
 
     uploadFormData.append(
       'request',

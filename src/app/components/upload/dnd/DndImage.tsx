@@ -7,8 +7,18 @@ interface DndImageProps {
 
 const DndImage = ({ fileName, url }: DndImageProps) => {
   return (
-    <div>
-      {url && <Image src={url} alt={fileName} width={450} height={250} />}
+    <div className="relative w-[450px] h-[250px]">
+      {url && (
+        <Image
+          priority
+          src={url}
+          alt={fileName}
+          fill={true}
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      )}
     </div>
   );
 };

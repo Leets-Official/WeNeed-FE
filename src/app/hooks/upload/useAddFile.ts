@@ -27,7 +27,6 @@ const useAddFile = () => {
     size: 0,
     url: '',
   });
-  console.log('blob현황', blobFiles);
 
   const divClick = () => {
     inputRef.current?.click();
@@ -76,9 +75,6 @@ const useAddFile = () => {
 
     if (file) {
       const blob = new Blob([file], { type: file.type });
-      console.log('blob이미지 배열', images);
-      console.log('blob문서 배열', blob, fileType);
-
       if (fileType === '이미지') {
         setImages((prevImages) =>
           prevImages.map((image) =>
@@ -93,7 +89,6 @@ const useAddFile = () => {
           ),
         );
       } else {
-        console.log('가져온 파일 관리아이디는 다음과 같음', id);
         setFiles((prevFiles) =>
           prevFiles.map((item) =>
             item.id === id
@@ -102,7 +97,6 @@ const useAddFile = () => {
           ),
         );
 
-        console.log('다음 파일들을 변경', blobFiles);
         setBlobFiles((prevFiles) =>
           prevFiles.map((editedfile) =>
             editedfile.id === id
@@ -118,7 +112,6 @@ const useAddFile = () => {
   const addFile = (file: File, type: string) => {
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
-      console.log('사진 추가', file);
       setItems((prevData) => [
         ...prevData,
         {
@@ -137,9 +130,6 @@ const useAddFile = () => {
         },
       ]);
       setOrderId(orderId + 1);
-
-      console.log('추가 후 orderId', orderId);
-      console.log('추가 후 images', images);
     } else {
       setFiles((prevData) => [
         ...prevData,
@@ -158,7 +148,6 @@ const useAddFile = () => {
           filename: file.name,
         },
       ]);
-      console.log('추가 후 file', blobFiles);
     }
   };
 

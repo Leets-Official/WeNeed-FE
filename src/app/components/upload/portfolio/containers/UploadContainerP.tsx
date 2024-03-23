@@ -7,7 +7,7 @@ import SideNav from 'components/upload/both/SideNav';
 import { navItemIconPath_P } from 'ui/IconsPath';
 import { SIDENAV_ITEM_NAME } from 'constants/portfolio';
 import FirstSelectP from '../FirstSelectP';
-import { fileBlobState, filestate, textState } from 'recoil/upload';
+import { filestate, textState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +19,6 @@ interface UploadContainerPProps {
 const UploadContainerP = ({ id, isEdit }: UploadContainerPProps) => {
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState(filestate);
-  const [bfiles, setBFiles] = useRecoilState(fileBlobState);
 
   return (
     <div className="relative flex flex-col w-[100%] h-auto bg-white mt-[22px] gap-y-2.5">

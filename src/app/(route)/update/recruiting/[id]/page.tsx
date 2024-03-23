@@ -26,7 +26,7 @@ export default function PortfolioPage({ params }: { params: { id: string } }) {
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (data) {
     const { user } = data;
