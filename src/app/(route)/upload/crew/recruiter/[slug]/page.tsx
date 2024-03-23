@@ -38,11 +38,13 @@ export default function CrewRecruiterPage({
         <ProjectInfoQ />
         <MemberInfoQ articleId={params.slug} />
         <ContentsQ />
-        <CrewSubmission
-          text="완료"
-          articleId={params.slug}
-          type="submitRecruit"
-        />
+        <div className="w-[80%] flex justify-end mb-[150px] mt-[30px] ">
+          <CrewSubmission
+            text="완료"
+            articleId={params.slug}
+            type="submitRecruit"
+          />
+        </div>
       </section>
     );
   }

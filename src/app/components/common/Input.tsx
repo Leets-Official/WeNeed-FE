@@ -9,6 +9,7 @@ interface InputProps {
   name?: string;
   placeholder?: string;
   className?: string;
+  accept?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -22,6 +23,7 @@ const Input = ({
   placeholder,
   className,
   inputType,
+  accept,
   onFocus,
   onBlur,
   onEnterPress,
@@ -40,6 +42,7 @@ const Input = ({
       onKeyPress={(e) => e.key === 'Enter' && onEnterPress && onEnterPress()}
       onChange={onChange}
       className={buttonStyles}
+      accept={accept}
     />
   );
 };

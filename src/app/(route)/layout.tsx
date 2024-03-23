@@ -16,8 +16,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className=" h-screen min-w-[850px] mx-auto">
+    <html lang="ko">
+      <body className=" min-h-screen min-w-[800px] mx-auto">
         <RecoilProvider>{children}</RecoilProvider>
       </body>
     </html>
