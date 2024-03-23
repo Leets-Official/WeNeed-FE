@@ -21,12 +21,11 @@ export default function PortfolioPage({ params }: { params: { id: string } }) {
       setData((prev) => resData);
       if (resData) {
         const { user, portfolio } = resData;
-        console.log('page에서', portfolio.files, '가져오기');
         fillPF({ user, portfolio });
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (data) {
     const { user } = data;

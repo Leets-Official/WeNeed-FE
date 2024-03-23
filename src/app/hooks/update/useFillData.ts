@@ -43,8 +43,8 @@ const useFillData = () => {
         url: item.fileUrl,
       };
     });
+    setItems([...portfolio.contents]);
 
-    console.log(portfolio);
     setUploadData({
       ...uploadData,
       title: portfolio.title,
@@ -52,15 +52,13 @@ const useFillData = () => {
       tags: portfolio.tags,
       content: [...portfolio.contents],
     });
-    setItems([...portfolio.contents]);
+
     setFiles([...newArray]);
     portfolio.files.forEach((fileURL) => {
       fetch(fileURL.fileUrl)
         .then((response) => response.blob())
         .then((blob) => {
           const file = new File([blob], fileURL.fileName);
-          console.log(file, 'blob생성 완');
-
           setFileBlob((prevFiles) => [
             ...prevFiles,
             {
@@ -79,7 +77,6 @@ const useFillData = () => {
           .then((response) => response.blob())
           .then((blob) => {
             const file = new File([blob], content.data);
-            console.log(file, '이미지 blob생성 완');
             setImages((prevImages) => [
               ...prevImages,
               {
@@ -105,12 +102,9 @@ const useFillData = () => {
         setUploadData({ ...uploadData, thumbnail: portfolio.thumbnail });
       })
       .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
-    console.log(fileBlob, 'blob 현황');
   };
 
   const fillRecruit = ({ recruit }: useFillRecruitProps) => {
-    console.log(recruit, '로 변경경');
-
     setUploadData({
       ...uploadData,
       articleType: 'RECRUITING',
@@ -140,7 +134,6 @@ const useFillData = () => {
           .then((response) => response.blob())
           .then((blob) => {
             const file = new File([blob], content.data);
-            console.log(file, '이미지 blob생성 완');
             setImages((prevImages) => [
               ...prevImages,
               {

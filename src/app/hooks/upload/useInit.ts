@@ -21,7 +21,6 @@ const useInit = () => {
 
   const initPF = () => {
     console.log('초기화');
-
     uploadFormData.delete('request');
     uploadFormData.delete('files');
     uploadFormData.delete('images');

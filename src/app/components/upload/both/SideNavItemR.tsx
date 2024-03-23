@@ -4,7 +4,7 @@ import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
 import { uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
-import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
+import { USER_PREVIEW } from 'constants/upload';
 import { previewAlert, thumbnailAlert } from './showToast';
 import RecruitPreview from './containers/RecruitPreview';
 
@@ -34,24 +34,8 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     }
   };
 
-  const previewRecruit: RecruitDetailItem = {
-    ...PORTFOLIO_PREVIEW,
-    contents: uploadData.content || '',
-    createdAt: String(koreanDate),
-    thumbnail: uploadData.thumbnail || '',
-    recruiting: true,
-    commentCount: 0,
-    sharedText: uploadData.sharedText || '',
-  };
-
   const navComponent: NavComponent = {
-    미리보기: (
-      <RecruitPreview
-        user={USER_PREVIEW}
-        recruiting={previewRecruit}
-        closeModal={closeModal}
-      />
-    ),
+    미리보기: <RecruitPreview user={USER_PREVIEW} closeModal={closeModal} />,
     업로드: <SelectDetailR closeModal={closeModal} isEdit={isEdit} id={id} />,
   };
 
