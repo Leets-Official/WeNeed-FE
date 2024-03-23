@@ -70,7 +70,7 @@ interface ResponseMypageMycrew {
 }
 
 interface ResponseMyApplicationCrew {
-  applicationInfoResponses: MyOutputList[];
+  applicationInfoResponses: FeedItems2[];
   pageableDto: Pageable;
 }
 

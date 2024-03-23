@@ -6,7 +6,7 @@ import { view } from 'ui/IconsPath';
 import GradientProfileSM from 'ui/gradient/GradientProfileSM';
 
 interface FeedItemsProps {
-  article: FeedItems;
+  article: FeedItems | FeedItems2;
 }
 
 const FeedItems = ({ article }: FeedItemsProps) => {
