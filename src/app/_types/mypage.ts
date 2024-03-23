@@ -7,6 +7,15 @@ interface FeedItems {
   teamProfiles: Array<string>;
 }
 
+interface FeedItems2 {
+  applicationId: number;
+  thumbnail: string;
+  title: string;
+  viewCount: number;
+  heartCount: number;
+  teamProfiles: Array<string>;
+}
+
 interface MyOutputList {
   articleId: number;
   thumbnail: string;

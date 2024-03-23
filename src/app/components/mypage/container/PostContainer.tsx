@@ -3,7 +3,7 @@ import FeedMenuContainer from './FeedMenuContainer';
 
 interface PostContainerProps {
   myOutputList1: MyOutputList[];
-  myOutputList2?: MyOutputList[];
+  myOutputList2?: FeedItems2[];
   sameUser: boolean;
   pageableDto1: Pageable;
   pageableDto2?: Pageable;
