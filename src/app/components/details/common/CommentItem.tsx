@@ -6,7 +6,7 @@ import Input from 'components/common/Input';
 import { PROFILE_STYLE } from 'constants/styles';
 import Image from 'next/image';
 import Icons from 'components/common/Icons';
-import { commentClose, commentOpen } from 'ui/IconsPath';
+import { commentClose, commentOpen, inputDrop } from 'ui/IconsPath';
 import GradientProfileMD from 'ui/gradient/GradientProfileMD';
 
 interface CommentItemProps {
@@ -141,14 +141,19 @@ const CommentItem = ({
               <GradientProfileMD />
             )}
           </div>
-          <Input
-            type="comment"
-            textValue={recommentValue}
-            onChange={(e) => setRecommentValue(e.target.value)}
-            onEnterPress={onSubmitHandler}
-            placeholder="댓글을 입력해주세요."
-            className="w-[87.25%]"
-          />
+          <div className="relative w-[95%]">
+            <Input
+              type="comment"
+              textValue={recommentValue}
+              onChange={(e) => setRecommentValue(e.target.value)}
+              onEnterPress={onSubmitHandler}
+              placeholder="댓글을 입력해주세요."
+              className="w-full"
+            />
+            <div className="absolute top-[30%] right-[1.5%] flex justify-center items-center w-6 h-6 rounded-full bg-gradient-to-r from-[#4EF4FF] to-[#608CFF] cursor-pointer">
+              <Icons name={inputDrop} onClick={onSubmitHandler} />
+            </div>
+          </div>
         </div>
       )}
     </>
