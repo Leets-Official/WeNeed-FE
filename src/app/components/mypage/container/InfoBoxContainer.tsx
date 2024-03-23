@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 
 interface InfoBoxContainerProps {
   doubleMajor: string;
-  interestFiled: string;
+  interestField: string;
   email: string;
   links: string[];
   selfIntro: string;
@@ -16,14 +16,14 @@ interface InfoBoxContainerProps {
 
 export const InfoBoxContainer = ({
   doubleMajor,
-  interestFiled,
+  interestField,
   email,
   links,
   selfIntro,
   sameUser,
 }: InfoBoxContainerProps) => {
   const router = useRouter();
-  const itemList = [doubleMajor, interestFiled, email, links, selfIntro];
+  const itemList = [doubleMajor, interestField, email, links, selfIntro];
 
   return (
     <div className="flex flex-col justify-center items-center gap-4">

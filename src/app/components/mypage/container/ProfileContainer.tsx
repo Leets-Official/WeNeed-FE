@@ -19,11 +19,12 @@ export const ProfileContainer = ({
       major,
       userGrade,
       doubleMajor,
-      interestFiled,
+      interestField,
       email,
       lnks,
       selfIntro,
     } = userInfoItemList;
+    console.log('userInfoItemList', userInfoItemList);
 
     return (
       <div
@@ -38,7 +39,7 @@ export const ProfileContainer = ({
           />
           <InfoBoxContainer
             doubleMajor={doubleMajor}
-            interestFiled={interestFiled}
+            interestField={interestField}
             email={email}
             links={lnks}
             selfIntro={selfIntro}

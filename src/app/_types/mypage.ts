@@ -31,7 +31,7 @@ interface MypageUserInfo {
   major: string;
   userGrade: number;
   doubleMajor: string;
-  interestFiled: string;
+  interestField: string;
   email: string;
   lnks: string[];
   selfIntro: string;
