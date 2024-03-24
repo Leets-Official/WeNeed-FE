@@ -4,6 +4,11 @@ import Button from 'components/common/Button';
 import Icons from 'components/common/Icons';
 import { pencil, trashcan } from 'ui/IconsPath';
 import { usePathname, useRouter } from 'next/navigation';
+import { useModal } from 'hooks/upload/useModal';
+import BeforeDelete from 'components/upload/both/modal/submit/BeforeDelete';
+import { deletePostAlert } from 'components/upload/both/showToast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface WriterOptionsProps {
   onRecruit?: boolean;
@@ -22,6 +27,7 @@ const WriterOptions = ({
 }: WriterOptionsProps) => {
   const pathName = usePathname();
   const router = useRouter();
+  const { isOpen, openModal, closeModal } = useModal(false);
 
   const onLinkHandler = () => {
     router.push(
@@ -32,13 +38,17 @@ const WriterOptions = ({
   };
 
   const deleteArticle = async (articleId: string) => {
+    deletePostAlert();
+    const route = onRecruit ? '/main/recruiting' : '/';
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/delete/post?articleId=${articleId}`,
       {
         method: 'DELETE',
       },
     );
-    router.push('/');
+    setTimeout(() => {
+      router.push(route);
+    }, 2500);
   };
 
   const onClickCrewButton = () => {
@@ -54,7 +64,7 @@ const WriterOptions = ({
       <div className="w-full flex justify-center items-center gap-[26px]">
         <div
           className="flex items-center gap-[10px] cursor-pointer"
-          onClick={() => deleteArticle(articleId)}
+          onClick={openModal}
         >
           <Icons name={trashcan} className={`${onRecruit && 'fill-black'}`} />
           <p className="pt-1">삭제하기</p>
@@ -67,6 +77,15 @@ const WriterOptions = ({
           <Icons name={pencil} className={`${onRecruit && 'fill-black'}`} />
           <p>수정하기</p>
         </div>
+        {isOpen && (
+          <div>
+            <ToastContainer />
+            <BeforeDelete
+              deletePost={() => deleteArticle(articleId)}
+              closeModal={closeModal}
+            />
+          </div>
+        )}
       </div>
       {onRecruit && (
         <Button

@@ -7,7 +7,7 @@ import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
 import { uploadDataState } from 'recoil/upload';
 import { USER_PREVIEW } from 'constants/upload';
-import { previewAlert, thumbnailAlert } from './showToast';
+import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
@@ -23,6 +23,8 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       openModal();
     } else if (uploadData.thumbnail === '') {
       thumbnailAlert();
+    } else if (uploadData.content.length < 1) {
+      noContentsAlert();
     } else {
       openModal();
     }
