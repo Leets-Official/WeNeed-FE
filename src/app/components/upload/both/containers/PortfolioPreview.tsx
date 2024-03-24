@@ -1,17 +1,43 @@
+'use client';
+
 import PortfolioDetailsContainer from 'components/details/portfolio/containers/PortfolioDetailsContainer';
 import Header from 'components/layout/Header';
+import { PORTFOLIO_PREVIEW } from 'constants/upload';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { filestate, textState, uploadDataState } from 'recoil/upload';
 
 interface PortfolioPreviewProps {
   user: UserProfile;
-  portfolio: PortfolioDetails;
   closeModal: () => void;
 }
+const koreanDate = new Date();
+koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
+const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [items, setItems] = useRecoilState(textState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const fileNames: FileDetail[] = files.map((file) => {
+    return {
+      fileName: file.id,
+      fileUrl: file.id,
+    };
+  });
+  useEffect(() => {
+    setUploadData({ ...uploadData, content: items });
+  }, [items]);
 
-const PortfolioPreview = ({
-  user,
-  portfolio,
-  closeModal,
-}: PortfolioPreviewProps) => {
+  const previewRecruit: RecruitDetailItem = {
+    ...PORTFOLIO_PREVIEW,
+    contents: uploadData.content || '',
+    createdAt: String(koreanDate),
+    thumbnail: uploadData.thumbnail || '',
+    recruiting: true,
+    commentCount: 0,
+    files: fileNames,
+    sharedText: uploadData.sharedText || '',
+  };
+
   return (
     <div
       className="fixed inset-0 flex min-h-screen justify-center z-50 bg-black overflow-auto scrollbar-hide"
@@ -22,7 +48,7 @@ const PortfolioPreview = ({
         <PortfolioDetailsContainer
           isPreview={true}
           user={user}
-          portfolio={portfolio}
+          portfolio={previewRecruit}
           articleId={'9999'}
         />
       </div>

@@ -6,7 +6,6 @@ import Header from 'components/layout/Header';
 import useLoginModal from 'hooks/upload/useLoginModal';
 import ModalPortal from 'components/common/modal/ModalPortal';
 import ModalOutside from 'components/common/modal/ModalOutside';
-import NeedLoginModal from 'components/common/modal/NeedLoginModal';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
 import { DetailCategoriesContainer } from 'components/main/containers';
 import { useRecoilValue } from 'recoil';
@@ -14,6 +13,14 @@ import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { setTokens } from 'utils/cookieUtils';
+import dynamic from 'next/dynamic';
+
+const NeedLoginModal = dynamic(
+  () => import('components/common/modal/NeedLoginModal'),
+  {
+    suspense: true,
+  },
+);
 
 export default function MainRecruitingPage() {
   const [page, setPage] = useState<number>(1);
@@ -27,21 +34,14 @@ export default function MainRecruitingPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_NEXT_SERVER
-        }/api/main/recruiting?size=${MAIN_SIZE}&page=${page}&detailTags=${
-          selectedCategoriesValue || ''
-        }`,
-      );
-      const responseData = await response.json();
+      const responseData = await fetchDataAPI(page, selectedCategoriesValue);
       if (responseData.tokens) {
         setTokens(
           responseData.tokens.accessToken,
           responseData.tokens.refreshToken,
         );
       }
-      setData((prevData: ResponseRecruitingMain | null | undefined) => ({
+      setData((prevData) => ({
         ...prevData!,
         pageable: responseData.pageable,
         user: responseData.user,
@@ -52,12 +52,46 @@ export default function MainRecruitingPage() {
     };
 
     fetchData();
-  }, [selectedCategoriesValue, page]);
+  }, [page]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const responseData = await fetchDataAPI(1, selectedCategoriesValue);
+      if (responseData.tokens) {
+        setTokens(
+          responseData.tokens.accessToken,
+          responseData.tokens.refreshToken,
+        );
+      }
+      setData({
+        pageable: responseData.pageable,
+        user: responseData.user,
+        recruitList: responseData.recruitList,
+      });
+    };
+
+    fetchData();
+  }, [selectedCategoriesValue]);
+
+  const fetchDataAPI = async (page: number, selectedCategoriesValue: any) => {
+    const response = await fetch(
+      `${
+        process.env.NEXT_PUBLIC_NEXT_SERVER
+      }/api/main/recruiting?size=${MAIN_SIZE}&page=${page}&detailTags=${
+        selectedCategoriesValue || ''
+      }`,
+    );
+    return response.json();
+  };
 
   const onIntersect: IntersectionObserverCallback = async ([
     { isIntersecting },
   ]) => {
-    if (isIntersecting && page != data?.pageable.totalPages) {
+    if (
+      isIntersecting &&
+      page != data?.pageable.totalPages &&
+      data?.pageable.totalElements !== 0
+    ) {
       setPage((prevPage) => prevPage + 1);
     }
   };

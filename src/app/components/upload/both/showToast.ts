@@ -6,7 +6,7 @@ export const editAlert = () => {
     icon: () => '✍️',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
     position: 'top-center',
   });
 };
@@ -16,7 +16,7 @@ export const deleteAlert = () => {
     icon: () => '🗑️',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
     position: 'top-center',
   });
 };
@@ -26,7 +26,7 @@ export const exceedAlert = () => {
     icon: () => '🚫',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
     position: 'top-center',
   });
 };
@@ -36,7 +36,7 @@ export const overlapAlert = () => {
     icon: () => '🚫',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
     position: 'top-center',
   });
 };
@@ -46,7 +46,7 @@ export const previewAlert = () => {
     icon: () => '🖱️',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
     position: 'top-center',
   });
 };
@@ -56,7 +56,27 @@ export const thumbnailAlert = () => {
     icon: () => '🖼️',
     theme: 'dark',
     closeOnClick: true,
-    autoClose: 3000,
+    autoClose: 2000,
+    position: 'top-center',
+  });
+};
+
+export const noContentsAlert = () => {
+  toast.info('본문에 최소 1개의 컨텐츠를 추가해주세요', {
+    icon: () => '✏️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 2000,
+    position: 'top-center',
+  });
+};
+
+export const deletePostAlert = () => {
+  toast.error('게시물이 삭제되었습니다. 잠시후 메인페이지로 이동합니다.', {
+    icon: () => '🗑️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 2000,
     position: 'top-center',
   });
 };

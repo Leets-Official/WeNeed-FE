@@ -1,7 +1,6 @@
 import { FILE_TYPE_LIST } from 'constants/portfolio';
 import FileTypeContainer from '../both/containers/FileTypeContainer';
 import { fileIconPath_P } from 'ui/IconsPath';
-import { FILE } from 'dns';
 
 const FirstSelectP = () => {
   return (

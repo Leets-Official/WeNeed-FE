@@ -1,5 +1,4 @@
 import { useRecoilState } from 'recoil';
-import { useResetRecoilState } from 'recoil';
 import {
   fileBlobState,
   filestate,
@@ -19,7 +18,12 @@ const useInit = () => {
   const [orderId, setOrderId] = useRecoilState(orderState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
+
   const initPF = () => {
+    console.log('초기화');
+    uploadFormData.delete('request');
+    uploadFormData.delete('files');
+    uploadFormData.delete('images');
     setItems([]);
     setFiles([]);
     setImages([]);
@@ -34,31 +38,10 @@ const useInit = () => {
       sharedText: '',
       thumbnail: '',
     });
-    uploadFormData.delete('request');
-    uploadFormData.delete('files');
-    uploadFormData.delete('images');
-    setOrderId(0);
-  };
-  const initRC = () => {
-    setItems([]);
-    setImages([]);
-    setUploadData({
-      articleType: 'RECRUITING',
-      title: '',
-      content: [],
-      skills: [],
-      tags: [],
-      teamMembersId: [],
-      sharedText: '',
-      thumbnail: '',
-    });
-    uploadFormData.delete('request');
-    uploadFormData.delete('images');
     setOrderId(0);
   };
 
   return {
-    initRC,
     initPF,
   };
 };

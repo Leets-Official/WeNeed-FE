@@ -1,21 +1,42 @@
+'use client';
+
 import Profile from 'components/details/common/Profile';
 import RecruitingDetailContainers from 'components/details/recruiting/containers/RecruitingDetailContainers';
 import Header from 'components/layout/Header';
-import { WRITER_PREVIEW } from 'constants/upload';
+import { PORTFOLIO_PREVIEW, WRITER_PREVIEW } from 'constants/upload';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { textState, uploadDataState } from 'recoil/upload';
 
 interface RecruitPreviewProps {
   user: UserProfile;
-  recruiting: RecruitDetailItem;
   closeModal: () => void;
 }
 const koreanDate = new Date();
 koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 
-const RecruitPreview = ({
-  user,
-  recruiting,
-  closeModal,
-}: RecruitPreviewProps) => {
+const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
+  const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [items, setItems] = useRecoilState(textState);
+
+  useEffect(() => {
+    setUploadData({ ...uploadData, content: items });
+  }, [items]);
+
+  const previewRecruit: RecruitDetailItem = {
+    ...PORTFOLIO_PREVIEW,
+    title: uploadData.title,
+    skills: uploadData.skills,
+    tags: uploadData.tags,
+    sharedText: uploadData.sharedText || '',
+    contents: uploadData.content || '',
+    createdAt: String(koreanDate),
+    thumbnail: uploadData.thumbnail || '',
+    recruiting: true,
+    commentCount: 0,
+  };
+  console.log('previewPF', previewRecruit);
+
   return (
     <div
       className="fixed inset-0 flex min-h-screen justify-center z-50 bg-black overflow-auto scrollbar-hide"
@@ -36,7 +57,7 @@ const RecruitPreview = ({
           <RecruitingDetailContainers
             isPreview={true}
             user={user}
-            recruit={recruiting}
+            recruit={previewRecruit}
             articleId={'9999'}
           />
         </div>

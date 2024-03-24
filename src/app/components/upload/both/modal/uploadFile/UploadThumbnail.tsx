@@ -47,6 +47,7 @@ const UploadThumbnail = ({ uploadInfo, closeModal }: UploadThumbnailProps) => {
               <div className="flex gap-x-[12px] mt-[30px] ml-[22px] text-black text-xs font-medium">
                 <div>
                   <Image
+                    priority
                     src={fileInfo.url}
                     alt={fileInfo.name}
                     {...imgAndVideo}

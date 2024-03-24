@@ -61,10 +61,14 @@ const PortfolioDetailsContainer = ({
           <Image
             priority
             src={thumbnail}
-            fill={true}
+            width={0}
+            height={0}
+            sizes="100vw"
             alt="thumbnail"
             style={{
               objectFit: 'cover',
+              width: '100vw',
+              height: '380px',
             }}
           />
         </div>

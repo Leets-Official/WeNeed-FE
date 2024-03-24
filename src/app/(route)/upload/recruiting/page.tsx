@@ -1,18 +1,23 @@
 'use client';
 import Header from 'components/layout/Header';
-import UploadContainerR from 'components/upload/recruiting/containers/UploadContainerR';
 import useInit from 'hooks/upload/useInit';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const UploadContainerR = dynamic(
+  () => import('components/upload/recruiting/containers/UploadContainerR'),
+  { loading: () => <p>Loading...</p> },
+);
 
 export default function UploadRecruitPage() {
   const searchParams = useSearchParams();
   const nickname = searchParams.get('nickname') || '';
   const userId = searchParams.get('userId') || 0;
-  const { initRC } = useInit();
+  const { initPF } = useInit();
 
   useEffect(() => {
-    initRC();
+    initPF();
   }, []);
 
   return (
