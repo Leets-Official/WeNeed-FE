@@ -50,7 +50,7 @@ const ApplicantListContainer = () => {
             totalCount={applicants[i].flat().length}
             title={status}
           />
-          <div className="w-[90%] h-[523px] overflow-scroll flex justify-center mb-[20px] mt-[30px]">
+          <div className="w-[90%] h-[523px] scrollbar-hide overflow-scroll flex justify-center mb-[20px] mt-[30px]">
             <ApplicantList applicantsData={applicants[i]} type={status} />
           </div>
         </div>
