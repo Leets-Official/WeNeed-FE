@@ -17,6 +17,7 @@ const RecruitingDetailContents = ({
   sharedText,
   isInMypage,
 }: RecruitingDetailContentsProps) => {
+  console.log(contents);
   return (
     <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden ">
       {contents.map((content) => {
@@ -48,15 +49,19 @@ const RecruitingDetailContents = ({
             return (
               <div
                 key={content.id}
-                className="relative flex justify-center items-center max-w-[1186px] rounded-[15px] max-h-[528px] overflow-hidden"
+                className="flex justify-center items-center w-full h-auto overflow-hidden"
               >
                 {content.data && (
                   <Image
                     src={content.data}
-                    fill={true}
+                    width={1280}
+                    height={748}
                     alt="content"
                     style={{
                       objectFit: 'cover',
+                      objectPosition: 'center center',
+                      width: '100%',
+                      height: '100%',
                     }}
                   />
                 )}
