@@ -12,11 +12,14 @@ const Share = ({ isRecruit }: ShareProps) => {
   const copyURL = async () => {
     const currentUrl = window.document.location.href;
     await navigator.clipboard.writeText(currentUrl);
+    console.log(currentUrl);
     alert('링크가 복사되었습니다.');
   };
+
   const router = useRouter();
   const goMain = () => {
     const route = isRecruit ? '/main/recruiting' : '/';
+    copyURL();
     router.push(route);
   };
   return (
