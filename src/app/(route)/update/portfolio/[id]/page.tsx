@@ -1,9 +1,14 @@
 'use client';
 import Header from 'components/layout/Header';
-import UploadContainerP from 'components/upload/portfolio/containers/UploadContainerP';
 import useFillData from 'hooks/update/useFillData';
 import useInit from 'hooks/upload/useInit';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const UploadContainerP = dynamic(
+  () => import('components/upload/portfolio/containers/UploadContainerP'),
+  { loading: () => <p>Loading...</p> },
+);
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillPF } = useFillData();

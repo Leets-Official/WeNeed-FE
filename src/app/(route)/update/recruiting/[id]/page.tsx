@@ -1,10 +1,15 @@
 'use client';
 
 import Header from 'components/layout/Header';
-import UploadContainerR from 'components/upload/recruiting/containers/UploadContainerR';
 import useFillData from 'hooks/update/useFillData';
 import useInit from 'hooks/upload/useInit';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const UploadContainerR = dynamic(
+  () => import('components/upload/recruiting/containers/UploadContainerR'),
+  { loading: () => <p>Loading...</p> },
+);
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillRecruit } = useFillData();
