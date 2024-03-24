@@ -13,7 +13,7 @@ export default function EditPage({ params }: EditPageProps) {
       <div className="w-[80%] max-w-[1290px]">
         <Header nickname={`d`} userId={userId} />
       </div>
-      <div className="w-[80%] max-w-[1290px] flex-cole flex items-center">
+      <div className="w-[80%] h-full max-w-[1290px] flex-col flex items-center">
         <ProfilesImgContainer profile={undefined} />
         <EditUserInfoContainer />
       </div>
