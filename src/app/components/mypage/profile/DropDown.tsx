@@ -12,6 +12,8 @@ interface DropDownProps {
   buttonClassName?: string;
   dropDownClassName?: string;
   itemClassName?: string;
+  type?: string;
+  title?: string;
 }
 
 const DropDown = ({
@@ -24,10 +26,13 @@ const DropDown = ({
   buttonClassName,
   dropDownClassName,
   itemClassName,
+  type,
+  title,
 }: DropDownProps) => {
   return (
     <div className={`${className}`}>
       <button type="button" onClick={onOpen} className={`${buttonClassName}`}>
+        {title && <span className="absolute left-4">{title}</span>}
         <span className="flex justify-center items-center">{selectedItem}</span>
         <span className="relative right-0">
           {isOpen ? (
@@ -44,7 +49,11 @@ const DropDown = ({
             <button
               key={item}
               className={`text-left ${itemClassName} ${
-                selectedItem === item ? 'text-black' : 'text-neutral-400'
+                selectedItem === item
+                  ? type === 'edit'
+                    ? 'text-white'
+                    : 'text-black'
+                  : 'text-neutral-400'
               } ${
                 index === sortedItemList.length - 1
                   ? ''

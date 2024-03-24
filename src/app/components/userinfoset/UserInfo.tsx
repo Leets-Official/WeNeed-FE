@@ -102,7 +102,7 @@ const UserInfo = ({ token }: UserInfoProps) => {
   };
 
   return (
-    <div className="w-full h-full flex justify-center items-center relativ">
+    <div className="w-full h-full flex justify-center items-center relative">
       <div className="absolute left-20 top-20 text-[20px] font-semibold ">
         {USER_INFO.TITLE}
       </div>
