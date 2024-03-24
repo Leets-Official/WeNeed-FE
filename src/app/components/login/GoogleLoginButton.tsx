@@ -12,7 +12,7 @@ const GoogleLoginButton = () => {
     <Button
       type="userinfo"
       buttonText="Google 계정으로 로그인"
-      className="w-[476px] h-[50px] bg-white rounded-lg text-center text-neutral-900 text-sm font-medium font-['Roboto']"
+      className="w-[476px] h-[50px] bg-white shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] rounded-lg text-center text-neutral-900 text-sm font-medium font-['Roboto']"
       isDisabled={false}
       onClickHandler={handleGoogleLogin}
     >
