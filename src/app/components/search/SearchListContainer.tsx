@@ -1,13 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import SearchItem from './SearchItem';
 import useLoginModal from 'hooks/upload/useLoginModal';
-import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import ModalPortal from 'components/common/modal/ModalPortal';
 import ModalOutside from 'components/common/modal/ModalOutside';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface SearchListContainerProps {
   searchList: SearchArticle[];
