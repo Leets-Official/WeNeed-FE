@@ -67,7 +67,7 @@ const EditUserInfoContainer = () => {
           body: JSON.stringify(mypageMyInfo),
         },
       ).then((res) => res.json());
-      console.log('Fetch Data Success:', response);
+      console.log('Fetch Data Edit User Info :', response);
     } catch (error) {
       console.error('Error during Fetch Data:', error);
     }

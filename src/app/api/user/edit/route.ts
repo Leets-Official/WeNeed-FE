@@ -31,7 +31,7 @@ export async function PATCH(req: Request) {
   };
   try {
     const response = await patchUserInfoEdit(requestBody, accessToken);
-    return NextResponse.json({ result: 'success' });
+    return NextResponse.json({ response });
   } catch (error) {
     console.error(
       '넥스트 서버에서 사용자 정보 PATCH 요청 처리 중 오류 발생:',

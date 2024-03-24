@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import { postUserInfo } from 'service/userinfo';
+import { getCookie } from 'utils/cookieUtils';
 
 export async function POST(req: Request): Promise<NextResponse> {
-  const { searchParams } = new URL(req.url);
-  const accessToken = searchParams.get('accessToken');
-  console.log(`searchParams: ${searchParams}, accessToken: ${accessToken}`);
+  const accessToken = getCookie(req, 'accessToken');
 
   const userInfo = await req.json();
   console.log(`userInfo: ${userInfo}`);
