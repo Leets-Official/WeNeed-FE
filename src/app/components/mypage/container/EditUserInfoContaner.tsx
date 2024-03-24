@@ -12,7 +12,7 @@ import { MY_PAGE } from 'constants/mypage';
 const fetchData = async (nickName: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/user/checkNickname?nickName=${nickName}`,
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/user/checkNickname?nickName=${nickName}`,
       {
         method: 'POST',
         cache: 'no-store',
