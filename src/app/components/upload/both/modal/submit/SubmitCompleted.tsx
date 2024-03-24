@@ -3,12 +3,15 @@ import Button from 'components/common/Button';
 import GradientCompleted from 'ui/gradient/GradientCompleted';
 import Share from './Share';
 import { useState } from 'react';
+interface SubmitCompletedProps {
+  isRecruit?: boolean;
+}
 
-const SubmitCompleted = () => {
+const SubmitCompleted = ({ isRecruit }: SubmitCompletedProps) => {
   const [onShare, setOnShare] = useState(false);
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-42 backdrop-blur-1">
-      {onShare && <Share />}
+      {onShare && <Share isRecruit={isRecruit} />}
       <div className="relative w-[922px] h-[340px] items-center bg-white rounded-[9px]">
         <div className="absolute top-[57.5px] left-[409px]">
           <GradientCompleted />

@@ -2,10 +2,10 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
-import { uploadDataState, uploadForm } from 'recoil/upload';
+import { uploadDataState } from 'recoil/upload';
 import { useRecoilState } from 'recoil';
-import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-import { previewAlert, thumbnailAlert } from './showToast';
+import { USER_PREVIEW } from 'constants/upload';
+import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 import RecruitPreview from './containers/RecruitPreview';
 
 interface SideNavItemProps {
@@ -20,8 +20,6 @@ type NavComponent = Record<string, JSX.Element>;
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 
@@ -29,31 +27,17 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     if (label === '미리보기') {
       previewAlert();
       openModal();
-    } else if (uploadData.thumbnail !== '') {
-      openModal();
-    } else {
+    } else if (uploadData.thumbnail === '') {
       thumbnailAlert();
+    } else if (uploadData.content.length < 1) {
+      noContentsAlert();
+    } else {
+      openModal();
     }
   };
 
-  const previewRecruit: RecruitDetailItem = {
-    ...PORTFOLIO_PREVIEW,
-    contents: uploadData.content || '',
-    createdAt: String(koreanDate),
-    thumbnail: uploadData.thumbnail || '',
-    recruiting: true,
-    commentCount: 0,
-    sharedText: uploadData.sharedText || '',
-  };
-
   const navComponent: NavComponent = {
-    미리보기: (
-      <RecruitPreview
-        user={USER_PREVIEW}
-        recruiting={previewRecruit}
-        closeModal={closeModal}
-      />
-    ),
+    미리보기: <RecruitPreview user={USER_PREVIEW} closeModal={closeModal} />,
     업로드: <SelectDetailR closeModal={closeModal} isEdit={isEdit} id={id} />,
   };
 
