@@ -15,7 +15,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     console.log('Google login response Tokens :', response);
     console.log('Has Registered :', response.hasRegistered);
     let destination = '';
-    response.hasRegistered
+    !response.hasRegistered
       ? (destination = `/userinfoset/1?accessToken=${response.accessToken}&refreshToken=${response.refreshToken}`)
       : (destination = `/`);
 

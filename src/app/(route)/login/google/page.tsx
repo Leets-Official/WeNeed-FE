@@ -1,6 +1,9 @@
 'use client';
 
+import Loading from '(route)/loading';
+import Icons from 'components/common/Icons';
 import { useEffect } from 'react';
+import { weneed } from 'ui/IconsPath';
 
 const fetchData = async () => {
   try {
@@ -53,14 +56,7 @@ const OauthPage = () => {
 
     fetchDataAndRedirect();
   }, []);
-  return (
-    <div>
-      <p className="w-96 h-10 bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]">
-        Redirecting...
-      </p>
-      <p className=" bg-gradient-to-r from-[#4EF4FF] to-[#608CFF]"></p>
-    </div>
-  );
+  return <Loading />;
 };
 
 export default OauthPage;

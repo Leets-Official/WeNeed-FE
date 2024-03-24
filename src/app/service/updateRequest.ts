@@ -13,7 +13,6 @@ const postRequest = async (
       },
       body: body,
     });
-    console.log('서버로 patch요청 res', response);
     return response;
   } catch (error) {
     console.log('Error:', error);
@@ -26,8 +25,6 @@ export const updatePortfolio = async (
   id: string,
 ) => {
   const url = `${SERVER_URL}/portfolio/${id}`;
-  console.log(url, '로 수정요청 토큰과 id', accessToken, id);
-
   return await postRequest(url, portfolio, accessToken);
 };
 

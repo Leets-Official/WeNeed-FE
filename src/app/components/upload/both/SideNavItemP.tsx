@@ -5,26 +5,15 @@ import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
 import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
-import { filestate, uploadDataState, uploadForm } from 'recoil/upload';
-import { PORTFOLIO_PREVIEW, USER_PREVIEW } from 'constants/upload';
-import { previewAlert, thumbnailAlert } from './showToast';
+import { uploadDataState } from 'recoil/upload';
+import { USER_PREVIEW } from 'constants/upload';
+import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
-
-  const fileNames: FileDetail[] = files.map((file) => {
-    return {
-      fileName: file.id,
-      fileUrl: file.id,
-    };
-  });
 
   const startPreview = () => {
     if (label === '미리보기') {
@@ -32,30 +21,17 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       openModal();
     } else if (label === '팀원 추가') {
       openModal();
-    } else if (uploadData.thumbnail !== '') {
-      openModal();
-    } else {
+    } else if (uploadData.thumbnail === '') {
       thumbnailAlert();
+    } else if (uploadData.content.length < 1) {
+      noContentsAlert();
+    } else {
+      openModal();
     }
   };
 
-  const previewPF: PortfolioDetails = {
-    ...PORTFOLIO_PREVIEW,
-    contents: uploadData.content || '',
-    createdAt: String(koreanDate),
-    thumbnail: uploadData.thumbnail || '',
-    files: fileNames,
-    recruiting: false,
-  };
-
   const navComponent: NavComponent = {
-    미리보기: (
-      <PortfolioPreview
-        user={USER_PREVIEW}
-        portfolio={previewPF}
-        closeModal={closeModal}
-      />
-    ),
+    미리보기: <PortfolioPreview user={USER_PREVIEW} closeModal={closeModal} />,
     업로드: <SelectDetailP closeModal={closeModal} isEdit={isEdit} id={id} />,
     '팀원 추가': <SearchTeam closeModal={closeModal} />,
   };

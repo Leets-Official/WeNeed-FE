@@ -16,7 +16,6 @@ const Attatched = () => {
           case 'docs':
             return <DndDocs key={index} fileName={file.data} />;
           default:
-            return null;
         }
       })}
     </div>

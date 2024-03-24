@@ -14,7 +14,6 @@ const Dropdown = ({ options, title, announcement }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOptionClick = (option: string) => {
-    console.log(option, '이 선택되었습니다.');
     setSelectedOption(option);
     setIsOpen(false);
   };

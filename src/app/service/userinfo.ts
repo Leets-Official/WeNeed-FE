@@ -1,3 +1,32 @@
+export const patchUserInfoEdit = async (
+  userInfo: MyPageMyInfoPatch,
+  token: string | null,
+) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER}/user/myPage/my-info`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(userInfo),
+        cache: 'no-store',
+      },
+    ).then((res) => res.json());
+
+    console.log('response in patchUserInfoEdit : ', response);
+    console.log('userInfo in patchUserInfoEdit : ', userInfo);
+    console.log('token in patchUserInfoEdit : ', token);
+
+    return response;
+  } catch (error) {
+    console.log('Error in patch userinfo edit func : ', error);
+    throw error;
+  }
+};
+
 export const setEmail = async (email: string) => {
   try {
     console.log('set Email : ', email);

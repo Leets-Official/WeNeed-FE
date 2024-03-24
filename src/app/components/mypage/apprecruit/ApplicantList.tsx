@@ -52,9 +52,9 @@ const ApplicantList = ({ applicantsData, type }: ApplicantListProps) => {
   };
 
   return (
-    <div className="w-full flex gap-8 flex-col items-center">
+    <div className="w-full flex gap-8 flex-col items-center scrollbar-hide">
       {applicants.map((applicantRow, index) => (
-        <div key={index} className="w-full">
+        <div key={index} className="w-full scrollbar-hide">
           {applicantRow.map((applicant, i) => (
             <Link
               href={`/crew/application/${applicant.applicationId}`}

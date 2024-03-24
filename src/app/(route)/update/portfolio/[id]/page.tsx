@@ -1,14 +1,22 @@
 'use client';
 import Header from 'components/layout/Header';
-import UploadContainerP from 'components/upload/portfolio/containers/UploadContainerP';
 import useFillData from 'hooks/update/useFillData';
+import useInit from 'hooks/upload/useInit';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const UploadContainerP = dynamic(
+  () => import('components/upload/portfolio/containers/UploadContainerP'),
+  { loading: () => <p>Loading...</p> },
+);
 
 export default function PortfolioPage({ params }: { params: { id: string } }) {
   const { fillPF } = useFillData();
   const [data, setData] = useState<ResponsePortfolioDetails | null>(null);
+  const { initPF } = useInit();
 
   useEffect(() => {
+    initPF();
     const fetchData = async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/portfolio?articleId=${params.id}`,
@@ -18,12 +26,11 @@ export default function PortfolioPage({ params }: { params: { id: string } }) {
       setData((prev) => resData);
       if (resData) {
         const { user, portfolio } = resData;
-        console.log('page에서', portfolio.files, '가져오기');
         fillPF({ user, portfolio });
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   if (data) {
     const { user } = data;
