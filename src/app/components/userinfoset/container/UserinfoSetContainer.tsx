@@ -14,24 +14,19 @@ import {
   userInfoSetState,
   userInfoState,
 } from 'recoil/userinfo';
-import { setTokens } from 'utils/cookieUtils';
 import { useEffect } from 'react';
 
 interface UserinfoSetContainerProps {
   slug: string;
 }
 
-const fetchData = async (token: string | null, userInfo: userInfo) => {
+const fetchData = async (userInfo: userInfo) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/user/info`,
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/info`,
       {
         method: 'POST',
         body: JSON.stringify(userInfo),
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${token}`,
-        },
         cache: 'no-store',
       },
     ).then((res) => res.json());
@@ -65,13 +60,6 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [successUserInfoSet.successNickname, userInfo]);
 
-  const { searchParams } =
-    typeof window !== 'undefined'
-      ? new URL(window.location.href)
-      : { searchParams: new URLSearchParams() };
-  const accessToken = searchParams.get('accessToken');
-  const refreshToken = searchParams.get('refreshToken');
-
   const pageNum = slug[0];
 
   const canNext =
@@ -80,17 +68,12 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
 
   const nextRoute = async () => {
     if (pageNum === '1') {
-      const response = await fetchData(accessToken, userInfo);
+      const response = await fetchData(userInfo);
       if (response.result) {
-        route.push(
-          `/userinfoset/2?accessToken=${accessToken}&refreshToken=${refreshToken}`,
-        );
+        route.push(`/userinfoset/2`);
       }
     } else {
-      if (accessToken && refreshToken) {
-        setTokens(accessToken, refreshToken);
-        route.push('/main/portfolio');
-      }
+      route.push('/main/portfolio');
     }
   };
 
@@ -104,7 +87,7 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
           <Link href="/main">
             <Icons name={loginHome} className="absolute top-4 right-6" />
           </Link>
-          {pageNum === '1' ? <UserInfo token={accessToken} /> : <UnivAuth />}
+          {pageNum === '1' ? <UserInfo /> : <UnivAuth />}
           <Button
             buttonText={pageNum === '1' ? UNIV_AUTH.BTN : USER_INFO.BTN}
             type="userinfo"
