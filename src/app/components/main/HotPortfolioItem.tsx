@@ -11,7 +11,8 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
       <Image
         src={thumbnail}
         alt="hot portfolio"
-        fill={true}
+        width={1150}
+        height={525}
         style={{
           objectFit: 'cover',
         }}

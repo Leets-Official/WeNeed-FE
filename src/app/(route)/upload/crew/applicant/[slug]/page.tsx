@@ -18,11 +18,6 @@ export default async function CrewApplicantPage({
         <RecruitmentContainer articleId={params.slug} />
         <ApplicantContainer articleId={params.slug} />
       </div>
-      <CrewSubmission
-        articleId={params.slug}
-        text="완료"
-        type="submitApplicant"
-      />
     </section>
   );
 }

@@ -54,6 +54,7 @@ interface ResponseCrewApplicant {
   applicationForm: ApplicationFormResponse;
   sameUser: boolean;
   nickname: string;
+  userId: number;
 }
 
 interface ResponseMypageBasicInfo {
@@ -70,7 +71,7 @@ interface ResponseMypageMycrew {
 }
 
 interface ResponseMyApplicationCrew {
-  applicationInfoResponses: MyOutputList[];
+  applicationInfoResponses: FeedItems2[];
   pageableDto: Pageable;
 }
 

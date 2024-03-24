@@ -12,7 +12,7 @@ import ReactPaginate from 'react-paginate';
 
 interface FeedItemsProps {
   article1: FeedItems[];
-  article2?: FeedItems[];
+  article2?: FeedItems2[];
   sameUser: boolean;
   pageableDto1: Pageable;
   pageableDto2?: Pageable;
@@ -33,6 +33,8 @@ const FeedItemsContainer = ({
   const onClickCrewType = (type: string) => {
     setCrewType(type);
   };
+
+  console.log(article2);
 
   console.log('totalPages', pageableDto1.totalPages);
   useEffect(() => {
@@ -105,10 +107,10 @@ const FeedItemsContainer = ({
           <div className="flex gap-[32px] mb-4 flex-wrap">
             {article2?.map((article) => (
               <Link
-                key={article.articleId}
-                href={`/mypage/apprecruit/${article.articleId}`}
+                key={article.applicationId}
+                href={`/crew/application/${article.applicationId}`}
               >
-                <FeedItems key={article.articleId} article={article} />
+                <FeedItems key={article.applicationId} article={article} />
               </Link>
             ))}
           </div>

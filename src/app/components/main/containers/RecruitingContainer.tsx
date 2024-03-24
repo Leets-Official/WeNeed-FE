@@ -39,7 +39,6 @@ const RecruitingContainer = ({
             articleId,
             userId,
           } = article;
-          console.log(userId);
           return (
             <div className="flex flex-col " key={article.articleId}>
               <div className="cursor-pointer">

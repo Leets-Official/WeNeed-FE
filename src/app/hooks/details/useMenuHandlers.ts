@@ -29,19 +29,16 @@ const useMenuHandlers = (
     }
   }, []);
 
-  const scrollToCommentsInDetail = () => {
-    if (page !== 'recruiting')
-      window.scrollTo({
-        top: window.scrollY + 400,
-        behavior: 'smooth',
-      });
-    else router.push(`/${page}/${articleId}`);
-  };
-
   const goToPage = (type: string) => {
     type === 'mypage'
       ? router.push(`/${type}/${userId}`)
       : router.push(`/${type}/${articleId}`);
+  };
+
+  const copyURL = async () => {
+    const currentUrl = window.document.location.href;
+    await navigator.clipboard.writeText(currentUrl);
+    alert('링크가 복사되었습니다.');
   };
 
   const onSubmitOption = async (type: string) => {
@@ -85,7 +82,7 @@ const useMenuHandlers = (
       scrollToComments();
     },
     공유: () => {
-      alert('준비중인 서비스입니다 :)');
+      copyURL();
     },
   };
   return {
