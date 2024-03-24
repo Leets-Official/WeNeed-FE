@@ -1,9 +1,14 @@
 'use client';
 import Header from 'components/layout/Header';
-import UploadContainerP from 'components/upload/portfolio/containers/UploadContainerP';
 import useInit from 'hooks/upload/useInit';
 import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
+
+const UploadContainerP = dynamic(
+  () => import('components/upload/portfolio/containers/UploadContainerP'),
+  { loading: () => <p>Loading...</p> },
+);
 
 export default function UploadPortfolioPage() {
   const searchParams = useSearchParams();
