@@ -12,6 +12,7 @@ interface InfoBoxContainerProps {
   links: string[];
   selfIntro: string;
   sameUser: boolean;
+  userId: number;
 }
 
 export const InfoBoxContainer = ({
@@ -21,6 +22,7 @@ export const InfoBoxContainer = ({
   links,
   selfIntro,
   sameUser,
+  userId,
 }: InfoBoxContainerProps) => {
   const router = useRouter();
   const itemList = [doubleMajor, interestField, email, links, selfIntro];
@@ -41,7 +43,7 @@ export const InfoBoxContainer = ({
           type="userinfo"
           className={`w-[300px] h-[40px] text-zinc-300 text-xs font-semibold relative rounded-[10px] bg-neutral-700 justify-center items-center flex px-8 hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100`}
           isDisabled={false}
-          onClickHandler={() => router.push('/edit')}
+          onClickHandler={() => router.push(`/edit/${userId}`)}
         />
       )}
     </div>

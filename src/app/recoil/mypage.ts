@@ -31,5 +31,23 @@ export const userProfileInfoSatate = atom({
       lnks: [''],
       selfIntro: '',
     },
+    userIdFromHeader: 0,
+  },
+});
+
+export const mypageMyInfoState = atom({
+  key: 'mypageMyInfoState',
+  default: {
+    profileImage: '',
+    request: {
+      nickname: '',
+      major: '',
+      userGrade: 0,
+      doubleMajor: '',
+      interestField: '',
+      email: '',
+      links: [''],
+    },
+    selfIntro: '',
   },
 });
