@@ -64,6 +64,7 @@ export default function MyPage({ params }: { params: { slug: string } }) {
           userNickname: userInfoData.userNickname,
           sameUser: userInfoData.sameUser,
           userInfo: userInfoData.userInfo,
+          userIdFromHeader: userInfoData.userIdFromHeader,
         }));
       } else {
         const [response, userInfoResponse] = await Promise.all([
@@ -80,6 +81,7 @@ export default function MyPage({ params }: { params: { slug: string } }) {
           userNickname: userInfoData.userNickname,
           sameUser: userInfoData.sameUser,
           userInfo: userInfoData.userInfo,
+          userIdFromHeader: userInfoData.userIdFromHeader,
         }));
       }
     };
@@ -89,18 +91,20 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     if (data) {
+      console.log('data in mypage : ', data);
       if ('userNickname' in data) {
-        const { userNickname, sameUser, userInfo } =
+        const { userNickname, sameUser, userInfo, userIdFromHeader } =
           data as ResponseMypageBasicInfo;
         if (!userInfoData) {
           setUserInfoData((prev) => userInfo);
         }
-        console.log(userNickname, sameUser, userInfo);
+        console.log(userNickname, sameUser, userInfo, userIdFromHeader);
         setUserInfoRecoil((prev) => ({
           ...prev,
           userNickname,
           sameUser,
           userInfo,
+          userIdFromHeader,
         }));
       }
     }
@@ -111,11 +115,14 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-
+    console.log('user Id in mypage', userId);
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">
-          <Header nickname={userInfoRecoil.userNickname} userId={userId} />
+          <Header
+            nickname={userInfoRecoil.userNickname}
+            userId={userInfoRecoil.userIdFromHeader}
+          />
         </div>
         <div className="w-full min-h-screen flex">
           <ProfileContainer

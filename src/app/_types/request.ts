@@ -14,7 +14,7 @@ interface MyPageMyInfoPatch {
     major: string;
     userGrade: number;
     doubleMajor: string;
-    interestFiled: string;
+    interestField: string;
     links: string[];
   };
   selfIntro: string;
