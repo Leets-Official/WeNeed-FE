@@ -4,7 +4,7 @@ import { USER_INFO } from 'constants/userinfoset';
 import DropDown from '../profile/DropDown';
 import { useRecoilState } from 'recoil';
 import { mypageMyInfoState } from 'recoil/mypage';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'components/common/Button';
 import { EditPen } from 'ui/EditPen';
 import { MY_PAGE } from 'constants/mypage';
@@ -44,6 +44,35 @@ const EditUserInfoContainer = () => {
   const [isEditingIntro, setIsEditingIntro] = useState<boolean>(false);
   const [newLink, setNewLink] = useState<string>('');
 
+  useEffect(() => {
+    const linksArray = newLink.split('\n');
+    setMypageMyInfo((prev) => ({
+      ...prev,
+      request: {
+        ...prev.request,
+        links: linksArray,
+      },
+    }));
+  }, [newLink]);
+
+  const handleDataPatch = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/edit`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(mypageMyInfo),
+        },
+      ).then((res) => res.json());
+      console.log('Fetch Data Success:', response);
+    } catch (error) {
+      console.error('Error during Fetch Data:', error);
+    }
+  };
+
   const handleEditingValue = (type: string) => {
     switch (type) {
       case 'nickname':
@@ -78,6 +107,7 @@ const EditUserInfoContainer = () => {
           setNewLink(userInput.slice(0, 300));
         } else {
           setNewLink(userInput);
+          console.log('newLink', newLink);
         }
         break;
       case 'intro':
@@ -163,8 +193,8 @@ const EditUserInfoContainer = () => {
             <label className="w-full relative flex items-center">
               <input
                 className={`${
-                  isEditingNickname ? 'w-[239px]' : 'w-full'
-                } h-[38px] pr-4 rounded-[8px] focus:outline-none border ${
+                  isEditingNickname ? 'w-[239px] pr-4' : 'w-full pr-12'
+                } h-[38px] rounded-[8px] focus:outline-none border ${
                   successNickname === 1
                     ? 'border-[#517EF3]'
                     : successNickname === 2
@@ -173,8 +203,8 @@ const EditUserInfoContainer = () => {
                 } text-white text-xs bg-black font-semibold text-right`}
                 type="text"
                 readOnly={!isEditingNickname}
-                value={mypageMyInfo.request.nickname}
-                placeholder={mypageMyInfo.request.nickname}
+                value={mypageMyInfo.request.nickname || '-'}
+                placeholder={mypageMyInfo.request.nickname || '-'}
                 onChange={(e) => {
                   const userInput = e.target.value;
                   const filteredInput = userInput.replace(
@@ -293,7 +323,7 @@ const EditUserInfoContainer = () => {
           type="edit"
           sortedItemList={[...USER_INFO.INTEREST_FIELD_LIST]}
           selectedItem={
-            mypageMyInfo.request.interestField.length === 0
+            mypageMyInfo.request.interestField === ''
               ? '-'
               : mypageMyInfo.request.interestField
           }
@@ -325,7 +355,7 @@ const EditUserInfoContainer = () => {
           <textarea
             className={`w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
             readOnly={!isEditingLink}
-            value={newLink}
+            value={newLink || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'link')}
             onKeyDown={handleKeyDown}
@@ -348,7 +378,7 @@ const EditUserInfoContainer = () => {
           <textarea
             className={`w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
             readOnly={!isEditingIntro}
-            value={mypageMyInfo.selfIntro}
+            value={mypageMyInfo.selfIntro || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'intro')}
           />
@@ -364,6 +394,14 @@ const EditUserInfoContainer = () => {
             )}
           </span>
         </div>
+
+        <Button
+          buttonText={MY_PAGE.MODIFY_PROFILE}
+          type="userinfo"
+          className="mt-10 w-full bg-[#3A3A3A] text-white text-xs font-semibold rounded-[8px] h-[38px] justify-center items-center flex hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3]"
+          isDisabled={false}
+          onClickHandler={() => handleDataPatch()}
+        />
       </div>
     </div>
   );

@@ -62,6 +62,7 @@ interface ResponseMypageBasicInfo {
   userInfo: MypageUserInfo;
   myOutputList: MyOutputList[];
   pageableDto: Pageable;
+  userIdFromHeader: number;
 }
 
 interface ResponseMypageMycrew {

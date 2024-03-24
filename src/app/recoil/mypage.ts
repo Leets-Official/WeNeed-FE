@@ -31,6 +31,7 @@ export const userProfileInfoSatate = atom({
       lnks: [''],
       selfIntro: '',
     },
+    userIdFromHeader: 0,
   },
 });
 
