@@ -13,7 +13,6 @@ const postRequest = async (
       },
       body: body,
     });
-    console.log('실제 서버에 넣어 보내기 성공 res', response);
     return response;
   } catch (error) {
     console.log('Error:', error);
