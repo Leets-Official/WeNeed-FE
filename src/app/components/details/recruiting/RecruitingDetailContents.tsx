@@ -17,7 +17,6 @@ const RecruitingDetailContents = ({
   sharedText,
   isInMypage,
 }: RecruitingDetailContentsProps) => {
-  console.log(contents);
   return (
     <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden ">
       {contents.map((content) => {
@@ -63,6 +62,8 @@ const RecruitingDetailContents = ({
                       width: '100%',
                       height: '100%',
                     }}
+                    placeholder="blur"
+                    blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPUqgcAANkAq7rAn7QAAAAASUVORK5CYII="
                   />
                 )}
               </div>

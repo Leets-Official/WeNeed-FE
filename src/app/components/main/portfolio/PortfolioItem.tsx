@@ -25,11 +25,16 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
         {article.thumbnail ? (
           <Image
             src={article.thumbnail}
-            fill={true}
+            width={296}
+            height={296}
             alt="postImage"
             style={{
               objectFit: 'cover',
+              width: '100%',
+              height: '100%',
             }}
+            placeholder="blur"
+            blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPskgEAATYAqCI2fhYAAAAASUVORK5CYII="
           />
         ) : (
           <GradientItemDefault />
@@ -53,6 +58,8 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
                 src={(article as PortfolioArticle).profile || ''}
                 style={{
                   objectFit: 'cover',
+                  width: '100%',
+                  height: '100%',
                 }}
               />
             ) : (

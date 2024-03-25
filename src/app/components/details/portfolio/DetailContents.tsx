@@ -57,6 +57,8 @@ const DetailContents = ({
                       width: '100%',
                       height: '100%',
                     }}
+                    placeholder="blur"
+                    blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPUqgcAANkAq7rAn7QAAAAASUVORK5CYII="
                   />
                 )}
               </div>

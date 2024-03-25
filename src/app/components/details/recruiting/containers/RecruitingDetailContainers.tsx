@@ -47,6 +47,8 @@ const RecruitingDetailContainers = ({
               fill={true}
               style={{ objectFit: 'contain' }}
               alt="recruitItem"
+              placeholder="blur"
+              blurDataURL="data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mPUqgcAANkAq7rAn7QAAAAASUVORK5CYII="
             />
           )}
         </div>
