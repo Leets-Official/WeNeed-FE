@@ -32,11 +32,12 @@ const Profile = ({
   return (
     <div className="w-full flex justify-between items-center">
       <div className="w-[80%] flex items-center gap-[20px] ">
-        <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
+        <div
+          className={`relative rounded-full overflow-hidden ${profileStyles} z-20 `}
+        >
           {profile ? (
             <Image
-              width={onComment ? 56 : 76}
-              height={onComment ? 56 : 76}
+              fill={true}
               alt="writer"
               src={profile}
               style={{
