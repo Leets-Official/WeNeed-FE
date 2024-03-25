@@ -28,7 +28,7 @@ const RecruitingContainer = ({
 
   return (
     <>
-      <div className="mt-[75px] flex flex-col gap-[50px] w-full text-white">
+      <ul className="mt-[75px] flex flex-col gap-[50px] w-full text-white">
         {data?.map((article) => {
           const {
             nickname,
@@ -40,7 +40,7 @@ const RecruitingContainer = ({
             userId,
           } = article;
           return (
-            <div className="flex flex-col " key={article.articleId}>
+            <li className="flex flex-col " key={article.articleId}>
               <div className="cursor-pointer">
                 <div
                   className="mb-[11px]"
@@ -59,10 +59,7 @@ const RecruitingContainer = ({
                   />
                 </div>
                 <div className="bg-white rounded-2xl pt-[40px] text-black px-[43px]">
-                  <div
-                    className=" "
-                    onClick={() => onClickItem(user.userId, articleId)}
-                  >
+                  <div onClick={() => onClickItem(user.userId, articleId)}>
                     <RecruitingItem article={article} />
                   </div>
                   <RecruitingItemMenuBar
@@ -72,10 +69,10 @@ const RecruitingContainer = ({
                   />
                 </div>
               </div>
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
       <div ref={setTarget}></div>
     </>
   );

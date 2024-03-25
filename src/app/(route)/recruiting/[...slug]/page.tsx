@@ -48,7 +48,7 @@ export default function RecruitingPage({
     } = data.recruit;
     const { bookmarked, hearted, nickname, userId } = data.user;
     return (
-      <section className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
+      <article className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
         <div className="  w-[80%]  max-w-[1290px] ">
           <Header nickname={nickname} userId={userId} />
           <div className="my-[40px]">
@@ -87,7 +87,7 @@ export default function RecruitingPage({
             </div>
           </div>
         </div>
-      </section>
+      </article>
     );
   }
 }
