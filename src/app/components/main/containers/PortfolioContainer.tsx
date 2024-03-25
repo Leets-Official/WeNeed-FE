@@ -42,16 +42,16 @@ const PortfolioContainer = ({
           onOpenSortModal={() => setOpenSortModal(!openSortModal)}
           onSelectHandler={onClickSortTypes}
         />
-        <div className="flex gap-[32px] flex-wrap">
+        <ul className="flex gap-[32px] flex-wrap">
           {data.map((article) => (
-            <div
+            <li
               key={article.articleId}
               onClick={() => onClickItem(user.userId, article.articleId)}
             >
               <PortfolioItem article={article} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     );
 };
