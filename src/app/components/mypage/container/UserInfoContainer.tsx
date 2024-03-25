@@ -17,7 +17,14 @@ export const UserInfoContainer = ({
   return (
     <div className="relative top-0 flex flex-col justify-center items-center gap-2.5">
       {profile ? (
-        <Image src={profile} alt="profile" width={80} height={80} />
+        <Image
+          src={profile}
+          alt="profile"
+          width={57}
+          height={57}
+          objectFit="cover"
+          className="rounded-full w-[57px] h-[57px]"
+        />
       ) : (
         <GradientProfileMD />
       )}

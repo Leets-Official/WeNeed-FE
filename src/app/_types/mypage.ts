@@ -33,6 +33,6 @@ interface MypageUserInfo {
   doubleMajor: string;
   interestField: string;
   email: string;
-  lnks: string[];
+  links: string[];
   selfIntro: string;
 }

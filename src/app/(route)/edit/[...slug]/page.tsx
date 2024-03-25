@@ -39,7 +39,7 @@ export default function EditPage({ params }: EditPageProps) {
         doubleMajor,
         interestField,
         email,
-        lnks,
+        links,
         selfIntro,
       } = userInfo;
       console.log('userInfo', userInfo);
@@ -47,13 +47,13 @@ export default function EditPage({ params }: EditPageProps) {
       setMypageInfoState({
         profileImage: profile,
         request: {
-          nickname,
-          major,
-          userGrade,
-          doubleMajor,
+          nickname: nickname,
+          major: major,
+          userGrade: userGrade,
+          doubleMajor: doubleMajor,
           interestField: interestField,
-          email,
-          links: lnks,
+          email: email,
+          links: links,
         },
         selfIntro,
       });
@@ -70,7 +70,7 @@ export default function EditPage({ params }: EditPageProps) {
           />
         </div>
         <div className="w-[80%] h-full max-w-[1290px] flex-col flex items-center">
-          <ProfilesImgContainer profile={undefined} />
+          <ProfilesImgContainer profile={mypageInfo.profileImage} />
           <EditUserInfoContainer />
         </div>
       </section>
