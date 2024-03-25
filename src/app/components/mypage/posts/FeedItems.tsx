@@ -37,9 +37,8 @@ const FeedItems = ({ article }: FeedItemsProps) => {
                     height={24}
                     alt="writer"
                     src={profile}
-                    style={{
-                      objectFit: 'cover',
-                    }}
+                    objectFit="cover"
+                    className="rounded-full w-[24px] h-[24px]"
                   />
                 ) : (
                   <GradientProfileSM />

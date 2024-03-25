@@ -23,7 +23,7 @@ export const ProfileContainer = ({
       doubleMajor,
       interestField,
       email,
-      lnks,
+      links,
       selfIntro,
     } = userInfoItemList;
     console.log('userInfoItemList', userInfoItemList);
@@ -43,7 +43,7 @@ export const ProfileContainer = ({
             doubleMajor={doubleMajor}
             interestField={interestField}
             email={email}
-            links={lnks}
+            links={links}
             selfIntro={selfIntro}
             sameUser={sameUser}
             userId={userId}

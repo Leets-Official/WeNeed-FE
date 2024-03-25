@@ -12,12 +12,11 @@ export async function GET(request: Request): Promise<NextResponse> {
 
   try {
     const response = await googleLogin(code as string);
-    console.log('Google login response Tokens :', response);
-    console.log('Has Registered :', response.hasRegistered);
     const destination = `/userinfoset/1?accessToken=${response.accessToken}&refreshToken=${response.refreshToken}&hasRegistered=${response.hasRegistered}`;
 
     return NextResponse.json({
       destination: destination,
+      response: response,
     });
   } catch (error) {
     console.error('Error during Google login:', error);

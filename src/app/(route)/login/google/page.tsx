@@ -30,7 +30,6 @@ const fetchData = async () => {
     }
 
     const data = await res.json();
-    console.log('success', data);
     return data;
   } catch (error) {
     console.error('Error during fetch in fetch function:', error);
@@ -44,8 +43,6 @@ const OauthPage = () => {
     const fetchDataAndRedirect = async () => {
       try {
         const data = await fetchData();
-        console.log('data', data);
-        console.log('data.destination', data.destination);
 
         if (data) {
           const href = `${process.env.NEXT_PUBLIC_NEXT_SERVER}${data.destination}`;
@@ -55,9 +52,6 @@ const OauthPage = () => {
           const accessToken = url.searchParams.get('accessToken');
           const refreshToken = url.searchParams.get('refreshToken');
 
-          console.log('url', url);
-          console.log('hasRegistered', hasRegistered);
-          console.log('accessToken', accessToken);
           if (accessToken && refreshToken) {
             if (accessToken === 'undefined' || refreshToken === 'undefined') {
               console.error('accessToken or refreshToken is undefined');
