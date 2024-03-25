@@ -65,13 +65,15 @@ const DetailContents = ({
         }
       })}
       <div className="flex flex-col items-start justify-center w-full gap-[40px] text-[#00E0EE] font-semibold mt-[39px]">
-        <div className="flex gap-3">
-          {skills && <Icons name={skillsList} />}
-          스킬 -
-          {skills.map((skill) => (
-            <div key={skill}>{skill}</div>
-          ))}
-        </div>
+        {skills.length > 0 && (
+          <div className="flex gap-3">
+            <Icons name={skillsList} />
+            스킬 -
+            {skills.map((skill) => (
+              <div key={skill}>{skill}</div>
+            ))}
+          </div>
+        )}
         {files && (
           <div className="flex flex-col gap-[30px] ">
             {files &&
