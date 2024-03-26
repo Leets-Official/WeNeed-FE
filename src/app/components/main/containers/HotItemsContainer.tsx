@@ -1,6 +1,6 @@
 'use client';
 
-import Slider from 'react-slick';
+import Slider, { LazyLoadTypes, Settings } from 'react-slick';
 import HotPortfolioItem from '../HotPortfolioItem';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -22,7 +22,7 @@ const HotItemsContainer = ({
   user,
   onClickItem,
 }: HotItemsContainerProps) => {
-  const settings = {
+  const settings: Settings = {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -31,6 +31,7 @@ const HotItemsContainer = ({
     centerPadding: '30px',
     draggable: true,
     swipeToSlide: true,
+    lazyLoad: 'anticipated',
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     autoplay: true,

@@ -28,7 +28,7 @@ export const userProfileInfoSatate = atom({
       doubleMajor: '',
       interestField: '',
       email: '',
-      lnks: [''],
+      links: [''],
       selfIntro: '',
     },
     userIdFromHeader: 0,

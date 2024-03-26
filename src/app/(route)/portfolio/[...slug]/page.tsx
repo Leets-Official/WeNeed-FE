@@ -1,10 +1,26 @@
 'use client';
 
-import CommentsContainer from 'components/details/portfolio/containers/CommentsContainer';
 import PortfolioDetailsContainer from 'components/details/portfolio/containers/PortfolioDetailsContainer';
-import PortfolioWorkListContainer from 'components/details/portfolio/containers/PortfolioWorkListContainer';
 import Header from 'components/layout/Header';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+
+const CommentsContainer = dynamic(
+  () => import('components/details/portfolio/containers/CommentsContainer'),
+  {
+    suspense: true,
+  },
+);
+
+const PortfolioWorkListContainer = dynamic(
+  () =>
+    import(
+      'components/details/portfolio/containers/PortfolioWorkListContainer'
+    ),
+  {
+    suspense: true,
+  },
+);
 
 export default function PortfolioPage({
   params,

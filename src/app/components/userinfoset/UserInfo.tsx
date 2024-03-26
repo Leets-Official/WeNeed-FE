@@ -7,19 +7,12 @@ import { useRecoilState } from 'recoil';
 import DropDown from 'components/mypage/profile/DropDown';
 import { useState } from 'react';
 
-interface UserInfoProps {
-  token: string | null;
-}
-
-const fetchData = async (token: string | null, nickName: string) => {
+const fetchData = async (nickName: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/user/checkNickname?nickName=${nickName}`,
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/checkNickname?nickName=${nickName}`,
       {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         cache: 'no-store',
       },
     ).then((res) => res.json());
@@ -36,7 +29,7 @@ const fetchData = async (token: string | null, nickName: string) => {
   }
 };
 
-const UserInfo = ({ token }: UserInfoProps) => {
+const UserInfo = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [userInfoSet, setUserInfoSet] = useRecoilState(userInfoSetState);
   const [successNickname, setSuccessNickname] = useState(0);
@@ -90,7 +83,7 @@ const UserInfo = ({ token }: UserInfoProps) => {
   };
 
   const handleNickname = async () => {
-    const response = await fetchData(token, userInfo.nickname);
+    const response = await fetchData(userInfo.nickname);
     console.log('handle nickname response', response);
     if (response === false) {
       setUserInfoSet((prev) => ({ ...prev, successNickname: true }));

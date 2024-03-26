@@ -1,11 +1,11 @@
 'use client';
 
-import Slider from 'react-slick';
+import PortfolioItem from '../portfolio/PortfolioItem';
+import Slider, { Settings } from 'react-slick';
+import { MouseEventHandler } from 'react';
+import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { LOGGEDIN_SECTION_HEADINGS } from 'constants/main';
-import PortfolioItem from '../portfolio/PortfolioItem';
-import { MouseEventHandler } from 'react';
 
 interface RecommendContainerProps {
   data: RecommendArticle[];
@@ -21,12 +21,13 @@ const RecommendContainer = ({
   user,
   onClickItem,
 }: RecommendContainerProps) => {
-  const settings = {
+  const settings: Settings = {
     infinite: true,
     slidesToScroll: 1,
     variableWidth: true,
     centerPadding: '20px',
     arrows: false,
+    lazyLoad: 'anticipated',
     autoplay: true,
     autoplaySpeed: 1200,
     prevArrow: <></>,

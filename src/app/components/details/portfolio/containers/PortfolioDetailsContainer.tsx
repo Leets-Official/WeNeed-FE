@@ -51,7 +51,7 @@ const PortfolioDetailsContainer = ({
   };
 
   return (
-    <div
+    <article
       className={`flex flex-col items-center bg-black text-white min-h-screen w-full ${
         isPreview ? 'pointer-events-none' : ''
       }`}
@@ -144,7 +144,7 @@ const PortfolioDetailsContainer = ({
         )}
       </div>
       <div ref={commentsRef}></div>
-    </div>
+    </article>
   );
 };
 

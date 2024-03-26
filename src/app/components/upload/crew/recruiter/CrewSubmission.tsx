@@ -35,7 +35,6 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       ...recruiterValue,
       deadline: recruiterValue.deadline.join('/'),
     };
-    console.log(recruiterValue.crewQuestions);
     try {
       await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/recruiter?articleId=${articleId}`,

@@ -42,6 +42,10 @@ const CommentItem = ({
   const profileStyles = PROFILE_STYLE['medium']();
 
   const onSubmitHandler = async () => {
+    if (!recommentValue) {
+      alert('내용을 입력해주세요!');
+      return;
+    }
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/comments?articleId=${articleId}&parentId=${parentId}`,

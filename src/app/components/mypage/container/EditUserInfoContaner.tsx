@@ -12,7 +12,7 @@ import { MY_PAGE } from 'constants/mypage';
 const fetchData = async (nickName: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/user/checkNickname?nickName=${nickName}`,
+      `${process.env.NEXT_PUBLIC_NEXT_SERVER}/user/checkNickname?nickName=${nickName}`,
       {
         method: 'POST',
         cache: 'no-store',
@@ -67,7 +67,7 @@ const EditUserInfoContainer = () => {
           body: JSON.stringify(mypageMyInfo),
         },
       ).then((res) => res.json());
-      console.log('Fetch Data Success:', response);
+      console.log('Fetch Data Edit User Info :', response);
     } catch (error) {
       console.error('Error during Fetch Data:', error);
     }
