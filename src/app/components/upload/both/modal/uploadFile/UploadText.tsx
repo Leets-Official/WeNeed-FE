@@ -52,7 +52,7 @@ const UploadText = ({
             className="w-[843px] h-[184px] flex flex-col items-center justify-center rounded-[9px] border-2 border-dashed border-neutral-700 mt-[26px]  text-[#D9D9D9]"
             onClick={startEdit}
           >
-            {isEditing ? (
+            {isEditing || text ? (
               <div className="flex text-sm font-normal overflow-y-auto">
                 <textarea
                   value={text}
