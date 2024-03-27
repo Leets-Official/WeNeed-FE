@@ -21,13 +21,6 @@ const useInit = () => {
 
   const initPF = () => {
     console.log('초기화');
-    uploadFormData.delete('request');
-    uploadFormData.delete('files');
-    uploadFormData.delete('images');
-    setItems([]);
-    setFiles([]);
-    setImages([]);
-    setBlobFiles([]);
     setUploadData({
       articleType: 'PORTFOLIO',
       title: '',
@@ -38,6 +31,13 @@ const useInit = () => {
       sharedText: '',
       thumbnail: '',
     });
+    uploadFormData.delete('request');
+    uploadFormData.delete('files');
+    uploadFormData.delete('images');
+    setItems([]);
+    setFiles([]);
+    setImages([]);
+    setBlobFiles([]);
     setOrderId(0);
   };
 
