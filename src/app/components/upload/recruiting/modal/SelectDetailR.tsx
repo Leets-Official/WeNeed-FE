@@ -31,16 +31,17 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     : 'api/upload/recruit';
   const apiMode = isEdit ? 'PATCH' : 'POST';
 
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSelectedTags(uploadData.tags);
+    setSkill(uploadData.skills);
+  }, []);
+
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
-
-  useEffect(() => {
-    setTitle(uploadData.title);
-    setSkill(uploadData.skills);
-  }, []);
 
   const handleConfirm = async () => {
     uploadFormData.delete('request');
@@ -48,13 +49,6 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     setLoading(true);
     images.forEach((image) => {
       uploadFormData.append('images', image.blob, image.filename);
-    });
-
-    setUploadData({
-      ...uploadData,
-      title: title,
-      skills: skill,
-      tags: selectedTags,
     });
 
     const articleRequest = {
@@ -77,6 +71,7 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
         body: uploadFormData,
       },
     );
+
     if (true) {
       setTimeout(() => {
         setLoading(false);

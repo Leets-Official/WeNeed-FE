@@ -28,7 +28,6 @@ const useFillData = () => {
     useRecoilState<FormData>(uploadForm);
 
   const fillPF = ({ portfolio }: useFillDataProps) => {
-    setOrderId(portfolio.contents.length);
     const newArray = portfolio.files.map((item) => {
       let contentType = '';
       if (item.fileName.endsWith('pdf')) {
@@ -43,17 +42,11 @@ const useFillData = () => {
         url: item.fileUrl,
       };
     });
+
+    setOrderId(portfolio.contents.length + 1);
     setItems([...portfolio.contents]);
-
-    setUploadData({
-      ...uploadData,
-      title: portfolio.title,
-      skills: portfolio.skills,
-      tags: portfolio.tags,
-      content: [...portfolio.contents],
-    });
-
     setFiles([...newArray]);
+
     portfolio.files.forEach((fileURL) => {
       fetch(fileURL.fileUrl)
         .then((response) => response.blob())
@@ -99,21 +92,19 @@ const useFillData = () => {
       .then((response) => response.blob())
       .then((blob) => {
         uploadFormData.append('thumbnail', blob, portfolio.thumbnail);
-        setUploadData({ ...uploadData, thumbnail: portfolio.thumbnail });
+        setUploadData({
+          ...uploadData,
+          thumbnail: portfolio.thumbnail,
+          content: [...portfolio.contents],
+          title: portfolio.title,
+          tags: portfolio.tags,
+          skills: portfolio.skills,
+        });
       })
       .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
   };
 
   const fillRecruit = ({ recruit }: useFillRecruitProps) => {
-    setUploadData({
-      ...uploadData,
-      articleType: 'RECRUITING',
-      title: recruit.title,
-      skills: recruit.skills,
-      tags: recruit.tags,
-      sharedText: recruit.sharedText,
-      content: [...recruit.contents],
-    });
     setItems([...recruit.contents]);
     setOrderId(recruit.contents.length + 1);
 
@@ -124,7 +115,16 @@ const useFillData = () => {
       .then((response) => response.blob())
       .then((blob) => {
         uploadFormData.append('thumbnail', blob, recruit.thumbnail);
-        setUploadData({ ...uploadData, thumbnail: recruit.thumbnail });
+        setUploadData({
+          ...uploadData,
+          thumbnail: recruit.thumbnail,
+          articleType: 'RECRUITING',
+          sharedText: recruit.sharedText,
+          content: [...recruit.contents],
+          title: recruit.title,
+          tags: recruit.tags,
+          skills: recruit.skills,
+        });
       })
       .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
 

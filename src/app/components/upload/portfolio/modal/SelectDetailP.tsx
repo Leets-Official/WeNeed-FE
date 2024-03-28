@@ -33,11 +33,16 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const isFilled = selectedTags.length === 0 || title.trim() === '';
-
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
   const apiMode = isEdit ? 'PATCH' : 'POST';
+
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSelectedTags(uploadData.tags);
+    setSkill(uploadData.skills);
+  }, []);
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -53,15 +58,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     images.forEach((image) => {
       uploadFormData.append('images', image.blob, image.filename);
     });
-
     blobFiles.forEach((file) => {
       uploadFormData.append('files', file.file, file.filename);
-    });
-    setUploadData({
-      ...uploadData,
-      title: title,
-      skills: skill,
-      tags: selectedTags,
     });
 
     let totalFileSize = 0;
@@ -95,6 +93,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
         body: uploadFormData,
       },
     );
+
     if (true) {
       setTimeout(() => {
         setLoading(false);
@@ -102,11 +101,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       }, 2000);
     }
   };
-
-  useEffect(() => {
-    setTitle(uploadData.title);
-    setSkill(uploadData.skills);
-  }, []);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
