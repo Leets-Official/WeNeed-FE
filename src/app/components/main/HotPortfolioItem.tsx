@@ -9,7 +9,6 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
   return (
     <div className="relative flex justify-center w-[1150px] h-[525px] rounded-lg bg-white overflow-hidden cursor-pointer">
       <Image
-        priority
         src={thumbnail}
         alt="hot portfolio"
         width={1150}
