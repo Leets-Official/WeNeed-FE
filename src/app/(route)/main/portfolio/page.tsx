@@ -12,6 +12,7 @@ import {
   DetailCategoriesContainer,
   HotItemsContainer,
   PortfolioContainer,
+  RecommendContainer,
 } from 'components/main/containers';
 import { useEffect, useState } from 'react';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
@@ -24,13 +25,6 @@ import dynamic from 'next/dynamic';
 
 const NeedLoginModal = dynamic(
   () => import('components/common/modal/NeedLoginModal'),
-  {
-    suspense: true,
-  },
-);
-
-const RecommendContainer = dynamic(
-  () => import('components/main/containers/RecommendContainer'),
   {
     suspense: true,
   },
