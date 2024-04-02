@@ -64,10 +64,7 @@ export default function EditPage({ params }: EditPageProps) {
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">
-          <Header
-            nickname={mypageInfo.request.nickname}
-            userId={data.userIdFromHeader}
-          />
+          <Header nickname={data.userNickname} userId={data.userIdFromHeader} />
         </div>
         <div className="w-[80%] h-full max-w-[1290px] flex-col flex items-center">
           <ProfilesImgContainer profile={mypageInfo.profileImage} />

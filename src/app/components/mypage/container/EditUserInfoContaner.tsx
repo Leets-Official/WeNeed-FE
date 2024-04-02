@@ -236,8 +236,8 @@ const EditUserInfoContainer = () => {
                 } text-white text-xs bg-black font-semibold text-right`}
                 type="text"
                 readOnly={!isEditingNickname}
-                value={mypageMyInfo.request.nickname || '-'}
-                placeholder={mypageMyInfo.request.nickname || '-'}
+                value={mypageMyInfo.request.nickname || ''}
+                placeholder={mypageMyInfo.request.nickname || ''}
                 onChange={(e) => {
                   const userInput = e.target.value;
                   const filteredInput = userInput.replace(
