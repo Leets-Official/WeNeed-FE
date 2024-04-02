@@ -9,6 +9,7 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
   return (
     <div className="relative flex justify-center w-[1150px] h-[525px] rounded-lg bg-white overflow-hidden cursor-pointer">
       <Image
+        priority
         src={thumbnail}
         alt="hot portfolio"
         width={1150}
@@ -16,6 +17,7 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
         style={{
           objectFit: 'cover',
         }}
+        quality={5}
       />
       <span className="absolute z-20 bottom-[30px] left-[30px] text-3xl font-semibold ">
         {title}
