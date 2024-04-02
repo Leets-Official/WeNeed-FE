@@ -19,9 +19,17 @@ const RecruitingItem = ({ article }: RecruitingItemProps) => {
               <Image
                 priority
                 src={thumbnail}
-                fill={true}
-                style={{ objectFit: 'cover' }}
+                width={0}
+                height={388}
+                sizes="100vw"
+                style={{
+                  objectFit: 'cover',
+                  width: '100vw',
+                  height: '388px',
+                }}
                 alt="recruitItem"
+                placeholder="blur"
+                blurDataURL="data:image/avif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
               />
             )}
           </div>
