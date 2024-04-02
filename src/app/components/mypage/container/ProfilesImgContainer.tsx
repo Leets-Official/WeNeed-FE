@@ -14,7 +14,7 @@ interface ProfilesImgContainerProps {
 const ProfilesImgContainer = ({ profile }: ProfilesImgContainerProps) => {
   const [profileImage, setProfileImage] = useState(profile);
   const [mypageMyInfo, setMypageMyInfo] = useRecoilState(mypageMyInfoState);
-  const [profileBlob, setProfileBlob] = useRecoilState(mypageMyProfileImgState);
+  const [profileFile, setProfileFile] = useRecoilState(mypageMyProfileImgState);
 
   useEffect(() => {
     setProfileImage(profile);
@@ -23,29 +23,19 @@ const ProfilesImgContainer = ({ profile }: ProfilesImgContainerProps) => {
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const allowedext = ['jpeg', 'png', 'jpg'];
-      const fileExtension = file.name.split('.').pop()?.toLowerCase();
-      console.log('fileExtension : ', fileExtension);
-
-      if (fileExtension && allowedext.includes(fileExtension)) {
-        const blob = new Blob([file], { type: file.type });
-        setProfileBlob({ blob: blob, name: file.name });
-
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (e: ProgressEvent<FileReader>) => {
-          if (reader.readyState === 2) {
-            const newProfileImage = e.target?.result as string;
-            setProfileImage(newProfileImage);
-            setMypageMyInfo((prev) => ({
-              ...prev,
-              profileImage: newProfileImage,
-            }));
-          }
-        };
-      } else {
-        alert('이미지 파일만 업로드 가능합니다.');
-      }
+      setProfileFile(file);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (reader.readyState === 2) {
+          const newProfileImage = e.target?.result as string;
+          setProfileImage(newProfileImage);
+          setMypageMyInfo((prev) => ({
+            ...prev,
+            profileImage: newProfileImage,
+          }));
+        }
+      };
     }
   };
 
@@ -80,6 +70,7 @@ const ProfilesImgContainer = ({ profile }: ProfilesImgContainerProps) => {
         type="file"
         onChange={handleImage}
         style={{ display: 'none' }}
+        accept="image/*"
       />
 
       <div className="mt-10 text-white text-2xl font-bold">{MY_PAGE.TITLE}</div>

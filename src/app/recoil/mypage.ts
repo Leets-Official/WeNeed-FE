@@ -52,10 +52,7 @@ export const mypageMyInfoState = atom({
   },
 });
 
-export const mypageMyProfileImgState = atom({
+export const mypageMyProfileImgState = atom<File | null>({
   key: 'mypageMyProfileImgState',
-  default: {
-    blob: new Blob(),
-    name: '',
-  },
+  default: null,
 });

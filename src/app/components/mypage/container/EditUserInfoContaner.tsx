@@ -48,7 +48,7 @@ const EditUserInfoContainer = () => {
   const [newIntro, setNewIntro] = useState<string>(
     mypageMyInfo.request.selfIntro,
   );
-  const profileBlob = useRecoilValue(mypageMyProfileImgState);
+  const profileFile = useRecoilValue(mypageMyProfileImgState);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -92,23 +92,25 @@ const EditUserInfoContainer = () => {
 
   const handleDataPatch = async () => {
     try {
-      const formData = new FormData();
-      formData.append('profileImage', profileBlob.blob, profileBlob.name);
-      formData.append(
-        'request',
-        new Blob([JSON.stringify(mypageMyInfo.request)], {
-          type: 'application/json',
-        }),
-      );
+      if (profileFile) {
+        const formData = new FormData();
+        formData.append('profileImage', profileFile, profileFile.name);
+        formData.append(
+          'request',
+          new Blob([JSON.stringify(mypageMyInfo.request)], {
+            type: 'application/json',
+          }),
+        );
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/edit`,
-        {
-          method: 'PATCH',
-          body: formData,
-        },
-      ).then((res) => res.json());
-      console.log('Fetch Data Edit User Info :', response);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/edit`,
+          {
+            method: 'PATCH',
+            body: formData,
+          },
+        ).then((res) => res.json());
+        console.log('Fetch Data Edit User Info :', response);
+      }
     } catch (error) {
       console.error('Error during Fetch Data:', error);
     }
