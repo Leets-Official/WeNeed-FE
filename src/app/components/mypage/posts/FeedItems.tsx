@@ -42,6 +42,9 @@ const FeedItems = ({ article }: FeedItemsProps) => {
                       src={profile}
                       style={{
                         objectFit: 'cover',
+                        objectPosition: 'center center',
+                        width: '100%',
+                        height: '100%',
                       }}
                     />
                   ) : (

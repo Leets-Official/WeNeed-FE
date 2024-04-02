@@ -16,15 +16,18 @@ export const UserInfoContainer = ({
 }: UserInfoContainerProps) => {
   return (
     <div className="relative top-0 flex flex-col justify-center items-center gap-2.5">
-      <div className={`rounded-full overflow-hidden w-[57px] h-[57px]`}>
+      <div className={`rounded-full overflow-hidden w-[56px] h-[56px]`}>
         {profile ? (
           <Image
             src={profile}
             alt="profile"
-            width={57}
-            height={57}
+            width={56}
+            height={56}
             style={{
               objectFit: 'cover',
+              objectPosition: 'center center',
+              width: '100%',
+              height: '100%',
             }}
           />
         ) : (

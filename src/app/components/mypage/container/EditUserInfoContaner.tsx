@@ -2,8 +2,8 @@
 
 import { USER_INFO } from 'constants/userinfoset';
 import DropDown from '../profile/DropDown';
-import { useRecoilState } from 'recoil';
-import { mypageMyInfoState } from 'recoil/mypage';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { mypageMyInfoState, mypageMyProfileImgState } from 'recoil/mypage';
 import { useEffect, useState } from 'react';
 import Button from 'components/common/Button';
 import { EditPen } from 'ui/EditPen';
@@ -42,7 +42,32 @@ const EditUserInfoContainer = () => {
   const [isEditingNickname, setIsEditingNickname] = useState<boolean>(false);
   const [isEditingLink, setIsEditingLink] = useState<boolean>(false);
   const [isEditingIntro, setIsEditingIntro] = useState<boolean>(false);
-  const [newLink, setNewLink] = useState<string>('');
+  const [newLink, setNewLink] = useState<string>(
+    mypageMyInfo.request.links.join('\n'),
+  );
+  const [newIntro, setNewIntro] = useState<string>(
+    mypageMyInfo.request.selfIntro,
+  );
+  const profileBlob = useRecoilValue(mypageMyProfileImgState);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const isEditTextArea = (event.target as HTMLElement).closest('textarea');
+      if (!isEditTextArea) {
+        setIsEditingLink(false);
+        setIsEditingIntro(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  });
+
+  useEffect(() => {
+    setNewLink(mypageMyInfo.request.links.join('\n'));
+    setNewIntro(mypageMyInfo.request.selfIntro);
+  }, [mypageMyInfo]);
 
   useEffect(() => {
     const linksArray = newLink.split('\n');
@@ -55,16 +80,32 @@ const EditUserInfoContainer = () => {
     }));
   }, [newLink]);
 
+  useEffect(() => {
+    setMypageMyInfo((prev) => ({
+      ...prev,
+      request: {
+        ...prev.request,
+        selfIntro: newIntro,
+      },
+    }));
+  }, [newIntro]);
+
   const handleDataPatch = async () => {
     try {
+      const formData = new FormData();
+      formData.append('profileImage', profileBlob.blob, profileBlob.name);
+      formData.append(
+        'request',
+        new Blob([JSON.stringify(mypageMyInfo.request)], {
+          type: 'application/json',
+        }),
+      );
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/edit`,
         {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(mypageMyInfo),
+          body: formData,
         },
       ).then((res) => res.json());
       console.log('Fetch Data Edit User Info :', response);
@@ -107,20 +148,13 @@ const EditUserInfoContainer = () => {
           setNewLink(userInput.slice(0, 300));
         } else {
           setNewLink(userInput);
-          console.log('newLink', newLink);
         }
         break;
       case 'intro':
         if (userInput.length > 500) {
-          setMypageMyInfo((prev) => ({
-            ...prev,
-            selfIntro: userInput.slice(0, 500),
-          }));
+          setNewIntro(userInput.slice(0, 500));
         } else {
-          setMypageMyInfo((prev) => ({
-            ...prev,
-            selfIntro: userInput,
-          }));
+          setNewIntro(userInput);
         }
         break;
     }
@@ -175,7 +209,6 @@ const EditUserInfoContainer = () => {
 
   const handleNickname = async () => {
     const response = await fetchData(mypageMyInfo.request.nickname);
-    console.log('handle nickname response', response);
     if (response === false) {
       setMypageMyInfo((prev) => ({ ...prev, successNickname: true }));
       setSuccessNickname(1);
@@ -353,46 +386,50 @@ const EditUserInfoContainer = () => {
           className={`w-full relative flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
         >
           <textarea
-            className={`w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
+            className={`${
+              isEditingLink && 'mr-[37.6px]'
+            } w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
             readOnly={!isEditingLink}
             value={newLink || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'link')}
             onKeyDown={handleKeyDown}
           />
-          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold w-full flex justify-between">
+          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold flex">
             {MY_PAGE.LINK}
-            {!isEditingLink && (
-              <div
-                className="w-[17px] h-[17px]"
-                onClick={() => handleEditingValue('link')}
-              >
-                <EditPen />
-              </div>
-            )}
           </span>
+          {!isEditingLink && (
+            <div
+              className="w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
+              onClick={() => handleEditingValue('link')}
+            >
+              <EditPen />
+            </div>
+          )}
         </div>
         <div
           className={`w-full relative flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
         >
           <textarea
-            className={`w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
+            className={`${
+              isEditingIntro && 'mr-[37.6px]'
+            } w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
             readOnly={!isEditingIntro}
-            value={mypageMyInfo.selfIntro || ''}
+            value={newIntro || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'intro')}
           />
-          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold w-full flex justify-between">
+          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold flex ">
             {MY_PAGE.INTRODUCE}
-            {!isEditingIntro && (
-              <div
-                className="w-[17px] h-[17px]"
-                onClick={() => handleEditingValue('intro')}
-              >
-                <EditPen />
-              </div>
-            )}
           </span>
+          {!isEditingIntro && (
+            <div
+              className="w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
+              onClick={() => handleEditingValue('intro')}
+            >
+              <EditPen />
+            </div>
+          )}
         </div>
 
         <Button

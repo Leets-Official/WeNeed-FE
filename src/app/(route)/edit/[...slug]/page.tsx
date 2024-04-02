@@ -54,8 +54,8 @@ export default function EditPage({ params }: EditPageProps) {
           interestField: interestField,
           email: email,
           links: links,
+          selfIntro,
         },
-        selfIntro,
       });
     }
   }, [data]);

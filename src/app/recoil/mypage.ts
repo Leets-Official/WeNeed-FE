@@ -47,7 +47,15 @@ export const mypageMyInfoState = atom({
       interestField: '',
       email: '',
       links: [''],
+      selfIntro: '',
     },
-    selfIntro: '',
+  },
+});
+
+export const mypageMyProfileImgState = atom({
+  key: 'mypageMyProfileImgState',
+  default: {
+    blob: new Blob(),
+    name: '',
   },
 });
