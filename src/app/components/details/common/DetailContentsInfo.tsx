@@ -14,7 +14,7 @@ const DetailContentsInfo = ({
 }: DetailContentsInfoProps) => {
   return (
     <>
-      <div className="w-full flex gap-[18px] items-center justify-center mb-[32px]">
+      <div className="ml-[7px] w-full flex gap-[18px] items-center justify-center mb-[32px]">
         {tags.map((tag) => (
           <DetailCategories key={tag} category={tag} />
         ))}

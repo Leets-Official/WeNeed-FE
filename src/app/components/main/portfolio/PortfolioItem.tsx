@@ -33,7 +33,9 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
               width: '100%',
               height: '100%',
             }}
-            quality={5}
+            quality={40}
+            placeholder="blur"
+            blurDataURL="data:image/avif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           />
         ) : (
           <GradientItemDefault />

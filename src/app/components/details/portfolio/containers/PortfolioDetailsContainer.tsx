@@ -70,6 +70,7 @@ const PortfolioDetailsContainer = ({
               width: '100vw',
               height: '380px',
             }}
+            quality={50}
           />
         </div>
       ) : (

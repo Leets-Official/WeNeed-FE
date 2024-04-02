@@ -17,7 +17,7 @@ const HotPortfolioItem = ({ article }: HotPortfolioItemProps) => {
         style={{
           objectFit: 'cover',
         }}
-        quality={5}
+        quality={50}
       />
       <span className="absolute z-20 bottom-[30px] left-[30px] text-3xl font-semibold ">
         {title}

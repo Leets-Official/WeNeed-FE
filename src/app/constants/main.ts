@@ -11,7 +11,7 @@ export const NOT_LOGGEDIN_SECTION_HEADING = {
   recommend_sub: '로그인하고 자유롭게 게시물을 열람하세요.',
 } as const;
 
-export const MAIN_SIZE = 12;
+export const MAIN_SIZE = 8;
 
 export const SORT_TYPES = {
   DESC: '최신순',

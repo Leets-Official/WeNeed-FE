@@ -57,6 +57,7 @@ const DetailContents = ({
                       width: '100%',
                       height: '100%',
                     }}
+                    quality={45}
                   />
                 )}
               </div>
