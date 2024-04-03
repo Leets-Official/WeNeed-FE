@@ -8,6 +8,7 @@ import {
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 import { deleteAlert, editAlert } from 'components/upload/both/showToast';
+import uploadToS3 from 'utils/awsS3';
 
 interface FileInfo {
   name: string;
@@ -70,7 +71,7 @@ const useAddFile = () => {
     }
   };
 
-  const updateFile = (id: string, fileType: string) => {
+  const updateFile = async (id: string, fileType: string) => {
     const file = inputRef.current?.files?.[0];
 
     if (file) {
@@ -109,7 +110,14 @@ const useAddFile = () => {
     }
   };
 
-  const addFile = (file: File, type: string) => {
+  const addFile = async (file: File, type: string) => {
+    const uploadPromises = uploadToS3(file);
+    try {
+      const imageUrls = await uploadPromises;
+      console.log('url :::::', imageUrls);
+    } catch (err) {
+      console.error(err);
+    }
     const blob = new Blob([file], { type: file.type });
     if (type === 'image') {
       setItems((prevData) => [
