@@ -3,7 +3,7 @@
 import { MY_PAGE } from 'constants/mypage';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { mypageMyInfoState, mypageMyProfileImgState } from 'recoil/mypage';
 import GradientProfile from 'ui/gradient/GradientProfile';
 
@@ -18,7 +18,7 @@ const ProfilesImgContainer = ({ profile }: ProfilesImgContainerProps) => {
 
   useEffect(() => {
     setProfileImage(profile);
-  }, []);
+  }, [profile]);
 
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

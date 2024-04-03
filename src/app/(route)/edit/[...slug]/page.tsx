@@ -29,7 +29,6 @@ export default function EditPage({ params }: EditPageProps) {
 
   useEffect(() => {
     if (data) {
-      console.log('data', data);
       const { userInfo, userIdFromHeader } = data;
       const {
         profile,
@@ -42,8 +41,6 @@ export default function EditPage({ params }: EditPageProps) {
         links,
         selfIntro,
       } = userInfo;
-      console.log('userInfo', userInfo);
-      console.log('userIdFromHeader', userIdFromHeader);
       setMypageInfoState({
         profileImage: profile,
         request: {

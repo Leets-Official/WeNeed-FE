@@ -8,24 +8,12 @@ export const patchUserInfoEdit = async (
       {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: 'Bearer ' + token,
         },
         body: userInfo,
         cache: 'no-store',
       },
     ).then((res) => res.json());
-
-    console.log('response in patchUserInfoEdit : ', response);
-    console.log(
-      'userinfo profileImage in patchUserInfoEdit : ',
-      userInfo.get('profileImage'),
-    );
-    console.log(
-      'userinfo request in patchUserInfoEdit : ',
-      userInfo.get('request'),
-    );
-    console.log('userInfo in patchUserInfoEdit : ', userInfo);
 
     return response;
   } catch (error) {
