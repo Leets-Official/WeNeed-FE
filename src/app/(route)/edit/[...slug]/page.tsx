@@ -3,6 +3,7 @@
 import Header from 'components/layout/Header';
 import EditUserInfoContainer from 'components/mypage/container/EditUserInfoContaner';
 import ProfilesImgContainer from 'components/mypage/container/ProfilesImgContainer';
+import IsSuccessEditProfile from 'components/mypage/edit/IsSuccessEditProfile';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { mypageMyInfoState } from 'recoil/mypage';
@@ -12,7 +13,6 @@ interface EditPageProps {
 }
 
 export default function EditPage({ params }: EditPageProps) {
-  const userId = parseInt(params.slug);
   const [data, setData] = useState<ResponseMypageBasicInfo>();
   const [mypageInfo, setMypageInfoState] = useRecoilState(mypageMyInfoState);
 
@@ -29,7 +29,7 @@ export default function EditPage({ params }: EditPageProps) {
 
   useEffect(() => {
     if (data) {
-      const { userInfo, userIdFromHeader } = data;
+      const { userInfo } = data;
       const {
         profile,
         nickname,
@@ -63,9 +63,10 @@ export default function EditPage({ params }: EditPageProps) {
         <div className="w-[80%] max-w-[1290px]">
           <Header nickname={data.userNickname} userId={data.userIdFromHeader} />
         </div>
+        <IsSuccessEditProfile />
         <div className="w-[80%] h-full max-w-[1290px] flex-col flex items-center">
           <ProfilesImgContainer profile={mypageInfo.profileImage} />
-          <EditUserInfoContainer />
+          <EditUserInfoContainer userId={data.userIdFromHeader} />
         </div>
       </section>
     );

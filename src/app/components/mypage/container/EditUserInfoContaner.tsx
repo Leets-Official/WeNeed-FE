@@ -2,12 +2,21 @@
 
 import { USER_INFO } from 'constants/userinfoset';
 import DropDown from '../profile/DropDown';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { mypageMyInfoState, mypageMyProfileImgState } from 'recoil/mypage';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+  mypageMyInfoState,
+  mypageMyProfileImgState,
+  mypagePatchSuccessState,
+} from 'recoil/mypage';
 import { useEffect, useState } from 'react';
 import Button from 'components/common/Button';
 import { EditPen } from 'ui/EditPen';
 import { MY_PAGE } from 'constants/mypage';
+import { useRouter } from 'next/navigation';
+
+interface EditUserInfoContainerProps {
+  userId: number;
+}
 
 const fetchData = async (nickName: string) => {
   try {
@@ -31,7 +40,7 @@ const fetchData = async (nickName: string) => {
   }
 };
 
-const EditUserInfoContainer = () => {
+const EditUserInfoContainer = ({ userId }: EditUserInfoContainerProps) => {
   const [mypageMyInfo, setMypageMyInfo] = useRecoilState(mypageMyInfoState);
   const [successNickname, setSuccessNickname] = useState(0);
   const [isGradeOpen, setIsGradeOpen] = useState<boolean>(false);
@@ -49,6 +58,8 @@ const EditUserInfoContainer = () => {
     mypageMyInfo.request.selfIntro,
   );
   const profileFile = useRecoilValue(mypageMyProfileImgState);
+  const setPatchSuccess = useSetRecoilState(mypagePatchSuccessState);
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -109,8 +120,19 @@ const EditUserInfoContainer = () => {
           method: 'PATCH',
           body: formData,
         },
-      ).then((res) => res.json());
-      console.log('Fetch Data Edit User Info :', response.nickname);
+      );
+      if (response.status === 200) {
+        setPatchSuccess({ isSuccess: 1, message: MY_PAGE.SUCCESS_MODIFY });
+        setTimeout(() => {
+          setPatchSuccess({ isSuccess: 0, message: '' });
+          router.push(`/mypage/${userId}`);
+        }, 2000);
+      } else {
+        setPatchSuccess({ isSuccess: 2, message: MY_PAGE.FAIL_MODIFY });
+        setTimeout(() => {
+          setPatchSuccess({ isSuccess: 0, message: '' });
+        }, 2000);
+      }
     } catch (error) {
       console.error('Error during Fetch Data:', error);
     }

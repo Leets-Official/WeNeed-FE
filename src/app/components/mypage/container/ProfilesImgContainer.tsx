@@ -23,19 +23,24 @@ const ProfilesImgContainer = ({ profile }: ProfilesImgContainerProps) => {
   const handleImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setProfileFile(file);
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        if (reader.readyState === 2) {
-          const newProfileImage = e.target?.result as string;
-          setProfileImage(newProfileImage);
-          setMypageMyInfo((prev) => ({
-            ...prev,
-            profileImage: newProfileImage,
-          }));
-        }
-      };
+      if (file.size > 1024 * 1024 * 5) {
+        alert(MY_PAGE.PROFILE_IMAGE_SIZE);
+        return;
+      } else {
+        setProfileFile(file);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          if (reader.readyState === 2) {
+            const newProfileImage = e.target?.result as string;
+            setProfileImage(newProfileImage);
+            setMypageMyInfo((prev) => ({
+              ...prev,
+              profileImage: newProfileImage,
+            }));
+          }
+        };
+      }
     }
   };
 

@@ -7,11 +7,8 @@ export async function PATCH(req: Request) {
   try {
     const requestBody = await req.formData();
     const response = await patchUserInfoEdit(requestBody, accessToken);
-    return NextResponse.json(JSON.stringify(response), {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    if (response.nickname) return NextResponse.json(response, { status: 200 });
+    else return NextResponse.json(response, { status: 400 });
   } catch (error) {
     console.error(
       '넥스트 서버에서 사용자 정보 PATCH 요청 처리 중 오류 발생 in user edit routes :',
