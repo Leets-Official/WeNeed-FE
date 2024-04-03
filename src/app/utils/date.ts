@@ -6,15 +6,19 @@ export const formatUploadTime = (uploadTime: string): string => {
   const utcUploadedDate = new Date(uploadedDate.getTime() + koreanTimeOffset);
 
   const timeDifference = now.getTime() - utcUploadedDate.getTime();
-  const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+  const hoursDifference = Math.floor(timeDifference / (1000 * 60 * 60));
 
-  if (minutesDifference < 1) {
-    const secondsDifference = Math.floor(timeDifference / 1000);
-    return `${secondsDifference}초 전`;
-  } else if (minutesDifference < 60) {
-    return `${minutesDifference}분 전`;
+  if (hoursDifference < 24) {
+    if (hoursDifference === 0) {
+      const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+      return `약 ${minutesDifference}분 전 업로드`;
+    } else {
+      return `약 ${hoursDifference}시간 전 업로드`;
+    }
   } else {
-    const hoursDifference = Math.floor(minutesDifference / 60);
-    return `약 ${hoursDifference}시간 전`;
+    const year = utcUploadedDate.getFullYear();
+    const month = String(utcUploadedDate.getMonth() + 1);
+    const day = utcUploadedDate.getDate();
+    return `${year}.${month}.${day}`;
   }
 };

@@ -47,7 +47,20 @@ export const mypageMyInfoState = atom({
       interestField: '',
       email: '',
       links: [''],
+      selfIntro: '',
     },
-    selfIntro: '',
+  },
+});
+
+export const mypageMyProfileImgState = atom<File | null>({
+  key: 'mypageMyProfileImgState',
+  default: null,
+});
+
+export const mypagePatchSuccessState = atom({
+  key: 'mypagePatchSuccessState',
+  default: {
+    isSuccess: 0,
+    message: '',
   },
 });

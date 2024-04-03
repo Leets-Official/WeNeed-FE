@@ -25,11 +25,17 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
         {article.thumbnail ? (
           <Image
             src={article.thumbnail}
-            fill={true}
+            width={296}
+            height={296}
             alt="postImage"
             style={{
               objectFit: 'cover',
+              width: '100%',
+              height: '100%',
             }}
+            quality={40}
+            placeholder="blur"
+            blurDataURL="data:image/avif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           />
         ) : (
           <GradientItemDefault />

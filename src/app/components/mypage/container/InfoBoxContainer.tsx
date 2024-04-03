@@ -31,7 +31,7 @@ export const InfoBoxContainer = ({
     <div className="flex flex-col justify-center items-center gap-4">
       {MY_PAGE.ITEM_LIST.map((item: string, index: number) => (
         <InfoBox
-          type={index === 4 ? 'explanation' : 'default'}
+          type={index === 4 ? 'explanation' : index === 3 ? 'links' : 'default'}
           key={item}
           title={item}
           content={itemList[index]}
