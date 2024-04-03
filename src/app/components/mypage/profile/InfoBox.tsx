@@ -19,9 +19,23 @@ const InfoBox = ({ title, content, type }: InfoBoxProps) => {
       <div className={`${titleStyle} text-white text-xs font-semibold`}>
         {title}
       </div>
-      <div className={`${contentStyle} text-white text-xs font-semibold`}>
-        {content}
-      </div>
+      {type === 'links' && (
+        <div
+          className={`${contentStyle} my-3 text-white text-xs font-semibold`}
+        >
+          {typeof content === 'object' &&
+            content.map((link, index) => (
+              <div className="my-2" key={link + index}>
+                {link}
+              </div>
+            ))}
+        </div>
+      )}
+      {type !== 'links' && (
+        <div className={`${contentStyle} text-white text-xs font-semibold`}>
+          {content}
+        </div>
+      )}
     </div>
   );
 };
