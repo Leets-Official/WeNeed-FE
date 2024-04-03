@@ -11,7 +11,6 @@ export const getNewToken = async (refreshToken: string) => {
       },
     });
     const data = await response.json();
-    console.log('토큰 갱신 성공 ');
     console.log('response in getNewToken : ', data);
     return data;
   } catch (error) {
