@@ -8,7 +8,6 @@ export async function GET(request: Request): Promise<NextResponse> {
   const size = searchParams.get('size') || '16';
   const page = searchParams.get('page') || '1';
   const keyword = searchParams.get('keyword') || '';
-  console.log('tt', accessToken);
   const data = await getSearch(size, page, keyword, accessToken).then(
     (data) => data,
   );

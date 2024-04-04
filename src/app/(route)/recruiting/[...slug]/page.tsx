@@ -46,7 +46,6 @@ export default function RecruitingPage({
       bookmarkCount,
       recruiting,
     } = data.recruit;
-    console.log(data);
     const { bookmarked, hearted, nickname, userId } = data.user;
     return (
       <article className=" min-h-screen flex flex-col items-center bg-black w-screen text-white  ">
