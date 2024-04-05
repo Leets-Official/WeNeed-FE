@@ -58,3 +58,8 @@ export const fileSizeState = atom<number>({
   key: 'fileSizeState',
   default: 0,
 });
+
+export const thumbnailState = atom<File | null>({
+  key: 'thumbnailState',
+  default: null,
+});
