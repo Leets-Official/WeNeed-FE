@@ -9,11 +9,13 @@ import { useRecoilState } from 'recoil';
 import {
   fileBlobState,
   imageBlobState,
+  thumbnailState,
   uploadDataState,
   uploadForm,
 } from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
+import uploadToS3 from 'utils/awsS3';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -28,11 +30,13 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [uploadFormData, setUploadFormData] =
     useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const isFilled = selectedTags.length === 0 || title.trim() === '';
+  const thumbnailUrl = '';
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
@@ -49,50 +53,66 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
+  console.log('변경된 content 배열:', uploadData);
 
   const handleConfirm = async () => {
-    uploadFormData.delete('request');
-    uploadFormData.delete('files');
-    uploadFormData.delete('images');
+    setThumbnail(null);
     setLoading(true);
-    images.forEach((image) => {
-      uploadFormData.append('images', image.blob, image.filename);
+    let thumbnailUrl = null;
+
+    let imgNum = 0;
+
+    const uploadPromises = uploadData.content.map(async (item) => {
+      if (item.type === 'image') {
+        try {
+          const imageUrl = await uploadToS3(images[imgNum].imageFile);
+          imgNum++;
+          return { ...item, data: imageUrl };
+        } catch (err) {
+          console.error('이미지 업로드 에러', err);
+          return item;
+        }
+      } else {
+        return item;
+      }
     });
-    blobFiles.forEach((file) => {
-      uploadFormData.append('files', file.file, file.filename);
-    });
 
-    let totalFileSize = 0;
+    if (thumbnail) {
+      thumbnailUrl = await uploadToS3(thumbnail);
+    }
 
-    images.forEach((image) => {
-      totalFileSize += image.blob.size;
-    });
+    const updatedContent = await Promise.all(uploadPromises);
+    setUploadData({ ...uploadData, content: updatedContent });
 
-    blobFiles.forEach((file) => {
-      totalFileSize += file.file.size;
-    });
-
-    console.log('폼데이터의 전체 파일 크기:', totalFileSize);
-
-    const articleRequest = {
-      ...uploadData,
-      title: title,
-      skills: skill,
-      tags: selectedTags,
+    const requestData = {
+      articleRequest: {
+        ...uploadData,
+        thumbnail: thumbnailUrl,
+        title: title,
+        skills: skill,
+        tags: selectedTags,
+      },
+      fileRequests: [
+        {
+          fileName: 'string',
+          fileUrl: 'string',
+        },
+      ],
     };
 
-    uploadFormData.append(
-      'request',
-      new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
-    );
+    const requestOptions = {
+      method: apiMode,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
-      {
-        method: apiMode,
-        body: uploadFormData,
-      },
+      requestOptions,
     );
+    console.log(await res.json(), 'res 결과값');
 
     if (true) {
       setTimeout(() => {
