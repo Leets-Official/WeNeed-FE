@@ -75,7 +75,7 @@ const CommentsContainer = ({
           onRecruit ? ' w-full' : ' w-[79%]'
         }`}
       >
-        <div className={`rounded-full overflow-hidden ${profileStyles} z-20 `}>
+        <div className={` rounded-full overflow-hidden ${profileStyles} z-20 `}>
           {user.profile ? (
             <Image
               width={56}
@@ -84,6 +84,8 @@ const CommentsContainer = ({
               src={user.profile}
               style={{
                 objectFit: 'cover',
+                width: '100%',
+                height: '100%',
               }}
             />
           ) : (
