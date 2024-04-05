@@ -74,8 +74,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       totalFileSize += file.file.size;
     });
 
-    console.log('폼데이터의 전체 파일 크기:', totalFileSize);
-
     const articleRequest = {
       ...uploadData,
       title: title,

@@ -79,7 +79,7 @@ export default function RecruitingPage({
                 scrollToComments={scrollToComments}
                 articleId={params.slug}
                 user={data.user}
-                userId={userId}
+                userId={writer.userId!}
                 onRecruit
                 recruiting={recruiting}
                 page="recruiting"

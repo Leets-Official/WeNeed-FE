@@ -17,7 +17,6 @@ const RecruitingDetailContents = ({
   sharedText,
   isInMypage,
 }: RecruitingDetailContentsProps) => {
-  console.log(contents);
   return (
     <div className="w-full flex flex-col items-center gap-[50px] mt-[20px] overflow-hidden ">
       {contents.map((content) => {
