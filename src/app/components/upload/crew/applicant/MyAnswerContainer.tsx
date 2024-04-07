@@ -97,7 +97,7 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
           {REQUIREMENT}
           {APPLICANT_QUESTIONS.keywords}
         </div>
-        <div className="text-white flex w-full flex-wrap gap-[10px]">
+        <div className="text-white flex w-full flex-wrap gap-[10px] h-[120px]">
           {CREW_KEYWORDS.map((keyword) => (
             <div
               key={keyword}
