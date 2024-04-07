@@ -73,7 +73,6 @@ const UploadThumbnail = ({ uploadInfo, closeModal }: UploadThumbnailProps) => {
             )}
             <input
               type="file"
-              multiple
               ref={inputRef}
               onChange={(e) => handleFileChange(e)}
               className="w-auto h-auto hidden"

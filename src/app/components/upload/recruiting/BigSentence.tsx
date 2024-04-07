@@ -21,14 +21,8 @@ const BigSentence = ({ isEdit }: BigSentenceProps) => {
     >
       <div>
         {uploadData.sharedText ? (
-          <div className="flex flex-col text-3xl font-bold gap-y-3">
-            <p>입력된 문장 : {uploadData.sharedText}</p>
-            <div className="flex items-center justify-center gap-x-4">
-              <div className="w-5 h-[22px]">
-                <Icons name={selectFileRIcon} />
-              </div>
-              <p className="text-xl font-bold text-[#CFCFCF]">문장 수정하기</p>{' '}
-            </div>
+          <div className="flex text-xl font-bold gap-x-3">
+            <p>입력되었습니다</p>
           </div>
         ) : (
           <div className="flex items-center justify-center gap-x-[31px]">

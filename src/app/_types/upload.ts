@@ -21,14 +21,13 @@ interface DndTextTypes {
   type: 'text' | 'image' | 'link' | 'sound';
   data: string;
   id: string;
-  url?: string;
 }
 
 interface DNDFileTypes {
   id: string;
   type: string;
   data: string;
-  url: string;
+  name?: string;
 }
 
 interface UserInfo {
@@ -78,7 +77,7 @@ interface ApplicationComplete {
 
 interface BlobImages {
   id: string;
-  blob: Blob;
+  imageFile: File;
   filename: string;
 }
 
@@ -94,4 +93,15 @@ interface SideNavItemProps {
   isEdit?: boolean;
   id?: string;
 }
+
+interface FileData {
+  fileName: string;
+  fileUrl: string;
+}
+
 type NavComponent = Record<string, JSX.Element>;
+
+interface UploadRequestBody {
+  articleRequest: UploadPFTypes;
+  fileRequests: FileData;
+}

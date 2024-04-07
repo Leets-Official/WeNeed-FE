@@ -5,12 +5,16 @@ import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
 import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
-import { uploadDataState } from 'recoil/upload';
+import { thumbnailState, uploadDataState } from 'recoil/upload';
 import { USER_PREVIEW } from 'constants/upload';
 import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
+    thumbnailState,
+  );
+
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
@@ -21,7 +25,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       openModal();
     } else if (label === '팀원 추가') {
       openModal();
-    } else if (uploadData.thumbnail === '') {
+    } else if (thumbnailData === null) {
       thumbnailAlert();
     } else if (uploadData.content.length < 1) {
       noContentsAlert();

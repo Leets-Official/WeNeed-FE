@@ -5,7 +5,7 @@ import { addThumbnailIcon } from 'ui/IconsPath';
 import { image, imgAndVideo, thumbnail } from 'ui/upload/fileType';
 import UploadThumbnail from './modal/uploadFile/UploadThumbnail';
 import { useRecoilState } from 'recoil';
-import { uploadDataState } from 'recoil/upload';
+import { thumbnailState, uploadDataState } from 'recoil/upload';
 import Image from 'next/image';
 
 interface AddThumbnailProps {
@@ -17,18 +17,26 @@ const AddThumbnail = ({ thumbnailInfo }: AddThumbnailProps) => {
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   const [uploadData, setUploadData] =
     useRecoilState<UploadPFTypes>(uploadDataState);
+  const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
+    thumbnailState,
+  );
+  console.log('추가된 썸네일일', thumbnailData);
 
   return (
     <div className="w-full cursor-pointer" onClick={openModal}>
       <div
         className={`flex items-center justify-center ${height} gap-x-3 ${bgColor} text-white font-bold ${etcStyles}`}
       >
-        {uploadData.thumbnail ? (
+        {thumbnailData ? (
           <div className="flex flex-col text-lg gap-y-3">
             <div className="flex justify-around">
               <div>선택된 대표 사진</div>
             </div>
-            <Image src={uploadData.thumbnail} alt="Thumbnail" {...thumbnail} />
+            <Image
+              src={thumbnailData ? URL.createObjectURL(thumbnailData) : ''}
+              alt="Thumbnail"
+              {...thumbnail}
+            />
             <div className="flex gap-x-3 items-center justify-center">
               <Icons name={addThumbnailIcon} />
               <div>클릭 시 대표 사진 변경</div>

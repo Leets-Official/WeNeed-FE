@@ -8,6 +8,7 @@ import {
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 import { deleteAlert, editAlert } from 'components/upload/both/showToast';
+import uploadToS3 from 'utils/awsS3';
 
 interface FileInfo {
   name: string;
@@ -70,16 +71,14 @@ const useAddFile = () => {
     }
   };
 
-  const updateFile = (id: string, fileType: string) => {
+  const updateFile = async (id: string, fileType: string) => {
     const file = inputRef.current?.files?.[0];
-
     if (file) {
-      const blob = new Blob([file], { type: file.type });
       if (fileType === '이미지') {
         setImages((prevImages) =>
           prevImages.map((image) =>
             image.id === id
-              ? { id: id, blob: blob, filename: file.name }
+              ? { id: id, imageFile: file, filename: file.name }
               : image,
           ),
         );
@@ -109,8 +108,15 @@ const useAddFile = () => {
     }
   };
 
-  const addFile = (file: File, type: string) => {
-    const blob = new Blob([file], { type: file.type });
+  const addFile = async (file: File, type: string) => {
+    const uploadPromises = uploadToS3(file);
+    try {
+      const imageUrls = await uploadPromises;
+      console.log('url :::::', imageUrls);
+    } catch (err) {
+      console.error(err);
+    }
+
     if (type === 'image') {
       setItems((prevData) => [
         ...prevData,
@@ -125,7 +131,7 @@ const useAddFile = () => {
         ...prevImages,
         {
           id: String(orderId),
-          blob: blob,
+          imageFile: file,
           filename: file.name,
         },
       ]);

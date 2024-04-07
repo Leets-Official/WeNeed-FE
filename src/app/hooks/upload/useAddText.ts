@@ -24,7 +24,7 @@ const useAddText = () => {
     editAlert();
   };
 
-  const addText = (type: 'text' | 'image' | 'link' | 'sound') => {
+  const addText = (type: 'text' | 'link' | 'sound') => {
     const updatedItems = [
       ...items,
       {
