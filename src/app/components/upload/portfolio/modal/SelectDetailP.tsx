@@ -53,7 +53,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
-  console.log('변경된 content 배열:', uploadData);
 
   const handleConfirm = async () => {
     setThumbnail(null);
@@ -82,11 +81,11 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     }
 
     const updatedContent = await Promise.all(uploadPromises);
-    setUploadData({ ...uploadData, content: updatedContent });
 
     const requestData = {
       articleRequest: {
         ...uploadData,
+        content: updatedContent,
         thumbnail: thumbnailUrl,
         title: title,
         skills: skill,

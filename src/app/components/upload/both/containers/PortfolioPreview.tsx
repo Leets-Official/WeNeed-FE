@@ -5,7 +5,12 @@ import Header from 'components/layout/Header';
 import { PORTFOLIO_PREVIEW } from 'constants/upload';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { filestate, textState, uploadDataState } from 'recoil/upload';
+import {
+  filestate,
+  textState,
+  thumbnailState,
+  uploadDataState,
+} from 'recoil/upload';
 
 interface PortfolioPreviewProps {
   user: UserProfile;
@@ -15,6 +20,7 @@ const koreanDate = new Date();
 koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const fileNames: FileDetail[] = files.map((file) => {
@@ -26,12 +32,16 @@ const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
   useEffect(() => {
     setUploadData({ ...uploadData, content: items });
   }, [items]);
+  let thumbnailURL = '';
+  if (thumbnail) {
+    thumbnailURL = URL.createObjectURL(thumbnail);
+  }
 
   const previewRecruit: RecruitDetailItem = {
     ...PORTFOLIO_PREVIEW,
     contents: uploadData.content || '',
     createdAt: String(koreanDate),
-    thumbnail: uploadData.thumbnail || '',
+    thumbnail: thumbnailURL || '',
     recruiting: true,
     commentCount: 0,
     files: fileNames,
