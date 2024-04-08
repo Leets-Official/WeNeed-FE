@@ -1,13 +1,14 @@
 import Icons from 'components/common/Icons';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { imageBlobState, uploadDataState, uploadForm } from 'recoil/upload';
+import { imageBlobState, thumbnailState, uploadDataState } from 'recoil/upload';
 import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
+import uploadToS3 from 'utils/awsS3';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -22,9 +23,8 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const isFilled = selectedTags.length === 0 || title.trim() === '';
   const reqPath = isEdit
     ? `api/update/recruiting?articleId=${id}`
@@ -44,33 +44,61 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
-    uploadFormData.delete('request');
-    uploadFormData.delete('images');
+    setThumbnail(null);
     setLoading(true);
-    images.forEach((image) => {
-      uploadFormData.append('images', image.blob, image.filename);
+
+    let thumbnailUrl = null;
+    let imgNum = 0;
+
+    setLoading(true);
+
+    const imagePromises = uploadData.content.map(async (item) => {
+      if (item.type === 'image') {
+        try {
+          const imageUrl = await uploadToS3(images[imgNum].imageFile);
+          imgNum++;
+          return { ...item, data: imageUrl };
+        } catch (err) {
+          console.error('이미지 업로드 에러', err);
+          return item;
+        }
+      } else {
+        return item;
+      }
     });
 
-    const articleRequest = {
-      ...uploadData,
-      articleType: 'RECRUITING',
-      title: title,
-      skills: skill,
-      tags: selectedTags,
+    if (thumbnail) {
+      thumbnailUrl = await uploadToS3(thumbnail);
+    }
+
+    const updatedContent = await Promise.all(imagePromises);
+
+    const requestData = {
+      articleRequest: {
+        ...uploadData,
+        articleType: 'RECRUITING',
+        content: updatedContent,
+        thumbnail: thumbnailUrl,
+        title: title,
+        skills: skill,
+        tags: selectedTags,
+      },
+      fileRequests: [],
     };
 
-    uploadFormData.append(
-      'request',
-      new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
-    );
+    const requestOptions = {
+      method: apiMode,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
-      {
-        method: apiMode,
-        body: uploadFormData,
-      },
+      requestOptions,
     );
+    console.log(res);
 
     if (true) {
       setTimeout(() => {

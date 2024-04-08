@@ -6,7 +6,7 @@ import Header from 'components/layout/Header';
 import { PORTFOLIO_PREVIEW, WRITER_PREVIEW } from 'constants/upload';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { textState, uploadDataState } from 'recoil/upload';
+import { textState, uploadDataState, thumbnailState } from 'recoil/upload';
 
 interface RecruitPreviewProps {
   user: UserProfile;
@@ -18,22 +18,25 @@ koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [items, setItems] = useRecoilState(textState);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
 
+  let thumbnailURL = '';
+
+  if (thumbnail) {
+    thumbnailURL = URL.createObjectURL(thumbnail);
+  }
   useEffect(() => {
     setUploadData({ ...uploadData, content: items });
   }, [items]);
 
   const previewRecruit: RecruitDetailItem = {
     ...PORTFOLIO_PREVIEW,
-    title: uploadData.title,
-    skills: uploadData.skills,
-    tags: uploadData.tags,
-    sharedText: uploadData.sharedText || '',
     contents: uploadData.content || '',
     createdAt: String(koreanDate),
-    thumbnail: uploadData.thumbnail || '',
-    recruiting: true,
+    thumbnail: thumbnailURL || '',
     commentCount: 0,
+    recruiting: true,
+    sharedText: uploadData.sharedText || '',
   };
   console.log('previewPF', previewRecruit);
 

@@ -29,13 +29,15 @@ const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
       fileUrl: file.id,
     };
   });
-  useEffect(() => {
-    setUploadData({ ...uploadData, content: items });
-  }, [items]);
+
   let thumbnailURL = '';
   if (thumbnail) {
     thumbnailURL = URL.createObjectURL(thumbnail);
   }
+
+  useEffect(() => {
+    setUploadData({ ...uploadData, content: items });
+  }, [items]);
 
   const previewRecruit: RecruitDetailItem = {
     ...PORTFOLIO_PREVIEW,

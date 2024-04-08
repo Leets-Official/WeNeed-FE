@@ -67,7 +67,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       }
     });
 
-    const uploadPromises = uploadData.content.map(async (item) => {
+    const imagePromises = uploadData.content.map(async (item) => {
       if (item.type === 'image') {
         try {
           const imageUrl = await uploadToS3(images[imgNum].imageFile);
@@ -86,7 +86,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       thumbnailUrl = await uploadToS3(thumbnail);
     }
 
-    const updatedContent = await Promise.all(uploadPromises);
+    const updatedContent = await Promise.all(imagePromises);
     const updatedFiles = await Promise.all(filePromises);
     console.log('제출 전 파일 배열', updatedFiles);
 
@@ -114,7 +114,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
       requestOptions,
     );
-    console.log(await res.json(), 'res 결과값');
 
     if (true) {
       setTimeout(() => {

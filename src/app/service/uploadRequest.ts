@@ -34,9 +34,9 @@ export const uploadPortfolio = async (
 };
 
 export const uploadRecruit = async (
-  portfolio: FormData,
+  recruiting: UploadRequestBody,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruit`;
-  return await postRequest(url, portfolio, accessToken);
+  return await postRequest(url, recruiting, accessToken);
 };
