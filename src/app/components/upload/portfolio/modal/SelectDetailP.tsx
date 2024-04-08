@@ -11,7 +11,6 @@ import {
   imageBlobState,
   thumbnailState,
   uploadDataState,
-  uploadForm,
 } from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
@@ -31,12 +30,9 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const isFilled = selectedTags.length === 0 || title.trim() === '';
-  const thumbnailUrl = '';
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
@@ -57,9 +53,19 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const handleConfirm = async () => {
     setThumbnail(null);
     setLoading(true);
-    let thumbnailUrl = null;
 
+    let thumbnailUrl = null;
     let imgNum = 0;
+
+    const filePromises = blobFiles.map(async (fileInfo) => {
+      try {
+        const fileURL = await uploadToS3(fileInfo.file);
+        return { fileName: fileInfo.filename, fileUrl: fileURL };
+      } catch (err) {
+        console.error('파일 업로드 에러', err);
+        return fileInfo;
+      }
+    });
 
     const uploadPromises = uploadData.content.map(async (item) => {
       if (item.type === 'image') {
@@ -81,6 +87,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     }
 
     const updatedContent = await Promise.all(uploadPromises);
+    const updatedFiles = await Promise.all(filePromises);
+    console.log('제출 전 파일 배열', updatedFiles);
 
     const requestData = {
       articleRequest: {
@@ -91,12 +99,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
         skills: skill,
         tags: selectedTags,
       },
-      fileRequests: [
-        {
-          fileName: 'string',
-          fileUrl: 'string',
-        },
-      ],
+      fileRequests: updatedFiles,
     };
 
     const requestOptions = {
