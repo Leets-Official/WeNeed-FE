@@ -79,6 +79,7 @@ interface Content {
   type: 'text' | 'image' | 'link' | 'sound';
   name?: string;
   data: string;
+  file?: File;
 }
 
 interface TeamMember {

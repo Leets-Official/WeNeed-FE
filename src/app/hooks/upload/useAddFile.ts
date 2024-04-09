@@ -84,7 +84,7 @@ const useAddFile = () => {
         );
         setItems((prevItems) =>
           prevItems.map((item) =>
-            item.id === id ? { ...item, data: fileInfo.url } : item,
+            item.id === id ? { ...item, data: fileInfo.url, file: file } : item,
           ),
         );
       } else {
@@ -116,6 +116,7 @@ const useAddFile = () => {
           id: String(orderId),
           type: type,
           data: fileInfo.url,
+          file: file,
         },
       ]);
 

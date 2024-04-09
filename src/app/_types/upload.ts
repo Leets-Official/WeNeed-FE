@@ -21,6 +21,7 @@ interface DndTextTypes {
   type: 'text' | 'image' | 'link' | 'sound';
   data: string;
   id: string;
+  file?: File;
 }
 
 interface DNDFileTypes {

@@ -31,7 +31,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
-  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
@@ -46,7 +45,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     setSelectedTags(uploadData.tags);
     setSkill(uploadData.skills);
   }, []);
-  console.log('제출 전 images 현황 ::', images);
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -58,7 +56,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     setLoading(true);
 
     let thumbnailUrl = null;
-    let imgNum = 0;
 
     const filePromises = blobFiles.map(async (fileInfo) => {
       try {
@@ -75,9 +72,9 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
         if (item.name === null) {
           return item;
         } else {
-          const imageUrl = await uploadToS3(images[imgNum].imageFile);
-          imgNum++;
-          return { ...item, data: imageUrl };
+          const imageUrl = item.file && (await uploadToS3(item.file));
+          const { file, ...itemWithoutFile } = item;
+          return { ...itemWithoutFile, data: imageUrl };
         }
       } else {
         return item;

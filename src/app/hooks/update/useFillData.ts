@@ -3,7 +3,6 @@ import {
   fileBlobState,
   imageBlobState,
   orderState,
-  thumbnailState,
   thumbnailUrlState,
 } from 'recoil/upload';
 import { filestate, textState, uploadDataState } from 'recoil/upload';
@@ -30,9 +29,20 @@ const useFillData = () => {
   const fillPF = ({ portfolio }: useFillDataProps) => {
     console.log('가져온 포폴', portfolio);
     setOrderId(portfolio.contents.length + 1);
-    setItems([...portfolio.contents]);
+    let idCounter = 0;
+    setItems(
+      portfolio.contents.map((content) => ({
+        ...content,
+        id: String(idCounter++),
+      })),
+    );
     setThumbnailUrl(portfolio.thumbnail);
-
+    setUploadData({
+      ...uploadData,
+      title: portfolio.title,
+      tags: portfolio.tags,
+      skills: portfolio.skills,
+    });
     const newArray = portfolio.files.map((item) => {
       let contentType = '';
       if (item.fileName.endsWith('pdf')) {

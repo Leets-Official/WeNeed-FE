@@ -6,7 +6,12 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import { filestate, textState, uploadDataState } from 'recoil/upload';
+import {
+  filestate,
+  imageBlobState,
+  textState,
+  uploadDataState,
+} from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import DndText from './DndText';
 import DndLink from './DndLink';
@@ -28,6 +33,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [files, setFiles] = useRecoilState(filestate);
   const [enabled, setEnabled] = useState(false);
+  const [images, setImages] = useRecoilState(imageBlobState);
   const [isEditFile, setIsEditFile] = useState(false);
   const [editItemId, setEditItemId] = useState<string | null>(null);
   const height = articleType === 'portfolio' ? 680 : 645;
@@ -59,8 +65,9 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
   };
 
   useEffect(() => {
-    console.log('items 변화 후 현황:', items);
-    console.log('items 변화 후 uploadData현황: ', uploadData);
+    console.log(' items:', items);
+    console.log('uploadData: ', uploadData);
+    console.log('images: ', images);
     setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
     setIsEditFile(false);
