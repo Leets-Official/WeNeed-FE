@@ -1,38 +1,44 @@
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
-const postRequest = async (
+const patchRequest = async (
   url: string,
-  body: FormData,
+  body: any = null,
   accessToken: string,
 ) => {
   try {
+    console.log('실제서버', body);
     const response = await fetch(url, {
       method: 'PATCH',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + accessToken,
       },
-      body: body,
+      body: JSON.stringify(body),
     });
-    return response;
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
   } catch (error) {
     console.log('Error:', error);
   }
 };
 
 export const updatePortfolio = async (
-  portfolio: FormData,
+  portfolio: UploadRequestBody,
   accessToken: string,
   id: string,
 ) => {
   const url = `${SERVER_URL}/portfolio/${id}`;
-  return await postRequest(url, portfolio, accessToken);
+  return await patchRequest(url, portfolio, accessToken);
 };
 
 export const updateRecruit = async (
-  recruit: FormData,
+  recruit: UploadRequestBody,
   accessToken: string,
   id: string,
 ) => {
   const url = `${SERVER_URL}/portfolio/${id}`;
-  return await postRequest(url, recruit, accessToken);
+  return await patchRequest(url, recruit, accessToken);
 };

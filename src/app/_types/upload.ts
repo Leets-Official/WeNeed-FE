@@ -79,6 +79,7 @@ interface BlobImages {
   id: string;
   imageFile: File;
   filename: string;
+  isEdit?: boolean;
 }
 
 interface BlobFiles {

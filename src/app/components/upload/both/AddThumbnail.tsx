@@ -2,10 +2,14 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import { addThumbnailIcon } from 'ui/IconsPath';
-import { image, imgAndVideo, thumbnail } from 'ui/upload/fileType';
+import { image, thumbnail } from 'ui/upload/fileType';
 import UploadThumbnail from './modal/uploadFile/UploadThumbnail';
 import { useRecoilState } from 'recoil';
-import { thumbnailState, uploadDataState } from 'recoil/upload';
+import {
+  thumbnailState,
+  thumbnailUrlState,
+  uploadDataState,
+} from 'recoil/upload';
 import Image from 'next/image';
 
 interface AddThumbnailProps {
@@ -15,25 +19,28 @@ interface AddThumbnailProps {
 const AddThumbnail = ({ thumbnailInfo }: AddThumbnailProps) => {
   const { height, bgColor, etcStyles } = thumbnailInfo;
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
-  const [uploadData, setUploadData] =
-    useRecoilState<UploadPFTypes>(uploadDataState);
   const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
     thumbnailState,
   );
-  console.log('추가된 썸네일일', thumbnailData);
+  const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+  console.log(thumbnailData, '현재 썸네일 파일 현황');
 
   return (
     <div className="w-full cursor-pointer" onClick={openModal}>
       <div
         className={`flex items-center justify-center ${height} gap-x-3 ${bgColor} text-white font-bold ${etcStyles}`}
       >
-        {thumbnailData ? (
+        {thumbnailData || thumbnailUrl ? (
           <div className="flex flex-col text-lg gap-y-3">
             <div className="flex justify-around">
               <div>선택된 대표 사진</div>
             </div>
             <Image
-              src={thumbnailData ? URL.createObjectURL(thumbnailData) : ''}
+              src={
+                thumbnailData
+                  ? URL.createObjectURL(thumbnailData)
+                  : thumbnailUrl
+              }
               alt="Thumbnail"
               {...thumbnail}
             />
@@ -48,7 +55,6 @@ const AddThumbnail = ({ thumbnailInfo }: AddThumbnailProps) => {
             <p>대표 사진 업로드</p>
           </div>
         )}
-
         <div onClick={handleModalClick}>
           {isOpen && (
             <UploadThumbnail uploadInfo={image} closeModal={closeModal} />

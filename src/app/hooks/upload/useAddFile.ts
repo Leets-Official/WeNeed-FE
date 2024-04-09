@@ -109,14 +109,6 @@ const useAddFile = () => {
   };
 
   const addFile = async (file: File, type: string) => {
-    const uploadPromises = uploadToS3(file);
-    try {
-      const imageUrls = await uploadPromises;
-      console.log('url :::::', imageUrls);
-    } catch (err) {
-      console.error(err);
-    }
-
     if (type === 'image') {
       setItems((prevData) => [
         ...prevData,

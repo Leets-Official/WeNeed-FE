@@ -9,6 +9,7 @@ import {
   filestate,
   textState,
   thumbnailState,
+  thumbnailUrlState,
   uploadDataState,
 } from 'recoil/upload';
 
@@ -21,6 +22,7 @@ koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
   const [items, setItems] = useRecoilState(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const fileNames: FileDetail[] = files.map((file) => {
@@ -33,6 +35,8 @@ const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
   let thumbnailURL = '';
   if (thumbnail) {
     thumbnailURL = URL.createObjectURL(thumbnail);
+  } else {
+    thumbnailURL = thumbnailUrlData;
   }
 
   useEffect(() => {

@@ -63,3 +63,8 @@ export const thumbnailState = atom<File | null>({
   key: 'thumbnailState',
   default: null,
 });
+
+export const thumbnailUrlState = atom<string>({
+  key: 'thumbnailUrlState',
+  default: '',
+});

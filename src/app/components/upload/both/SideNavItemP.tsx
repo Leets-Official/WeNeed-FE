@@ -5,7 +5,11 @@ import SelectDetailP from '../portfolio/modal/SelectDetailP';
 import SearchTeam from '../portfolio/modal/search/SearchTeam';
 import PortfolioPreview from './containers/PortfolioPreview';
 import { useRecoilState } from 'recoil';
-import { thumbnailState, uploadDataState } from 'recoil/upload';
+import {
+  thumbnailState,
+  thumbnailUrlState,
+  uploadDataState,
+} from 'recoil/upload';
 import { USER_PREVIEW } from 'constants/upload';
 import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 
@@ -14,7 +18,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
     thumbnailState,
   );
-
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
@@ -25,7 +29,7 @@ const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
       openModal();
     } else if (label === '팀원 추가') {
       openModal();
-    } else if (thumbnailData === null) {
+    } else if (thumbnailData === null && thumbnailUrlData === '') {
       thumbnailAlert();
     } else if (uploadData.content.length < 1) {
       noContentsAlert();

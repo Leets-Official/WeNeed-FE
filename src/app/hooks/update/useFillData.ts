@@ -1,11 +1,12 @@
 import { useRecoilState } from 'recoil';
-import { fileBlobState, imageBlobState, orderState } from 'recoil/upload';
 import {
-  filestate,
-  textState,
-  uploadDataState,
-  uploadForm,
+  fileBlobState,
+  imageBlobState,
+  orderState,
+  thumbnailState,
+  thumbnailUrlState,
 } from 'recoil/upload';
+import { filestate, textState, uploadDataState } from 'recoil/upload';
 
 interface useFillDataProps {
   user: UserProfile;
@@ -24,10 +25,14 @@ const useFillData = () => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [fileBlob, setFileBlob] = useRecoilState(fileBlobState);
   const [orderId, setOrderId] = useRecoilState(orderState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
+  const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   const fillPF = ({ portfolio }: useFillDataProps) => {
+    console.log('가져온 포폴', portfolio);
+    setOrderId(portfolio.contents.length + 1);
+    setItems([...portfolio.contents]);
+    setThumbnailUrl(portfolio.thumbnail);
+
     const newArray = portfolio.files.map((item) => {
       let contentType = '';
       if (item.fileName.endsWith('pdf')) {
@@ -42,16 +47,13 @@ const useFillData = () => {
         url: item.fileUrl,
       };
     });
-
-    setOrderId(portfolio.contents.length + 1);
-    setItems([...portfolio.contents]);
     setFiles([...newArray]);
 
-    portfolio.files.forEach((fileURL) => {
-      fetch(fileURL.fileUrl)
+    portfolio.files.forEach((fileInfo) => {
+      fetch(fileInfo.fileUrl)
         .then((response) => response.blob())
         .then((blob) => {
-          const file = new File([blob], fileURL.fileName);
+          const file = new File([blob], fileInfo.fileName);
           setFileBlob((prevFiles) => [
             ...prevFiles,
             {
@@ -74,8 +76,9 @@ const useFillData = () => {
               ...prevImages,
               {
                 id: file.name,
-                blob: file,
-                filename: file.name,
+                imageFile: file,
+                filename: content.data,
+                isEdit: true,
               },
             ]);
           })
@@ -84,37 +87,15 @@ const useFillData = () => {
           );
       }
     });
-
-    if (uploadFormData.has('thumbnail')) {
-      uploadFormData.delete('thumbnail');
-    }
-    fetch(portfolio.thumbnail)
-      .then((response) => response.blob())
-      .then((blob) => {
-        uploadFormData.append('thumbnail', blob, portfolio.thumbnail);
-        setUploadData({
-          ...uploadData,
-          thumbnail: portfolio.thumbnail,
-          content: [...portfolio.contents],
-          title: portfolio.title,
-          tags: portfolio.tags,
-          skills: portfolio.skills,
-        });
-      })
-      .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
   };
 
   const fillRecruit = ({ recruit }: useFillRecruitProps) => {
     setItems([...recruit.contents]);
     setOrderId(recruit.contents.length + 1);
 
-    if (uploadFormData.has('thumbnail')) {
-      uploadFormData.delete('thumbnail');
-    }
     fetch(recruit.thumbnail)
       .then((response) => response.blob())
       .then((blob) => {
-        uploadFormData.append('thumbnail', blob, recruit.thumbnail);
         setUploadData({
           ...uploadData,
           thumbnail: recruit.thumbnail,
@@ -134,14 +115,6 @@ const useFillData = () => {
           .then((response) => response.blob())
           .then((blob) => {
             const file = new File([blob], content.data);
-            setImages((prevImages) => [
-              ...prevImages,
-              {
-                id: file.name,
-                blob: file,
-                filename: file.name,
-              },
-            ]);
           })
           .catch((error) =>
             console.error('파일 다운로드 중 오류 발생:', error),

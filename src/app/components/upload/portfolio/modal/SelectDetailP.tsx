@@ -10,6 +10,7 @@ import {
   fileBlobState,
   imageBlobState,
   thumbnailState,
+  thumbnailUrlState,
   uploadDataState,
 } from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
@@ -32,6 +33,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+
   const isFilled = selectedTags.length === 0 || title.trim() === '';
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
@@ -43,6 +46,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     setSelectedTags(uploadData.tags);
     setSkill(uploadData.skills);
   }, []);
+  console.log('제출 전 images 현황 ::', images);
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -51,7 +55,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
-    setThumbnail(null);
     setLoading(true);
 
     let thumbnailUrl = null;
@@ -69,22 +72,25 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
 
     const imagePromises = uploadData.content.map(async (item) => {
       if (item.type === 'image') {
-        try {
+        if (item.name === null) {
+          return item;
+        } else {
           const imageUrl = await uploadToS3(images[imgNum].imageFile);
           imgNum++;
           return { ...item, data: imageUrl };
-        } catch (err) {
-          console.error('이미지 업로드 에러', err);
-          return item;
         }
       } else {
         return item;
       }
     });
 
-    if (thumbnail) {
+    if (thumbnailUrlData === '' && thumbnail) {
       thumbnailUrl = await uploadToS3(thumbnail);
+    } else {
+      thumbnailUrl = thumbnailUrlData;
     }
+
+    setThumbnail(null);
 
     const updatedContent = await Promise.all(imagePromises);
     const updatedFiles = await Promise.all(filePromises);
