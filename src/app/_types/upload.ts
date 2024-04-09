@@ -71,6 +71,7 @@ interface ApplicationComplete {
   grade: (arg: string) => string;
   status: (arg: string) => string;
   phone: (arg: string) => string;
+  appeal: (arg: string) => string;
   aboutMe: (arg: string) => string;
   content: (arg: string) => string;
   keywords: (arg: string) => string;

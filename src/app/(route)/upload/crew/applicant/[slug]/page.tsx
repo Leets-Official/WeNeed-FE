@@ -2,7 +2,6 @@ import ApplicantContainer from 'components/upload/crew/applicant/ApplicantContai
 import RecruitmentContainer from 'components/crew/RecruitmentContainer';
 import CrewHeader from 'components/upload/crew/common/CrewHeader';
 import { HEADER_APPLICANT } from 'constants/crew';
-import CrewSubmission from 'components/upload/crew/recruiter/CrewSubmission';
 
 export default async function CrewApplicantPage({
   params,

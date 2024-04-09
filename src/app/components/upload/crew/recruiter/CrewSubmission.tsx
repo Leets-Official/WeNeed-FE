@@ -9,6 +9,7 @@ import {
   postApplicantReqState,
   postRecruiterState,
 } from 'recoil/crew';
+import uploadToS3 from 'utils/awsS3';
 
 interface CrewSubmissionProps {
   text: string;
@@ -64,22 +65,22 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       alert('어필할 수 있는 파일을 올려주세요.');
       return;
     }
-    const newData = { ...postApplicantReq, international: postApplicantBool };
-    const formData = new FormData();
-    formData.append(
-      'request',
-      new Blob([JSON.stringify(newData)], { type: 'application/json' }),
-    );
-    if (postApplicantAppeal) {
-      formData.append('appeal', postApplicantAppeal, postApplicantAppeal.name);
-    }
-
+    const appealUrl = await uploadToS3(postApplicantAppeal);
+    const newData = {
+      ...postApplicantReq,
+      international: postApplicantBool,
+      appealUrl: appealUrl,
+      appealName: postApplicantAppeal.name,
+    };
     try {
       await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/applicant?articleId=${articleId}`,
         {
           method: 'POST',
-          body: formData,
+          body: JSON.stringify(newData),
+          headers: {
+            'Content-Type': 'application/json',
+          },
         },
       );
       router.push(`/upload/crew/applicant/success`);
