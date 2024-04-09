@@ -66,17 +66,18 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       return;
     }
     const appealUrl = await uploadToS3(postApplicantAppeal);
+    const newData = {
+      ...postApplicantReq,
+      international: postApplicantBool,
+      appealUrl: appealUrl,
+      appealName: postApplicantAppeal.name,
+    };
     try {
       await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/applicant?articleId=${articleId}`,
         {
           method: 'POST',
-          body: JSON.stringify({
-            ...postApplicantReq,
-            international: postApplicantBool,
-            appealUrl: appealUrl,
-            appealName: postApplicantAppeal.name,
-          }),
+          body: JSON.stringify(newData),
           headers: {
             'Content-Type': 'application/json',
           },

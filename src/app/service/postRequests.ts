@@ -61,7 +61,5 @@ export const postApplicant = async (
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/application-forms/${articleId}`;
-  const res = await postRequest(url, accessToken, bodyData);
-  console.log(res);
-  return res;
+  return await postRequest(url, accessToken, bodyData);
 };
