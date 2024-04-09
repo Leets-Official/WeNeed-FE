@@ -52,7 +52,10 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       case 'crewQuestions':
         return crewQuestions.map((question) => (
-          <div key={question} className="flex border-b border-black px-[30px]">
+          <div
+            key={question}
+            className="flex border-b border-black px-[30px] mb-[18px] "
+          >
             {question}
           </div>
         ));

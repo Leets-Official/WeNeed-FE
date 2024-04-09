@@ -70,7 +70,7 @@ const RecruitingDetailContents = ({
         }
       })}
       <div className="flex flex-col items-start justify-center w-full gap-[40px] text-[#00E0EE] font-semibold mt-[39px] ">
-        <div className="flex gap-3 bg-black h-[36px] items-center px-[24px] rounded-[10px]">
+        <div className="flex gap-3 bg-[#3A3A3A] h-[36px] items-center px-3 rounded-[10px]">
           {skills && <Icons name={skillsList} />}
           스킬 -
           {skills.map((skill) => (

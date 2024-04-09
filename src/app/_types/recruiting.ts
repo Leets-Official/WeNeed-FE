@@ -69,6 +69,8 @@ interface ApplicationFormResponse {
   detailTags: string[];
   crewAnswers: string[];
   crewQuestions: string[];
+  appealUrl: string;
+  appealName: string;
 }
 
 interface ApplicationForm {
@@ -84,4 +86,20 @@ interface ApplicationForm {
   content: string;
   keywords: string[];
   crewAnswers: string[];
+}
+
+interface ApplicationFormRequest {
+  name: string;
+  major: string;
+  doubleMajor: string;
+  international: boolean;
+  grade: number;
+  status: string;
+  phone: string;
+  aboutMe: string;
+  content: string;
+  keywords: string[];
+  crewAnswers: string[];
+  appealUrl: string;
+  appealName: string;
 }

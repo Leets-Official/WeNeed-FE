@@ -1,13 +1,25 @@
+import Icons from 'components/common/Icons';
 import DetailCategories from 'components/main/common/DetailCategories';
 import { APPLICATION_COMPLETE } from 'constants/crew';
+import { fileMini } from 'ui/IconsPath';
 
 interface ApplicationInfoProps {
   applicationForm: ApplicationFormResponse;
 }
 
 const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
-  const { name, phone, keywords, crewAnswers, major, crewQuestions } =
-    applicationForm;
+  const {
+    name,
+    phone,
+    keywords,
+    crewAnswers,
+    major,
+    crewQuestions,
+    appealName,
+    appealUrl,
+  } = applicationForm;
+
+  console.log(appealName, appealUrl);
 
   const renderContent = (questionKey: string) => {
     switch (questionKey) {
@@ -15,7 +27,7 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
         return (
           <div className="flex gap-[50px] relative">
             <div className="">{major}</div>
-            <div className="absolute top-[-50px] right-[-180px] h-[200px] ">
+            <div className="absolute top-[-50px] right-[-230px] h-[200px] ">
               <p className="font-semibold mb-[26px]">복수전공 </p>
               <div className=" border-b border-black px-[30px]">{`${major}`}</div>
             </div>
@@ -24,12 +36,14 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
       case 'phone':
         return (
           <div className="w-full">
-            <div className=" border-b border-black px-[30px]">{phone}</div>
-            <div className="mt-[40px]">
+            <div className="border-b border-black px-[30px]  w-fit">
+              {phone}
+            </div>
+            <div className="mt-[72px]">
               {crewQuestions.map((question, i) => (
                 <div key={question} className="font-semibold">
                   <div>{question}</div>
-                  <div className="mt-[32px] px-[30px] border-b border-black">
+                  <div className=" w-fit my-[32px] px-[30px] border-b border-black font-normal">
                     {crewAnswers[i]}
                   </div>
                 </div>
@@ -43,6 +57,22 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
             {keywords.map((keyword) => (
               <DetailCategories key={keyword} category={keyword} noBg />
             ))}
+          </div>
+        );
+      case 'appeal':
+        return (
+          <div
+            key={appealUrl}
+            className="flex gap-3 items-center w-full truncate"
+          >
+            <a
+              href={appealUrl}
+              download={appealUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {appealName}
+            </a>
           </div>
         );
       default:
