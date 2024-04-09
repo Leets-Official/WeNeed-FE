@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   fileBlobState,
+  filestate,
   imageBlobState,
   thumbnailState,
   thumbnailUrlState,
@@ -31,7 +32,7 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   const isFilled = selectedTags.length === 0 || title.trim() === '';
@@ -57,10 +58,12 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
 
     let thumbnailUrl = null;
 
-    const filePromises = blobFiles.map(async (fileInfo) => {
+    const filePromises = files.map(async (fileInfo) => {
       try {
-        const fileURL = await uploadToS3(fileInfo.file);
-        return { fileName: fileInfo.filename, fileUrl: fileURL };
+        const fileURL = fileInfo.file
+          ? await uploadToS3(fileInfo.file)
+          : fileInfo.url;
+        return { fileName: fileInfo.id, fileUrl: fileURL };
       } catch (err) {
         console.error('파일 업로드 에러', err);
         return fileInfo;

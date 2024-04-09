@@ -29,6 +29,8 @@ interface DNDFileTypes {
   type: string;
   data: string;
   name?: string;
+  file?: File;
+  url?: string;
 }
 
 interface UserInfo {

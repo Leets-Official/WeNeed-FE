@@ -8,7 +8,6 @@ import {
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 import { deleteAlert, editAlert } from 'components/upload/both/showToast';
-import uploadToS3 from 'utils/awsS3';
 
 interface FileInfo {
   name: string;
@@ -91,7 +90,13 @@ const useAddFile = () => {
         setFiles((prevFiles) =>
           prevFiles.map((item) =>
             item.id === id
-              ? { ...item, id: file.name, data: file.name, url: fileInfo.url }
+              ? {
+                  ...item,
+                  id: file.name,
+                  data: file.name,
+                  url: fileInfo.url,
+                  file: file,
+                }
               : item,
           ),
         );
@@ -137,6 +142,7 @@ const useAddFile = () => {
           type: type,
           data: file.name,
           url: fileInfo.url,
+          file: file,
         },
       ]);
       setBlobFiles((prevFiles) => [

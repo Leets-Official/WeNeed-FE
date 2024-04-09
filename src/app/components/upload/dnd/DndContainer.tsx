@@ -68,6 +68,7 @@ const DndContainer = ({ articleType }: DndContainerProps) => {
     console.log(' items:', items);
     console.log('uploadData: ', uploadData);
     console.log('images: ', images);
+    console.log('files: ', files);
     setUploadData({ ...uploadData, content: items });
     const animation = requestAnimationFrame(() => setEnabled(true));
     setIsEditFile(false);

@@ -59,23 +59,6 @@ const useFillData = () => {
     });
     setFiles([...newArray]);
 
-    portfolio.files.forEach((fileInfo) => {
-      fetch(fileInfo.fileUrl)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const file = new File([blob], fileInfo.fileName);
-          setFileBlob((prevFiles) => [
-            ...prevFiles,
-            {
-              id: file.name,
-              file: file,
-              filename: file.name,
-            },
-          ]);
-        })
-        .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
-    });
-
     portfolio.contents.forEach((content) => {
       if (content.type === 'image') {
         fetch(content.data)
