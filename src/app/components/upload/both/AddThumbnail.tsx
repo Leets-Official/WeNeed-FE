@@ -5,11 +5,7 @@ import { addThumbnailIcon } from 'ui/IconsPath';
 import { image, thumbnail } from 'ui/upload/fileType';
 import UploadThumbnail from './modal/uploadFile/UploadThumbnail';
 import { useRecoilState } from 'recoil';
-import {
-  thumbnailState,
-  thumbnailUrlState,
-  uploadDataState,
-} from 'recoil/upload';
+import { thumbnailState, thumbnailUrlState } from 'recoil/upload';
 import Image from 'next/image';
 
 interface AddThumbnailProps {
@@ -23,7 +19,6 @@ const AddThumbnail = ({ thumbnailInfo }: AddThumbnailProps) => {
     thumbnailState,
   );
   const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
-  console.log(thumbnailData, '현재 썸네일 파일 현황');
 
   return (
     <div className="w-full cursor-pointer" onClick={openModal}>

@@ -20,11 +20,6 @@ export const userId = atom<number[]>({
   default: [],
 });
 
-export const uploadForm = atom<FormData>({
-  key: 'uploadFormState',
-  default: new FormData(),
-});
-
 export const uploadDataState = atom<UploadPFTypes>({
   key: 'uploadDataState',
   default: {
@@ -47,16 +42,6 @@ export const crewRecruiterState = atom<null>({
 export const imageBlobState = atom<BlobImages[]>({
   key: 'imageBlobState',
   default: [],
-});
-
-export const fileBlobState = atom<BlobFiles[]>({
-  key: 'fileBlobState',
-  default: [],
-});
-
-export const fileSizeState = atom<number>({
-  key: 'fileSizeState',
-  default: 0,
 });
 
 export const thumbnailState = atom<File | null>({

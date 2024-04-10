@@ -1,6 +1,5 @@
 import { useRecoilState } from 'recoil';
 import {
-  fileBlobState,
   filestate,
   imageBlobState,
   orderState,
@@ -14,7 +13,6 @@ const useInit = () => {
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const [images, setImages] = useRecoilState<BlobImages[]>(imageBlobState);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [orderId, setOrderId] = useRecoilState(orderState);
@@ -36,7 +34,6 @@ const useInit = () => {
     setItems([]);
     setFiles([]);
     setImages([]);
-    setBlobFiles([]);
     setOrderId(0);
     setThumbnail(null);
     setThumbnailUrl('');

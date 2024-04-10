@@ -86,12 +86,6 @@ interface BlobImages {
   isEdit?: boolean;
 }
 
-interface BlobFiles {
-  id: string;
-  file: File;
-  filename: string;
-}
-
 interface SideNavItemProps {
   iconInfo: IconPathTypes;
   label: string;

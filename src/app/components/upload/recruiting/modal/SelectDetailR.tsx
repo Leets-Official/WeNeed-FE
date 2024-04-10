@@ -4,7 +4,6 @@ import Icons from 'components/common/Icons';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
-  imageBlobState,
   thumbnailState,
   thumbnailUrlState,
   uploadDataState,
@@ -30,7 +29,6 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 

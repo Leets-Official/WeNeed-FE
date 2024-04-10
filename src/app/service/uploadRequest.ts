@@ -6,7 +6,6 @@ const postRequest = async (
   accessToken: string,
 ) => {
   try {
-    console.log('실제서버', body);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
