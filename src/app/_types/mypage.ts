@@ -33,6 +33,20 @@ interface MypageUserInfo {
   doubleMajor: string;
   interestField: string;
   email: string;
-  lnks: string[];
+  links: string[];
   selfIntro: string;
+}
+
+interface MypageMyinfo {
+  profileImage: Blob;
+  request: {
+    nickname: string;
+    major: string;
+    userGrade: number;
+    doubleMajor: string;
+    interestField: string;
+    email: string;
+    links: string[];
+    selfIntro: string;
+  };
 }

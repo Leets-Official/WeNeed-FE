@@ -6,6 +6,7 @@ import Header from 'components/layout/Header';
 import useLoginModal from 'hooks/upload/useLoginModal';
 import ModalPortal from 'components/common/modal/ModalPortal';
 import ModalOutside from 'components/common/modal/ModalOutside';
+import dynamic from 'next/dynamic';
 import { LOGGEDIN_SECTION_HEADINGS, MAIN_SIZE } from 'constants/main';
 import { DetailCategoriesContainer } from 'components/main/containers';
 import { useRecoilValue } from 'recoil';
@@ -13,7 +14,6 @@ import { selectedCategories } from 'recoil/main';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { setTokens } from 'utils/cookieUtils';
-import dynamic from 'next/dynamic';
 
 const NeedLoginModal = dynamic(
   () => import('components/common/modal/NeedLoginModal'),

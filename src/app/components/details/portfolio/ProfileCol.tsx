@@ -11,7 +11,17 @@ const ProfileCol = ({ user }: ProfileColProps) => {
     <div className="w-full flex flex-col justify-center items-center gap-[10px] mb-[66px]">
       <div className="w-[76px] h-[76px] overflow-hidden rounded-full">
         {profile ? (
-          <Image src={profile} width={76} height={76} alt="writer" />
+          <Image
+            src={profile}
+            width={76}
+            height={76}
+            alt="writer"
+            style={{
+              objectFit: 'cover',
+              width: '100%',
+              height: '100%',
+            }}
+          />
         ) : (
           <GradientProfile />
         )}

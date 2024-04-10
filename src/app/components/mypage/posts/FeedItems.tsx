@@ -31,19 +31,26 @@ const FeedItems = ({ article }: FeedItemsProps) => {
           <div className="z-10 absolute top-1 left-2 flex ml-[10px]">
             {article.teamProfiles.map((profile: string, index) => (
               <div key={profile + `${index}`} className="ml-[-10px]">
-                {profile !== null ? (
-                  <Image
-                    width={24}
-                    height={24}
-                    alt="writer"
-                    src={profile}
-                    style={{
-                      objectFit: 'cover',
-                    }}
-                  />
-                ) : (
-                  <GradientProfileSM />
-                )}
+                <div
+                  className={`rounded-full overflow-hidden w-[24px] h-[24px]`}
+                >
+                  {profile !== null ? (
+                    <Image
+                      width={24}
+                      height={24}
+                      alt="writer"
+                      src={profile}
+                      style={{
+                        objectFit: 'cover',
+                        objectPosition: 'center center',
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    />
+                  ) : (
+                    <GradientProfileSM />
+                  )}
+                </div>
               </div>
             ))}
           </div>

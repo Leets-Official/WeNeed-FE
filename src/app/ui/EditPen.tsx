@@ -1,6 +1,6 @@
 export const EditPen = () => {
   return (
-    <div className="cursor-pointer">
+    <div>
       <svg
         width="18"
         height="18"

@@ -25,11 +25,17 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
         {article.thumbnail ? (
           <Image
             src={article.thumbnail}
-            fill={true}
+            width={296}
+            height={296}
             alt="postImage"
             style={{
               objectFit: 'cover',
+              width: '100%',
+              height: '100%',
             }}
+            quality={40}
+            placeholder="blur"
+            blurDataURL="data:image/avif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           />
         ) : (
           <GradientItemDefault />
@@ -43,8 +49,8 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
           <div className="absolute top-0 h-20 w-[296px] bg-gradient-to-t from-transparent to-neutral-950 rounded-md"></div>
         </>
       ) : (
-        <div className="flex justify-between w-full h-[35px] mt-[11px]">
-          <div className="flex justify-center items-center gap-[10px]">
+        <div className="flex items-center justify-between w-full h-[35px] mt-[11px]">
+          <div className="rounded-full overflow-hidden w-[24px] h-[24px] mb-0.5">
             {(article as PortfolioArticle).profile ? (
               <Image
                 width={24}
@@ -53,15 +59,17 @@ const PortfolioItem = ({ article, onRecommend }: PortfolioItemsProps) => {
                 src={(article as PortfolioArticle).profile || ''}
                 style={{
                   objectFit: 'cover',
+                  width: '100%',
+                  height: '100%',
                 }}
               />
             ) : (
               <GradientProfileSM />
             )}
-            <p className="font-semibold w-[130px] truncate">
-              {(article as PortfolioArticle).writerNickname}
-            </p>
           </div>
+          <p className="font-semibold w-[155px] truncate">
+            {(article as PortfolioArticle).writerNickname}
+          </p>
           {!onRecommend && (
             <div className="flex gap-[10px] justify-center items-center">
               <Icons name={view} />
