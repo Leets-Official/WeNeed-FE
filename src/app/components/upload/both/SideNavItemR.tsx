@@ -2,7 +2,11 @@
 import Icons from 'components/common/Icons';
 import { useModal } from 'hooks/upload/useModal';
 import SelectDetailR from '../recruiting/modal/SelectDetailR';
-import { thumbnailState, uploadDataState } from 'recoil/upload';
+import {
+  thumbnailState,
+  uploadDataState,
+  thumbnailUrlState,
+} from 'recoil/upload';
 import { useRecoilState } from 'recoil';
 import { USER_PREVIEW } from 'constants/upload';
 import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
@@ -19,10 +23,11 @@ type NavComponent = Record<string, JSX.Element>;
 
 const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
   const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
     thumbnailState,
   );
+  const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
 
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
@@ -31,7 +36,7 @@ const SideNavItemR = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
     if (label === '미리보기') {
       previewAlert();
       openModal();
-    } else if (thumbnailData === null) {
+    } else if (thumbnailData === null && thumbnailUrlData === '') {
       thumbnailAlert();
     } else if (uploadData.content.length < 1) {
       noContentsAlert();

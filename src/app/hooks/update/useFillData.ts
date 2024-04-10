@@ -1,11 +1,6 @@
 import { useRecoilState } from 'recoil';
-import { fileBlobState, imageBlobState, orderState } from 'recoil/upload';
-import {
-  filestate,
-  textState,
-  uploadDataState,
-  uploadForm,
-} from 'recoil/upload';
+import { imageBlobState, orderState, thumbnailUrlState } from 'recoil/upload';
+import { filestate, textState, uploadDataState } from 'recoil/upload';
 
 interface useFillDataProps {
   user: UserProfile;
@@ -22,12 +17,28 @@ const useFillData = () => {
   const [files, setFiles] = useRecoilState(filestate);
   const [images, setImages] = useRecoilState(imageBlobState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [fileBlob, setFileBlob] = useRecoilState(fileBlobState);
   const [orderId, setOrderId] = useRecoilState(orderState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
+  const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   const fillPF = ({ portfolio }: useFillDataProps) => {
+    setOrderId(portfolio.contents.length + 1);
+    setThumbnailUrl(portfolio.thumbnail);
+    let idCounter = 0;
+
+    setItems(
+      portfolio.contents.map((content) => ({
+        ...content,
+        id: String(idCounter++),
+      })),
+    );
+
+    setUploadData({
+      ...uploadData,
+      title: portfolio.title,
+      tags: portfolio.tags,
+      skills: portfolio.skills,
+    });
+
     const newArray = portfolio.files.map((item) => {
       let contentType = '';
       if (item.fileName.endsWith('pdf')) {
@@ -42,27 +53,7 @@ const useFillData = () => {
         url: item.fileUrl,
       };
     });
-
-    setOrderId(portfolio.contents.length + 1);
-    setItems([...portfolio.contents]);
     setFiles([...newArray]);
-
-    portfolio.files.forEach((fileURL) => {
-      fetch(fileURL.fileUrl)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const file = new File([blob], fileURL.fileName);
-          setFileBlob((prevFiles) => [
-            ...prevFiles,
-            {
-              id: file.name,
-              file: file,
-              filename: file.name,
-            },
-          ]);
-        })
-        .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
-    });
 
     portfolio.contents.forEach((content) => {
       if (content.type === 'image') {
@@ -74,8 +65,9 @@ const useFillData = () => {
               ...prevImages,
               {
                 id: file.name,
-                blob: file,
-                filename: file.name,
+                imageFile: file,
+                filename: content.data,
+                isEdit: true,
               },
             ]);
           })
@@ -84,49 +76,30 @@ const useFillData = () => {
           );
       }
     });
-
-    if (uploadFormData.has('thumbnail')) {
-      uploadFormData.delete('thumbnail');
-    }
-    fetch(portfolio.thumbnail)
-      .then((response) => response.blob())
-      .then((blob) => {
-        uploadFormData.append('thumbnail', blob, portfolio.thumbnail);
-        setUploadData({
-          ...uploadData,
-          thumbnail: portfolio.thumbnail,
-          content: [...portfolio.contents],
-          title: portfolio.title,
-          tags: portfolio.tags,
-          skills: portfolio.skills,
-        });
-      })
-      .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
   };
 
   const fillRecruit = ({ recruit }: useFillRecruitProps) => {
-    setItems([...recruit.contents]);
     setOrderId(recruit.contents.length + 1);
+    console.log(recruit, '가져온 리크루팅');
 
-    if (uploadFormData.has('thumbnail')) {
-      uploadFormData.delete('thumbnail');
-    }
-    fetch(recruit.thumbnail)
-      .then((response) => response.blob())
-      .then((blob) => {
-        uploadFormData.append('thumbnail', blob, recruit.thumbnail);
-        setUploadData({
-          ...uploadData,
-          thumbnail: recruit.thumbnail,
-          articleType: 'RECRUITING',
-          sharedText: recruit.sharedText,
-          content: [...recruit.contents],
-          title: recruit.title,
-          tags: recruit.tags,
-          skills: recruit.skills,
-        });
-      })
-      .catch((error) => console.error('파일 다운로드 중 오류 발생:', error));
+    setOrderId(recruit.contents.length + 1);
+    setThumbnailUrl(recruit.thumbnail);
+    let idCounter = 0;
+
+    setItems(
+      recruit.contents.map((recruit) => ({
+        ...recruit,
+        id: String(idCounter++),
+      })),
+    );
+
+    setUploadData({
+      ...uploadData,
+      title: recruit.title,
+      tags: recruit.tags,
+      skills: recruit.skills,
+      sharedText: recruit.sharedText,
+    });
 
     recruit.contents.forEach((content) => {
       if (content.type === 'image') {
@@ -138,8 +111,9 @@ const useFillData = () => {
               ...prevImages,
               {
                 id: file.name,
-                blob: file,
-                filename: file.name,
+                imageFile: file,
+                filename: content.data,
+                isEdit: true,
               },
             ]);
           })

@@ -21,6 +21,7 @@ interface DndTextTypes {
   type: 'text' | 'image' | 'link' | 'sound';
   data: string;
   id: string;
+  file?: File;
 }
 
 interface DNDFileTypes {
@@ -28,6 +29,8 @@ interface DNDFileTypes {
   type: string;
   data: string;
   name?: string;
+  file?: File;
+  url?: string;
 }
 
 interface UserInfo {
@@ -80,12 +83,7 @@ interface BlobImages {
   id: string;
   imageFile: File;
   filename: string;
-}
-
-interface BlobFiles {
-  id: string;
-  file: File;
-  filename: string;
+  isEdit?: boolean;
 }
 
 interface SideNavItemProps {

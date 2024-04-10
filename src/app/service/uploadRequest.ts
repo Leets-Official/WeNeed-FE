@@ -6,7 +6,6 @@ const postRequest = async (
   accessToken: string,
 ) => {
   try {
-    console.log('실제서버', body);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -34,9 +33,9 @@ export const uploadPortfolio = async (
 };
 
 export const uploadRecruit = async (
-  portfolio: FormData,
+  recruiting: UploadRequestBody,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruit`;
-  return await postRequest(url, portfolio, accessToken);
+  return await postRequest(url, recruiting, accessToken);
 };

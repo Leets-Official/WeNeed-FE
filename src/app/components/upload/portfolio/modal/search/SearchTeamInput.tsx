@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { searchTeamIcon } from 'ui/IconsPath';
 import GradientProfileSM from 'ui/gradient/GradientProfileSM';
 import Icons from 'components/common/Icons';

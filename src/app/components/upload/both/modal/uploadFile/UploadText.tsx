@@ -78,7 +78,6 @@ const UploadText = ({
                     ? () => handleConfirm(fileType)
                     : () => {
                         if (isShare) {
-                          console.log(text, '나누고싶은 문장 변경');
                           setUploadData({ ...uploadData, sharedText: text });
                         } else {
                           updateText(id || '', text);

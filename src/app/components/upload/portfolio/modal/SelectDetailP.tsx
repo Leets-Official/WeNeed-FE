@@ -7,11 +7,10 @@ import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
-  fileBlobState,
-  imageBlobState,
+  filestate,
   thumbnailState,
+  thumbnailUrlState,
   uploadDataState,
-  uploadForm,
 } from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
@@ -30,13 +29,11 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
-  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+
   const isFilled = selectedTags.length === 0 || title.trim() === '';
-  const thumbnailUrl = '';
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
@@ -53,51 +50,60 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
     const skillsArray = value.split(',');
     setSkill(skillsArray);
   };
-  console.log('변경된 content 배열:', uploadData);
 
   const handleConfirm = async () => {
-    setThumbnail(null);
     setLoading(true);
+
     let thumbnailUrl = null;
 
-    let imgNum = 0;
+    const filePromises = files.map(async (fileInfo) => {
+      try {
+        const fileURL = fileInfo.file
+          ? await uploadToS3(fileInfo.file)
+          : fileInfo.url;
+        return { fileName: fileInfo.id, fileUrl: fileURL };
+      } catch (err) {
+        console.error('파일 업로드 에러', err);
+        return fileInfo;
+      }
+    });
 
-    const uploadPromises = uploadData.content.map(async (item) => {
+    const imagePromises = uploadData.content.map(async (item) => {
       if (item.type === 'image') {
-        try {
-          const imageUrl = await uploadToS3(images[imgNum].imageFile);
-          imgNum++;
-          return { ...item, data: imageUrl };
-        } catch (err) {
-          console.error('이미지 업로드 에러', err);
+        if (item.name === null) {
           return item;
+        } else {
+          const imageUrl = item.file && (await uploadToS3(item.file));
+          const { file, ...itemWithoutFile } = item;
+          return { ...itemWithoutFile, data: imageUrl };
         }
       } else {
         return item;
       }
     });
 
-    if (thumbnail) {
+    if (thumbnailUrlData === '' && thumbnail) {
       thumbnailUrl = await uploadToS3(thumbnail);
+    } else {
+      thumbnailUrl = thumbnailUrlData;
     }
 
-    const updatedContent = await Promise.all(uploadPromises);
-    setUploadData({ ...uploadData, content: updatedContent });
+    setThumbnail(null);
+
+    const updatedContent = await Promise.all(imagePromises);
+    const updatedFiles = await Promise.all(filePromises);
+    console.log('제출 전 파일 배열', updatedFiles);
 
     const requestData = {
       articleRequest: {
         ...uploadData,
+        content: updatedContent,
         thumbnail: thumbnailUrl,
         title: title,
         skills: skill,
         tags: selectedTags,
       },
-      fileRequests: [
-        {
-          fileName: 'string',
-          fileUrl: 'string',
-        },
-      ],
+      fileRequests: updatedFiles,
     };
 
     const requestOptions = {
@@ -112,7 +118,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
       requestOptions,
     );
-    console.log(await res.json(), 'res 결과값');
 
     if (true) {
       setTimeout(() => {
