@@ -7,7 +7,6 @@ export async function PATCH(request: Request) {
   const id = searchParams.get('articleId') || '';
   const accessToken = getCookie(request, 'accessToken');
   const content = await request.json();
-  console.log(content, '로 넥스트 서버에서 요청');
 
   try {
     const data = await updateRecruit(content, accessToken, id);

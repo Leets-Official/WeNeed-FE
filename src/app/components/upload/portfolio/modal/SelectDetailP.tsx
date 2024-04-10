@@ -7,9 +7,7 @@ import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
-  fileBlobState,
   filestate,
-  imageBlobState,
   thumbnailState,
   thumbnailUrlState,
   uploadDataState,
@@ -31,8 +29,8 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
   const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   const isFilled = selectedTags.length === 0 || title.trim() === '';

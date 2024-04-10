@@ -15,11 +15,13 @@ import { noContentsAlert, previewAlert, thumbnailAlert } from './showToast';
 
 const SideNavItemP = ({ iconInfo, label, isEdit, id }: SideNavItemProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
   const [thumbnailData, setThumbnail] = useRecoilState<File | null>(
     thumbnailState,
   );
-  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+
   const { isOpen, openModal, closeModal, handleModalClick } = useModal(false);
+
   const koreanDate = new Date();
   koreanDate.setUTCHours(koreanDate.getUTCHours() - 9);
 

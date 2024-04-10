@@ -6,7 +6,12 @@ import Header from 'components/layout/Header';
 import { PORTFOLIO_PREVIEW, WRITER_PREVIEW } from 'constants/upload';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { textState, uploadDataState, thumbnailState } from 'recoil/upload';
+import {
+  textState,
+  uploadDataState,
+  thumbnailState,
+  thumbnailUrlState,
+} from 'recoil/upload';
 
 interface RecruitPreviewProps {
   user: UserProfile;
@@ -19,12 +24,15 @@ const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [items, setItems] = useRecoilState(textState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   let thumbnailURL = '';
-
   if (thumbnail) {
     thumbnailURL = URL.createObjectURL(thumbnail);
+  } else {
+    thumbnailURL = thumbnailUrlData;
   }
+
   useEffect(() => {
     setUploadData({ ...uploadData, content: items });
   }, [items]);
@@ -38,7 +46,6 @@ const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
     recruiting: true,
     sharedText: uploadData.sharedText || '',
   };
-  console.log('previewPF', previewRecruit);
 
   return (
     <div

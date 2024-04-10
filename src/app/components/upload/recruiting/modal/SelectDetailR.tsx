@@ -1,7 +1,14 @@
+'use client';
+
 import Icons from 'components/common/Icons';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { imageBlobState, thumbnailState, uploadDataState } from 'recoil/upload';
+import {
+  imageBlobState,
+  thumbnailState,
+  thumbnailUrlState,
+  uploadDataState,
+} from 'recoil/upload';
 import { closeIcon, titleIcon } from 'ui/IconsPath';
 import { INTERESTED_TAG_LIST } from 'constants/portfolio';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
@@ -25,6 +32,8 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
   const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
   const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+
   const isFilled = selectedTags.length === 0 || title.trim() === '';
   const reqPath = isEdit
     ? `api/update/recruiting?articleId=${id}`
@@ -44,33 +53,31 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
-    setThumbnail(null);
     setLoading(true);
 
     let thumbnailUrl = null;
-    let imgNum = 0;
 
     setLoading(true);
 
     const imagePromises = uploadData.content.map(async (item) => {
       if (item.type === 'image') {
-        try {
-          const imageUrl = await uploadToS3(images[imgNum].imageFile);
-          imgNum++;
-          return { ...item, data: imageUrl };
-        } catch (err) {
-          console.error('이미지 업로드 에러', err);
+        if (item.name === null) {
           return item;
+        } else {
+          const imageUrl = item.file && (await uploadToS3(item.file));
+          const { file, ...itemWithoutFile } = item;
+          return { ...itemWithoutFile, data: imageUrl };
         }
       } else {
         return item;
       }
     });
 
-    if (thumbnail) {
+    if (thumbnailUrlData === '' && thumbnail) {
       thumbnailUrl = await uploadToS3(thumbnail);
+    } else {
+      thumbnailUrl = thumbnailUrlData;
     }
-
     const updatedContent = await Promise.all(imagePromises);
 
     const requestData = {

@@ -39,6 +39,6 @@ export const updateRecruit = async (
   accessToken: string,
   id: string,
 ) => {
-  const url = `${SERVER_URL}/portfolio/${id}`;
+  const url = `${SERVER_URL}/recruit/${id}`;
   return await patchRequest(url, recruit, accessToken);
 };
