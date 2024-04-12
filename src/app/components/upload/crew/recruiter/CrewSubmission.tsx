@@ -1,6 +1,7 @@
 'use client';
 
 import Button from 'components/common/Button';
+import useThrottling from 'hooks/common/useThrottling';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
 import {
@@ -37,7 +38,7 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       deadline: recruiterValue.deadline.join('/'),
     };
     try {
-      await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/recruiter?articleId=${articleId}`,
         {
           method: 'POST',
@@ -48,6 +49,9 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
         },
       );
       router.push(`/crew/recruitment/${articleId}`);
+      if (!response.ok) {
+        throw new Error('Error submitting recruiter data');
+      }
     } catch (e) {
       console.log(e);
     }
@@ -73,7 +77,7 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       appealName: postApplicantAppeal.name,
     };
     try {
-      await fetch(
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/upload/crew/applicant?articleId=${articleId}`,
         {
           method: 'POST',
@@ -83,22 +87,34 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
           },
         },
       );
+      if (!response.ok) {
+        throw new Error('Error submitting recruiter data');
+      }
+      console.log('제출됨!');
       router.push(`/upload/crew/applicant/success`);
     } catch (e) {
       console.log(e);
     }
   };
 
+  const throttledOnSubmitRecruiter = useThrottling<typeof onSubmitRecruiter>(
+    onSubmitRecruiter,
+    5000,
+  );
+  const throttledOnSubmitApplicant = useThrottling<typeof onSubmitApplicant>(
+    onSubmitApplicant,
+    5000,
+  );
   const onClickHandler = (type: string) => {
     switch (type) {
       case 'routerApplicant':
         router.push(`/upload/crew/applicant/${articleId}`);
         break;
       case 'submitRecruit':
-        onSubmitRecruiter();
+        throttledOnSubmitRecruiter();
         break;
       case 'submitApplicant':
-        onSubmitApplicant();
+        throttledOnSubmitApplicant();
         break;
       case 'onCloseApplication':
         router.back();
