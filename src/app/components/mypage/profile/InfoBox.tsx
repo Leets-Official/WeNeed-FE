@@ -7,7 +7,6 @@ interface InfoBoxProps {
 }
 
 const InfoBox = ({ title, content, type }: InfoBoxProps) => {
-  console.log('type : ', type);
   const infoboxStyle = INFOBOX_STYLE.infobox(type);
   const titleStyle = INFOBOX_STYLE.title(type);
   const contentStyle = INFOBOX_STYLE.content(type);

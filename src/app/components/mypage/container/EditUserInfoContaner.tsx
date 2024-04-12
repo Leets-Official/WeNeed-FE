@@ -28,11 +28,6 @@ const fetchData = async (nickName: string) => {
       },
     ).then((res) => res.json());
 
-    if (response === false) {
-      console.log('Fetch check nickname Data Success:', response);
-    } else {
-      console.log('Fetch check nickname Data Fail:', response);
-    }
     return response;
   } catch (error) {
     console.error('Error during Fetch Data:', error);

@@ -10,7 +10,6 @@ export const setTokens = (accessToken: string, refreshToken: string) => {
     document.cookie = `accessToken=${accessToken}; expires=${accessTokenExpiresUTC}; path=/;`;
     document.cookie = `refreshToken=${refreshToken}; expires=${refreshTokenExpiresUTC}; path=/;`;
   } catch (error) {
-    console.error('쿠키 세팅 에러:', error);
     throw error;
   }
 };
@@ -21,7 +20,6 @@ export const getCookie = (req: Request, name: string) => {
     const cookies = parse(cookieHeader || '');
     return cookies[name];
   } catch (error) {
-    console.error('쿠키 가져오기 에러:', error);
     throw error;
   }
 };

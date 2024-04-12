@@ -29,14 +29,10 @@ const FeedItemsContainer = ({
 }: FeedItemsProps) => {
   const selectedMenu = useRecoilValue(menuState);
   const [crewType, setCrewType] = useRecoilState(crewTypeState);
-  console.log('crewType', crewType);
   const onClickCrewType = (type: string) => {
     setCrewType(type);
   };
 
-  console.log(article2);
-
-  console.log('totalPages', pageableDto1.totalPages);
   useEffect(() => {
     selectedMenu !== 'MY CREW' && setCrewType('');
   });
@@ -61,7 +57,7 @@ const FeedItemsContainer = ({
             {article1.map((article) => (
               <Link
                 key={article.articleId}
-                href={`/mypage/apprecruit/${article.articleId}`}
+                href={`/mypage/apprecruit/${article.articleId}/${article.recruitId}`}
               >
                 <FeedItems key={article.articleId} article={article} />
               </Link>

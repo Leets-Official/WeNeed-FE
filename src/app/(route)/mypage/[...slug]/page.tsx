@@ -91,14 +91,12 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     if (data) {
-      console.log('data in mypage : ', data);
       if ('userNickname' in data) {
         const { userNickname, sameUser, userInfo, userIdFromHeader } =
           data as ResponseMypageBasicInfo;
         if (!userInfoData) {
           setUserInfoData((prev) => userInfo);
         }
-        console.log(userNickname, sameUser, userInfo, userIdFromHeader);
         setUserInfoRecoil((prev) => ({
           ...prev,
           userNickname,
@@ -115,7 +113,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-    console.log('user Id in mypage', userId);
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">

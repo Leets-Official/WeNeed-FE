@@ -26,7 +26,6 @@ export const ProfileContainer = ({
       links,
       selfIntro,
     } = userInfoItemList;
-    console.log('userInfoItemList', userInfoItemList);
 
     return (
       <div

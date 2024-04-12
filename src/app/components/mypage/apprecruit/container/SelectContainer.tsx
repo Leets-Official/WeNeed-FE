@@ -5,59 +5,39 @@ import Icons from 'components/common/Icons';
 import { APPLICANTIONS } from 'constants/apprecruit';
 import GradientCheckBox from 'ui/gradient/GradientCheckBox';
 import useOnClickHandlers from 'hooks/apprecruit/useOnclickHandler';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  acceptedListSelectedState,
-  acceptedSelectedState,
-  pendingListSelectedState,
-  pendingSelectedState,
-  refusedListSelectedState,
-  refusedSelectedState,
-} from 'recoil/apprecruit';
+import { useRecoilValue } from 'recoil';
+import { selectedAllListState, selectedListItems } from 'recoil/apprecruit';
+import { useEffect, useState } from 'react';
 
 interface SelectContainerProps {
-  selectedCount: number;
   totalCount: number;
   title: string;
-  applicants: ExtendedApplicant[][];
+  applicants: SelectedStateApllication[];
   type: string;
 }
 
-const SelectContainer = ({
-  totalCount,
-  title,
-  applicants,
-  type,
-}: SelectContainerProps) => {
+const SelectContainer = ({ totalCount, title, type }: SelectContainerProps) => {
   const { handleSelectedAll, handleAccept, handleReject } =
     useOnClickHandlers();
-  const [selectedAllPending] = useRecoilState(pendingListSelectedState);
-  const [selectedAllRefused] = useRecoilState(refusedListSelectedState);
-  const [selectedAllAccepted] = useRecoilState(acceptedListSelectedState);
-  const pendingSelected = useRecoilValue(pendingSelectedState);
-  const refusedSelected = useRecoilValue(refusedSelectedState);
-  const acceptedSelected = useRecoilValue(acceptedSelectedState);
-
-  const selectedAll =
-    type === APPLICANTIONS.PENDING
-      ? selectedAllPending
-      : type === APPLICANTIONS.ACCEPTED
-        ? selectedAllAccepted
-        : selectedAllRefused;
+  const selecteList = useRecoilValue(selectedListItems);
+  const selectedAllList = useRecoilValue(selectedAllListState);
 
   const selectedList =
     type === APPLICANTIONS.PENDING
-      ? pendingSelected
+      ? selecteList.pending.filter((applicant) => applicant.selected)
       : type === APPLICANTIONS.ACCEPTED
-        ? acceptedSelected
-        : refusedSelected;
-  console.log('selectedList: ', selectedList);
-  const calculateNonEmptyArrayList = (arr: ExtendedApplicant[][]) =>
-    arr.filter((subArr) => subArr.length > 0);
+        ? selecteList.accepted.filter((applicant) => applicant.selected)
+        : selecteList.refused.filter((applicant) => applicant.selected);
 
-  const nonEmptyList = calculateNonEmptyArrayList(selectedList);
+  const isSelectedAll =
+    totalCount > 0 &&
+    (type === APPLICANTIONS.PENDING
+      ? selectedAllList.pending
+      : type === APPLICANTIONS.ACCEPTED
+        ? selectedAllList.accepted
+        : selectedAllList.refused);
 
-  console.log('Non-empty List:', nonEmptyList);
+  console.log('isSelectedAll: ', isSelectedAll);
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -65,36 +45,36 @@ const SelectContainer = ({
         {title}
       </div>
       <div className="flex justify-between w-[90%]">
-        <div className="flex justify-between items-center w-[15%]">
+        <div className="flex justify-between items-center w-[20%]">
           <div
-            onClick={() => handleSelectedAll(type, applicants)}
+            onClick={() => handleSelectedAll(type)}
             className={`flex items-center justify-center w-[17px] h-[17px] cursor-pointer rounded-[5px] ${
-              !selectedAll && 'border border-[#8C8C8C]'
+              !isSelectedAll && 'border border-[#8C8C8C]'
             }`}
           >
-            {selectedAll ? (
+            {isSelectedAll ? (
               <GradientCheckBox width={18} height={18} />
             ) : (
               <Icons name={checkbox} />
             )}
           </div>
-          <p className="text-black text-sm font-normal">
+          <p className="text-black w-[60px] flex justify-center items-center text-sm font-normal">
             {APPLICANTIONS.ALL_SECTION}
           </p>
-          <p className="text-neutral-400 text-sm font-normal">
-            ({nonEmptyList.length}/{totalCount})
+          <p className="text-neutral-400 w-[50px] flex items-center text-sm font-normal">
+            ({selectedList.length}/{totalCount})
           </p>
         </div>
         <div className="flex justify-between items-center w-[150px]">
           <p
-            onClick={() => handleAccept(nonEmptyList)}
+            onClick={() => handleAccept(type)}
             className="cursor-pointer text-blue-400 w-[56px] flex justify-center items-center pb-1 text-xs font-medium border-b border-b-blue-400"
           >
             {APPLICANTIONS.ACCEPT}
           </p>
           <p className="text-neutral-400">|</p>
           <p
-            onClick={() => handleReject(nonEmptyList)}
+            onClick={() => handleReject(type)}
             className="cursor-pointer text-red-400 w-[56px] flex justify-center items-center pb-1 text-xs font-medium border-b border-b-red-400"
           >
             {APPLICANTIONS.REJECT}
