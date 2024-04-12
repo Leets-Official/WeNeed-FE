@@ -20,7 +20,6 @@ export default function CrewRecruiterPage({
     const fetchData = async () => {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${params.slug}`,
-        { cache: 'no-store' },
       );
       const responseData = await response.json();
       setData((prev) => responseData);

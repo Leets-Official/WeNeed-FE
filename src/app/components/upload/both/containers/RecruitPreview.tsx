@@ -44,6 +44,7 @@ const RecruitPreview = ({ user, closeModal }: RecruitPreviewProps) => {
     thumbnail: thumbnailURL || '',
     commentCount: 0,
     recruiting: true,
+    hasApplied: false,
     sharedText: uploadData.sharedText || '',
   };
 
