@@ -134,6 +134,7 @@ const PortfolioDetailsContainer = ({
           articleId={articleId}
           page="portfolio"
           recruiting={false}
+          hasApplied={false}
           scrollToComments={scrollToComments}
         />
         {user.sameUser && (
