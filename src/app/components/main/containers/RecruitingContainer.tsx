@@ -2,7 +2,7 @@
 
 import RecruitingItem from '../recruiting/RecruitingItem';
 import Profile from 'components/details/common/Profile';
-import useIntersection from 'hooks/main/useIntersection';
+import useIntersection from 'hooks/common/useIntersection';
 import { MouseEventHandler } from 'react';
 import RecruitingItemMenuBar from '../recruiting/RecruitingItemMenuBar';
 import { useRouter } from 'next/navigation';

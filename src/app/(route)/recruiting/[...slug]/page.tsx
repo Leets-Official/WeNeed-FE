@@ -45,6 +45,7 @@ export default function RecruitingPage({
       heartCount,
       bookmarkCount,
       recruiting,
+      hasApplied,
     } = data.recruit;
     const { bookmarked, hearted, nickname, userId } = data.user;
     return (
@@ -82,6 +83,7 @@ export default function RecruitingPage({
                 userId={writer.userId!}
                 onRecruit
                 recruiting={recruiting}
+                hasApplied={hasApplied}
                 page="recruiting"
               />
             </div>

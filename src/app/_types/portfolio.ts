@@ -107,6 +107,7 @@ interface PortfolioDetails {
   contents: Array<Content>;
   teamMembers: teamMember[];
   recruiting: boolean;
+  hasApplied: boolean;
 }
 
 interface teamMember {
