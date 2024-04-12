@@ -30,7 +30,7 @@ const Header = ({ nickname, userId, isPreview }: HeaderProps) => {
           마이페이지
         </Link>
         {nickname !== 'guest' ? (
-          <p>{nickname}님</p>
+          <Link href={`/mypage/${userId}`}>{nickname}님</Link>
         ) : (
           <Link href={'/login'}>로그인</Link>
         )}
