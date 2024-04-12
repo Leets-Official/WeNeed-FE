@@ -7,8 +7,6 @@ export async function POST(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
   const articleId = searchParams.get('articleId') || '';
   const resquestBody = await request.json();
-  const data = await postApplicant(articleId, resquestBody, accessToken).then(
-    (data) => data,
-  );
+  const data = await postApplicant(articleId, resquestBody, accessToken);
   return NextResponse.json(data);
 }

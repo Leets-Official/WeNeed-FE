@@ -1,23 +1,20 @@
+'use client';
+
 import { useState, useCallback } from 'react';
 
-interface useThrottlingProps {
-  callback: (...args: any) => void;
-  delay: number;
-}
-
-const useThrottling = ({ callback, delay }: useThrottlingProps) => {
+const useThrottling = <T extends (...args: any[]) => any>(
+  callback: T,
+  delay: number | undefined = 2000,
+) => {
   const [lastCall, setLastCall] = useState(0);
 
-  const throttledCallback = useCallback(
-    (...args: any) => {
-      const currentTime = Date.now();
-      if (currentTime - lastCall >= delay) {
-        setLastCall(currentTime);
-        callback(...args);
-      }
-    },
-    [callback, delay, lastCall],
-  );
+  const throttledCallback = useCallback(() => {
+    const currentTime = Date.now();
+    if (currentTime - lastCall >= delay) {
+      setLastCall(currentTime);
+      callback();
+    }
+  }, [callback, delay, lastCall]);
 
   return throttledCallback;
 };

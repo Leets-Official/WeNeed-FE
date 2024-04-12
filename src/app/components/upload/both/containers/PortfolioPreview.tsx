@@ -52,6 +52,7 @@ const PortfolioPreview = ({ user, closeModal }: PortfolioPreviewProps) => {
     commentCount: 0,
     files: fileNames,
     sharedText: uploadData.sharedText || '',
+    hasApplied: false,
   };
 
   return (
