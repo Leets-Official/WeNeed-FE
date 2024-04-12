@@ -20,6 +20,7 @@ interface DetailMenuBarProps {
   articleId: string;
   recruiting: boolean;
   onRecruit?: boolean;
+  hasApplied: boolean;
   scrollToComments: () => void;
 }
 
@@ -29,6 +30,7 @@ const DetailMenuBar = ({
   articleId,
   onRecruit,
   recruiting,
+  hasApplied,
   page,
   scrollToComments,
 }: DetailMenuBarProps) => {
@@ -38,9 +40,9 @@ const DetailMenuBar = ({
     page,
     recruiting,
     scrollToComments,
+    hasApplied,
     user,
   );
-
   return (
     <div
       className={`flex ${
