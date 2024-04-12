@@ -93,15 +93,16 @@ const PortfolioDetailsContainer = ({
                     }}
                   >
                     {mem.profile ? (
-                      <Image
-                        width={80}
-                        height={80}
-                        alt="writer"
-                        src={mem.profile}
-                        style={{
-                          objectFit: 'cover',
-                        }}
-                      />
+                      <div className="relative rounded-full overflow-hidden w-[80px] h-[80px]">
+                        <Image
+                          fill={true}
+                          alt="writer"
+                          src={mem.profile}
+                          style={{
+                            objectFit: 'cover',
+                          }}
+                        />
+                      </div>
                     ) : (
                       <GradientProfile />
                     )}
