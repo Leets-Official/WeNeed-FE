@@ -21,10 +21,8 @@ const fetchEmailData = async (email: string) => {
         cache: 'no-store',
       },
     ).then((res) => res.json());
-    console.log('response body: ', response);
 
     if (response.code === 200) {
-      console.log('Fetch Email Data Success:', response.message);
       return response;
     } else {
       console.error('Fetch Email Data Error:', response.message);
@@ -49,7 +47,6 @@ const fetchCodeData = async (email: string, code: string) => {
         cache: 'no-store',
       },
     ).then((res) => res.json());
-    console.log('fetch data code response', response);
     return response;
   } catch (error) {
     console.error('Error during Fetch Code:', error);
@@ -105,7 +102,6 @@ const UnivAuth = () => {
           placeholder={UNIV_AUTH.EMAIL}
           onChange={(e) => {
             setUnivAuthEmail(e.target.value);
-            console.log(univAuthEmail);
           }}
         />
         <Button
@@ -152,7 +148,6 @@ const UnivAuth = () => {
           placeholder={UNIV_AUTH.AUTH_CODE}
           onChange={(e) => {
             setUnivAuthCode(e.target.value);
-            console.log(univAuthCode);
           }}
         />
         <Button

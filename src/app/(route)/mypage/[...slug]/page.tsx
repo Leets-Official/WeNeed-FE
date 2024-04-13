@@ -5,8 +5,14 @@ import PostContainer from 'components/mypage/container/PostContainer';
 import { ProfileContainer } from 'components/mypage/container/ProfileContainer';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { crewTypeState, menuState, userProfileInfoSatate } from 'recoil/mypage';
+import {
+  crewTypeState,
+  menuState,
+  prevMenuState,
+  userProfileInfoSatate,
+} from 'recoil/mypage';
 import useMypageURL from 'hooks/mypage/useMypageURL';
+import { useRouter } from 'next/navigation';
 
 export default function MyPage({ params }: { params: { slug: string } }) {
   const [selectedMenu, setSelectedMenu] = useRecoilState(menuState);
@@ -21,6 +27,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   >(null);
   const [userInfoData, setUserInfoData] = useState<MypageUserInfo>();
   const [page, setPage] = useState<number>(1);
+  const router = useRouter();
+  const [prevMenu, setPrevMenu] = useRecoilState<string>(prevMenuState);
 
   const crewType = useRecoilValue(crewTypeState);
   let crewSize = 3;
@@ -40,7 +48,7 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     setSelectedMenu('MY OUTPUT');
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
@@ -86,19 +94,20 @@ export default function MyPage({ params }: { params: { slug: string } }) {
       }
     };
 
-    fetchData();
+    if (selectedMenu !== prevMenu) {
+      fetchData();
+    }
+    setPrevMenu(selectedMenu);
   }, [selectedMenu, crewSize, page]);
 
   useEffect(() => {
     if (data) {
-      console.log('data in mypage : ', data);
       if ('userNickname' in data) {
         const { userNickname, sameUser, userInfo, userIdFromHeader } =
           data as ResponseMypageBasicInfo;
         if (!userInfoData) {
           setUserInfoData((prev) => userInfo);
         }
-        console.log(userNickname, sameUser, userInfo, userIdFromHeader);
         setUserInfoRecoil((prev) => ({
           ...prev,
           userNickname,
@@ -115,7 +124,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-    console.log('user Id in mypage', userId);
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">

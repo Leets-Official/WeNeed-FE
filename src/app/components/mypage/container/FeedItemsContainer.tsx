@@ -29,14 +29,10 @@ const FeedItemsContainer = ({
 }: FeedItemsProps) => {
   const selectedMenu = useRecoilValue(menuState);
   const [crewType, setCrewType] = useRecoilState(crewTypeState);
-  console.log('crewType', crewType);
   const onClickCrewType = (type: string) => {
     setCrewType(type);
   };
 
-  console.log(article2);
-
-  console.log('totalPages', pageableDto1.totalPages);
   useEffect(() => {
     selectedMenu !== 'MY CREW' && setCrewType('');
   });
@@ -61,7 +57,7 @@ const FeedItemsContainer = ({
             {article1.map((article) => (
               <Link
                 key={article.articleId}
-                href={`/mypage/apprecruit/${article.articleId}`}
+                href={`/mypage/apprecruit/${article.articleId}/${article.recruitId}`}
               >
                 <FeedItems key={article.articleId} article={article} />
               </Link>
@@ -151,23 +147,25 @@ const FeedItemsContainer = ({
           </Link>
         ))}
       </div>
-      <ReactPaginate
-        className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
-        previousLabel={
-          <div className="pt-0.5">
-            <Icons name={myLeftAngle} />
-          </div>
-        }
-        nextLabel={
-          <div className="pt-0.5">
-            <Icons name={myRightAngle} />
-          </div>
-        }
-        pageCount={pageableDto1.totalPages}
-        onPageChange={handlePageChange}
-        activeClassName={'active text-black'}
-        disabledClassName={'pagination-disabled'}
-      />
+      {pageableDto1.totalElements > 0 && (
+        <ReactPaginate
+          className="flex items-center justify-center mt-8 h-[40px] w-full gap-[20px] text-[17px]  text-[#868686] font-semibold"
+          previousLabel={
+            <div className="pt-0.5">
+              <Icons name={myLeftAngle} />
+            </div>
+          }
+          nextLabel={
+            <div className="pt-0.5">
+              <Icons name={myRightAngle} />
+            </div>
+          }
+          pageCount={pageableDto1.totalPages}
+          onPageChange={handlePageChange}
+          activeClassName={'active text-black'}
+          disabledClassName={'pagination-disabled'}
+        />
+      )}
     </div>
   );
 };

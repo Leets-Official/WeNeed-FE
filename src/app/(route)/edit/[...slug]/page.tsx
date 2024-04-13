@@ -21,7 +21,6 @@ export default function EditPage({ params }: EditPageProps) {
     const fetchData = async () => {
       const userInfoResponse = await fetch(userInfoUrl, { cache: 'no-store' });
       const userInfoData = await userInfoResponse.json();
-      console.log('userInfoData', userInfoData);
       setData(userInfoData);
     };
     fetchData();

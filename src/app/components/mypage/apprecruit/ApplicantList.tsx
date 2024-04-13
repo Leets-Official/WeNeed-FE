@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Icons from 'components/common/Icons';
 import useOnClickHandlers from 'hooks/apprecruit/useOnclickHandler';
 import {
@@ -10,81 +9,74 @@ import {
 } from 'ui/IconsPath';
 import GradientCheckBox from 'ui/gradient/GradientCheckBox';
 import GradientProfileMD from 'ui/gradient/GradientProfileMD';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import {
-  acceptedSelectedState,
-  pendingSelectedState,
-  refusedSelectedState,
+  acceptedListState,
+  pendingListState,
+  refusedListState,
 } from 'recoil/apprecruit';
 import { APPLICANTIONS } from 'constants/apprecruit';
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface ApplicantListProps {
-  applicantsData: ExtendedApplicant[][];
   type: string;
 }
 
-const ApplicantList = ({ applicantsData, type }: ApplicantListProps) => {
-  const [applicants, setApplicants] = useState(applicantsData);
+const ApplicantList = ({ type }: ApplicantListProps) => {
+  const acceptedList = useRecoilValue(acceptedListState);
+  const pendingList = useRecoilValue(pendingListState);
+  const refusedList = useRecoilValue(refusedListState);
   const { handleSelect } = useOnClickHandlers();
-  const setPendingSelectedState = useSetRecoilState(pendingSelectedState);
-  const setAcceptedSelectedState = useSetRecoilState(acceptedSelectedState);
-  const setRefusedSelectedState = useSetRecoilState(refusedSelectedState);
 
-  useEffect(() => {
-    setApplicants(applicantsData);
-  }, [applicantsData]);
-
-  const handleSelectAndUpdate = (rowIndex: number, id: number) => {
-    const { updatedApplicants, selectApplicant } = handleSelect(
-      rowIndex,
-      id,
-      applicants,
-    );
-    setApplicants(updatedApplicants);
-
+  const applicationList =
     type === APPLICANTIONS.PENDING
-      ? setPendingSelectedState(selectApplicant)
+      ? pendingList
       : type === APPLICANTIONS.ACCEPTED
-        ? setAcceptedSelectedState(selectApplicant)
-        : setRefusedSelectedState(selectApplicant);
-  };
+        ? acceptedList
+        : refusedList;
 
   return (
     <div className="w-full flex gap-8 flex-col items-center scrollbar-hide">
-      {applicants.map((applicantRow, index) => (
-        <div key={index} className="w-full scrollbar-hide">
-          {applicantRow.map((applicant, i) => (
-            <Link
-              href={`/crew/application/${applicant.applicationId}`}
-              key={applicant.applicationId}
-              className={`flex relative border-black items-center w-full h-[140px] border ${
-                applicant.selected ? ' bg-black' : 'bg-white'
-              } rounded-[15px] mb-4`}
+      <div className="w-full scrollbar-hide">
+        {applicationList.map((applicant, index) => (
+          <div
+            key={applicant.applicationItem.applicationId}
+            className={`flex relative border-black items-center w-full h-[140px] border ${
+              applicant.selected ? ' bg-black' : 'bg-white'
+            } rounded-[15px] mb-4`}
+          >
+            <div
+              onClick={() => {
+                handleSelect(type, index);
+              }}
+              className={`ml-6 flex items-center justify-center w-[17px] h-[17px] cursor-pointer rounded-[5px] ${
+                !applicant.selected && 'border border-[#8C8C8C]'
+              }`}
             >
-              <div
-                onClick={() => {
-                  handleSelectAndUpdate(index, applicant.applicationId);
-                }}
-                className={`ml-6 flex items-center justify-center w-[17px] h-[17px] cursor-pointer rounded-[5px] ${
-                  !applicant.selected && 'border border-[#8C8C8C]'
-                }`}
-              >
-                {applicant.selected ? (
-                  <GradientCheckBox width={18} height={18} />
-                ) : (
-                  <Icons name={checkbox} />
-                )}
-              </div>
-              <div className="w-[57px] mx-10">
-                {applicant.user.profile ? (
+              {applicant.selected ? (
+                <GradientCheckBox width={18} height={18} />
+              ) : (
+                <Icons name={checkbox} />
+              )}
+            </div>
+            <Link
+              className="flex relative items-center"
+              href={`/crew/application/${applicant.applicationItem.applicationId}`}
+            >
+              <div className="rounded-full overflow-hidden h-[57px] w-[57px] mx-10">
+                {applicant.applicationItem.user.profile ? (
                   <Image
-                    src={applicant.user.profile}
+                    src={applicant.applicationItem.user.profile}
                     alt="profile"
                     width={57}
                     height={57}
-                    className="rounded-full"
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center center',
+                      width: '100%',
+                      height: '100%',
+                    }}
                   />
                 ) : (
                   <GradientProfileMD />
@@ -96,35 +88,40 @@ const ApplicantList = ({ applicantsData, type }: ApplicantListProps) => {
                     applicant.selected ? 'text-white' : 'text-black'
                   } text-3xl font-bold`}
                 >
-                  {applicant.user.nickname} [{applicant.user.major}] 지원서
+                  {applicant.applicationItem.user.nickname} [
+                  {applicant.applicationItem.user.major}] 지원서
                 </div>
                 <div
                   className={`${
                     applicant.selected ? 'text-white' : 'text-black'
                   } text-sm font-normal`}
                 >
-                  {applicant.user.major} | {applicant.user.grade}학년 |{' '}
-                  {new Date(applicant.appliedAt).toISOString().split('T')[0]}
+                  {applicant.applicationItem.user.major} |{' '}
+                  {applicant.applicationItem.user.grade}학년 |{' '}
+                  {
+                    new Date(applicant.applicationItem.appliedAt)
+                      .toISOString()
+                      .split('T')[0]
+                  }
                 </div>
               </div>
-              <div
-                className={`absolute right-8 flex items-end pb-5 gap-3 ${
-                  applicant.selected ? 'text-white' : 'text-black'
-                } text-sm h-full`}
-              >
-                <Icons
-                  name={
-                    applicant.selected
-                      ? applicantShareWhite
-                      : applicantShareBlack
-                  }
-                />
-                공유하기
-              </div>
             </Link>
-          ))}
-        </div>
-      ))}
+
+            <div
+              className={`absolute right-4 flex items-end pb-5 gap-3 ${
+                applicant.selected ? 'text-white' : 'text-black'
+              } text-sm h-full`}
+            >
+              <Icons
+                name={
+                  applicant.selected ? applicantShareWhite : applicantShareBlack
+                }
+              />
+              공유하기
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

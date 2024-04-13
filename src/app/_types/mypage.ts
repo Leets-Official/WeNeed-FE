@@ -5,6 +5,7 @@ interface FeedItems {
   viewCount: number;
   heartCount: number;
   teamProfiles: Array<string>;
+  recruitId: number;
 }
 
 interface FeedItems2 {
@@ -23,6 +24,17 @@ interface MyOutputList {
   viewCount: number;
   heartCount: number;
   teamProfiles: Array<string>;
+  recruitId: number;
+}
+
+interface MyOutputRecruitList {
+  articleId: number;
+  thumbnail: string;
+  title: string;
+  viewCount: number;
+  heartCount: number;
+  teamProfiles: Array<string>;
+  recruitId: number;
 }
 
 interface MypageUserInfo {

@@ -20,7 +20,7 @@
     "node": true,
     "es6": true
   },
-  "ignorePatterns": ["node_modules/", "EditorTools"],
+  "ignorePatterns": ["node_modules/", "EditorTools", "postcss.config.js"],
   "extends": [
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended",
