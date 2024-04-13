@@ -42,6 +42,10 @@ const CommentItem = ({
   const profileStyles = PROFILE_STYLE['medium']();
 
   const onSubmitHandler = async () => {
+    if (recommentValue.length > 255) {
+      alert('댓글 내용은 255자 이하로 입력해주세요.');
+      return;
+    }
     if (!recommentValue) {
       alert('내용을 입력해주세요!');
       return;
