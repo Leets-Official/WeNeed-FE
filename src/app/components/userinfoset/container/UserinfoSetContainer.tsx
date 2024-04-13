@@ -30,7 +30,6 @@ const fetchData = async (userInfo: userInfo) => {
         cache: 'no-store',
       },
     ).then((res) => res.json());
-    console.log('fetch data response', response);
     return response;
   } catch (error) {
     console.error('Error during Fetch Data:', error);
@@ -54,8 +53,6 @@ const UserinfoSetContainer = ({ slug }: UserinfoSetContainerProps) => {
       userInfo.doubleMajor !== ''
     ) {
       setSuccessUserInfoSet((prev) => ({ ...prev, canUserInfoSet: true }));
-      console.log('successUserInfoSet', successUserInfoSet);
-      console.log('userInfo', userInfo);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [successUserInfoSet.successNickname, userInfo]);

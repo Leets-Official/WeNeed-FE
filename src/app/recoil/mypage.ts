@@ -5,6 +5,11 @@ export const menuState = atom({
   default: 'MY OUTPUT',
 });
 
+export const prevMenuState = atom({
+  key: 'prevMenuState',
+  default: '',
+});
+
 export const crewTypeState = atom({
   key: 'crewTypeState',
   default: '',

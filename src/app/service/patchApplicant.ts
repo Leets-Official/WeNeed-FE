@@ -36,8 +36,8 @@ export const updateApplicantResult = async (
 
   try {
     const response = await postRequest(url, requestBody, accessToken);
-    return response; // 요청이 성공하면 응답을 반환합니다.
+    return response;
   } catch (error) {
-    throw error; // postRequest 함수에서 발생한 오류를 다시 throw하여 호출한 곳에서 처리할 수 있도록 합니다.
+    throw error;
   }
 };
