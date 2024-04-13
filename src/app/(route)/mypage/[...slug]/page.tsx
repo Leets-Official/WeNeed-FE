@@ -5,8 +5,14 @@ import PostContainer from 'components/mypage/container/PostContainer';
 import { ProfileContainer } from 'components/mypage/container/ProfileContainer';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { crewTypeState, menuState, userProfileInfoSatate } from 'recoil/mypage';
+import {
+  crewTypeState,
+  menuState,
+  prevMenuState,
+  userProfileInfoSatate,
+} from 'recoil/mypage';
 import useMypageURL from 'hooks/mypage/useMypageURL';
+import { useRouter } from 'next/navigation';
 
 export default function MyPage({ params }: { params: { slug: string } }) {
   const [selectedMenu, setSelectedMenu] = useRecoilState(menuState);
@@ -21,6 +27,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   >(null);
   const [userInfoData, setUserInfoData] = useState<MypageUserInfo>();
   const [page, setPage] = useState<number>(1);
+  const router = useRouter();
+  const [prevMenu, setPrevMenu] = useRecoilState<string>(prevMenuState);
 
   const crewType = useRecoilValue(crewTypeState);
   let crewSize = 3;
@@ -40,7 +48,7 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     setSelectedMenu('MY OUTPUT');
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
@@ -86,7 +94,10 @@ export default function MyPage({ params }: { params: { slug: string } }) {
       }
     };
 
-    fetchData();
+    if (selectedMenu !== prevMenu) {
+      fetchData();
+    }
+    setPrevMenu(selectedMenu);
   }, [selectedMenu, crewSize, page]);
 
   useEffect(() => {

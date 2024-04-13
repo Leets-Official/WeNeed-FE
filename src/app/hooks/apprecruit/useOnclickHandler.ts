@@ -236,6 +236,16 @@ export const useOnClickHandlers = () => {
       const isSuccess = responses.every((response) => response.ok);
       if (isSuccess) {
         setIsPatchData((prev) => !prev);
+        setSelectedAllListState({
+          pending: false,
+          accepted: false,
+          refused: false,
+        });
+        setSelectedListItem({
+          pending: [],
+          accepted: [],
+          refused: [],
+        });
       }
     } catch (error) {
       console.error('Error in handleAccept : ', error);
@@ -262,6 +272,16 @@ export const useOnClickHandlers = () => {
       const isSuccess = responses.every((response) => response.ok);
       if (isSuccess) {
         setIsPatchData((prev) => !prev);
+        setSelectedAllListState({
+          pending: false,
+          accepted: false,
+          refused: false,
+        });
+        setSelectedListItem({
+          pending: [],
+          accepted: [],
+          refused: [],
+        });
       }
     } catch (error) {
       console.error('There was an error in one or more requests:', error);

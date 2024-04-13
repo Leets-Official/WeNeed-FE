@@ -161,10 +161,18 @@ const EditUserInfoContainer = ({ userId }: EditUserInfoContainerProps) => {
     type: string,
   ) => {
     const userInput = e.target.value;
+
+    const applyCharacterLimitPerLine = (text: string, limit: number) => {
+      const lines = text.split('\n');
+      const limitedLines = lines.map((line) => line.slice(0, limit));
+      return limitedLines.join('\n');
+    };
+
     switch (type) {
       case 'link':
-        if (userInput.length > 300) {
-          setNewLink(userInput.slice(0, 300));
+        if (userInput.length > 100) {
+          const limitedText = applyCharacterLimitPerLine(userInput, 100);
+          setNewLink(limitedText);
         } else {
           setNewLink(userInput);
         }
@@ -402,24 +410,24 @@ const EditUserInfoContainer = ({ userId }: EditUserInfoContainerProps) => {
           </span>
         </div>
         <div
-          className={`w-full relative flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
+          className={`w-full relative justify-between flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
         >
+          <span className="relative mx-4 w-[10%] text-[#D9D9D9] text-xs font-semibold flex">
+            {MY_PAGE.LINK}
+          </span>
           <textarea
-            className={`${
-              isEditingLink && 'mr-[37.6px]'
-            } w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
+            className={`relative w-[60%] pr-4 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold `}
             readOnly={!isEditingLink}
             value={newLink || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'link')}
             onKeyDown={handleKeyDown}
           />
-          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold flex">
-            {MY_PAGE.LINK}
-          </span>
-          {!isEditingLink && (
+          {isEditingLink ? (
+            <div className="relative w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"></div>
+          ) : (
             <div
-              className="w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
+              className="relative w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
               onClick={() => handleEditingValue('link')}
             >
               <EditPen />
@@ -427,23 +435,23 @@ const EditUserInfoContainer = ({ userId }: EditUserInfoContainerProps) => {
           )}
         </div>
         <div
-          className={`w-full relative flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
+          className={`w-full relative justify-between flex items-center mt-4 py-3 rounded-[8px] border border-[#8C8C8C]`}
         >
+          <div className="relative mx-4 w-[10%] text-[#D9D9D9] text-xs font-semibold flex ">
+            {MY_PAGE.INTRODUCE}
+          </div>
           <textarea
-            className={`${
-              isEditingIntro && 'mr-[37.6px]'
-            } w-full pr-4 pl-12 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold text-right `}
+            className={`relative w-[60%] pr-4 rounded-[8px] focus:outline-none scrollbar-hide text-white text-xs bg-black font-semibold `}
             readOnly={!isEditingIntro}
             value={newIntro || ''}
             rows={3}
             onChange={(e) => handleTextarea(e, 'intro')}
           />
-          <span className="absolute px-4 text-[#D9D9D9] text-xs font-semibold flex ">
-            {MY_PAGE.INTRODUCE}
-          </span>
-          {!isEditingIntro && (
+          {isEditingIntro ? (
+            <div className="relative w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"></div>
+          ) : (
             <div
-              className="w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
+              className="relative w-[30px] h-[30px] mr-3 items-center justify-center flex cursor-pointer"
               onClick={() => handleEditingValue('intro')}
             >
               <EditPen />

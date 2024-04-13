@@ -59,7 +59,7 @@ export const InfoBoxContainer = ({
           <Button
             buttonText={MY_PAGE.LOG_OUT}
             type="userinfo"
-            className={`w-[300px] h-[40px] text-zinc-300 text-xs font-semibold relative rounded-[10px] bg-neutral-700 justify-center items-center flex px-8 hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100`}
+            className={`w-[300px] h-[40px] mb-12 text-zinc-300 text-xs font-semibold relative rounded-[10px] bg-neutral-700 justify-center items-center flex px-8 hover:bg-gradient-to-r from-[#00E0EE] to-[#517EF3] hover:opacity-100`}
             isDisabled={false}
             onClickHandler={() => handleLogout()}
           />

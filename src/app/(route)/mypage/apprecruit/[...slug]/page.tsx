@@ -52,7 +52,6 @@ export default function MypageAppRecruitPage({
       try {
         const response = await fetch(url, { cache: 'no-store' });
         const responseData = await response.json();
-        console.log('responseData : ', responseData);
         if (selectedMenu === '받은 지원서') {
           const [
             acceptedApplications,
@@ -82,7 +81,6 @@ export default function MypageAppRecruitPage({
           setData(responseData);
         }
         setLoading(false);
-        console.log('in fetch data');
       } catch (error) {
         setError(error as Error);
         setLoading(false);
@@ -90,7 +88,6 @@ export default function MypageAppRecruitPage({
     };
 
     fetchData();
-    console.log('hi');
   }, [selectedMenu, articleId, recruitId, router, isPatchData]);
 
   const reset = () => {

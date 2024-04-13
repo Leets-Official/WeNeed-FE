@@ -37,8 +37,6 @@ const SelectContainer = ({ totalCount, title, type }: SelectContainerProps) => {
         ? selectedAllList.accepted
         : selectedAllList.refused);
 
-  console.log('isSelectedAll: ', isSelectedAll);
-
   return (
     <div className="w-full flex flex-col items-center">
       <div className="w-[90%] flex items-center text-black text-3xl font-bold mb-[40px]">
