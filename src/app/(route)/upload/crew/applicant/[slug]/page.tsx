@@ -9,7 +9,7 @@ export default async function CrewApplicantPage({
   params: { slug: string };
 }) {
   return (
-    <section className="flex flex-col items-center w-full min-h-screen">
+    <section className="flex flex-col items-center w-full  min-h-screen">
       <div className="flex flex-col items-center gap-[20px]">
         <div className="mt-[60px]">
           <CrewHeader header={HEADER_APPLICANT} />
