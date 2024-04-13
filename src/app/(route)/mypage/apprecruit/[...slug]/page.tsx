@@ -116,7 +116,11 @@ export default function MypageAppRecruitPage({
           <div className="w-[80%] min-h-screen flex flex-col items-center">
             <MenuBarContainer />
             {selectedMenu === '받은 지원서' ? (
-              <ApplicantListContainer />
+              recruitId === null ? (
+                <div></div>
+              ) : (
+                <ApplicantListContainer />
+              )
             ) : (
               <AppRecruitContainer
                 count={[viewCount, heartCount, bookmarkCount]}
