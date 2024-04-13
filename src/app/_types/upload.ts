@@ -21,14 +21,16 @@ interface DndTextTypes {
   type: 'text' | 'image' | 'link' | 'sound';
   data: string;
   id: string;
-  url?: string;
+  file?: File;
 }
 
 interface DNDFileTypes {
   id: string;
   type: string;
   data: string;
-  url: string;
+  name?: string;
+  file?: File;
+  url?: string;
 }
 
 interface UserInfo {
@@ -71,6 +73,7 @@ interface ApplicationComplete {
   grade: (arg: string) => string;
   status: (arg: string) => string;
   phone: (arg: string) => string;
+  appeal: (arg: string) => string;
   aboutMe: (arg: string) => string;
   content: (arg: string) => string;
   keywords: (arg: string) => string;
@@ -78,14 +81,9 @@ interface ApplicationComplete {
 
 interface BlobImages {
   id: string;
-  blob: Blob;
+  imageFile: File;
   filename: string;
-}
-
-interface BlobFiles {
-  id: string;
-  file: File;
-  filename: string;
+  isEdit?: boolean;
 }
 
 interface SideNavItemProps {
@@ -94,4 +92,15 @@ interface SideNavItemProps {
   isEdit?: boolean;
   id?: string;
 }
+
+interface FileData {
+  fileName: string;
+  fileUrl: string;
+}
+
 type NavComponent = Record<string, JSX.Element>;
+
+interface UploadRequestBody {
+  articleRequest: UploadPFTypes;
+  fileRequests: FileData;
+}

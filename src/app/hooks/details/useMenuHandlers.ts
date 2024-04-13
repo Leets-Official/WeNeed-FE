@@ -14,6 +14,7 @@ const useMenuHandlers = (
   page: string,
   recruiting: boolean,
   scrollToComments: () => void,
+  hasApplied: boolean,
   user?: UserProfile,
 ) => {
   const router = useRouter();
@@ -69,7 +70,10 @@ const useMenuHandlers = (
   const detailMenuHandlers: Record<string, () => void> = {
     프로필: () => goToPage('mypage'),
     크루제안: () => {
-      if (page !== 'portfolio' && recruiting) goToPage('crew/recruitment');
+      if (page !== 'portfolio' && recruiting && !hasApplied)
+        goToPage('crew/recruitment');
+      else if (hasApplied)
+        alert('이미 지원한 게시물입니다. 마이페이지에서 확인해보세요!');
       else alert('해당 게시물은 크루를 모집하고 있지 않습니다.');
     },
     좋아요: () => {

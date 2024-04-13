@@ -20,7 +20,6 @@ const fetchData = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      cache: 'no-store',
       credentials: 'include',
     });
 
@@ -46,7 +45,6 @@ const OauthPage = () => {
 
         if (data) {
           const href = `${process.env.NEXT_PUBLIC_NEXT_SERVER}${data.destination}`;
-          console.log('href', href);
           const url = new URL(href);
           const hasRegistered = url.searchParams.get('hasRegistered');
           const accessToken = url.searchParams.get('accessToken');

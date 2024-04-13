@@ -7,13 +7,14 @@ import DropdownTag from 'components/upload/both/modal/uploadFile/DropdownTag';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
-  fileBlobState,
-  imageBlobState,
+  filestate,
+  thumbnailState,
+  thumbnailUrlState,
   uploadDataState,
-  uploadForm,
 } from 'recoil/upload';
 import SubmitLoading from 'components/upload/both/modal/submit/SubmitLoading';
 import SubmitCompleted from 'components/upload/both/modal/submit/SubmitCompleted';
+import uploadToS3 from 'utils/awsS3';
 
 interface SelectDetailProps {
   closeModal?: () => void;
@@ -28,16 +29,21 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [uploadFormData, setUploadFormData] =
-    useRecoilState<FormData>(uploadForm);
-  const [images, setImgaes] = useRecoilState<BlobImages[]>(imageBlobState);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
-  const isFilled = selectedTags.length === 0 || title.trim() === '';
+  const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
+  const [thumbnail, setThumbnail] = useRecoilState<File | null>(thumbnailState);
+  const [thumbnailUrlData, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
+  const isFilled = selectedTags.length === 0 || title.trim() === '';
   const reqPath = isEdit
     ? `api/update/portfolio?articleId=${id}`
     : 'api/upload/portfolio';
   const apiMode = isEdit ? 'PATCH' : 'POST';
+
+  useEffect(() => {
+    setTitle(uploadData.title);
+    setSelectedTags(uploadData.tags);
+    setSkill(uploadData.skills);
+  }, []);
 
   const handleSkillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -46,53 +52,73 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
   };
 
   const handleConfirm = async () => {
-    uploadFormData.delete('request');
-    uploadFormData.delete('files');
-    uploadFormData.delete('images');
     setLoading(true);
-    images.forEach((image) => {
-      uploadFormData.append('images', image.blob, image.filename);
+
+    let thumbnailUrl = null;
+
+    const filePromises = files.map(async (fileInfo) => {
+      try {
+        const fileURL = fileInfo.file
+          ? await uploadToS3(fileInfo.file)
+          : fileInfo.url;
+        return { fileName: fileInfo.id, fileUrl: fileURL };
+      } catch (err) {
+        console.error('파일 업로드 에러', err);
+        return fileInfo;
+      }
     });
 
-    blobFiles.forEach((file) => {
-      uploadFormData.append('files', file.file, file.filename);
-    });
-    setUploadData({
-      ...uploadData,
-      title: title,
-      skills: skill,
-      tags: selectedTags,
-    });
-
-    let totalFileSize = 0;
-
-    images.forEach((image) => {
-      totalFileSize += image.blob.size;
+    const imagePromises = uploadData.content.map(async (item) => {
+      if (item.type === 'image') {
+        if (item.name === null) {
+          return item;
+        } else {
+          const imageUrl = item.file && (await uploadToS3(item.file));
+          const { file, ...itemWithoutFile } = item;
+          return { ...itemWithoutFile, data: imageUrl };
+        }
+      } else {
+        return item;
+      }
     });
 
-    blobFiles.forEach((file) => {
-      totalFileSize += file.file.size;
-    });
+    if (thumbnailUrlData === '' && thumbnail) {
+      thumbnailUrl = await uploadToS3(thumbnail);
+    } else {
+      thumbnailUrl = thumbnailUrlData;
+    }
 
-    const articleRequest = {
-      ...uploadData,
-      title: title,
-      skills: skill,
-      tags: selectedTags,
+    setThumbnail(null);
+
+    const updatedContent = await Promise.all(imagePromises);
+    const updatedFiles = await Promise.all(filePromises);
+    console.log('제출 전 파일 배열', updatedFiles);
+
+    const requestData = {
+      articleRequest: {
+        ...uploadData,
+        content: updatedContent,
+        thumbnail: thumbnailUrl,
+        title: title,
+        skills: skill,
+        tags: selectedTags,
+      },
+      fileRequests: updatedFiles,
     };
 
-    uploadFormData.append(
-      'request',
-      new Blob([JSON.stringify(articleRequest)], { type: 'application/json' }),
-    );
+    const requestOptions = {
+      method: apiMode,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
-      {
-        method: apiMode,
-        body: uploadFormData,
-      },
+      requestOptions,
     );
+
     if (true) {
       setTimeout(() => {
         setLoading(false);
@@ -100,11 +126,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       }, 2000);
     }
   };
-
-  useEffect(() => {
-    setTitle(uploadData.title);
-    setSkill(uploadData.skills);
-  }, []);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

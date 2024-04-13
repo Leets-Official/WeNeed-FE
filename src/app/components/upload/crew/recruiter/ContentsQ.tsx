@@ -85,7 +85,7 @@ const ContentsQ = () => {
         <div className="flex gap-1 mt-[30px] mb-[5px]">
           {REQUIREMENT} {RECRUITER_QUESTIONS.keywords}
         </div>
-        <div className="flex text-white h-[95px] flex-wrap">
+        <div className="flex text-white h-[120px] flex-wrap">
           {CREW_KEYWORDS.map((keyword) => (
             <div
               key={keyword}

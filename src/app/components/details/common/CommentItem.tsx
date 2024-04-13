@@ -42,6 +42,10 @@ const CommentItem = ({
   const profileStyles = PROFILE_STYLE['medium']();
 
   const onSubmitHandler = async () => {
+    if (recommentValue.length > 255) {
+      alert('댓글 내용은 255자 이하로 입력해주세요.');
+      return;
+    }
     if (!recommentValue) {
       alert('내용을 입력해주세요!');
       return;
@@ -79,7 +83,7 @@ const CommentItem = ({
           onComment={true}
           size="medium"
         />
-        <div className="w-fit relative bg-[#8C8C8C] h-[50px] ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
+        <div className="w-fit h-fit relative bg-[#8C8C8C]  ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
           {content}
           {!hasChildren && (
             <div

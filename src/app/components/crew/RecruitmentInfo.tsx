@@ -3,9 +3,10 @@ import { RECRUITMENT_COMPLETE } from 'constants/crew';
 
 interface RecruitmentInfoProps {
   recruitForm: RecruitFormFromServer;
+  isApp?: boolean;
 }
 
-const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
+const RecruitmentInfo = ({ recruitForm, isApp }: RecruitmentInfoProps) => {
   const {
     deadline,
     description,
@@ -20,7 +21,11 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
     switch (questionKey) {
       case 'deadline':
         return (
-          <div className="flex w-60 border-b border-black px-[30px]">
+          <div
+            className={`flex w-60 border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
             {deadline.split('/').map((datePart, index) => (
               <div
                 key={index}
@@ -36,29 +41,54 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       case 'description':
         return (
-          <div className="flex border-b border-black px-[30px]">
+          <div
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
             {description}
           </div>
         );
       case 'taskNeed':
         return (
-          <div className="flex border-b border-black px-[30px]">{taskNeed}</div>
+          <div
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
+            {taskNeed}
+          </div>
         );
       case 'memberCount':
         return (
-          <div className="flex border-b border-black px-[30px]">
+          <div
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
             {memberCount}명
           </div>
         );
       case 'crewQuestions':
         return crewQuestions.map((question) => (
-          <div key={question} className="flex border-b border-black px-[30px]">
+          <div
+            key={question}
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px] mb-[18px]`}
+          >
             {question}
           </div>
         ));
       case 'phone':
         return (
-          <div className="flex border-b border-black px-[30px] ">{phone}</div>
+          <div
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
+            {phone}
+          </div>
         );
       case 'keywords':
         return (
@@ -70,7 +100,11 @@ const RecruitmentInfo = ({ recruitForm }: RecruitmentInfoProps) => {
         );
       default:
         return (
-          <div className="flex border-b border-black px-[30px] ">
+          <div
+            className={`flex border-b ${
+              isApp ? 'border-white' : 'border-black'
+            } px-[30px]`}
+          >
             {recruitForm[questionKey as keyof typeof recruitForm]}
           </div>
         );

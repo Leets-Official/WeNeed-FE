@@ -9,7 +9,7 @@ const LoginPage = () => {
     <section>
       <div className="relative flex-col items-center bg-login w-screen h-screen bg-cover bg-no-repeat bg-fixed flex ">
         <Icons name={loginLeest} className="top-2" />
-        <div className="mt-44 w-[530px] h-[68px] text-white text-[64px] font-bold font-['Pretendard']">
+        <div className="mt-44 w-fit h-[68px] text-white text-[64px] font-bold font-['Pretendard']">
           {LOGIN_SUCCESS.TITLE}
         </div>
         <Icons name={loginWeneed} />

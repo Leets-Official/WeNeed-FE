@@ -1,17 +1,23 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Header from 'components/layout/Header';
 import AppRecruitContainer from 'components/mypage/apprecruit/container/AppRecruitContainer';
 import ApplicantListContainer from 'components/mypage/apprecruit/container/ApplicantListContainer';
 import MenuBarContainer from 'components/mypage/apprecruit/container/MenuBarContainer';
-import useUpdateApplicantList from 'hooks/apprecruit/useUpdataApplicantList';
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import GlobalError from '(route)/error';
+import Loading from '(route)/loading';
+import { useRouter } from 'next/navigation';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-  acceptAndrefuseState,
   appMenuState,
-  responseApplicantsListState,
+  acceptedListState,
+  refusedListState,
+  pendingListState,
+  isPatchState,
 } from 'recoil/apprecruit';
+import Button from 'components/common/Button';
+import AppRecruitment from 'components/mypage/apprecruit/AppRecruitment';
 
 interface MypageAppRecruitPageProps {
   params: { slug: string };
@@ -20,39 +26,88 @@ interface MypageAppRecruitPageProps {
 export default function MypageAppRecruitPage({
   params,
 }: MypageAppRecruitPageProps) {
+  const { slug } = params;
+  const [articleId, recruitId] = slug;
   const [data, setData] = useState<ResponseRecruitingDetail | null>(null);
-  const selectedMenu = useRecoilValue(appMenuState);
-  const [responseApplicantsList, setResponseApplicantsList] = useRecoilState(
-    responseApplicantsListState,
-  );
-  const updateApplicantList = useUpdateApplicantList();
-  const acceptAndrefuse = useRecoilValue(acceptAndrefuseState);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>();
+  const [selectedMenu, setSelectedMenu] = useRecoilState(appMenuState);
+  const router = useRouter();
+  const setAcceptedListState = useSetRecoilState(acceptedListState);
+  const setPendingListState = useSetRecoilState(pendingListState);
+  const setRefusedListState = useSetRecoilState(refusedListState);
+  const isPatchData = useRecoilValue(isPatchState);
+
+  useEffect(() => {
+    setSelectedMenu('모집글');
+  }, [router]);
 
   useEffect(() => {
     const fetchData = async () => {
       let url = '';
       if (selectedMenu === '받은 지원서') {
-        url = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/applicationforms/applications?articleId=${params.slug}`;
+        url = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/applicationforms/applications?articleId=${recruitId}`;
       } else {
-        url = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${params.slug}`;
+        url = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/details/recruiting?articleId=${articleId}`;
       }
 
-      const response = await fetch(url, { cache: 'no-store' });
-      const responseData = await response.json();
-      if (selectedMenu === '받은 지원서') {
-        setResponseApplicantsList(responseData);
-        updateApplicantList();
-      } else {
-        setData(responseData);
+      try {
+        if (selectedMenu === '받은 지원서' && recruitId === 'null') {
+          return;
+        }
+        const response = await fetch(url);
+        const responseData = await response.json();
+        if (selectedMenu === '받은 지원서') {
+          const [
+            acceptedApplications,
+            pendingApplications,
+            refusedApplications,
+          ] = responseData;
+
+          setAcceptedListState(
+            acceptedApplications.map((applicationItem: ApplicationItem) => ({
+              selected: false,
+              applicationItem,
+            })),
+          );
+          setPendingListState(
+            pendingApplications.map((applicationItem: ApplicationItem) => ({
+              selected: false,
+              applicationItem,
+            })),
+          );
+          setRefusedListState(
+            refusedApplications.map((applicationItem: ApplicationItem) => ({
+              selected: false,
+              applicationItem,
+            })),
+          );
+        } else {
+          setData(responseData);
+        }
+        setLoading(false);
+      } catch (error) {
+        setError(error as Error);
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, [selectedMenu, acceptAndrefuse]);
+  }, [selectedMenu, articleId, recruitId, router, isPatchData]);
 
-  useEffect(() => {
-    updateApplicantList();
-  }, [updateApplicantList]);
+  const reset = () => {
+    setLoading(true);
+    setError(null);
+    router.back();
+  };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <GlobalError error={error} reset={reset} />;
+  }
 
   if (data) {
     const { nickname, userId } = data.user;
@@ -66,7 +121,43 @@ export default function MypageAppRecruitPage({
           <div className="w-[80%] min-h-screen flex flex-col items-center">
             <MenuBarContainer />
             {selectedMenu === '받은 지원서' ? (
-              <ApplicantListContainer />
+              recruitId === 'null' ? (
+                <div className="h-[80%] w-full flex flex-col justify-center items-center">
+                  <div className="text-black font-bold text-3xl">
+                    크루를 모집하고 있지 않습니다.
+                  </div>
+                  <Button
+                    className="mt-8"
+                    buttonText="크루 모집하러가기"
+                    isDisabled={false}
+                    type="upload_recruiter"
+                    onClickHandler={() =>
+                      router.push(`/upload/crew/recruiter/${articleId}`)
+                    }
+                  />
+                </div>
+              ) : (
+                <ApplicantListContainer />
+              )
+            ) : selectedMenu === '모집서' ? (
+              recruitId === 'null' ? (
+                <div className="h-[80%] w-full flex flex-col justify-center items-center">
+                  <div className="text-black font-bold text-3xl">
+                    크루를 모집하고 있지 않습니다.
+                  </div>
+                  <Button
+                    className="mt-8"
+                    buttonText="크루 모집하러가기"
+                    isDisabled={false}
+                    type="upload_recruiter"
+                    onClickHandler={() =>
+                      router.push(`/upload/crew/recruiter/${articleId}`)
+                    }
+                  />
+                </div>
+              ) : (
+                <AppRecruitment articleId={articleId} />
+              )
             ) : (
               <AppRecruitContainer
                 count={[viewCount, heartCount, bookmarkCount]}
@@ -80,90 +171,3 @@ export default function MypageAppRecruitPage({
     );
   }
 }
-
-// const mockApplicantsData: Applicant[][] = [
-//   [
-//     {
-//       user: {
-//         userId: 0,
-//         profile: null,
-//         nickname: '하이요',
-//         major: '경영학전공',
-//         grade: 1,
-//       },
-//       applicationId: 1,
-//       appliedAt: '2024-03-11T08:18:17.522Z',
-//       result: 'ACCEPTED',
-//     },
-//   ],
-//   [
-//     {
-//       user: {
-//         userId: 1,
-//         profile: null,
-//         nickname: 'hello',
-//         major: '인공지능전공',
-//         grade: 2,
-//       },
-//       applicationId: 2,
-//       appliedAt: '2024-03-12T08:18:17.522Z',
-//       result: 'REFUSED',
-//     },
-//   ],
-//   [
-//     {
-//       user: {
-//         userId: 2,
-//         profile: null,
-//         nickname: '웅냐',
-//         major: '컴퓨터공학전공',
-//         grade: 3,
-//       },
-//       applicationId: 3,
-//       appliedAt: '2024-03-13T08:18:17.522Z',
-//       result: 'PENDING',
-//     },
-//   ],
-//   [
-//     {
-//       user: {
-//         userId: 3,
-//         profile: null,
-//         nickname: '코딩왕',
-//         major: '컴퓨터공학전공',
-//         grade: 4,
-//       },
-//       applicationId: 4,
-//       appliedAt: '2024-03-14T08:18:17.522Z',
-//       result: 'PENDING',
-//     },
-//   ],
-//   [
-//     {
-//       user: {
-//         userId: 4,
-//         profile: null,
-//         nickname: '프론트엔드',
-//         major: '컴퓨터공학전공',
-//         grade: 4,
-//       },
-//       applicationId: 5,
-//       appliedAt: '2024-03-15T08:18:17.522Z',
-//       result: 'PENDING',
-//     },
-//   ],
-//   [
-//     {
-//       user: {
-//         userId: 5,
-//         profile: null,
-//         nickname: '백엔드',
-//         major: '컴퓨터공학전공',
-//         grade: 4,
-//       },
-//       applicationId: 6,
-//       appliedAt: '2024-03-16T08:18:17.522Z',
-//       result: 'ACCEPTED',
-//     },
-//   ],
-// ];

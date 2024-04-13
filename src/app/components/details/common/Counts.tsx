@@ -30,39 +30,39 @@ const Counts = ({ count, gradient = false }: CountsProps) => {
   }, [count, setBookmarkCount, setHeartCount]);
 
   return (
-    <div className="flex gap-[32px] h-[75px] items-center justify-center w-[20%]">
-      <p className="flex gap-[10px] cursor-pointer">
+    <div className="flex gap-[22px] h-[75px] items-center justify-center w-[20%]">
+      <p className="flex gap-[10px] cursor-pointer pr-[22px]">
         <GradientView width={24} height={18} /> {count[0]}
       </p>
       {gradient ? (
         <>
-          <p className="flex gap-[10px] cursor-pointer">
+          <div className="flex gap-[10px] cursor-pointer">
             <GradientHeart width={24} height={24} />
-            {heartCount}
-          </p>
-          <p className="flex  gap-[10px] cursor-pointer">
+            <p className="w-[30px]">{heartCount}</p>
+          </div>
+          <div className="flex  gap-[10px] cursor-pointer">
             <GradientBookmark width={17} height={24} />
-            {bookmarkCount}
-          </p>
+            <p className="w-[30px]">{bookmarkCount}</p>
+          </div>
         </>
       ) : (
         <>
-          <p className="flex gap-[10px] cursor-pointer">
+          <div className="flex gap-[10px] cursor-pointer">
             {hearted ? (
               <GradientHeart width={24} height={24} />
             ) : (
               <Icons name={heart} />
             )}
-            {heartCount}
-          </p>
-          <p className="flex  gap-[10px] cursor-pointer">
+            <p className="w-[30px]">{heartCount}</p>
+          </div>
+          <div className="flex  gap-[10px] cursor-pointer">
             {bookmarked ? (
               <GradientBookmark width={17} height={24} />
             ) : (
               <Icons name={bookmark} />
             )}
-            {bookmarkCount}
-          </p>
+            <p className="w-[30px]">{bookmarkCount}</p>
+          </div>
         </>
       )}
     </div>

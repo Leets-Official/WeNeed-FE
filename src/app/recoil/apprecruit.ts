@@ -5,62 +5,40 @@ export const appMenuState = atom({
   default: '모집글',
 });
 
-export const selectedApplicantsState = atom<ExtendedApplicant[][]>({
-  key: 'selectedApplicantsState',
-  default: [],
+export const isPatchState = atom({
+  key: 'isPatchState',
+  default: false,
 });
 
-export const responseApplicantsListState = atom<Applicant[][]>({
-  key: 'responseApplicantsListState',
-  default: [],
-});
-
-export const pendingListState = atom<ExtendedApplicant[][]>({
+export const pendingListState = atom<SelectedStateApllication[]>({
   key: 'pendingListState',
   default: [],
 });
 
-export const refusedListState = atom<ExtendedApplicant[][]>({
+export const refusedListState = atom<SelectedStateApllication[]>({
   key: 'refusedListState',
   default: [],
 });
 
-export const acceptedListState = atom<ExtendedApplicant[][]>({
+export const acceptedListState = atom<SelectedStateApllication[]>({
   key: 'acceptedListState',
   default: [],
 });
 
-export const pendingListSelectedState = atom({
-  key: 'pendingListSelectedState',
-  default: false,
+export const selectedAllListState = atom({
+  key: 'selectedAllListState',
+  default: {
+    pending: false,
+    accepted: false,
+    refused: false,
+  },
 });
 
-export const refusedListSelectedState = atom({
-  key: 'refusedListSelectedState',
-  default: false,
-});
-
-export const acceptedListSelectedState = atom({
-  key: 'acceptedListSelectedState',
-  default: false,
-});
-
-export const pendingSelectedState = atom<ExtendedApplicant[][]>({
-  key: 'pendingSelectedState',
-  default: [],
-});
-
-export const refusedSelectedState = atom<ExtendedApplicant[][]>({
-  key: 'refusedSelectedState',
-  default: [],
-});
-
-export const acceptedSelectedState = atom<ExtendedApplicant[][]>({
-  key: 'acceptedSelectedState',
-  default: [],
-});
-
-export const acceptAndrefuseState = atom({
-  key: 'acceptAndrefuseState',
-  default: false,
+export const selectedListItems = atom({
+  key: 'selectedListItems',
+  default: {
+    pending: [] as SelectedStateApllication[],
+    accepted: [] as SelectedStateApllication[],
+    refused: [] as SelectedStateApllication[],
+  },
 });

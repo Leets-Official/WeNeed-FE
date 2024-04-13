@@ -153,5 +153,6 @@ export const MY_PAGE = {
   INTEREST_OUTPUT: '관심 게시글',
   INTEREST_CREW: '관심 크루 찾기',
   TAG_RESET: '선택 초기화',
+  LOG_OUT: '로그아웃',
   postNum: (num: number) => `총 ${num}개`,
 } as const;

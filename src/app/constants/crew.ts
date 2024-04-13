@@ -14,6 +14,10 @@ export const HEADER_COMPLETE = {
   title: '간단 크루 지원 모집서 ',
 } as const;
 
+export const HEADER_APPLICANT_COMPLETE = {
+  title: '간단 크루 지원서 ',
+} as const;
+
 export const RECRUITER_QUESTIONS = {
   category: ['대표적인 카테고리를 선택해주세요.', '카테고리'],
   detailTag: '세부분야를 선택해주세요.',
@@ -88,6 +92,7 @@ export const APPLICATION_COMPLETE: ApplicationComplete = {
   grade: (_) => '학년',
   status: (_) => '학적 상태',
   phone: (name) => `${name} 님의 연락처`,
+  appeal: () => `어필할 수 있는 파일 (파일명 클릭시 다운로드)`,
   aboutMe: (name) => `${name} 님을 표현할 수 있는 한마디`,
   content: (_) => '하고 싶은 말',
   keywords: (name) => `${name} 님을 표현할 수 있는 태그`,

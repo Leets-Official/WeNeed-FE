@@ -2,25 +2,30 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER;
 
 const postRequest = async (
   url: string,
-  body: FormData,
+  body: any = null,
   accessToken: string,
 ) => {
   try {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + accessToken,
       },
-      body: body,
+      body: JSON.stringify(body),
     });
-    return response;
+    if (response.ok) {
+      return await response.json();
+    } else {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
   } catch (error) {
     console.log('Error:', error);
   }
 };
 
 export const uploadPortfolio = async (
-  portfolio: FormData,
+  portfolio: UploadRequestBody,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/portfolio`;
@@ -28,9 +33,9 @@ export const uploadPortfolio = async (
 };
 
 export const uploadRecruit = async (
-  portfolio: FormData,
+  recruiting: UploadRequestBody,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/recruit`;
-  return await postRequest(url, portfolio, accessToken);
+  return await postRequest(url, recruiting, accessToken);
 };

@@ -26,6 +26,11 @@ const nextConfig = {
         hostname: 'weneedbucket.s3.ap-northeast-2.amazonaws.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.weneed.site',
+        port: '',
+      },
     ],
   },
   reactStrictMode: false,

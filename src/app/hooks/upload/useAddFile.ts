@@ -1,10 +1,5 @@
 import { useRecoilState } from 'recoil';
-import {
-  fileBlobState,
-  filestate,
-  imageBlobState,
-  orderState,
-} from 'recoil/upload';
+import { filestate, imageBlobState, orderState } from 'recoil/upload';
 import { textState } from 'recoil/upload';
 import { useRef, useState } from 'react';
 import { deleteAlert, editAlert } from 'components/upload/both/showToast';
@@ -20,7 +15,6 @@ const useAddFile = () => {
   const [items, setItems] = useRecoilState<DndTextTypes[]>(textState);
   const [files, setFiles] = useRecoilState<DNDFileTypes[]>(filestate);
   const [images, setImages] = useRecoilState<BlobImages[]>(imageBlobState);
-  const [blobFiles, setBlobFiles] = useRecoilState<BlobFiles[]>(fileBlobState);
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileInfo, setFileInfo] = useState<FileInfo>({
     name: '',
@@ -70,38 +64,34 @@ const useAddFile = () => {
     }
   };
 
-  const updateFile = (id: string, fileType: string) => {
+  const updateFile = async (id: string, fileType: string) => {
     const file = inputRef.current?.files?.[0];
-
     if (file) {
-      const blob = new Blob([file], { type: file.type });
       if (fileType === '이미지') {
         setImages((prevImages) =>
           prevImages.map((image) =>
             image.id === id
-              ? { id: id, blob: blob, filename: file.name }
+              ? { id: id, imageFile: file, filename: file.name }
               : image,
           ),
         );
         setItems((prevItems) =>
           prevItems.map((item) =>
-            item.id === id ? { ...item, data: fileInfo.url } : item,
+            item.id === id ? { ...item, data: fileInfo.url, file: file } : item,
           ),
         );
       } else {
         setFiles((prevFiles) =>
           prevFiles.map((item) =>
             item.id === id
-              ? { ...item, id: file.name, data: file.name, url: fileInfo.url }
+              ? {
+                  ...item,
+                  id: file.name,
+                  data: file.name,
+                  url: fileInfo.url,
+                  file: file,
+                }
               : item,
-          ),
-        );
-
-        setBlobFiles((prevFiles) =>
-          prevFiles.map((editedfile) =>
-            editedfile.id === id
-              ? { id: file.name, file: file, filename: file.name }
-              : editedfile,
           ),
         );
       }
@@ -109,8 +99,7 @@ const useAddFile = () => {
     }
   };
 
-  const addFile = (file: File, type: string) => {
-    const blob = new Blob([file], { type: file.type });
+  const addFile = async (file: File, type: string) => {
     if (type === 'image') {
       setItems((prevData) => [
         ...prevData,
@@ -118,6 +107,7 @@ const useAddFile = () => {
           id: String(orderId),
           type: type,
           data: fileInfo.url,
+          file: file,
         },
       ]);
 
@@ -125,7 +115,7 @@ const useAddFile = () => {
         ...prevImages,
         {
           id: String(orderId),
-          blob: blob,
+          imageFile: file,
           filename: file.name,
         },
       ]);
@@ -138,14 +128,7 @@ const useAddFile = () => {
           type: type,
           data: file.name,
           url: fileInfo.url,
-        },
-      ]);
-      setBlobFiles((prevFiles) => [
-        ...prevFiles,
-        {
-          id: file.name,
           file: file,
-          filename: file.name,
         },
       ]);
     }
@@ -156,9 +139,6 @@ const useAddFile = () => {
       setImages((prevImages) => prevImages.filter((image) => image.id !== id));
     } else {
       setFiles((prevFiles) => prevFiles.filter((file) => file.id !== id));
-      setBlobFiles((prevBlobFiles) =>
-        prevBlobFiles.filter((blobFile) => blobFile.id !== id),
-      );
     }
     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
     deleteAlert();
@@ -166,7 +146,6 @@ const useAddFile = () => {
 
   const removeAllFile = () => {
     setFiles([]);
-    setBlobFiles([]);
     deleteAlert();
   };
 

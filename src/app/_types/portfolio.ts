@@ -79,6 +79,7 @@ interface Content {
   type: 'text' | 'image' | 'link' | 'sound';
   name?: string;
   data: string;
+  file?: File;
 }
 
 interface TeamMember {
@@ -106,6 +107,7 @@ interface PortfolioDetails {
   contents: Array<Content>;
   teamMembers: teamMember[];
   recruiting: boolean;
+  hasApplied: boolean;
 }
 
 interface teamMember {

@@ -16,7 +16,7 @@ const postRequest = async (
         ? { Authorization: 'Bearer ' + accessToken }
         : { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
       body: isFormData ? body : JSON.stringify(body),
-    }).then((res) => res.json());
+    });
     return response;
   } catch (error) {
     console.log('Error:', error);
@@ -57,11 +57,9 @@ export const postRecruiter = async (
 
 export const postApplicant = async (
   articleId: string,
-  bodyData: FormData,
+  bodyData: ApplicationFormRequest,
   accessToken: string,
 ) => {
   const url = `${SERVER_URL}/application-forms/${articleId}`;
-  const res = await postRequest(url, accessToken, bodyData, true);
-  console.log(res);
-  return res;
+  return await postRequest(url, accessToken, bodyData);
 };

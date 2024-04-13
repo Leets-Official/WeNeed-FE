@@ -13,15 +13,9 @@ const fetchData = async (nickName: string) => {
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/checkNickname?nickName=${nickName}`,
       {
         method: 'POST',
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
-    if (response === false) {
-      console.log('Fetch check nickname Data Success:', response);
-    } else {
-      console.log('Fetch check nickname Data Fail:', response);
-    }
     return response;
   } catch (error) {
     console.error('Error during Fetch Data:', error);
@@ -48,7 +42,6 @@ const UserInfo = () => {
       doubleMajor: type === 'doubleMajor' ? item : prev.doubleMajor,
       interestField: type === 'interestField' ? item : prev.interestField,
     }));
-    console.log(userInfo);
   };
 
   const handleIsOpen = (type: string) => {
@@ -84,7 +77,6 @@ const UserInfo = () => {
 
   const handleNickname = async () => {
     const response = await fetchData(userInfo.nickname);
-    console.log('handle nickname response', response);
     if (response === false) {
       setUserInfoSet((prev) => ({ ...prev, successNickname: true }));
       setSuccessNickname(1);

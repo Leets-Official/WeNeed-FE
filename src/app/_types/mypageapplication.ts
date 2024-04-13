@@ -6,13 +6,20 @@ interface ApplicantUser {
   grade: number;
 }
 
-interface Applicant {
+interface ApplicationItem {
   user: ApplicantUser;
   applicationId: number;
   appliedAt: string;
   result: 'PENDING' | 'ACCEPTED' | 'REFUSED';
 }
 
-interface ExtendedApplicant extends Applicant {
+interface SelectedStateApllication {
   selected: boolean;
+  applicationItem: ApplicationItem;
+}
+
+interface ApplicationState {
+  accepted: ApplicationItem[];
+  pending: ApplicationItem[];
+  refused: ApplicationItem[];
 }

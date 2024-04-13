@@ -11,7 +11,6 @@ export const patchUserInfoEdit = async (
           Authorization: 'Bearer ' + token,
         },
         body: userInfo,
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
@@ -32,7 +31,6 @@ export const setEmail = async (email: string) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
@@ -53,7 +51,6 @@ export const postCode = async (code: string, email: string) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ code, email }),
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
@@ -77,7 +74,6 @@ export const postUserInfo = async (
           Authorization: 'Bearer ' + token,
         },
         body: JSON.stringify(userInfo),
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
@@ -97,7 +93,6 @@ export const checkNickname = async (nickName: string) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 

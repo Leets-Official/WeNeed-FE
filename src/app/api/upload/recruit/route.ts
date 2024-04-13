@@ -4,14 +4,11 @@ import { getCookie } from 'utils/cookieUtils';
 
 export async function POST(request: Request) {
   const accessToken = getCookie(request, 'accessToken');
+  const content = await request.json();
+
   try {
-    const res = await request.formData();
-    const data = await uploadRecruit(res, accessToken);
-    return new Response(JSON.stringify(res), {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const data = await uploadRecruit(content, accessToken);
+    return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json({ error: 'Internal Server Error' });
   }

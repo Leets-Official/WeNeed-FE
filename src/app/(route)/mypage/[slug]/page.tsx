@@ -5,8 +5,14 @@ import PostContainer from 'components/mypage/container/PostContainer';
 import { ProfileContainer } from 'components/mypage/container/ProfileContainer';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { crewTypeState, menuState, userProfileInfoSatate } from 'recoil/mypage';
+import {
+  crewTypeState,
+  menuState,
+  prevMenuState,
+  userProfileInfoSatate,
+} from 'recoil/mypage';
 import useMypageURL from 'hooks/mypage/useMypageURL';
+import { useRouter } from 'next/navigation';
 
 export default function MyPage({ params }: { params: { slug: string } }) {
   const [selectedMenu, setSelectedMenu] = useRecoilState(menuState);
@@ -21,6 +27,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   >(null);
   const [userInfoData, setUserInfoData] = useState<MypageUserInfo>();
   const [page, setPage] = useState<number>(1);
+  const router = useRouter();
+  const [prevMenu, setPrevMenu] = useRecoilState<string>(prevMenuState);
 
   const crewType = useRecoilValue(crewTypeState);
   let crewSize = 3;
@@ -38,67 +46,77 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     setPage(() => selected + 1);
   };
 
+  const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
+  const fetchData = async () => {
+    if (selectedMenu === 'MY CREW') {
+      const [recruitUrl, appliedUrl] = url;
+      const [recruitResponse, appliedResponse, userInfoResponse] =
+        await Promise.all([
+          fetch(`${recruitUrl}&page=${page}`),
+          fetch(`${appliedUrl}&page=${page}`),
+          fetch(userInfoUrl),
+        ]);
+      const [recruitData, appliedData] = await Promise.all([
+        recruitResponse.json(),
+        appliedResponse.json(),
+      ]);
+      const userInfoData = await userInfoResponse.json();
+      setData({ recruitData, appliedData });
+      setUserInfoData((prev) => userInfoData.userInfo);
+      setUserInfoRecoil((prev) => ({
+        userNickname: userInfoData.userNickname,
+        sameUser: userInfoData.sameUser,
+        userInfo: userInfoData.userInfo,
+        userIdFromHeader: userInfoData.userIdFromHeader,
+      }));
+    } else {
+      const [response, userInfoResponse] = await Promise.all([
+        fetch(`${url}&page=${page}`),
+        fetch(userInfoUrl),
+      ]);
+      const responseData = await response.json();
+      const userInfoData = await userInfoResponse.json();
+      setData(responseData);
+      setUserInfoData((prev) => userInfoData.userInfo);
+      setUserInfoRecoil((prev) => ({
+        userNickname: userInfoData.userNickname,
+        sameUser: userInfoData.sameUser,
+        userInfo: userInfoData.userInfo,
+        userIdFromHeader: userInfoData.userIdFromHeader,
+      }));
+    }
+  };
+
   useEffect(() => {
     setSelectedMenu('MY OUTPUT');
-  }, []);
+    if (
+      selectedMenu !== prevMenu ||
+      prevMenu !== 'MY OUTPUT' ||
+      selectedMenu === 'MY OUTPUT'
+    ) {
+      fetchData();
+    }
+  }, [router]);
 
   useEffect(() => {
-    const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
-    const fetchData = async () => {
-      if (selectedMenu === 'MY CREW') {
-        const [recruitUrl, appliedUrl] = url;
-        const [recruitResponse, appliedResponse, userInfoResponse] =
-          await Promise.all([
-            fetch(`${recruitUrl}&page=${page}`, { cache: 'no-store' }),
-            fetch(`${appliedUrl}&page=${page}`, { cache: 'no-store' }),
-            fetch(userInfoUrl, { cache: 'no-store' }),
-          ]);
-        const [recruitData, appliedData] = await Promise.all([
-          recruitResponse.json(),
-          appliedResponse.json(),
-        ]);
-        const userInfoData = await userInfoResponse.json();
-        setData({ recruitData, appliedData });
-        setUserInfoData((prev) => userInfoData.userInfo);
-        setUserInfoRecoil((prev) => ({
-          userNickname: userInfoData.userNickname,
-          sameUser: userInfoData.sameUser,
-          userInfo: userInfoData.userInfo,
-          userIdFromHeader: userInfoData.userIdFromHeader,
-        }));
-      } else {
-        const [response, userInfoResponse] = await Promise.all([
-          fetch(`${url}&page=${page}`, {
-            cache: 'no-store',
-          }),
-          fetch(userInfoUrl, { cache: 'no-store' }),
-        ]);
-        const responseData = await response.json();
-        const userInfoData = await userInfoResponse.json();
-        setData(responseData);
-        setUserInfoData((prev) => userInfoData.userInfo);
-        setUserInfoRecoil((prev) => ({
-          userNickname: userInfoData.userNickname,
-          sameUser: userInfoData.sameUser,
-          userInfo: userInfoData.userInfo,
-          userIdFromHeader: userInfoData.userIdFromHeader,
-        }));
-      }
-    };
-
-    fetchData();
+    if (
+      selectedMenu !== prevMenu ||
+      prevMenu !== 'MY OUTPUT' ||
+      selectedMenu === 'MY OUTPUT'
+    ) {
+      fetchData();
+    }
+    setPrevMenu(selectedMenu);
   }, [selectedMenu, crewSize, page]);
 
   useEffect(() => {
     if (data) {
-      console.log('data in mypage : ', data);
       if ('userNickname' in data) {
         const { userNickname, sameUser, userInfo, userIdFromHeader } =
           data as ResponseMypageBasicInfo;
         if (!userInfoData) {
           setUserInfoData((prev) => userInfo);
         }
-        console.log(userNickname, sameUser, userInfo, userIdFromHeader);
         setUserInfoRecoil((prev) => ({
           ...prev,
           userNickname,
@@ -115,7 +133,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
     const { myOutputList, pageableDto } = data as
       | ResponseMypageOtherInfo
       | ResponseMypageOtherInfo;
-    console.log('user Id in mypage', userId);
     return (
       <section className="w-full flex items-center flex-col">
         <div className="w-[80%] max-w-[1290px]">
