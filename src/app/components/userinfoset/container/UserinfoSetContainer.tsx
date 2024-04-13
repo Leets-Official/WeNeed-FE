@@ -27,7 +27,6 @@ const fetchData = async (userInfo: userInfo) => {
       {
         method: 'POST',
         body: JSON.stringify(userInfo),
-        cache: 'no-store',
       },
     ).then((res) => res.json());
     return response;

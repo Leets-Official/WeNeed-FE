@@ -19,7 +19,7 @@ export default function EditPage({ params }: EditPageProps) {
   useEffect(() => {
     const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${1}`;
     const fetchData = async () => {
-      const userInfoResponse = await fetch(userInfoUrl, { cache: 'no-store' });
+      const userInfoResponse = await fetch(userInfoUrl);
       const userInfoData = await userInfoResponse.json();
       setData(userInfoData);
     };

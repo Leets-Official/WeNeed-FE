@@ -48,14 +48,13 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   const userInfoUrl = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${params.slug}&size=6&page=${page}`;
   const fetchData = async () => {
-    console.log('selectedMenu prevMenu', selectedMenu, prevMenu);
     if (selectedMenu === 'MY CREW') {
       const [recruitUrl, appliedUrl] = url;
       const [recruitResponse, appliedResponse, userInfoResponse] =
         await Promise.all([
-          fetch(`${recruitUrl}&page=${page}`, { cache: 'no-store' }),
-          fetch(`${appliedUrl}&page=${page}`, { cache: 'no-store' }),
-          fetch(userInfoUrl, { cache: 'no-store' }),
+          fetch(`${recruitUrl}&page=${page}`),
+          fetch(`${appliedUrl}&page=${page}`),
+          fetch(userInfoUrl),
         ]);
       const [recruitData, appliedData] = await Promise.all([
         recruitResponse.json(),
@@ -72,10 +71,8 @@ export default function MyPage({ params }: { params: { slug: string } }) {
       }));
     } else {
       const [response, userInfoResponse] = await Promise.all([
-        fetch(`${url}&page=${page}`, {
-          cache: 'no-store',
-        }),
-        fetch(userInfoUrl, { cache: 'no-store' }),
+        fetch(`${url}&page=${page}`),
+        fetch(userInfoUrl),
       ]);
       const responseData = await response.json();
       const userInfoData = await userInfoResponse.json();
@@ -92,8 +89,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
 
   useEffect(() => {
     setSelectedMenu('MY OUTPUT');
-    console.log('selectedMenu', selectedMenu);
-    console.log('prevMenu', prevMenu);
     if (
       selectedMenu !== prevMenu ||
       prevMenu !== 'MY OUTPUT' ||
@@ -104,8 +99,6 @@ export default function MyPage({ params }: { params: { slug: string } }) {
   }, [router]);
 
   useEffect(() => {
-    console.log('selectedMenu in ', selectedMenu);
-    console.log('prevMenu in ', prevMenu);
     if (
       selectedMenu !== prevMenu ||
       prevMenu !== 'MY OUTPUT' ||
