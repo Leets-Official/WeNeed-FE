@@ -79,7 +79,7 @@ const CommentItem = ({
           onComment={true}
           size="medium"
         />
-        <div className="w-fit relative bg-[#8C8C8C] h-[50px] ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
+        <div className="w-fit h-fit relative bg-[#8C8C8C]  ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
           {content}
           {!hasChildren && (
             <div
