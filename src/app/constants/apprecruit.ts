@@ -1,6 +1,7 @@
 export const MENU = {
   ARTICLE: '모집글',
   APPLICATIONS_LIST: '받은 지원서',
+  RECRUITMENT: '모집서',
 };
 
 export const APPLICANTIONS = {
