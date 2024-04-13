@@ -32,7 +32,7 @@ const MyAnswerContainer = ({ user, crewQuestions }: MyAnswerContainerProps) => {
   };
 
   return (
-    <div className="flex flex-col w-[80%] h-fit bg-white rounded-lg p-[30px] gap-[20px]">
+    <div className="flex flex-col w-[80%] h-fit bg-white rounded-lg p-[30px] gap-[20px] max-w-[1280px] ">
       <h5 className="flex gap-1 mb-[18px] font-semibold">{`${user.nickname}님이 궁금한 질문`}</h5>
       {crewQuestions.map((question, i) => (
         <div className="w-full" key={question}>

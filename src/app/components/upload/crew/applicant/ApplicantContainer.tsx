@@ -33,7 +33,7 @@ const ApplicantContainer = ({ articleId }: ApplicantContainerProps) => {
           user={recruitUser}
           crewQuestions={recruitForm.crewQuestions}
         />
-        <div className="w-[80%] flex justify-end mb-[150px] ">
+        <div className="w-[80%] flex justify-end mb-[150px] max-w-[1280px]  ">
           <CrewSubmission
             articleId={articleId}
             text="완료"
