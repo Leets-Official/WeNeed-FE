@@ -39,6 +39,11 @@ const CommentsContainer = ({
   }, [comments]);
 
   const onSubmitHandler = async () => {
+    if (commentValue.length > 255) {
+      alert('댓글 내용은 255자 이하로 입력해주세요.');
+      return;
+    }
+
     if (!commentValue) {
       alert('내용을 입력해주세요!');
       return;
