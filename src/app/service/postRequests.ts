@@ -16,7 +16,7 @@ const postRequest = async (
         ? { Authorization: 'Bearer ' + accessToken }
         : { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
       body: isFormData ? body : JSON.stringify(body),
-    }).then((res) => res.json());
+    });
     return response;
   } catch (error) {
     console.log('Error:', error);
