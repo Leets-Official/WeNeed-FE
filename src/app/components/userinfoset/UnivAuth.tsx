@@ -18,7 +18,6 @@ const fetchEmailData = async (email: string) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 
@@ -44,7 +43,6 @@ const fetchCodeData = async (email: string, code: string) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ code, email }),
-        cache: 'no-store',
       },
     ).then((res) => res.json());
     return response;

@@ -13,7 +13,6 @@ const fetchData = async (nickName: string) => {
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/user/checkNickname?nickName=${nickName}`,
       {
         method: 'POST',
-        cache: 'no-store',
       },
     ).then((res) => res.json());
 

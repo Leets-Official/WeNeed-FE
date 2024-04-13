@@ -55,7 +55,7 @@ export default function MypageAppRecruitPage({
         if (selectedMenu === '받은 지원서' && recruitId === 'null') {
           return;
         }
-        const response = await fetch(url, { cache: 'no-store' });
+        const response = await fetch(url);
         const responseData = await response.json();
         if (selectedMenu === '받은 지원서') {
           const [
