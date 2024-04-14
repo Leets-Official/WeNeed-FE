@@ -7,15 +7,19 @@ interface DndImageProps {
 
 const DndImage = ({ fileName, url }: DndImageProps) => {
   return (
-    <div className="relative w-[450px] h-[250px]">
+    <div className="relative flex justify-center w-full h-auto">
       {url && (
         <Image
           priority
           src={url}
           alt={fileName}
-          fill={true}
+          width={1280}
+          height={780}
           style={{
+            width: '80%',
+            height: '80%',
             objectFit: 'cover',
+            objectPosition: 'center center',
           }}
         />
       )}
