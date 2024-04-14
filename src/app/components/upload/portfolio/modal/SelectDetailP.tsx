@@ -119,11 +119,15 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       requestOptions,
     );
 
-    if (true) {
-      setTimeout(() => {
-        setLoading(false);
-        setCompleted(true);
-      }, 2000);
+    if (!res.ok) {
+      throw new Error('Error submitting recruiter data');
+    } else {
+      if (true) {
+        setTimeout(() => {
+          setLoading(false);
+          setCompleted(true);
+        }, 2000);
+      }
     }
   };
 

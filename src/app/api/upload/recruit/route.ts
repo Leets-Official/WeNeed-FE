@@ -10,6 +10,6 @@ export async function POST(request: Request) {
     const data = await uploadRecruit(content, accessToken);
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' });
+    throw new Error('Error submitting recruiter data');
   }
 }

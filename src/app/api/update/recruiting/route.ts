@@ -12,6 +12,6 @@ export async function PATCH(request: Request) {
     const data = await updateRecruit(content, accessToken, id);
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' });
+    throw new Error('Error submitting recruiter data');
   }
 }
