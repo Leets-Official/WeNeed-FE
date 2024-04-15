@@ -83,32 +83,33 @@ const PortfolioDetailsContainer = ({
       <div className="w-full mb-[143px]">
         <div className="relative mb-[60px] mt-[48px]">
           <div className="absolute top-0 left-[-96px] flex ">
-            {teamMembers &&
-              teamMembers.map((mem, i) => (
-                <Link href={`/mypage/${mem.userId}`} key={mem.userId}>
-                  <div
-                    className="rounded-full overflow-hidden w-[80px] h-[80px]"
-                    style={{
-                      marginLeft: `-${i * 30}px`,
-                    }}
-                  >
-                    {mem.profile ? (
-                      <div className="relative rounded-full overflow-hidden w-[80px] h-[80px]">
-                        <Image
-                          fill={true}
-                          alt="writer"
-                          src={mem.profile}
-                          style={{
-                            objectFit: 'cover',
-                          }}
-                        />
-                      </div>
-                    ) : (
-                      <GradientProfile />
-                    )}
-                  </div>
-                </Link>
-              ))}
+            {teamMembers?.map((mem, i) => (
+              <Link href={`/mypage/${mem.userId}`} key={mem.userId}>
+                <div
+                  className="rounded-full overflow-hidden w-[80px] h-[80px]"
+                  style={{
+                    marginLeft: `${
+                      teamMembers.length == 1 ? `50px` : `-${i * 30}px`
+                    }`,
+                  }}
+                >
+                  {mem.profile ? (
+                    <div className="relative rounded-full overflow-hidden w-[80px] h-[80px]">
+                      <Image
+                        fill={true}
+                        alt="writer"
+                        src={mem.profile}
+                        style={{
+                          objectFit: 'cover',
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <GradientProfile />
+                  )}
+                </div>
+              </Link>
+            ))}
           </div>
           <Link href={`/mypage/${writer.userId}`}>
             <Profile

@@ -17,7 +17,7 @@ const PortfolioWorkListContainer = ({
   workList,
 }: PortfolioWorkListContainerProps) => {
   const settings = {
-    infinite: true,
+    infinite: false,
     slidesToScroll: 1,
     variableWidth: true,
     arrows: false,
