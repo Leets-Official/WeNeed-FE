@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { uploadRecruit } from 'service/uploadRequest';
+import { uploadRecruit } from 'service/postRequests';
 import { getCookie } from 'utils/cookieUtils';
 
 export async function POST(request: Request) {

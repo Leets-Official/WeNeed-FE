@@ -5,23 +5,14 @@ const patchRequest = async (
   body: any = null,
   accessToken: string,
 ) => {
-  try {
-    const response = await fetch(url, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + accessToken,
-      },
-      body: JSON.stringify(body),
-    });
-    if (response.ok) {
-      return await response.json();
-    } else {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  } catch (error) {
-    console.log('Error:', error);
-  }
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + accessToken,
+    },
+    body: JSON.stringify(body),
+  });
 };
 
 export const updatePortfolio = async (

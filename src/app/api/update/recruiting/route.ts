@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { updateRecruit } from 'service/updateRequest';
+import { updateRecruit } from 'service/patchRequests';
 import { getCookie } from 'utils/cookieUtils';
 
 export async function PATCH(request: Request) {
