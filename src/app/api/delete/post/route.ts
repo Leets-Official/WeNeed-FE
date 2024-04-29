@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { deletePost } from 'service/deletePost';
+import { deletePost } from 'service/deleteRequests';
 import { getCookie } from 'utils/cookieUtils';
 
 export async function DELETE(request: Request): Promise<NextResponse> {

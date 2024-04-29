@@ -53,3 +53,8 @@ export const thumbnailUrlState = atom<string>({
   key: 'thumbnailUrlState',
   default: '',
 });
+
+export const errorState = atom<Error | null>({
+  key: 'errorState',
+  default: null,
+});

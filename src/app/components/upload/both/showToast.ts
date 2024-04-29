@@ -80,3 +80,13 @@ export const deletePostAlert = () => {
     position: 'top-center',
   });
 };
+
+export const textLimitAlert = () => {
+  toast.warning('텍스트는 255자 이하로 작성해주세요', {
+    icon: () => '✏️',
+    theme: 'dark',
+    closeOnClick: true,
+    autoClose: 2000,
+    position: 'top-center',
+  });
+};

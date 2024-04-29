@@ -7,15 +7,12 @@ const postRequest = async (
   url: string,
   accessToken: string,
   body: any = null,
-  isFormData: boolean = false,
 ) => {
   try {
     const response = await fetch(url, {
       method: 'POST',
-      headers: isFormData
-        ? { Authorization: 'Bearer ' + accessToken }
-        : { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
-      body: isFormData ? body : JSON.stringify(body),
+      headers: { ...commonHeaders, Authorization: 'Bearer ' + accessToken },
+      body: JSON.stringify(body),
     });
     return response;
   } catch (error) {
@@ -62,4 +59,20 @@ export const postApplicant = async (
 ) => {
   const url = `${SERVER_URL}/application-forms/${articleId}`;
   return await postRequest(url, accessToken, bodyData);
+};
+
+export const uploadPortfolio = async (
+  portfolio: UploadRequestBody,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/portfolio`;
+  return await postRequest(url, accessToken, portfolio);
+};
+
+export const uploadRecruit = async (
+  recruiting: UploadRequestBody,
+  accessToken: string,
+) => {
+  const url = `${SERVER_URL}/recruit`;
+  return await postRequest(url, accessToken, recruiting);
 };

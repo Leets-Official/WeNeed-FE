@@ -172,3 +172,8 @@ export const getApplicationsList = async (
   const url = `${SERVER_URL}/application-forms/applications/${articleId}`;
   return await getRequest(url, accessToken);
 };
+
+export const getTeamMate = async (searchText: string, accessToken: string) => {
+  const url = `${SERVER_URL}/portfolio/team-member?nickname=${searchText}`;
+  return await getRequest(url, accessToken);
+};

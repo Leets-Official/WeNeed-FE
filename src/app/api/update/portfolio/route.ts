@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { updatePortfolio } from 'service/updateRequest';
+import { updatePortfolio } from 'service/patchRequests';
 import { getCookie } from 'utils/cookieUtils';
 
 export async function PATCH(request: Request) {
@@ -12,6 +12,6 @@ export async function PATCH(request: Request) {
     const data = await updatePortfolio(content, accessToken, id);
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: 'Internal Server Error' });
+    throw new Error('Error submitting recruiter data');
   }
 }

@@ -3,9 +3,13 @@ import Icons from 'components/common/Icons';
 import { closeIcon } from 'ui/IconsPath';
 import ConfirmButton from 'components/upload/both/ConfirmButton';
 import useAddText from 'hooks/upload/useAddText';
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { uploadDataState } from 'recoil/upload';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { textLimitAlert } from '../../showToast';
+
 interface UploadTextProps {
   uploadInfo: UploadPropTypes;
   closeModal?: () => void;
@@ -24,6 +28,17 @@ const UploadText = ({
   const { text, setText, handleConfirm, isEditing, startEdit, updateText } =
     useAddText();
   const isShare = fileType === '나누고 싶은 큰 문장';
+
+  const writeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const nowText = e.target.value;
+    if (nowText.length > 255) {
+      textLimitAlert();
+      return;
+    } else {
+      setText(nowText);
+    }
+  };
+
   useEffect(() => {
     if (id) {
       if (id === 'share') {
@@ -58,7 +73,7 @@ const UploadText = ({
                   value={text}
                   className="w-[782px] h-[124px] border-none text-black font-semibold focus:outline-none focus:border-none"
                   onChange={(e) => {
-                    setText(e.target.value);
+                    writeText(e);
                   }}
                   autoFocus
                 ></textarea>
@@ -69,6 +84,7 @@ const UploadText = ({
                 <span className="text-xs">{rule}</span>
               </div>
             )}
+            <ToastContainer />
           </div>
           <div className="flex flex-row-reverse mt-[24px]">
             <div onClick={closeModal}>

@@ -25,10 +25,6 @@ const useAddText = () => {
   };
 
   const addText = (type: 'text' | 'link' | 'sound') => {
-    if (text.length > 255) {
-      alert('텍스트는 255자 이하로 입력해주세요 :)');
-      return;
-    }
     const updatedItems = [
       ...items,
       {
