@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Icons from 'components/common/Icons';
 import { commentClose, commentOpen, inputDrop } from 'ui/IconsPath';
 import GradientProfileMD from 'ui/gradient/GradientProfileMD';
+import Link from 'next/link';
 
 interface CommentItemProps {
   comment: CommentList | RecommentList;
@@ -71,18 +72,20 @@ const CommentItem = ({
   return (
     <>
       <div className="mt-[23px] w-[90%]">
-        <Profile
-          writer={{
-            userId,
-            writerNickname: nickname ? nickname : writerNickname,
-            major,
-            profile,
-            grade,
-          }}
-          date={createdAt}
-          onComment={true}
-          size="medium"
-        />
+        <Link href={`/mypage/${userId}`}>
+          <Profile
+            writer={{
+              userId,
+              writerNickname: nickname ? nickname : writerNickname,
+              major,
+              profile,
+              grade,
+            }}
+            date={createdAt}
+            onComment={true}
+            size="medium"
+          />
+        </Link>
         <div className="w-fit h-fit relative bg-[#8C8C8C]  ml-[75px] px-[17px] py-[16px] rounded-[10px] font-semibold text-white ">
           {content}
           {!hasChildren && (
