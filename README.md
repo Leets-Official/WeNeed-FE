@@ -12,15 +12,6 @@
     <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FLeets-Official%2FWeNeed-FE&count_bg=%23333333&title_bg=%23FC4F59&icon=&icon_color=%23FC4F59&title=hits&edge_flat=false)](https://hits.seeyoufarm.com"/></a>
 </div>
 
-## 📄 목차
-
-- [📄 목차](#-목차)
-- [✍🏻 프로젝트 개요](#-프로젝트-개요)
-- [⚙️ 기술 스택](#️-기술-스택)
-- [🧡 FE 팀원 소개](#-fe-팀원-소개)
-- [🖥️ 화면 구성](#-화면-구성)
-- [🚀 핵심 기능 및 FE 기술적 도전](#-핵심-기능-및-FE-기술적-도전)
-
 <br />
 
 ## ✍🏻 프로젝트 개요
@@ -118,3 +109,29 @@ We Need, Win It 🎯
 <br />
 
 ## 🚀 핵심 기능 및 FE 기술적 도전
+
+### 1) Route Handlers 적용
+
+- Node.js 서버를 통한 Mock API 구현 및 토큰 관리
+
+### 2) Amazon S3 이미지 변환
+
+- 프론트엔드단에서 File → URL(string타입) 이미지 변환
+
+### 3) Atomic 디자인 패턴 지향
+
+- 도메인 중심의 Page, Layout, Containers, Component 단위로 구성해 로직과 UI 분리
+- common 폴더로 팀원 공통 코드, constants 폴더로 상수 관리
+
+### 4) 게시물 CRUD
+
+- postRequest, getRequest라는 공통 함수를 정의해 로직의 일관성 유지
+- intersectionObserver 활용 무한스크롤 구현
+- optimistic UI 적용 (좋아요, 북마크)
+- 파일 다운로드 기능
+
+### 5) 최적화
+
+- image에 placeholder적용, avif 렌더링, lazyLoading
+- 모달 dynamic import 활용으로 페이지 bundle size 축소
+- throttling 적용
