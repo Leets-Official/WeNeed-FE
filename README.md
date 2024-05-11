@@ -2,7 +2,7 @@
   <h1><img src="public/readme/banner.png"/></h1> 
 </div>
 
-> 서비스 바로가기 <br /> > **https://www.weneed.site**
+> 서비스는 아쉽게도 종료되었습니다. 🥹
 
 <br/>
 
