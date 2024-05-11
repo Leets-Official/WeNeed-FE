@@ -19,8 +19,6 @@ const ApplicationInfo = ({ applicationForm }: ApplicationInfoProps) => {
     appealUrl,
   } = applicationForm;
 
-  console.log(appealName, appealUrl);
-
   const renderContent = (questionKey: string) => {
     switch (questionKey) {
       case 'major':

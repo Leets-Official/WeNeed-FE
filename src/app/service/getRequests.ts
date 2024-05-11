@@ -14,7 +14,7 @@ const getRequest = async (url: string, accessToken?: string) => {
     }).then((res) => res.json());
     return response;
   } catch (error) {
-    console.log('Error:', error);
+    console.error('Error:', error);
   }
 };
 

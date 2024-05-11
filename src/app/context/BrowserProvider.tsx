@@ -18,7 +18,6 @@ export const BrowserProvider = ({ children }: BrowserProviderProps) => {
   useEffect(() => {
     const userAgent = window.navigator.userAgent;
     setIsMobile(/Mobile|Android|iP(ad|hone)/.test(userAgent));
-    console.log(isMobile);
   }, []);
 
   useEffect(() => {

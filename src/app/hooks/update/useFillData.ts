@@ -80,8 +80,6 @@ const useFillData = () => {
 
   const fillRecruit = ({ recruit }: useFillRecruitProps) => {
     setOrderId(recruit.contents.length + 1);
-    console.log(recruit, '가져온 리크루팅');
-
     setOrderId(recruit.contents.length + 1);
     setThumbnailUrl(recruit.thumbnail);
     let idCounter = 0;

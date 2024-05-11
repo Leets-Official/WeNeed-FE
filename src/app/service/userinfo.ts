@@ -16,14 +16,13 @@ export const patchUserInfoEdit = async (
 
     return response;
   } catch (error) {
-    console.log('Error in patch userinfo edit func : ', error);
+    console.error('error', error);
     throw error;
   }
 };
 
 export const setEmail = async (email: string) => {
   try {
-    console.log('set Email : ', email);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`, // 백엔드 엔드포인트
       {
@@ -36,13 +35,12 @@ export const setEmail = async (email: string) => {
 
     return response;
   } catch (error) {
-    console.log('Error in set Email func : ', error);
+    console.error('error', error);
   }
 };
 
 export const postCode = async (code: string, email: string) => {
   try {
-    console.log('post Code and Email', JSON.stringify({ code, email }));
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certifycode`,
       {
@@ -56,7 +54,7 @@ export const postCode = async (code: string, email: string) => {
 
     return response;
   } catch (error) {
-    console.log('Error in post code func : ', error);
+    console.error('error', error);
   }
 };
 
@@ -79,7 +77,7 @@ export const postUserInfo = async (
 
     return response;
   } catch (error) {
-    console.log('Error in post userinfo func : ', error);
+    console.error('error', error);
     throw error;
   }
 };
@@ -98,6 +96,6 @@ export const checkNickname = async (nickName: string) => {
 
     return response;
   } catch (error) {
-    console.log('Error in check nickname func : ', error);
+    console.error('error', error);
   }
 };

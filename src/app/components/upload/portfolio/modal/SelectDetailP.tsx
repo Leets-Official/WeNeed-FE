@@ -94,7 +94,6 @@ const SelectDetailP = ({ closeModal, isEdit, id }: SelectDetailProps) => {
 
     const updatedContent = await Promise.all(imagePromises);
     const updatedFiles = await Promise.all(filePromises);
-    console.log('제출 전 파일 배열', updatedFiles);
 
     const requestData = {
       articleRequest: {

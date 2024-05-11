@@ -103,7 +103,6 @@ const SelectDetailR = ({ closeModal, isEdit, id }: SelectDetailProps) => {
       `${process.env.NEXT_PUBLIC_NEXT_SERVER}/${reqPath}`,
       requestOptions,
     );
-    console.log(res);
 
     if (true) {
       setTimeout(() => {

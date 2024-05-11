@@ -14,6 +14,6 @@ export const searchTeamMate = async (searchText: string) => {
     ).then((res) => res.json());
     return users;
   } catch (error) {
-    console.log('팀검색 오류 발생 error', error);
+    console.error('팀검색 오류 발생 error', error);
   }
 };

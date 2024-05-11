@@ -51,7 +51,6 @@ const useAddText = () => {
       addText('sound');
     } else {
       addShare();
-      console.log('나누고 싶은 문장 추가', text);
     }
   };
 

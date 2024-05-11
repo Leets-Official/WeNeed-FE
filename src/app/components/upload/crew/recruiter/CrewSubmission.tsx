@@ -90,7 +90,6 @@ const CrewSubmission = ({ text, articleId, type }: CrewSubmissionProps) => {
       if (!response.ok) {
         throw new Error('Error submitting recruiter data');
       }
-      console.log('제출됨!');
       router.push(`/upload/crew/applicant/success`);
     } catch (e) {
       console.log(e);

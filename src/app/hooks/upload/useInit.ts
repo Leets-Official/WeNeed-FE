@@ -19,8 +19,6 @@ const useInit = () => {
   const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
 
   const initPF = () => {
-    console.log('초기화');
-
     setUploadData({
       articleType: 'PORTFOLIO',
       title: '',

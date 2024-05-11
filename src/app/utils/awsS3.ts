@@ -22,7 +22,6 @@ const uploadToS3 = (img: File): Promise<string> => {
   const uuid = uuidv4();
   const fileExtension = img.name.split('.').pop();
   const encodedFileName = encodeURIComponent(img.name);
-  console.log('인코딩 파일명::::', fileExtension);
   const params: UploadParams = {
     ACL: 'public-read',
     Body: img,
@@ -36,7 +35,6 @@ const uploadToS3 = (img: File): Promise<string> => {
       .on('httpUploadProgress', (evt) => {})
       .send((err, _) => {
         if (err) {
-          console.log(err);
           reject(err);
           return;
         }

@@ -14,7 +14,7 @@ export const googleLogin = async (
 
     return response;
   } catch (error) {
-    console.log('google login error', error);
+    console.error('google login error', error);
     throw error;
   }
 };

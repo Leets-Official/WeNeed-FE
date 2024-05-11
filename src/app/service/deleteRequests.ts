@@ -9,6 +9,6 @@ export const deletePost = async (id: string, accessToken: string) => {
     }).then((res) => res.json());
     return response;
   } catch (error) {
-    console.log('삭제 중 error발생', error);
+    console.error('삭제 중 error발생', error);
   }
 };
