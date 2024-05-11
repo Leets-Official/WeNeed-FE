@@ -1,4 +1,4 @@
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { imageBlobState, orderState, thumbnailUrlState } from 'recoil/upload';
 import { filestate, textState, uploadDataState } from 'recoil/upload';
 
@@ -13,12 +13,12 @@ interface useFillRecruitProps {
 }
 
 const useFillData = () => {
-  const [items, setItems] = useRecoilState(textState);
-  const [files, setFiles] = useRecoilState(filestate);
-  const [images, setImages] = useRecoilState(imageBlobState);
   const [uploadData, setUploadData] = useRecoilState(uploadDataState);
-  const [orderId, setOrderId] = useRecoilState(orderState);
-  const [thumbnailUrl, setThumbnailUrl] = useRecoilState(thumbnailUrlState);
+  const setItems = useSetRecoilState(textState);
+  const setFiles = useSetRecoilState(filestate);
+  const setImages = useSetRecoilState(imageBlobState);
+  const setOrderId = useSetRecoilState(orderState);
+  const setThumbnailUrl = useSetRecoilState(thumbnailUrlState);
 
   const fillPF = ({ portfolio }: useFillDataProps) => {
     setOrderId(portfolio.contents.length + 1);

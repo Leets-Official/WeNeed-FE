@@ -122,4 +122,4 @@ export const LOGIN_SUCCESS = {
   TITLE: 'WE NEED, WIN IT.',
   TITLE1: '회원가입이 완료되었습니다!',
   TITLE2: '다양한 콘텐츠를 감상해보세요!',
-};
+} as const;

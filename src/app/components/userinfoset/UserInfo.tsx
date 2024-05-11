@@ -107,12 +107,10 @@ const UserInfo = () => {
               placeholder=""
               onChange={(e) => {
                 const userInput = e.target.value;
-                // 영어와 한글만 허용, 공백과 특수문자를 제
                 const filteredInput = userInput.replace(
                   /[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣]/g,
                   '',
                 );
-                // 최대 길이 16자로 제한
                 const trimmedInput = filteredInput.slice(0, 16);
                 setUserInfo({ ...userInfo, nickname: trimmedInput });
               }}

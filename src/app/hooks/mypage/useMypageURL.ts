@@ -5,18 +5,19 @@ interface UseMypageURL {
 }
 
 const useMypageURL = ({ menu, slug, size }: UseMypageURL) => {
+  const BASE = `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/`;
   switch (menu) {
     case 'MY CREW':
       return [
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myrecruitingcrews?size=${size}`,
-        `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myappliedcrews?size=${size}`,
+        `${BASE}myrecruitingcrews?size=${size}`,
+        `${BASE}myappliedcrews?size=${size}`,
       ];
     case '관심 게시글':
-      return `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/instportfolio?size=6`;
+      return `${BASE}instportfolio?size=6`;
     case '관심 크루 찾기':
-      return `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/instcrew?size=6`;
+      return `${BASE}instcrew?size=6`;
     default:
-      return `${process.env.NEXT_PUBLIC_NEXT_SERVER}/api/mypage/myportfolio?userId=${slug}&size=6`;
+      return `${BASE}myportfolio?userId=${slug}&size=6`;
   }
 };
 

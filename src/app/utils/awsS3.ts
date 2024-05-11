@@ -21,7 +21,6 @@ interface UploadParams {
 const uploadToS3 = (img: File): Promise<string> => {
   const uuid = uuidv4();
   const fileExtension = img.name.split('.').pop();
-  const encodedFileName = encodeURIComponent(img.name);
   const params: UploadParams = {
     ACL: 'public-read',
     Body: img,

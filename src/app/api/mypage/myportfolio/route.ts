@@ -14,19 +14,3 @@ export async function GET(request: Request): Promise<NextResponse> {
   );
   return NextResponse.json(data);
 }
-
-// const Mockdata = {
-//   userNickname: 'string',
-//   sameUser: false,
-//   userInfo: {
-//     profile: null,
-//     nickname: 'string',
-//     major: '경영학전공',
-//     userGrade: 0,
-//     doubleMajor: '경영학전공',
-//     interestField: '미디어',
-//     email: 'string',
-//     links: ['string'],
-//     selfIntro: 'string',
-//   },
-// };

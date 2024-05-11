@@ -78,7 +78,6 @@ interface ApplicationForm {
   name: string;
   major: string;
   doubleMajor: string;
-  // international: boolean;
   grade: string;
   status: string;
   phone: string;

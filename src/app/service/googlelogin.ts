@@ -3,7 +3,7 @@ export const googleLogin = async (
 ): Promise<ResponseGoogleLogin> => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/api/auth/callback/google?code=${authorizationCode}`, // backend endpoint
+      `${process.env.NEXT_PUBLIC_SERVER}/api/auth/callback/google?code=${authorizationCode}`,
       {
         method: 'GET',
         headers: {

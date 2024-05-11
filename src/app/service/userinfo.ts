@@ -24,7 +24,7 @@ export const patchUserInfoEdit = async (
 export const setEmail = async (email: string) => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`, // 백엔드 엔드포인트
+      `${process.env.NEXT_PUBLIC_SERVER}/api/v1/certify?email=${email}`,
       {
         method: 'POST',
         headers: {

@@ -5,7 +5,7 @@ export const USER_PREVIEW = {
   hearted: true,
   bookmarked: true,
   profile: '',
-};
+} as const;
 
 export const WRITER_PREVIEW = {
   userId: 999,
@@ -14,7 +14,7 @@ export const WRITER_PREVIEW = {
   major: '000학과',
   profile: '',
   grade: 0,
-};
+} as const;
 
 export const PORTFOLIO_PREVIEW = {
   thumbnail: '',
@@ -30,4 +30,4 @@ export const PORTFOLIO_PREVIEW = {
   writer: WRITER_PREVIEW,
   contents: [],
   teamMembers: [],
-};
+} as const;

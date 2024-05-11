@@ -18,4 +18,4 @@ export const RECRUITING_DROPDOWN = {
   INTERSETED_FIELD,
   MEMBERS: '인원수',
   CREW_MEMBER,
-};
+} as const;
